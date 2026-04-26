@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.27/build/spline-viewer.js"></script>
 </head>
 <body>
 
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="hero-3d">
-      <canvas id="hero-canvas"></canvas>
+      <spline-viewer url="https://prod.spline.design/TJDl9lMZTvJtZfHi/scene.splinecode"></spline-viewer>
     </div>
   </section>
 
@@ -321,192 +321,6 @@
       toggle.classList.remove('open');
     }));
 
-    /* ── Three.js Robot Hero ── */
-    (function () {
-      const container = document.querySelector('.hero-3d');
-      const canvas    = document.getElementById('hero-canvas');
-      if (!container || !canvas || typeof THREE === 'undefined') return;
-
-      const scene  = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
-      camera.position.set(0, 0.6, 8);
-      camera.lookAt(0, 0.4, 0);
-
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.useLegacyLights = true;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.4;
-
-      /* ── Materials ── */
-      const mDark  = new THREE.MeshStandardMaterial({ color: 0x22222e, metalness: 0.85, roughness: 0.20 });
-      const mMid   = new THREE.MeshStandardMaterial({ color: 0x32324a, metalness: 0.80, roughness: 0.25 });
-      const mPanel = new THREE.MeshStandardMaterial({ color: 0x0a0a12, metalness: 0.40, roughness: 0.55 });
-      const mGlow  = new THREE.MeshStandardMaterial({ color: 0x6c63ff, emissive: 0x6c63ff, emissiveIntensity: 2.0 });
-      const mGlow2 = new THREE.MeshStandardMaterial({ color: 0xa78bfa, emissive: 0xa78bfa, emissiveIntensity: 1.2 });
-
-      /* ── Helpers ── */
-      function bx(w,h,d,m,px=0,py=0,pz=0,rx=0,ry=0,rz=0){
-        const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
-        o.position.set(px,py,pz); o.rotation.set(rx,ry,rz); return o;
-      }
-      function cy(rt,rb,h,s,m,px=0,py=0,pz=0,rx=0,ry=0,rz=0){
-        const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,s),m);
-        o.position.set(px,py,pz); o.rotation.set(rx,ry,rz); return o;
-      }
-      function sp(r,m,px=0,py=0,pz=0){
-        const o=new THREE.Mesh(new THREE.SphereGeometry(r,20,20),m);
-        o.position.set(px,py,pz); return o;
-      }
-
-      /* ── Robot ── */
-      const robot = new THREE.Group();
-      scene.add(robot);
-
-      /* Head */
-      const headGroup = new THREE.Group();
-      headGroup.position.set(0, 2.15, 0);
-      robot.add(headGroup);
-      headGroup.add(bx(1.12, 1.02, 0.98, mMid));
-      headGroup.add(bx(0.72, 0.26, 0.06, mPanel,  0,  0.04, 0.50));
-      headGroup.add(sp(0.095, mGlow,  -0.19, 0.04, 0.52));
-      headGroup.add(sp(0.095, mGlow,   0.19, 0.04, 0.52));
-      headGroup.add(bx(0.52, 0.04, 0.04, mGlow2,  0, -0.22, 0.50));
-      headGroup.add(bx(0.08, 0.54, 0.48, mDark,  -0.61, 0, 0));
-      headGroup.add(bx(0.08, 0.54, 0.48, mDark,   0.61, 0, 0));
-      headGroup.add(cy(0.032, 0.032, 0.44, 8, mDark, 0, 0.73, 0));
-      headGroup.add(sp(0.072, mGlow, 0, 0.96, 0));
-
-      /* Neck */
-      robot.add(cy(0.19, 0.24, 0.34, 12, mDark, 0, 1.64, 0));
-
-      /* Torso */
-      const torso = new THREE.Group();
-      torso.position.y = 0.68;
-      robot.add(torso);
-      torso.add(bx(1.52, 1.68, 0.88, mMid));
-      torso.add(bx(0.68, 0.07, 0.07, mGlow,  0,  0.30, 0.45));
-      torso.add(bx(0.48, 0.05, 0.05, mGlow2, 0,  0.10, 0.45));
-      torso.add(bx(0.34, 0.05, 0.05, mGlow,  0, -0.10, 0.45));
-      torso.add(bx(0.28, 0.23, 0.10, mPanel, 0,  0.20, 0.46));
-
-      /* Shoulders */
-      robot.add(bx(0.40, 0.40, 0.52, mMid, -0.99, 1.44, 0));
-      robot.add(bx(0.40, 0.40, 0.52, mMid,  0.99, 1.44, 0));
-
-      /* Upper arms */
-      robot.add(cy(0.21, 0.19, 0.98, 14, mMid, -1.08, 0.80, 0));
-      robot.add(cy(0.21, 0.19, 0.98, 14, mMid,  1.08, 0.80, 0));
-      robot.add(sp(0.21, mDark, -1.10, 0.27, 0));
-      robot.add(sp(0.21, mDark,  1.10, 0.27, 0));
-
-      /* Forearms */
-      const lFA = cy(0.17, 0.21, 0.82, 14, mMid, -1.16, -0.22, 0.07);
-      lFA.rotation.z =  0.24; robot.add(lFA);
-      const rFA = cy(0.17, 0.21, 0.82, 14, mMid,  1.16, -0.22,-0.07);
-      rFA.rotation.z = -0.20; robot.add(rFA);
-
-      /* Hands */
-      robot.add(sp(0.19, mPanel, -1.28, -0.70,  0.10));
-      robot.add(sp(0.19, mPanel,  1.26, -0.66, -0.10));
-
-      /* Hips */
-      robot.add(bx(1.08, 0.30, 0.70, mDark, 0, -0.68, 0));
-
-      /* Upper legs */
-      robot.add(bx(0.43, 1.08, 0.48, mMid, -0.37, -1.36, 0));
-      robot.add(bx(0.43, 1.08, 0.48, mMid,  0.37, -1.36, 0));
-      robot.add(sp(0.23, mDark, -0.37, -0.96, 0.04));
-      robot.add(sp(0.23, mDark,  0.37, -0.96, 0.04));
-
-      /* Lower legs */
-      robot.add(cy(0.18, 0.21, 0.88, 14, mMid, -0.37, -1.86, 0));
-      robot.add(cy(0.18, 0.21, 0.88, 14, mMid,  0.37, -1.86, 0));
-
-      /* Feet */
-      robot.add(bx(0.48, 0.21, 0.72, mDark, -0.37, -2.40, 0.11));
-      robot.add(bx(0.48, 0.21, 0.72, mDark,  0.37, -2.40, 0.11));
-
-      /* Leg glow strips */
-      robot.add(bx(0.05, 0.68, 0.05, mGlow2, -0.54, -1.36, 0.25));
-      robot.add(bx(0.05, 0.68, 0.05, mGlow2,  0.54, -1.36, 0.25));
-
-      robot.position.y = 0.5;
-
-      /* ── Lights ── */
-      scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-
-      /* Ceiling spotlight (dramatic top-left) */
-      const spotCeil = new THREE.SpotLight(0xffffff, 2.8, 35, Math.PI / 6, 0.3, 1.0);
-      spotCeil.position.set(-4, 9, 5);
-      spotCeil.target.position.set(0, 0.5, 0);
-      scene.add(spotCeil); scene.add(spotCeil.target);
-
-      /* Front fill — ilumina de frente */
-      const frontL = new THREE.PointLight(0xffffff, 1.2, 20);
-      frontL.position.set(0, 1, 6);
-      scene.add(frontL);
-
-      /* Purple fill */
-      const fillL = new THREE.PointLight(0x6c63ff, 1.5, 18);
-      fillL.position.set(4, -1, 3);
-      scene.add(fillL);
-
-      /* Rim */
-      const rimL = new THREE.PointLight(0xa78bfa, 1.0, 14);
-      rimL.position.set(-3, -2, -3);
-      scene.add(rimL);
-
-      /* Flashlight — sigue la cabeza */
-      const flashL = new THREE.SpotLight(0xffffff, 3.5, 22, Math.PI / 9, 0.4, 1.5);
-      scene.add(flashL); scene.add(flashL.target);
-
-      /* ── Mouse ── */
-      let tx = 0, ty = 0, hx = 0, hy = 0;
-      window.addEventListener('mousemove', e => {
-        tx = (e.clientX / window.innerWidth  - 0.5) * 2;
-        ty = (e.clientY / window.innerHeight - 0.5) * 2;
-      }, { passive: true });
-
-      /* ── Resize ── */
-      function resize() {
-        const w = container.offsetWidth, h = container.offsetHeight;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-
-      /* ── Loop ── */
-      const _v3 = new THREE.Vector3();
-      function animate() {
-        requestAnimationFrame(animate);
-        const t = Date.now() * 0.001;
-
-        /* Float */
-        robot.position.y = 0.5 + Math.sin(t * 1.15) * 0.065;
-
-        /* Head tracks mouse */
-        hx += (tx * 0.58 - hx) * 0.06;
-        hy += (ty * 0.40 - hy) * 0.06;
-        headGroup.rotation.y = -hx;
-        headGroup.rotation.x =  hy;
-
-        /* Flashlight follows head */
-        headGroup.getWorldPosition(_v3);
-        flashL.position.copy(_v3);
-        flashL.target.position.set(_v3.x - hx * 6, _v3.y - hy * 6, _v3.z + 9);
-        flashL.target.updateMatrixWorld();
-
-        /* Subtle body sway */
-        robot.rotation.y = Math.sin(t * 0.38) * 0.035 - hx * 0.07;
-
-        renderer.render(scene, camera);
-      }
-      animate();
-    })();
   </script>
 </body>
 </html>
