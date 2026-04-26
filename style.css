@@ -124,11 +124,27 @@ nav.nav-scrolled {
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: calc(var(--nav-h) + 60px) 60px 80px;
+  gap: 40px;
   position: relative;
   overflow: hidden;
+}
+
+.hero-3d {
+  position: relative;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#hero-canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .hero-bg {
@@ -656,7 +672,8 @@ footer p {
   .nav-links a { font-size: 20px; }
   .nav-toggle { display: flex; }
 
-  .hero { padding: calc(var(--nav-h) + 40px) 24px 64px; }
+  .hero { padding: calc(var(--nav-h) + 40px) 24px 64px; grid-template-columns: 1fr; }
+  .hero-3d { display: none; }
   section { padding: 80px 24px; }
 
   .proyectos-grid { grid-template-columns: 1fr; }

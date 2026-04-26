@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 </head>
 <body>
 
@@ -51,6 +52,9 @@
         <span class="meta-sep">·</span>
         <span>4° año</span>
       </div>
+    </div>
+    <div class="hero-3d">
+      <canvas id="hero-canvas"></canvas>
     </div>
   </section>
 
@@ -293,16 +297,19 @@
   </footer>
 
   <script>
+    /* ── Scroll reveal ── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
 
+    /* ── Nav scroll ── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('nav-scrolled', window.scrollY > 40);
     }, { passive: true });
 
+    /* ── Mobile nav ── */
     const toggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
     toggle.addEventListener('click', () => {
@@ -313,6 +320,76 @@
       navLinks.classList.remove('open');
       toggle.classList.remove('open');
     }));
+
+    /* ── Three.js 3D Hero ── */
+    (function () {
+      const container = document.querySelector('.hero-3d');
+      const canvas    = document.getElementById('hero-canvas');
+      if (!container || !canvas || typeof THREE === 'undefined') return;
+
+      const scene    = new THREE.Scene();
+      const camera   = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+      camera.position.z = 5;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      /* Geometry */
+      const geo = new THREE.TorusKnotGeometry(1.25, 0.42, 220, 36, 2, 3);
+      const mat = new THREE.MeshStandardMaterial({
+        color:     0x7c6fff,
+        metalness: 0.9,
+        roughness: 0.12,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      scene.add(mesh);
+
+      /* Lights */
+      scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+      const light1 = new THREE.PointLight(0xffffff, 5, 30);
+      light1.position.set(5, 6, 5);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0x6c63ff, 4, 20);
+      light2.position.set(-4, -2, 3);
+      scene.add(light2);
+
+      const light3 = new THREE.PointLight(0xa78bfa, 2.5, 18);
+      light3.position.set(0, -5, -2);
+      scene.add(light3);
+
+      /* Mouse parallax */
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      window.addEventListener('mousemove', e => {
+        tx = (e.clientX / window.innerWidth  - 0.5) *  0.9;
+        ty = (e.clientY / window.innerHeight - 0.5) * -0.7;
+      }, { passive: true });
+
+      /* Resize */
+      function resize() {
+        const w = container.offsetWidth;
+        const h = container.offsetHeight;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      /* Loop */
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = Date.now() * 0.00042;
+        cx += (tx - cx) * 0.045;
+        cy += (ty - cy) * 0.045;
+        mesh.rotation.x = t * 0.38 + cy;
+        mesh.rotation.y = t       + cx;
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
   </script>
 </body>
 </html>
