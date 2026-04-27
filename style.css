@@ -542,24 +542,42 @@ section { padding: 120px 60px; }
 .proceso-header { text-align: center; }
 .proceso-header .section-sub { max-width: 500px; margin: 0 auto; text-align: center; }
 
+.proceso-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 .proceso-list {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
   gap: 0;
   position: relative;
-  max-width: 100%;
-  width: calc(100vw - 120px);
   margin: 0 auto;
+}
+
+.proceso-row-4 {
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+
+.proceso-row-3 {
+  grid-template-columns: repeat(3, 1fr);
+  width: 75%;
 }
 
 .proceso-list::before {
   content: '';
   position: absolute;
   top: 28px;
-  left: calc(100% / 14);
-  right: calc(100% / 14);
+  left: calc(100% / 8);
+  right: calc(100% / 8);
   height: 1px;
   background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent);
+}
+
+.proceso-row-3::before {
+  left: calc(100% / 6);
+  right: calc(100% / 6);
 }
 
 .proceso-step {
@@ -690,7 +708,8 @@ footer p {
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
-  .proceso-list { grid-template-columns: repeat(4, 1fr); gap: 40px 0; width: 100%; }
+  .proceso-row-4 { grid-template-columns: repeat(2, 1fr); }
+  .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
 }
 
@@ -719,7 +738,7 @@ footer p {
 
   .proyectos-grid { grid-template-columns: 1fr; }
   .servicios-grid { grid-template-columns: 1fr; }
-  .proceso-list { grid-template-columns: repeat(2, 1fr); gap: 36px 0; width: 100%; }
+  .proceso-row-4, .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
 
   footer { padding: 24px; }
