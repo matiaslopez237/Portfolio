@@ -544,7 +544,7 @@ section { padding: 120px 60px; }
 
 .proceso-list {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 0;
   position: relative;
 }
@@ -552,9 +552,9 @@ section { padding: 120px 60px; }
 .proceso-list::before {
   content: '';
   position: absolute;
-  top: 44px;
-  left: calc(100% / 12);
-  right: calc(100% / 12);
+  top: 28px;
+  left: calc(100% / 14);
+  right: calc(100% / 14);
   height: 1px;
   background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent);
 }
@@ -687,7 +687,7 @@ footer p {
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
-  .proceso-list { grid-template-columns: repeat(3, 1fr); gap: 40px 0; }
+  .proceso-list { grid-template-columns: repeat(4, 1fr); gap: 40px 0; }
   .proceso-list::before { display: none; }
 }
 
