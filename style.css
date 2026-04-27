@@ -539,55 +539,78 @@ section { padding: 120px 60px; }
 }
 
 /* ── PROCESO ── */
+.proceso-header { text-align: center; }
+.proceso-header .section-sub { max-width: 500px; margin: 0 auto; text-align: center; }
+
 .proceso-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  position: relative;
 }
 
-.proceso-step { padding-right: 36px; }
+.proceso-list::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: calc(100% / 12);
+  right: calc(100% / 12);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent);
+}
 
-.paso-header {
+.proceso-step {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  text-align: center;
+  padding: 0 12px;
+  position: relative;
+  cursor: default;
 }
 
-.paso-num {
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--accent2);
-  background: var(--accent-soft);
-  border: 1px solid rgba(108,99,255,0.2);
-  width: 34px; height: 34px;
+.paso-icon-wrap {
+  width: 56px; height: 56px;
   border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg2);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  letter-spacing: 0;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
 }
 
-.paso-connector {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-  margin-left: 12px;
+.proceso-step:hover .paso-icon-wrap {
+  border-color: var(--accent);
+  color: var(--accent2);
+  background: var(--accent-soft);
 }
 
-.proceso-step:last-child .paso-connector { display: none; }
+.paso-num-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
 
 .proceso-step h3 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 10px;
-  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
   color: var(--text);
 }
 .proceso-step p {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.75;
+  line-height: 1.7;
 }
 
 /* ── CONTACTO ── */
@@ -664,9 +687,8 @@ footer p {
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
-  .proceso-list { grid-template-columns: repeat(2, 1fr); gap: 40px 0; }
-  .proceso-step:nth-child(2n) .paso-connector { display: none; }
-  .proceso-step { padding-right: 0; padding-bottom: 0; }
+  .proceso-list { grid-template-columns: repeat(3, 1fr); gap: 40px 0; }
+  .proceso-list::before { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -694,9 +716,8 @@ footer p {
 
   .proyectos-grid { grid-template-columns: 1fr; }
   .servicios-grid { grid-template-columns: 1fr; }
-  .proceso-list { grid-template-columns: 1fr; gap: 36px; }
-  .paso-connector { display: none !important; }
-  .proceso-step { padding-right: 0; }
+  .proceso-list { grid-template-columns: repeat(2, 1fr); gap: 36px 0; }
+  .proceso-list::before { display: none; }
 
   footer { padding: 24px; }
   .footer-inner { flex-direction: column; text-align: center; }
