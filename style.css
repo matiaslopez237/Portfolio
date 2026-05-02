@@ -441,6 +441,9 @@ section { padding: 120px 60px; }
 .proyecto-preview-soon {
   background: linear-gradient(145deg, #0f0f0f 0%, #181818 100%);
 }
+.proyecto-preview-cafe {
+  background: linear-gradient(145deg, #1a100a 0%, #3b1f10 50%, #5c3218 100%);
+}
 
 .proyecto-preview-inner {
   position: absolute;
