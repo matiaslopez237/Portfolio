@@ -139,8 +139,7 @@ nav.nav-scrolled {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 60% 50%, black 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 85% 80% at 60% 50%, black 40%, transparent 100%);
+  overflow: hidden;
 }
 
 .hero-3d::after {
@@ -149,19 +148,59 @@ nav.nav-scrolled {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 180px;
-  background: linear-gradient(to top, var(--bg) 30%, transparent 100%);
+  height: 90px;
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
-spline-viewer {
+/* ── ROBOT SVG ── */
+.robot-svg {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  display: block;
-  background: transparent !important;
-  --background-color: transparent !important;
+  overflow: visible;
+  filter:
+    drop-shadow(0 0 40px rgba(108,99,255,0.10))
+    drop-shadow(0 24px 60px rgba(0,0,0,0.45));
 }
+
+.robot-spotlight {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,0.09) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.hero-3d:hover .robot-spotlight { opacity: 1; }
+
+/* Float animation */
+@keyframes robotFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-16px); }
+}
+#robot-float {
+  animation: robotFloat 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Antenna tip pulse */
+@keyframes antennaPulse {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 0.25; }
+}
+.robot-antenna-pulse { animation: antennaPulse 2.2s ease-in-out infinite; }
+
+/* Core inner glow breathe */
+@keyframes coreBreathe {
+  0%, 100% { opacity: 0.78; }
+  50%       { opacity: 0.45; }
+}
+.robot-core-glow { animation: coreBreathe 3s ease-in-out infinite; }
 
 .hero-bg {
   position: absolute;
