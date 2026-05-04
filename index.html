@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matias Lopez — Diseño Web</title>
   <meta name="description" content="Diseñador web freelance. Creá páginas web a medida para negocios, profesionales y emprendimientos." />
+  <meta name="theme-color" content="#080808" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236c63ff'/><text x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='13' fill='white'>ML</text></svg>" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Matias Lopez — Diseño Web" />
+  <meta property="og:description" content="Diseñador web freelance. Creá páginas web a medida para negocios, profesionales y emprendimientos." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
@@ -14,29 +25,29 @@
 <body>
 
   <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">ML<span>.</span></a>
-    <ul class="nav-links" id="nav-links">
+  <nav id="nav" aria-label="Navegación principal">
+    <a href="#" class="nav-logo" aria-label="Matias Lopez — Inicio">ML<span>.</span></a>
+    <ul class="nav-links" id="nav-links" role="list">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto" class="nav-cta">Contacto</a></li>
     </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="hero-bg"></div>
-    <div class="hero-glow"></div>
+  <section class="hero" id="inicio" aria-labelledby="hero-heading">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-badge">
-        <span class="badge-dot"></span>
+        <span class="badge-dot" aria-hidden="true"></span>
         Disponible para nuevos proyectos
       </div>
-      <h1>
+      <h1 id="hero-heading">
         <span class="hero-intro">Hola, soy</span>
         <span class="hero-name">Matias Lopez</span>
       </h1>
@@ -49,54 +60,54 @@
       </div>
       <div class="hero-meta">
         <span>Ing. en Sistemas — UTN San Rafael</span>
-        <span class="meta-sep">·</span>
+        <span class="meta-sep" aria-hidden="true">·</span>
         <span>4° año</span>
       </div>
     </div>
-    <div class="hero-3d">
+    <div class="hero-3d" aria-hidden="true">
       <spline-viewer url="https://prod.spline.design/TJDl9lMZTvJtZfHi/scene.splinecode"></spline-viewer>
     </div>
   </section>
 
   <!-- SERVICIOS -->
-  <section id="servicios">
+  <section id="servicios" aria-labelledby="servicios-heading">
     <div class="container">
       <div class="section-header">
         <p class="section-label">Lo que hago</p>
-        <h2 class="section-title">Servicios</h2>
+        <h2 class="section-title" id="servicios-heading">Servicios</h2>
         <p class="section-sub">Diseño páginas adaptadas a cada tipo de negocio, con foco en la experiencia del usuario y los resultados.</p>
       </div>
 
       <div class="servicios-grid">
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M3 21h18M9 21V9l3-6 3 6v12M9 12h6"/>
               <rect x="10" y="15" width="4" height="6"/>
             </svg>
           </div>
-          <div class="servicio-num">01</div>
+          <div class="servicio-num" aria-hidden="true">01</div>
           <h3>Páginas Institucionales</h3>
           <p>Para centros médicos, consultorios, clínicas y profesionales de salud. Con información de servicios, contacto y turnos.</p>
         </div>
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
           </div>
-          <div class="servicio-num">02</div>
+          <div class="servicio-num" aria-hidden="true">02</div>
           <h3>Tiendas Online</h3>
           <p>Catálogo de productos, carrito de compras y pagos integrados. Ideal para negocios que quieren vender en internet.</p>
         </div>
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M18 8h1a4 4 0 010 8h-1"/>
               <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
               <line x1="6" y1="1" x2="6" y2="4"/>
@@ -104,44 +115,44 @@
               <line x1="14" y1="1" x2="14" y2="4"/>
             </svg>
           </div>
-          <div class="servicio-num">03</div>
+          <div class="servicio-num" aria-hidden="true">03</div>
           <h3>Restaurantes y Cafés</h3>
           <p>Menú digital, galería de fotos, reservas y contacto por WhatsApp. Para que tus clientes te encuentren fácil.</p>
         </div>
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <rect x="3" y="3" width="7" height="7" rx="1"/>
               <rect x="14" y="3" width="7" height="7" rx="1"/>
               <rect x="3" y="14" width="7" height="7" rx="1"/>
               <rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
           </div>
-          <div class="servicio-num">04</div>
+          <div class="servicio-num" aria-hidden="true">04</div>
           <h3>Portfolios Profesionales</h3>
           <p>Para freelancers, artistas, fotógrafos y cualquier profesional que quiera mostrar su trabajo en internet.</p>
         </div>
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
           </div>
-          <div class="servicio-num">05</div>
+          <div class="servicio-num" aria-hidden="true">05</div>
           <h3>Inmobiliarias</h3>
           <p>Listado de propiedades con filtros, fotos y formulario de contacto. Tu catálogo inmobiliario siempre actualizado.</p>
         </div>
 
         <div class="servicio-card reveal-item">
-          <div class="servicio-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <div class="servicio-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
           </div>
-          <div class="servicio-num">06</div>
+          <div class="servicio-num" aria-hidden="true">06</div>
           <h3>Landing Pages</h3>
           <p>Páginas enfocadas en convertir visitas en clientes. Para campañas, productos o servicios específicos.</p>
         </div>
@@ -151,30 +162,30 @@
   </section>
 
   <!-- PROYECTOS -->
-  <section id="proyectos">
+  <section id="proyectos" aria-labelledby="proyectos-heading">
     <div class="container">
       <div class="section-header">
         <p class="section-label">Mi trabajo</p>
-        <h2 class="section-title">Proyectos</h2>
+        <h2 class="section-title" id="proyectos-heading">Proyectos</h2>
         <p class="section-sub">Páginas reales que diseñé y desarrollé para clientes.</p>
       </div>
 
       <div class="proyectos-grid">
 
         <div class="proyecto-card reveal-item">
-          <a href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cmsd">
-            <div class="proyecto-preview-inner">
-              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+          <a href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cmsd" aria-label="Ver proyecto Centro Médico Santo Domingo">
+            <div class="proyecto-preview-inner" aria-hidden="true">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" aria-hidden="true" focusable="false">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
               </svg>
             </div>
-            <div class="proyecto-overlay">
+            <div class="proyecto-overlay" aria-hidden="true">
               <span>Ver proyecto →</span>
             </div>
             <span class="proyecto-badge proyecto-badge-live">En vivo</span>
           </a>
           <div class="proyecto-body">
-            <div class="proyecto-tags">
+            <div class="proyecto-tags" aria-label="Tecnologías">
               <span class="tag">Salud</span>
               <span class="tag">React</span>
               <span class="tag">E-commerce</span>
@@ -183,7 +194,7 @@
             <p>Página completa para un centro médico en San Rafael, Mendoza. Servicios, catálogo con carrito y pagos online vía Mercado Pago.</p>
             <a href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" class="proyecto-link">
               Ver proyecto
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M7 17L17 7M7 7h10v10"/>
               </svg>
             </a>
@@ -191,19 +202,19 @@
         </div>
 
         <div class="proyecto-card reveal-item">
-          <a href="https://coffea-front.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cafe">
-            <div class="proyecto-preview-inner">
-              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+          <a href="https://coffea-front.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cafe" aria-label="Ver proyecto Café Demo">
+            <div class="proyecto-preview-inner" aria-hidden="true">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" aria-hidden="true" focusable="false">
                 <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
               </svg>
             </div>
-            <div class="proyecto-overlay">
+            <div class="proyecto-overlay" aria-hidden="true">
               <span>Ver proyecto →</span>
             </div>
             <span class="proyecto-badge proyecto-badge-live">En vivo</span>
           </a>
           <div class="proyecto-body">
-            <div class="proyecto-tags">
+            <div class="proyecto-tags" aria-label="Tecnologías">
               <span class="tag">Gastronomía</span>
               <span class="tag">React</span>
             </div>
@@ -211,7 +222,7 @@
             <p>Página demo para un café o restaurante. Menú digital, galería, reservas y contacto directo por WhatsApp.</p>
             <a href="https://coffea-front.onrender.com" target="_blank" rel="noopener" class="proyecto-link">
               Ver proyecto
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M7 17L17 7M7 7h10v10"/>
               </svg>
             </a>
@@ -223,11 +234,11 @@
   </section>
 
   <!-- PROCESO -->
-  <section id="proceso">
+  <section id="proceso" aria-labelledby="proceso-heading">
     <div class="container">
       <div class="section-header proceso-header">
         <p class="section-label">Cómo trabajo</p>
-        <h2 class="section-title">Mi plan de trabajo</h2>
+        <h2 class="section-title" id="proceso-heading">Mi plan de trabajo</h2>
         <p class="section-sub">Un proceso claro y probado, desde la primera charla hasta el lanzamiento.</p>
       </div>
 
@@ -236,45 +247,45 @@
         <!-- Fila 1: 4 pasos -->
         <div class="proceso-list proceso-row-4">
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
               </svg>
             </div>
-            <div class="paso-num-label">01</div>
+            <div class="paso-num-label" aria-hidden="true">01</div>
             <h3>Consulta</h3>
             <p>Entendemos tu negocio, tu público y qué querés comunicar. Sin costo.</p>
           </div>
 
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
               </svg>
             </div>
-            <div class="paso-num-label">02</div>
+            <div class="paso-num-label" aria-hidden="true">02</div>
             <h3>Objetivos</h3>
             <p>Definimos metas claras: qué tiene que lograr la página para tu negocio.</p>
           </div>
 
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
               </svg>
             </div>
-            <div class="paso-num-label">03</div>
+            <div class="paso-num-label" aria-hidden="true">03</div>
             <h3>Diseño UI/UX</h3>
             <p>Creo la identidad visual y estructura pensada para tus usuarios.</p>
           </div>
 
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
               </svg>
             </div>
-            <div class="paso-num-label">04</div>
+            <div class="paso-num-label" aria-hidden="true">04</div>
             <h3>Desarrollo</h3>
             <p>Construyo la página con código limpio, rápido y responsive.</p>
           </div>
@@ -283,34 +294,34 @@
         <!-- Fila 2: 3 pasos -->
         <div class="proceso-list proceso-row-3">
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
             </div>
-            <div class="paso-num-label">05</div>
+            <div class="paso-num-label" aria-hidden="true">05</div>
             <h3>Revisión</h3>
             <p>Ajustamos juntos hasta que quede exactamente como lo imaginaste.</p>
           </div>
 
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M12 19V5M5 12l7-7 7 7"/>
               </svg>
             </div>
-            <div class="paso-num-label">06</div>
+            <div class="paso-num-label" aria-hidden="true">06</div>
             <h3>Publicación</h3>
             <p>Lanzamos la página al mundo y te entrego todo listo para administrar.</p>
           </div>
 
           <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="paso-icon-wrap" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
               </svg>
             </div>
-            <div class="paso-num-label">07</div>
+            <div class="paso-num-label" aria-hidden="true">07</div>
             <h3>Mantenimiento</h3>
             <p>Soporte continuo, actualizaciones y mejoras para que tu página siempre funcione bien.</p>
           </div>
@@ -321,21 +332,21 @@
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto">
+  <section id="contacto" aria-labelledby="contacto-heading">
     <div class="container contacto-container">
       <div class="contacto-inner reveal-item">
         <p class="section-label">Hablemos</p>
-        <h2 class="section-title">¿Tenés un proyecto<br>en mente?</h2>
+        <h2 class="section-title" id="contacto-heading">¿Tenés un proyecto<br>en mente?</h2>
         <p class="section-sub">La consulta inicial es sin costo. Escribime y te respondo en el día.</p>
         <div class="contacto-btns">
           <a href="https://wa.me/542995560164" target="_blank" rel="noopener" class="contacto-btn contacto-btn-wa">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             WhatsApp
           </a>
           <a href="https://www.instagram.com/matulopez_747/" target="_blank" rel="noopener" class="contacto-btn contacto-btn-ig">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
             Instagram
@@ -348,7 +359,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
-      <a href="#" class="nav-logo">ML<span>.</span></a>
+      <a href="#" class="nav-logo" aria-label="Matias Lopez — Inicio">ML<span>.</span></a>
       <p>© 2026 Matias Emanuel Lopez</p>
       <div class="footer-links">
         <a href="https://wa.me/542995560164" target="_blank" rel="noopener">WhatsApp</a>
@@ -373,15 +384,32 @@
     /* ── Mobile nav ── */
     const toggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      toggle.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+
+    function openMenu() {
+      navLinks.classList.add('open');
+      toggle.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
       navLinks.classList.remove('open');
       toggle.classList.remove('open');
-    }));
+      toggle.setAttribute('aria-expanded', 'false');
+    }
 
+    toggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
   </script>
 </body>
 </html>

@@ -295,6 +295,27 @@ spline-viewer {
   background: rgba(255,255,255,0.025);
 }
 
+/* ── FOCUS STATES ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.contacto-btn:focus-visible {
+  outline-offset: 4px;
+}
+.nav-toggle:focus-visible {
+  outline-offset: 6px;
+}
+.proyecto-link:focus-visible,
+.footer-links a:focus-visible,
+.nav-links a:focus-visible {
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
 .hero-meta {
   display: flex;
   align-items: center;
@@ -307,6 +328,7 @@ spline-viewer {
 
 /* ── SECTIONS ── */
 section { padding: 120px 60px; }
+section[id] { scroll-margin-top: var(--nav-h); }
 
 #servicios { background: var(--bg2); }
 #proyectos { background: var(--bg); }
@@ -438,9 +460,6 @@ section { padding: 120px 60px; }
 .proyecto-preview-cmsd {
   background: linear-gradient(145deg, #0d1b2a 0%, #1b3a5c 50%, #0f2744 100%);
 }
-.proyecto-preview-soon {
-  background: linear-gradient(145deg, #0f0f0f 0%, #181818 100%);
-}
 .proyecto-preview-cafe {
   background: linear-gradient(145deg, #1a100a 0%, #3b1f10 50%, #5c3218 100%);
 }
@@ -533,13 +552,6 @@ section { padding: 120px 60px; }
   transition: gap 0.2s, opacity 0.2s;
 }
 .proyecto-link:hover { gap: 10px; opacity: 0.8; }
-.proyecto-link-disabled {
-  color: var(--text-muted);
-  cursor: default;
-  opacity: 0.4;
-  font-size: 13px;
-  font-weight: 500;
-}
 
 /* ── PROCESO ── */
 .proceso-header { text-align: center; }
@@ -753,4 +765,20 @@ footer p {
   .hero-btns a { width: fit-content; }
   .contacto-btns { flex-direction: column; width: 100%; }
   .contacto-btn { justify-content: center; }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
 }
