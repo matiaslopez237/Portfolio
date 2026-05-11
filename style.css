@@ -476,7 +476,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 /* ── PROYECTOS ── */
 .proyectos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -501,6 +501,9 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 .proyecto-preview-cafe {
   background: linear-gradient(145deg, #1a100a 0%, #3b1f10 50%, #5c3218 100%);
+}
+.proyecto-preview-quiro {
+  background: linear-gradient(145deg, #071520 0%, #0b3040 50%, #061a2a 100%);
 }
 
 .proyecto-preview-inner {
@@ -762,6 +765,14 @@ footer p {
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
+  .proyectos-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Center last project card when alone on its row */
+  .proyecto-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 10px);
+    margin-left: auto;
+    margin-right: auto;
+  }
   .proceso-row-4 { grid-template-columns: repeat(2, 1fr); }
   .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
