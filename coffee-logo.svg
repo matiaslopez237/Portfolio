@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" fill="none">
+  <defs>
+    <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"></stop>
+      <stop offset="55%" stop-color="#7c5cff"></stop>
+      <stop offset="100%" stop-color="#5b3df5"></stop>
+    </linearGradient>
+    <linearGradient id="sleeve" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7c5cff"></stop>
+      <stop offset="100%" stop-color="#4a2dd9"></stop>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4b5fd"></stop>
+      <stop offset="100%" stop-color="#8b6dff"></stop>
+    </linearGradient>
+    <linearGradient id="steamGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0"></stop>
+      <stop offset="40%" stop-color="#c4b5fd" stop-opacity="0.85"></stop>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="1"></stop>
+    </linearGradient>
+  </defs>
+
+  
+  <g fill="none" stroke="url(#steamGrad)" stroke-width="4.5" stroke-linecap="round">
+    <path d="M 92 78 C 86 64 100 56 94 42 C 88 28 100 18 96 6"></path>
+    <path d="M 122 84 C 116 70 130 60 124 46 C 118 32 130 22 126 8"></path>
+    <path d="M 152 78 C 146 64 160 56 154 42 C 148 28 160 18 156 6"></path>
+  </g>
+
+  
+  <path d="M 68 110&#xA;           L 76 250&#xA;           Q 78 262 90 264&#xA;           L 158 264&#xA;           Q 170 262 172 250&#xA;           L 180 110 Z" fill="url(#cup)"></path>
+
+  
+  <path d="M 60 110&#xA;           Q 60 100 70 100&#xA;           L 178 100&#xA;           Q 188 100 188 110&#xA;           L 184 122&#xA;           Q 182 128 174 128&#xA;           L 74 128&#xA;           Q 66 128 64 122 Z" fill="url(#lid)"></path>
+
+  
+  <ellipse cx="100" cy="106" rx="14" ry="4" fill="#2e1c80" opacity="0.55"></ellipse>
+
+  
+  <path d="M 74 160&#xA;           L 174 160&#xA;           L 171 200&#xA;           L 77 200 Z" fill="url(#sleeve)"></path>
+  
+  <path d="M 74 160 L 174 160 L 173.5 167 L 74.5 167 Z" fill="#ffffff" opacity="0.18"></path>
+  
+  <path d="M 75 195 L 173 195 L 171 200 L 77 200 Z" fill="#1a0c66" opacity="0.4"></path>
+
+  
+  <path d="M 70 115&#xA;           L 76 250&#xA;           Q 77 258 84 261&#xA;           L 84 261&#xA;           Q 80 254 79 244&#xA;           L 74 130 Z" fill="#ffffff" opacity="0.13"></path>
+
+  
+  <path d="M 178 115&#xA;           L 172 250&#xA;           Q 171 258 164 261&#xA;           L 164 261&#xA;           Q 168 254 169 244&#xA;           L 174 130 Z" fill="#1a0c66" opacity="0.32"></path>
+
+  
+  <path d="M 64 110 Q 64 104 72 104 L 176 104 Q 184 104 184 110 L 183 113 L 65 113 Z" fill="#ffffff" opacity="0.32"></path>
+
+  
+  <ellipse cx="124" cy="266" rx="38" ry="3" fill="#1a0c66" opacity="0.45"></ellipse>
+</svg>

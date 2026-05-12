@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 140" fill="none">
+  <defs>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"></stop>
+      <stop offset="55%" stop-color="#7c5cff"></stop>
+      <stop offset="100%" stop-color="#5b3df5"></stop>
+    </linearGradient>
+  </defs>
+  <g fill="url(#textGrad)" font-family="ui-sans-serif, system-ui, -apple-system, &#39;Segoe UI&#39;, Roboto, sans-serif" font-weight="800" font-size="110" letter-spacing="-3">
+    <text x="180" y="105" text-anchor="middle">CMSD</text>
+  </g>
+</svg>
