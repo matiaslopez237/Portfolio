@@ -503,7 +503,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
   background: linear-gradient(145deg, #1a100a 0%, #3b1f10 50%, #5c3218 100%);
 }
 .proyecto-preview-quiro {
-  background: linear-gradient(145deg, #071520 0%, #0b3040 50%, #061a2a 100%);
+  background: linear-gradient(145deg, #0b3040 0%, #1a5a7a 50%, #ff8c42 100%);
 }
 
 .proyecto-preview-inner {
