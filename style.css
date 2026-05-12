@@ -513,6 +513,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .proyecto-overlay {
@@ -534,8 +535,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 .proyecto-preview:focus-visible .proyecto-overlay { opacity: 1; }
 
 .proyecto-preview:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
+  box-shadow: inset 0 0 0 2px var(--accent);
 }
 
 .proyecto-badge {
