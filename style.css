@@ -774,16 +774,18 @@ footer p {
 @media (max-width: 960px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
   .proyectos-grid { grid-template-columns: repeat(2, 1fr); }
-  /* Center last project card when alone on its row */
+  .proceso-row-4 { grid-template-columns: repeat(2, 1fr); }
+  .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
+  .proceso-list::before { display: none; }
+}
+/* Center last card only when grid is 2 columns (tablet range) */
+@media (min-width: 769px) and (max-width: 960px) {
   .proyecto-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     max-width: calc(50% - 10px);
     margin-left: auto;
     margin-right: auto;
   }
-  .proceso-row-4 { grid-template-columns: repeat(2, 1fr); }
-  .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
-  .proceso-list::before { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -810,7 +812,6 @@ footer p {
   section { padding: 80px 24px; }
 
   .proyectos-grid { grid-template-columns: 1fr; }
-  .proyecto-card:last-child:nth-child(odd) { grid-column: auto; max-width: none; margin-left: 0; margin-right: 0; }
   .servicios-grid { grid-template-columns: 1fr; }
   .proceso-row-4, .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
