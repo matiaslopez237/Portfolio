@@ -858,5 +858,137 @@
       })();
     })();
   </script>
+
+  <!-- Waves background -->
+  <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js"></script>
+  <script>
+    (function () {
+      const STROKE   = 'rgba(108,99,255,0.18)';
+      const isMobile = window.innerWidth < 768;
+      const X_GAP    = isMobile ? 14 : 8;
+      const Y_GAP    = isMobile ? 14 : 8;
+
+      /* ── Container + SVG ── */
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;';
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.style.cssText = 'display:block;width:100%;height:100%;';
+      wrap.appendChild(svg);
+      document.body.prepend(wrap);
+
+      /* ── State ── */
+      const noise = new SimplexNoise();
+      const mouse = { x:-10, y:0, lx:0, ly:0, sx:0, sy:0, v:0, vs:0, a:0, set:false };
+      let paths = [], lines = [], bounding, raf;
+
+      /* ── Setup ── */
+      function setSize() {
+        bounding = wrap.getBoundingClientRect();
+        svg.setAttribute('width',  bounding.width);
+        svg.setAttribute('height', bounding.height);
+      }
+
+      function setLines() {
+        paths.forEach(p => p.remove());
+        paths = []; lines = [];
+        const { width, height } = bounding;
+        const cols   = Math.ceil((width  + 200) / X_GAP);
+        const rows   = Math.ceil((height +  30) / Y_GAP);
+        const x0     = (width  - X_GAP * cols) / 2;
+        const y0     = (height - Y_GAP * rows) / 2;
+
+        for (let i = 0; i < cols; i++) {
+          const pts = [];
+          for (let j = 0; j < rows; j++) {
+            pts.push({ x: x0 + X_GAP*i, y: y0 + Y_GAP*j,
+                       wave:{ x:0, y:0 }, cursor:{ x:0, y:0, vx:0, vy:0 } });
+          }
+          const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+          p.setAttribute('fill','none');
+          p.setAttribute('stroke', STROKE);
+          p.setAttribute('stroke-width','1');
+          svg.appendChild(p);
+          paths.push(p); lines.push(pts);
+        }
+      }
+
+      function onResize() { setSize(); setLines(); }
+
+      function updateMouse(x, y) {
+        mouse.x = x - bounding.left;
+        mouse.y = y - bounding.top + window.scrollY;
+        if (!mouse.set) {
+          mouse.sx = mouse.x; mouse.sy = mouse.y;
+          mouse.lx = mouse.x; mouse.ly = mouse.y;
+          mouse.set = true;
+        }
+      }
+
+      /* ── Physics ── */
+      function movePoints(t) {
+        lines.forEach(pts => pts.forEach(p => {
+          const m = noise.noise2D((p.x + t*0.008)*0.003, (p.y + t*0.003)*0.002) * 8;
+          p.wave.x = Math.cos(m) * 12;
+          p.wave.y = Math.sin(m) * 6;
+
+          const dx = p.x - mouse.sx, dy = p.y - mouse.sy;
+          const d  = Math.hypot(dx, dy), l = Math.max(175, mouse.vs);
+          if (d < l) {
+            const f = Math.cos(d*0.001) * (1 - d/l);
+            p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00035;
+            p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00035;
+          }
+          p.cursor.vx += (0 - p.cursor.x) * 0.01;  p.cursor.vy += (0 - p.cursor.y) * 0.01;
+          p.cursor.vx *= 0.95;                       p.cursor.vy *= 0.95;
+          p.cursor.x  += p.cursor.vx;               p.cursor.y  += p.cursor.vy;
+          p.cursor.x   = Math.min(50, Math.max(-50, p.cursor.x));
+          p.cursor.y   = Math.min(50, Math.max(-50, p.cursor.y));
+        }));
+      }
+
+      function drawLines() {
+        lines.forEach((pts, i) => {
+          if (pts.length < 2 || !paths[i]) return;
+          const f = pts[0];
+          let d = `M ${f.x + f.wave.x} ${f.y + f.wave.y}`;
+          for (let j = 1; j < pts.length; j++) {
+            const p = pts[j];
+            d += ` L ${p.x + p.wave.x + p.cursor.x} ${p.y + p.wave.y + p.cursor.y}`;
+          }
+          paths[i].setAttribute('d', d);
+        });
+      }
+
+      /* ── Loop ── */
+      function tick(t) {
+        mouse.sx += (mouse.x - mouse.sx) * 0.1;
+        mouse.sy += (mouse.y - mouse.sy) * 0.1;
+        const dx = mouse.x - mouse.lx, dy = mouse.y - mouse.ly;
+        mouse.vs += (Math.hypot(dx, dy) - mouse.vs) * 0.1;
+        mouse.vs  = Math.min(100, mouse.vs);
+        mouse.lx  = mouse.x; mouse.ly = mouse.y;
+        mouse.a   = Math.atan2(dy, dx);
+        movePoints(t); drawLines();
+        raf = requestAnimationFrame(tick);
+      }
+
+      /* ── Pause when tab hidden ── */
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { cancelAnimationFrame(raf); }
+        else { raf = requestAnimationFrame(tick); }
+      });
+
+      /* ── Init ── */
+      window.addEventListener('resize', onResize);
+      window.addEventListener('mousemove', e => updateMouse(e.pageX, e.pageY), { passive:true });
+      window.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        updateMouse(t.clientX, t.clientY);
+      }, { passive:true });
+
+      setSize(); setLines();
+      raf = requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
