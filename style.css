@@ -142,17 +142,6 @@ nav.nav-scrolled {
   overflow: hidden;
 }
 
-.hero-3d::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
-  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
 
 /* ── ROBOT SVG ── */
 .robot-svg {
@@ -166,18 +155,23 @@ nav.nav-scrolled {
     drop-shadow(0 24px 60px rgba(0,0,0,0.45));
 }
 
-.robot-spotlight {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(108,99,255,0.09) 0%, transparent 65%);
-  pointer-events: none;
+.robot-spotlight { display: none; }
+
+/* ── Global cursor glow ── */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.6s ease;
+  background: radial-gradient(
+    200px circle at var(--mx, -999px) var(--my, -999px),
+    rgba(108,99,255,0.10) 0%,
+    transparent 65%
+  );
 }
-.hero-3d:hover .robot-spotlight { opacity: 1; }
+.cursor-glow.active { opacity: 1; }
 
 /* Float animation */
 @keyframes robotFloat {
@@ -369,10 +363,17 @@ nav.nav-scrolled {
 section { padding: 120px 60px; }
 section[id] { scroll-margin-top: var(--nav-h); }
 
-#servicios { background: var(--bg2); }
-#proyectos { background: var(--bg); }
-#proceso   { background: var(--bg2); }
-#contacto  { background: var(--bg); }
+/* ── Circuit board texture — generated via JS at runtime ── */
+.circuit-bg {
+  /* background-image applied by circuit-board script in index.html */
+  background-size: 900px 600px;
+  background-repeat: repeat;
+}
+
+#servicios { background-color: #000; }
+#proyectos { background-color: #000; }
+#proceso   { background-color: #000; }
+#contacto  { background-color: #000; }
 
 .section-header { margin-bottom: 64px; }
 
@@ -425,7 +426,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 }
 
 .servicio-card {
-  background: var(--bg2);
+  background: #020202;
   padding: 32px;
   position: relative;
   transition: background 0.2s;
@@ -611,6 +612,10 @@ section[id] { scroll-margin-top: var(--nav-h); }
   display: flex;
   flex-direction: column;
   gap: 48px;
+  background: #020202;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 40px 32px;
 }
 
 .proceso-list {
