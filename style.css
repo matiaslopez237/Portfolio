@@ -363,17 +363,58 @@ nav.nav-scrolled {
 section { padding: 120px 60px; }
 section[id] { scroll-margin-top: var(--nav-h); }
 
-/* ── Circuit board texture — generated via JS at runtime ── */
-.circuit-bg {
-  /* background-image applied by circuit-board script in index.html */
-  background-size: 900px 600px;
-  background-repeat: repeat;
+/* ── Tech blueprint texture — plus-grid + radial glow ── */
+section[id] {
+  position: relative;
 }
 
-#servicios { background-color: #000; }
-#proyectos { background-color: #000; }
-#proceso   { background-color: #000; }
-#contacto  { background-color: #000; }
+#servicios {
+  background-color: var(--bg2);
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='none' stroke='rgba(108,99,255,0.11)' stroke-width='1' stroke-linecap='round'%3E%3Cpath d='M24 19.5v9M19.5 24h9'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,99,255,0.05) 0%, transparent 60%);
+  background-size: 48px 48px, 100% 100%;
+}
+
+#proyectos {
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cg fill='none' stroke='rgba(167,139,250,0.09)' stroke-width='1' stroke-linecap='round'%3E%3Cpath d='M28 23v10M23 28h10'/%3E%3Ccircle cx='28' cy='28' r='0.8' fill='rgba(167,139,250,0.14)' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse 70% 50% at 80% 100%, rgba(108,99,255,0.06) 0%, transparent 55%);
+  background-size: 56px 56px, 100% 100%;
+}
+
+#proceso {
+  background-color: var(--bg2);
+  background-image:
+    /* Major grid every 120px */
+    linear-gradient(rgba(108,99,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.045) 1px, transparent 1px),
+    /* Plus markers */
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='rgba(108,99,255,0.10)' stroke-width='1' stroke-linecap='round'%3E%3Cpath d='M30 25v10M25 30h10'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(108,99,255,0.05) 0%, transparent 55%);
+  background-size: 120px 120px, 120px 120px, 60px 60px, 100% 100%;
+}
+
+#contacto {
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Cg fill='none' stroke='rgba(167,139,250,0.10)' stroke-width='1' stroke-linecap='round'%3E%3Cpath d='M26 21v10M21 26h10'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse 90% 70% at 50% 100%, rgba(108,99,255,0.08) 0%, transparent 60%);
+  background-size: 52px 52px, 100% 100%;
+}
+
+/* Soft fade at section edges to blend transitions */
+section[id]::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(8,8,8,0.6), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+section[id] > * { position: relative; z-index: 1; }
 
 .section-header { margin-bottom: 64px; }
 

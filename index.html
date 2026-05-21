@@ -867,29 +867,28 @@
     (function () {
       const STROKE   = 'rgba(108,99,255,0.18)';
       const isMobile = window.innerWidth < 768;
-      const X_GAP    = isMobile ? 16 : 10;
-      const Y_GAP    = isMobile ? 16 : 10;
+      // Larger gaps = far fewer points: desktop ~120×68=8k vs old 192×108=20k
+      const X_GAP    = isMobile ? 24 : 16;
+      const Y_GAP    = isMobile ? 24 : 16;
       const DPR      = Math.min(window.devicePixelRatio || 1, 2);
 
-      /* ── Canvas (replaces SVG — sin DOM por frame) ── */
+      // Helpers
+      const lerp  = (a, b, t) => a + (b - a) * t;
+      const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+
       const canvas = document.createElement('canvas');
-      canvas.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;';
+      canvas.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;will-change:transform;';
       document.body.prepend(canvas);
       const ctx = canvas.getContext('2d');
 
-      /* ── State ── */
       const noise = new SimplexNoise();
-      const mouse = { x:-10, y:0, lx:0, ly:0, sx:0, sy:0, v:0, vs:0, a:0, set:false };
-      let lines = [], W = 0, H = 0, raf;
+      const mouse = { x:-10, y:0, lx:0, ly:0, sx:0, sy:0, vs:0, a:0, set:false };
+      let lines = [], W = 0, H = 0, raf, lastFrameTime = 0;
 
-      /* ── Setup ── */
       function setSize() {
-        W = window.innerWidth;
-        H = window.innerHeight;
-        canvas.width  = W * DPR;
-        canvas.height = H * DPR;
-        canvas.style.width  = W + 'px';
-        canvas.style.height = H + 'px';
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width  = W * DPR; canvas.height = H * DPR;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
         ctx.scale(DPR, DPR);
       }
 
@@ -897,39 +896,29 @@
         lines = [];
         const cols = Math.ceil((W + 200) / X_GAP);
         const rows = Math.ceil((H +  30) / Y_GAP);
-        const x0   = (W - X_GAP * cols) / 2;
-        const y0   = (H - Y_GAP * rows) / 2;
+        const x0 = (W - X_GAP * cols) / 2;
+        const y0 = (H - Y_GAP * rows) / 2;
         for (let i = 0; i < cols; i++) {
           const pts = [];
-          for (let j = 0; j < rows; j++) {
-            pts.push({ x: x0 + X_GAP*i, y: y0 + Y_GAP*j,
-                       wx:0, wy:0, cx:0, cy:0, cvx:0, cvy:0 });
-          }
+          for (let j = 0; j < rows; j++)
+            pts.push({ x: x0 + X_GAP*i, y: y0 + Y_GAP*j, wx:0, wy:0, cx:0, cy:0, cvx:0, cvy:0 });
           lines.push(pts);
         }
       }
 
-      function onResize() {
-        ctx.setTransform(1,0,0,1,0,0); // reset antes de re-escalar
-        setSize(); setLines();
-      }
+      function onResize() { ctx.setTransform(1,0,0,1,0,0); setSize(); setLines(); }
 
-      function updateMouse(px, py) {
-        mouse.x = px;
-        mouse.y = py + window.scrollY;
+      function updateInput(px, py) {
+        // Canvas is position:fixed — use viewport coords only (no scrollY)
+        mouse.x = px; mouse.y = py;
         if (!mouse.set) {
-          mouse.sx = mouse.x; mouse.sy = mouse.y;
-          mouse.lx = mouse.x; mouse.ly = mouse.y;
+          mouse.sx = px; mouse.sy = py;
+          mouse.lx = px; mouse.ly = py;
           mouse.set = true;
         }
       }
 
-      /* ── Physics ── */
-      function movePoints(t) {
-        const msx = mouse.sx, msy = mouse.sy;
-        const mvsMax = Math.max(175, mouse.vs);
-        const mCos = Math.cos(mouse.a), mSin = Math.sin(mouse.a);
-
+      function movePoints(t, msx, msy, mvsMax, mCos, mSin) {
         for (let i = 0; i < lines.length; i++) {
           const pts = lines[i];
           for (let j = 0; j < pts.length; j++) {
@@ -937,31 +926,26 @@
             const m = noise.noise2D((p.x + t*0.008)*0.003, (p.y + t*0.003)*0.002) * 8;
             p.wx = Math.cos(m) * 12;
             p.wy = Math.sin(m) * 6;
-
             const dx = p.x - msx, dy = p.y - msy;
             const d  = Math.hypot(dx, dy);
             if (d < mvsMax) {
               const f = Math.cos(d*0.001) * (1 - d/mvsMax);
               const k = f * mvsMax * mouse.vs * 0.00035;
-              p.cvx += mCos * k;
-              p.cvy += mSin * k;
+              p.cvx += mCos * k; p.cvy += mSin * k;
             }
-            p.cvx += (0 - p.cx) * 0.01;  p.cvy += (0 - p.cy) * 0.01;
-            p.cvx *= 0.95;                p.cvy *= 0.95;
-            p.cx  += p.cvx;              p.cy  += p.cvy;
-            if (p.cx >  50) p.cx =  50; else if (p.cx < -50) p.cx = -50;
-            if (p.cy >  50) p.cy =  50; else if (p.cy < -50) p.cy = -50;
+            p.cvx += -p.cx * 0.01; p.cvy += -p.cy * 0.01;
+            p.cvx *= 0.95;         p.cvy *= 0.95;
+            p.cx = clamp(p.cx + p.cvx, -50, 50);
+            p.cy = clamp(p.cy + p.cvy, -50, 50);
           }
         }
       }
 
-      /* ── Draw — una sola pasada, un solo stroke() ── */
       function drawLines() {
         ctx.clearRect(0, 0, W, H);
         ctx.beginPath();
         ctx.strokeStyle = STROKE;
         ctx.lineWidth   = 1;
-
         for (let i = 0; i < lines.length; i++) {
           const pts = lines[i];
           if (pts.length < 2) continue;
@@ -975,26 +959,34 @@
         ctx.stroke();
       }
 
-      /* ── Loop ── */
       function tick(t) {
-        mouse.sx += (mouse.x - mouse.sx) * 0.1;
-        mouse.sy += (mouse.y - mouse.sy) * 0.1;
+        // Throttle to ~12 fps when mouse is idle, full 60 fps when active
+        const idle = mouse.vs < 0.5;
+        if (idle && t - lastFrameTime < 80) { raf = requestAnimationFrame(tick); return; }
+        lastFrameTime = t;
+
         const dx = mouse.x - mouse.lx, dy = mouse.y - mouse.ly;
-        mouse.vs += (Math.hypot(dx, dy) - mouse.vs) * 0.1;
-        mouse.vs  = Math.min(100, mouse.vs);
-        mouse.lx  = mouse.x; mouse.ly = mouse.y;
-        mouse.a   = Math.atan2(dy, dx);
-        movePoints(t); drawLines();
+        mouse.vs = clamp(lerp(mouse.vs, Math.hypot(dx, dy), 0.1), 0, 100);
+        mouse.lx = mouse.x; mouse.ly = mouse.y;
+        mouse.a  = Math.atan2(dy, dx);
+        mouse.sx = lerp(mouse.sx, mouse.x, 0.1);
+        mouse.sy = lerp(mouse.sy, mouse.y, 0.1);
+
+        // Pre-compute derived values once per frame (not per point)
+        const mvsMax = Math.max(175, mouse.vs);
+        const mCos   = Math.cos(mouse.a);
+        const mSin   = Math.sin(mouse.a);
+
+        movePoints(t, mouse.sx, mouse.sy, mvsMax, mCos, mSin);
+        drawLines();
         raf = requestAnimationFrame(tick);
       }
 
-      /* ── Pausa en tabs ocultas ── */
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) cancelAnimationFrame(raf);
         else raf = requestAnimationFrame(tick);
       });
 
-      /* ── Global cursor glow ── */
       const glow = document.getElementById('cursor-glow');
       function updateGlow(cx, cy) {
         document.documentElement.style.setProperty('--mx', cx + 'px');
@@ -1002,336 +994,21 @@
         if (glow && !glow.classList.contains('active')) glow.classList.add('active');
       }
 
-      /* ── Init ── */
-      window.addEventListener('resize', onResize, { passive:true });
+      // Merged mouse/touch handlers — single normalisation point
       window.addEventListener('mousemove', e => {
-        updateMouse(e.clientX, e.clientY);
+        updateInput(e.clientX, e.clientY);
         updateGlow(e.clientX, e.clientY);
       }, { passive:true });
       window.addEventListener('touchmove', e => {
-        const t = e.touches[0];
-        updateMouse(t.clientX, t.clientY);
-        updateGlow(t.clientX, t.clientY);
+        const t0 = e.touches[0];
+        updateInput(t0.clientX, t0.clientY);
+        updateGlow(t0.clientX, t0.clientY);
       }, { passive:true });
+      window.addEventListener('resize', onResize, { passive:true });
 
       setSize(); setLines();
       raf = requestAnimationFrame(tick);
     })();
-  </script>
-
-  <!-- ── Circuit-board background (generated, replaces static SVG tile) ── -->
-  <script>
-  (function () {
-    /* ---------- Seeded RNG (mulberry32) ---------- */
-    function rng(seed) {
-      var s = seed;
-      return function () {
-        s |= 0; s = s + 0x6D2B79F5 | 0;
-        var t = Math.imul(s ^ s >>> 15, 1 | s);
-        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-        return ((t ^ t >>> 14) >>> 0) / 4294967296;
-      };
-    }
-
-    /* ---------- Occupancy grid (5 px cells, ≥5 px gap between lines) ---------- */
-    var CS = 5; // cell size in px
-    var MIN_GAP = 5; // minimum distance between any two lines
-    var PAD_CELLS = Math.ceil(MIN_GAP / CS); // cells padded around each stamped segment
-
-    function makeGrid(W, H) {
-      var gw = Math.ceil(W / CS) + 2, gh = Math.ceil(H / CS) + 2;
-      return { d: new Uint8Array(gw * gh), w: gw, h: gh };
-    }
-    function ci(g, cx, cy) { return cy * g.w + cx; }
-    function inBounds(g, cx, cy) { return cx >= 0 && cy >= 0 && cx < g.w && cy < g.h; }
-
-    function rectHits(g, x, y, w, h) {
-      var x0 = x / CS | 0, y0 = y / CS | 0;
-      var x1 = (x + w) / CS | 0, y1 = (y + h) / CS | 0;
-      for (var cy = y0; cy <= y1; cy++) for (var cx = x0; cx <= x1; cx++)
-        if (inBounds(g, cx, cy) && g.d[ci(g, cx, cy)]) return true;
-      return false;
-    }
-    function stampRect(g, x, y, w, h, pad) {
-      var x0 = Math.floor((x - pad) / CS), y0 = Math.floor((y - pad) / CS);
-      var x1 = Math.floor((x + w + pad) / CS), y1 = Math.floor((y + h + pad) / CS);
-      for (var cy = y0; cy <= y1; cy++) for (var cx = x0; cx <= x1; cx++)
-        if (inBounds(g, cx, cy)) g.d[ci(g, cx, cy)] = 1;
-    }
-    function stampSeg(g, x1, y1, x2, y2) {
-      var len = Math.hypot(x2 - x1, y2 - y1);
-      var steps = Math.max(1, Math.ceil(len / (CS * 0.5)));
-      for (var i = 0; i <= steps; i++) {
-        var t = i / steps;
-        var px = x1 + (x2 - x1) * t, py = y1 + (y2 - y1) * t;
-        var cxC = px / CS | 0, cyC = py / CS | 0;
-        for (var dy = -PAD_CELLS; dy <= PAD_CELLS; dy++) {
-          var cy = cyC + dy; if (cy < 0 || cy >= g.h) continue;
-          for (var dx = -PAD_CELLS; dx <= PAD_CELLS; dx++) {
-            var cx = cxC + dx; if (cx >= 0 && cx < g.w) g.d[ci(g, cx, cy)] = 1;
-          }
-        }
-      }
-    }
-    function circleHits(g, pcx, pcy, r) {
-      var cells = Math.ceil(r / CS);
-      var cxC = pcx / CS | 0, cyC = pcy / CS | 0;
-      for (var dy = -cells; dy <= cells; dy++) {
-        var cy = cyC + dy; if (cy < 0 || cy >= g.h) continue;
-        for (var dx = -cells; dx <= cells; dx++) {
-          var cx = cxC + dx; if (!inBounds(g, cx, cy)) continue;
-          var wx = (cx + 0.5) * CS, wy = (cy + 0.5) * CS;
-          if (Math.hypot(wx - pcx, wy - pcy) <= r && g.d[ci(g, cx, cy)]) return true;
-        }
-      }
-      return false;
-    }
-    function stampCircle(g, pcx, pcy, r) {
-      var cells = Math.ceil(r / CS);
-      var cxC = pcx / CS | 0, cyC = pcy / CS | 0;
-      for (var dy = -cells; dy <= cells; dy++) {
-        var cy = cyC + dy; if (cy < 0 || cy >= g.h) continue;
-        for (var dx = -cells; dx <= cells; dx++) {
-          var cx = cxC + dx; if (!inBounds(g, cx, cy)) continue;
-          var wx = (cx + 0.5) * CS, wy = (cy + 0.5) * CS;
-          if (Math.hypot(wx - pcx, wy - pcy) <= r) g.d[ci(g, cx, cy)] = 1;
-        }
-      }
-    }
-    function safeLen(g, x, y, ux, uy, maxL, margin, W, H) {
-      var step = CS * 0.5, len = step;
-      while (len < maxL) {
-        var nx = x + ux * len, ny = y + uy * len;
-        if (nx < margin || ny < margin || nx > W - margin || ny > H - margin) return Math.max(0, len - step);
-        var cx = nx / CS | 0, cy = ny / CS | 0;
-        if (inBounds(g, cx, cy) && g.d[ci(g, cx, cy)]) return Math.max(0, len - step);
-        len += step;
-      }
-      return maxL;
-    }
-
-    /* ---------- Circuit generator ---------- */
-    function generate(W, H, seed, density) {
-      var rand = rng(seed * 9973 + 1);
-      var grid = makeGrid(W, H);
-      var chips = [], pads = [], vias = [], traces = [];
-      var DIRS = [[1,0],[-1,0],[0,1],[0,-1]];
-
-      var templates = [
-        { kind:'big',    sMin:70, sMax:95, sides:['l','r','t','b'], pps:9, pl:12, count:2*density },
-        { kind:'big',    sMin:60, sMax:85, sides:['l','r','t','b'], pps:8, pl:11, count:2*density },
-        { kind:'dip',    wMin:80, wMax:130, hMin:30, hMax:45, sides:['t','b'], pps:8, pl:10, count:2*density },
-        { kind:'med',    sMin:42, sMax:56, sides:['l','r','t','b'], pps:6, pl:9,  count:4*density },
-        { kind:'spider', sMin:18, sMax:26, sides:['l','r','t','b'], pps:3, pl:8,  count:8*density },
-        { kind:'tiny',   sMin:11, sMax:14, sides:['l','r','t','b'], pps:1, pl:6,  count:10*density },
-      ];
-
-      function placeChip(tmpl) {
-        var isDip = tmpl.kind === 'dip';
-        var w = isDip ? (tmpl.wMin + rand()*(tmpl.wMax-tmpl.wMin)) : (tmpl.sMin + rand()*(tmpl.sMax-tmpl.sMin));
-        var h = isDip ? (tmpl.hMin + rand()*(tmpl.hMax-tmpl.hMin)) : w*(0.95+rand()*0.1);
-        var mg = 100; // keep chips away from the fade-out zone (~7% = 63px) + pin clearance
-        var x = mg + rand()*Math.max(1, W-mg*2-w);
-        var y = mg + rand()*Math.max(1, H-mg*2-h);
-        var sides = tmpl.sides;
-        var bbox = {
-          x: x-(sides.indexOf('l')>=0?tmpl.pl:0)-4,
-          y: y-(sides.indexOf('t')>=0?tmpl.pl:0)-4,
-          w: w+(sides.indexOf('l')>=0?tmpl.pl:0)+(sides.indexOf('r')>=0?tmpl.pl:0)+8,
-          h: h+(sides.indexOf('t')>=0?tmpl.pl:0)+(sides.indexOf('b')>=0?tmpl.pl:0)+8,
-        };
-        if (rectHits(grid, bbox.x, bbox.y, bbox.w, bbox.h)) return null;
-        stampRect(grid, bbox.x, bbox.y, bbox.w, bbox.h, 8);
-        var pins = [];
-        for (var si = 0; si < sides.length; si++) {
-          var side = sides[si];
-          for (var i = 0; i < tmpl.pps; i++) {
-            var t = (i+1)/(tmpl.pps+1);
-            var inX, inY, dxx, dyy;
-            if (side==='l')      { inX=x;   inY=y+h*t; dxx=-1; dyy=0; }
-            else if (side==='r') { inX=x+w; inY=y+h*t; dxx=1;  dyy=0; }
-            else if (side==='t') { inX=x+w*t; inY=y;   dxx=0;  dyy=-1; }
-            else                 { inX=x+w*t; inY=y+h;  dxx=0;  dyy=1; }
-            pins.push({ inX:inX, inY:inY, outX:inX+dxx*tmpl.pl, outY:inY+dyy*tmpl.pl, dx:dxx, dy:dyy });
-          }
-        }
-        return { x:x, y:y, w:w, h:h, kind:tmpl.kind, pins:pins };
-      }
-
-      for (var ti = 0; ti < templates.length; ti++) {
-        var tmpl = templates[ti];
-        var target = Math.floor(tmpl.count), placed = 0, attempts = 0;
-        while (placed < target && attempts < target*30) {
-          var c = placeChip(tmpl);
-          if (c) { chips.push(c); placed++; }
-          attempts++;
-        }
-      }
-
-      function routePin(pin) {
-        var x=pin.outX, y=pin.outY, ux=pin.dx, uy=pin.dy;
-        var pts = [[x,y]];
-        var l1 = safeLen(grid, x, y, ux, uy, 18+rand()*90, 14, W, H);
-        if (l1 < 8) return null;
-        x+=ux*l1; y+=uy*l1; pts.push([x,y]);
-        var bends = 1+Math.floor(rand()*3);
-        for (var k=0; k<bends; k++) {
-          var sign = rand()>0.5?1:-1;
-          var nux=sign>0?-uy:uy, nuy=sign>0?ux:-ux; ux=nux; uy=nuy;
-          var sl = safeLen(grid, x, y, ux, uy, 12+rand()*110, 14, W, H);
-          if (sl<8) break;
-          x+=ux*sl; y+=uy*sl; pts.push([x,y]);
-        }
-        for (var i=1; i<pts.length; i++) stampSeg(grid, pts[i-1][0], pts[i-1][1], pts[i][0], pts[i][1]);
-        return { pts:pts, ex:x, ey:y };
-      }
-
-      for (var ci2=0; ci2<chips.length; ci2++) {
-        var chip = chips[ci2];
-        for (var pi=0; pi<chip.pins.length; pi++) {
-          if (rand()>0.78) continue;
-          var res = routePin(chip.pins[pi]);
-          if (!res) continue;
-          traces.push(res.pts);
-          var pr = 1.6+rand()*1.6;
-          pads.push({ x:res.ex, y:res.ey, r:pr });
-          stampCircle(grid, res.ex, res.ey, pr+3);
-        }
-      }
-
-      // Bus traces (standalone)
-      var busTarget = Math.floor(15*density);
-      for (var bi=0; bi<busTarget*6; bi++) {
-        if (traces.length>200) break;
-        var bx=20+rand()*(W-40), by=20+rand()*(H-40);
-        if (circleHits(grid, bx, by, 4)) continue;
-        var dir = DIRS[Math.floor(rand()*4)];
-        var bux=dir[0], buy=dir[1], bpts=[[bx,by]];
-        var bl1 = safeLen(grid, bx, by, bux, buy, 25+rand()*120, 14, W, H);
-        if (bl1<20) continue;
-        bx+=bux*bl1; by+=buy*bl1; bpts.push([bx,by]);
-        for (var bk=0; bk<1+Math.floor(rand()*2); bk++) {
-          var bs=rand()>0.5?1:-1;
-          var nbux=bs>0?-buy:buy, nbuy=bs>0?bux:-bux; bux=nbux; buy=nbuy;
-          var bsl=safeLen(grid, bx, by, bux, buy, 20+rand()*100, 14, W, H);
-          if (bsl<10) break;
-          bx+=bux*bsl; by+=buy*bsl; bpts.push([bx,by]);
-        }
-        for (var bj=1; bj<bpts.length; bj++) stampSeg(grid, bpts[bj-1][0], bpts[bj-1][1], bpts[bj][0], bpts[bj][1]);
-        traces.push(bpts);
-        pads.push({ x:bpts[0][0], y:bpts[0][1], r:1.8+rand()*1.4 });
-        pads.push({ x:bx, y:by, r:1.8+rand()*1.4 });
-      }
-
-      // Vias
-      var viaTarget=Math.floor(30*density), vAttempts=0;
-      while (vias.length<viaTarget && vAttempts<viaTarget*12) {
-        var vx=10+rand()*(W-20), vy=10+rand()*(H-20), vr=1.4+rand()*1.2;
-        if (!circleHits(grid, vx, vy, vr+3)) { vias.push({x:vx,y:vy,r:vr}); stampCircle(grid,vx,vy,vr+3); }
-        vAttempts++;
-      }
-
-      return { chips:chips, traces:traces, pads:pads, vias:vias };
-    }
-
-    /* ---------- SVG string builder ---------- */
-    function buildSvg(data, W, H) {
-      var LINE = 'rgba(60,60,60,.28)';
-      var LW = 1.5;
-      var s = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '">';
-
-      // Edge-fade mask: left/right edges blend to transparent to hide tile seam
-      s += '<defs>' +
-           '<linearGradient id="cfx" x1="0" y1="0" x2="1" y2="0">' +
-             '<stop offset="0"    stop-color="white" stop-opacity="0"/>' +
-             '<stop offset="0.07" stop-color="white" stop-opacity="1"/>' +
-             '<stop offset="0.93" stop-color="white" stop-opacity="1"/>' +
-             '<stop offset="1"    stop-color="white" stop-opacity="0"/>' +
-           '</linearGradient>' +
-           '<linearGradient id="cfy" x1="0" y1="0" x2="0" y2="1">' +
-             '<stop offset="0"    stop-color="white" stop-opacity="0"/>' +
-             '<stop offset="0.07" stop-color="white" stop-opacity="1"/>' +
-             '<stop offset="0.93" stop-color="white" stop-opacity="1"/>' +
-             '<stop offset="1"    stop-color="white" stop-opacity="0"/>' +
-           '</linearGradient>' +
-           '<mask id="cfmx"><rect width="' + W + '" height="' + H + '" fill="url(#cfx)"/></mask>' +
-           '<mask id="cfmy"><rect width="' + W + '" height="' + H + '" fill="url(#cfy)"/></mask>' +
-           '</defs>';
-
-      // Wrap all content in horizontal then vertical fade masks
-      s += '<g mask="url(#cfmx)"><g mask="url(#cfmy)">';
-
-      // Traces
-      s += '<g stroke="' + LINE + '" stroke-width="' + LW + '" fill="none" stroke-linecap="round" stroke-linejoin="round">';
-      for (var ti=0; ti<data.traces.length; ti++) {
-        var tr = data.traces[ti];
-        var pts = '';
-        for (var pi=0; pi<tr.length; pi++) pts += (pi?' ':'') + tr[pi][0].toFixed(1) + ',' + tr[pi][1].toFixed(1);
-        s += '<polyline points="' + pts + '"/>';
-      }
-      s += '</g>';
-
-      // Chips
-      for (var ci3=0; ci3<data.chips.length; ci3++) {
-        var c = data.chips[ci3];
-        // pins
-        for (var pi2=0; pi2<c.pins.length; pi2++) {
-          var p = c.pins[pi2];
-          s += '<line stroke="'+LINE+'" stroke-width="'+LW+'" stroke-linecap="round"'+
-               ' x1="'+p.inX.toFixed(1)+'" y1="'+p.inY.toFixed(1)+'"'+
-               ' x2="'+p.outX.toFixed(1)+'" y2="'+p.outY.toFixed(1)+'"/>';
-        }
-        // body rect
-        s += '<rect x="'+c.x.toFixed(1)+'" y="'+c.y.toFixed(1)+'" width="'+c.w.toFixed(1)+'" height="'+c.h.toFixed(1)+'"'+
-             ' fill="none" stroke="'+LINE+'" stroke-width="'+LW+'" rx="2"/>';
-        // corner dot
-        s += '<circle cx="'+(c.x+5).toFixed(1)+'" cy="'+(c.y+5).toFixed(1)+'" r="1.4" fill="'+LINE+'"/>';
-        // inner detail rect
-        if (c.kind==='big') {
-          s += '<rect x="'+(c.x+c.w*0.18).toFixed(1)+'" y="'+(c.y+c.h*0.18).toFixed(1)+'"'+
-               ' width="'+(c.w*0.64).toFixed(1)+'" height="'+(c.h*0.64).toFixed(1)+'"'+
-               ' fill="none" stroke="'+LINE+'" stroke-width="'+(LW*0.7).toFixed(2)+'"/>';
-        } else if (c.kind==='med'||c.kind==='dip') {
-          s += '<rect x="'+(c.x+4).toFixed(1)+'" y="'+(c.y+4).toFixed(1)+'"'+
-               ' width="'+(c.w-8).toFixed(1)+'" height="'+(c.h-8).toFixed(1)+'"'+
-               ' fill="none" stroke="'+LINE+'" stroke-width="'+(LW*0.6).toFixed(2)+'"/>';
-        }
-      }
-
-      // Pads (hollow circles)
-      s += '<g stroke="'+LINE+'" stroke-width="'+LW+'" fill="none">';
-      for (var pdi=0; pdi<data.pads.length; pdi++) {
-        var pd = data.pads[pdi];
-        s += '<circle cx="'+pd.x.toFixed(1)+'" cy="'+pd.y.toFixed(1)+'" r="'+pd.r.toFixed(2)+'"/>';
-      }
-      s += '</g>';
-
-      // Vias (filled dots)
-      s += '<g fill="'+LINE+'">';
-      for (var vi=0; vi<data.vias.length; vi++) {
-        var v = data.vias[vi];
-        s += '<circle cx="'+v.x.toFixed(1)+'" cy="'+v.y.toFixed(1)+'" r="'+v.r.toFixed(2)+'"/>';
-      }
-      s += '</g>';
-
-      s += '</g></g>'; // close fade masks
-
-      s += '</svg>';
-      return s;
-    }
-
-    /* ---------- Apply to .circuit-bg sections ---------- */
-    var TW = 900, TH = 600; // tile dimensions
-    var data = generate(TW, TH, 32, 1.5);
-    var svgStr = buildSvg(data, TW, TH);
-    var uri = 'url("data:image/svg+xml,' + encodeURIComponent(svgStr) + '")';
-    var els = document.querySelectorAll('.circuit-bg');
-    for (var i = 0; i < els.length; i++) {
-      els[i].style.backgroundImage = uri;
-      els[i].style.backgroundSize = TW + 'px ' + TH + 'px';
-      els[i].style.backgroundRepeat = 'repeat';
-    }
-  })();
   </script>
 </body>
 </html>
