@@ -490,11 +490,12 @@ section[id] {
 }
 
 .plan-price-old {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   color: var(--text-muted);
   text-decoration: line-through;
-  margin-bottom: 4px;
-  opacity: 0.7;
+  text-decoration-thickness: 1.5px;
+  margin-bottom: 2px;
 }
 .plan-price-old sup {
   font-size: 10px;
@@ -503,8 +504,9 @@ section[id] {
 
 .plan-price-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
   margin-bottom: 0;
 }
 
@@ -513,12 +515,13 @@ section[id] {
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #4ade80;
-  background: rgba(74,222,128,0.1);
-  border: 1px solid rgba(74,222,128,0.25);
-  padding: 3px 8px;
+  background: rgba(74,222,128,0.12);
+  border: 1px solid rgba(74,222,128,0.3);
+  padding: 4px 9px;
   border-radius: 99px;
-  align-self: center;
-  margin-top: 4px;
+  white-space: nowrap;
+  margin-bottom: 6px;
+  flex-shrink: 0;
 }
 
 .plan-price {
