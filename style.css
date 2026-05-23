@@ -489,6 +489,38 @@ section[id] {
   margin-bottom: 8px;
 }
 
+.plan-price-old {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+.plan-price-old sup {
+  font-size: 10px;
+  vertical-align: super;
+}
+
+.plan-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.plan-discount {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25);
+  padding: 3px 8px;
+  border-radius: 99px;
+  align-self: center;
+  margin-top: 4px;
+}
+
 .plan-price {
   font-family: 'Syne', sans-serif;
   font-size: 38px;
