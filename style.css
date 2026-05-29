@@ -1104,7 +1104,106 @@ section[id]:not(.hero) > * { position: relative; z-index: 1; }
 }
 
 /* ── CONTACTO ── */
-#contacto { text-align: center; }
+.contacto-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.contacto-texto h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin: 12px 0 20px;
+}
+
+.contacto-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 380px;
+}
+
+.contacto-btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.contacto-btn-wa:hover { opacity: 0.88; }
+
+/* Form */
+.contacto-form {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-muted); }
+.form-group input:focus,
+.form-group textarea:focus { border-color: rgba(108,99,255,0.5); }
+
+.form-submit {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.02em;
+}
+.form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.form-nota {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
 
 .contacto-container { max-width: 640px; }
 .contacto-inner { display: flex; flex-direction: column; align-items: center; }
@@ -1141,6 +1240,12 @@ section[id]:not(.hero) > * { position: relative; z-index: 1; }
   background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: white;
   box-shadow: 0 4px 24px rgba(220,39,67,0.18);
+}
+
+/* ── CONTACTO responsive ── */
+@media (max-width: 768px) {
+  .contacto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .contacto-sub { max-width: 100%; }
 }
 
 /* ── FOOTER ── */
