@@ -396,6 +396,7 @@ section[id] {
   background-size: 120px 120px, 120px 120px, 60px 60px, 100% 100%;
 }
 
+#planes,
 #precios {
   background-color: var(--bg2);
   background-image:
