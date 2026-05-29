@@ -404,6 +404,113 @@ section[id] {
   background-size: 48px 48px, 100% 100%;
 }
 
+/* ── PLANES (explicación) ── */
+.planes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.plan-card {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.plan-card:hover {
+  background: var(--bg3);
+  border-color: rgba(108,99,255,0.22);
+}
+
+.plan-card--featured {
+  border-color: rgba(108,99,255,0.35);
+  background: rgba(108,99,255,0.06);
+  position: relative;
+}
+.plan-card--featured::before {
+  content: 'Más popular';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.plan-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent2);
+  flex-shrink: 0;
+}
+
+.plan-card-name {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.plan-card-ideal {
+  font-size: 13.5px;
+  color: var(--accent2);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.plan-card-desc {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.plan-card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.plan-card-features li {
+  font-size: 14px;
+  color: var(--text-mid);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+.plan-card-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
 /* ── PRECIOS ── */
 .precios-grid {
   display: grid;
@@ -1072,6 +1179,12 @@ footer p {
   .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
 }
+/* ── PLANES responsive ── */
+@media (max-width: 1000px) {
+  .planes-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
+  .plan-card--featured { order: -1; }
+}
+
 /* ── PRECIOS responsive ── */
 @media (min-width: 769px) and (max-width: 1000px) {
   .precios-grid {
