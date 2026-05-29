@@ -515,6 +515,7 @@ section[id] {
 .precios-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
   gap: 20px;
   align-items: start;
   margin-bottom: 40px;
@@ -527,6 +528,7 @@ section[id] {
   padding: 36px 32px 32px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   position: relative;
   overflow: hidden;
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
