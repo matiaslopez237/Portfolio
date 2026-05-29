@@ -742,7 +742,7 @@ section[id] {
   line-height: 1.7;
   text-align: center;
   max-width: 620px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding: 20px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
@@ -1287,6 +1287,78 @@ footer p {
   .proceso-row-3 { grid-template-columns: repeat(2, 1fr); width: 100%; }
   .proceso-list::before { display: none; }
 }
+/* Precio dentro de plan-card */
+.plan-card-precio {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.plan-card-precio-old {
+  font-size: 13px;
+  color: #555;
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+.plan-card-precio-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.plan-card-precio-num {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.plan-card-precio-num sup {
+  font-size: 14px;
+  vertical-align: super;
+}
+.plan-card-descuento {
+  background: #4ade80;
+  color: #052e16;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+}
+.plan-card-currency {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.plan-card-cta {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.plan-card-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+.plan-card-cta--outline {
+  border: 1px solid rgba(108,99,255,0.35);
+  color: var(--accent2);
+  background: transparent;
+}
+.plan-card-cta--filled {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
 /* ── PLANES responsive ── */
 @media (max-width: 1000px) {
   .planes-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
