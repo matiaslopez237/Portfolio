@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>Matias Lopez — Diseño Web</title>
   <meta name="description" content="Diseñador web freelance. Creá páginas web a medida para negocios, profesionales y emprendimientos." />
   <meta name="theme-color" content="#09090b" />
+  <meta name="color-scheme" content="dark" />
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2309090b'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23a29dff'>M</text></svg>" />
@@ -335,11 +336,11 @@
           <p class="form-title">¿Preferís dejarme un mensaje?</p>
           <div class="field">
             <label for="nombre">¿Cómo te llamás?</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name" required />
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name" autocapitalize="words" enterkeyhint="next" required />
           </div>
           <div class="field">
             <label for="contacto-input">¿Cómo te contacto?</label>
-            <input type="text" id="contacto-input" name="contacto" placeholder="Email o teléfono" autocomplete="email" required />
+            <input type="text" id="contacto-input" name="contacto" placeholder="Email o teléfono" autocomplete="on" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" required />
           </div>
           <div class="field">
             <label for="proyecto">¿Qué querés hacer?</label>
@@ -389,41 +390,68 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); toggle.focus(); }
     });
+    document.addEventListener('pointerdown', e => {
+      if (navLinks.classList.contains('open') && !header.contains(e.target)) setMenu(false);
+    });
 
     /* ── Pestañas de trabajos (sin JS se ven todos los proyectos uno debajo del otro) ── */
     document.querySelectorAll('[data-tabs]').forEach(root => {
       const tabs = [...root.querySelectorAll('[role="tab"]')];
       const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
       root.classList.add('is-enhanced');
-      function select(i, focus) {
+      function select(i, focus, animate) {
         tabs.forEach((t, j) => {
           const on = i === j;
           t.setAttribute('aria-selected', String(on));
           t.tabIndex = on ? 0 : -1;
           panels[j].hidden = !on;
+          panels[j].classList.toggle('is-entering', on && animate);
         });
         if (focus) tabs[i].focus();
+        const strip = tabs[i].parentElement;
+        if (strip.scrollWidth > strip.clientWidth) {
+          strip.scrollTo({ left: tabs[i].offsetLeft - (strip.clientWidth - tabs[i].offsetWidth) / 2, behavior: animate ? 'smooth' : 'auto' });
+        }
       }
+      panels.forEach(p => p.addEventListener('animationend', () => p.classList.remove('is-entering')));
       tabs.forEach((t, i) => {
-        t.addEventListener('click', () => select(i, false));
+        // Con el mouse o el dedo hay un fundido corto; con el teclado el cambio es instantáneo
+        t.addEventListener('click', e => { if (t.getAttribute('aria-selected') !== 'true') select(i, false, e.detail > 0); });
         t.addEventListener('keydown', e => {
           const k = e.key;
           if (k === 'ArrowRight' || k === 'ArrowLeft' || k === 'Home' || k === 'End') {
             e.preventDefault();
             const n = k === 'Home' ? 0 : k === 'End' ? tabs.length - 1
               : (i + (k === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-            select(n, true);
+            select(n, true, false);
           }
         });
       });
-      select(0, false);
+      select(0, false, false);
     });
 
     /* ── Captura faltante: muestra el nombre del proyecto en lugar de una imagen rota ── */
     document.querySelectorAll('.frame-shot img').forEach(img => {
       const fail = () => { img.parentElement.classList.add('is-missing'); img.remove(); };
-      if (img.complete && img.naturalWidth === 0) fail(); else img.addEventListener('error', fail);
+      if (img.complete) { if (img.naturalWidth === 0) fail(); return; }
+      img.classList.add('is-loading');
+      img.addEventListener('load', () => img.classList.remove('is-loading'), { once: true });
+      img.addEventListener('error', fail, { once: true });
     });
+
+    /* ── Botón flotante: aparece solo cuando no hay otro botón de WhatsApp a la vista ── */
+    const fab = document.querySelector('.fab');
+    const waTargets = [document.querySelector('.hero-ctas'), document.querySelector('.contacto-texto .btn-wa')].filter(Boolean);
+    if (fab && 'IntersectionObserver' in window) {
+      const visible = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => en.isIntersecting ? visible.add(en.target) : visible.delete(en.target));
+        fab.classList.toggle('is-visible', visible.size === 0);
+      });
+      waTargets.forEach(el => io.observe(el));
+    } else if (fab) {
+      fab.classList.add('is-visible');
+    }
 
     /* ── Formulario: envía sin salir de la página (Formspree), con aviso de éxito o error ── */
     const form = document.getElementById('contact-form');

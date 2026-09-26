@@ -35,7 +35,8 @@
   --section-y: clamp(88px, 12vw, 152px);
 
   /* Movimiento */
-  --ease-out:  cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Capas */
   --z-header:  50;
@@ -52,6 +53,18 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   -webkit-text-size-adjust: 100%;
+  /* Sin el destello gris al tocar: cada control tiene su propio :active */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Controles: responden al instante (sin la espera del doble toque) y no seleccionan su texto al mantener apretado */
+a, button, .btn, .tab, .fab, .nav-toggle {
+  touch-action: manipulation;
+}
+button, .btn, .tab, .fab, .nav-toggle {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 body {
@@ -97,7 +110,8 @@ html { scrollbar-color: var(--line-strong) var(--bg); }
   width: 100%;
   max-width: var(--max-w);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 
 /* ── Tipografía ───────────────────────────────────────── */
@@ -136,7 +150,7 @@ p { text-wrap: pretty; }
 .btn-wa { background: var(--accent); color: #fff; }
 .btn-plain { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-wa:hover { background: var(--accent-hover); }
   .btn-plain:hover { background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--muted); }
 }
@@ -156,7 +170,7 @@ p { text-wrap: pretty; }
   transition: text-decoration-color 160ms var(--ease-out);
 }
 .link-arrow::after { content: '→'; display: inline-block; transition: transform 160ms var(--ease-out); }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .link-arrow:hover .link-text { text-decoration-color: var(--accent-text); }
   .link-arrow:hover::after { transform: translateX(3px); }
 }
@@ -165,6 +179,7 @@ p { text-wrap: pretty; }
 .site-header {
   position: sticky;
   top: 0;
+  padding-top: env(safe-area-inset-top, 0px);
   z-index: var(--z-header);
   background: var(--bg);
   border-bottom: 1px solid transparent;
@@ -182,7 +197,7 @@ p { text-wrap: pretty; }
 
 .nav-links { display: flex; align-items: center; gap: 30px; font-size: 14px; }
 .nav-links a:not(.btn) { color: var(--muted); transition: color 160ms var(--ease-out); }
-@media (hover: hover) { .nav-links a:not(.btn):hover { color: var(--text); } }
+@media (hover: hover) and (pointer: fine) { .nav-links a:not(.btn):hover { color: var(--text); } }
 
 .nav-toggle {
   display: none;
@@ -194,7 +209,7 @@ p { text-wrap: pretty; }
 }
 .nav-toggle span {
   display: block; width: 22px; height: 1.5px; background: var(--text);
-  transition: transform 200ms var(--ease-out);
+  transition: transform 220ms var(--ease-in-out);
 }
 .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:last-child  { transform: translateY(-3.75px) rotate(-45deg); }
@@ -238,7 +253,7 @@ p { text-wrap: pretty; }
   color: var(--text);
   text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong);
 }
-@media (hover: hover) { .ficha a:hover { text-decoration-color: var(--text); } }
+@media (hover: hover) and (pointer: fine) { .ficha a:hover { text-decoration-color: var(--text); } }
 .firma { margin-top: 22px; font-size: 14px; color: var(--muted); }
 .firma strong { color: var(--text); font-weight: 600; }
 
@@ -272,7 +287,21 @@ p { text-wrap: pretty; }
   box-shadow: 0 0 0 1px var(--line);
   padding: clamp(14px, 2vw, 24px);
 }
-.tabs { display: none; gap: 4px; margin-bottom: 18px; overflow-x: auto; scrollbar-width: none; }
+.tabs {
+  display: none; gap: 4px; margin-bottom: 18px;
+  overflow-x: auto; scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+.tab { scroll-snap-align: start; }
+@media (max-width: 860px) {
+  .tabs {
+    margin-inline: calc(-1 * clamp(14px, 2vw, 24px));
+    padding-inline: clamp(14px, 2vw, 24px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+  }
+}
 .tabs::-webkit-scrollbar { display: none; }
 .showcase.is-enhanced .tabs { display: flex; }
 .tab {
@@ -289,12 +318,16 @@ p { text-wrap: pretty; }
   -webkit-tap-highlight-color: transparent;
   transition: background-color 150ms var(--ease-out), color 150ms var(--ease-out);
 }
-@media (hover: hover) { .tab:hover { color: var(--text); } }
+@media (hover: hover) and (pointer: fine) { .tab:hover { color: var(--text); } }
 .tab[aria-selected="true"] { background: var(--surface-2); color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
 
 .panel + .panel { margin-top: 48px; }
 .showcase.is-enhanced .panel + .panel { margin-top: 0; }
 .panel[hidden] { display: none; }
+@keyframes panel-in { from { opacity: 0; } to { opacity: 1; } }
+.panel.is-entering { animation: panel-in 180ms var(--ease-out); }
+.frame-shot img { transition: opacity 220ms var(--ease-out); }
+.frame-shot img.is-loading { opacity: 0; }
 
 .devices {
   display: grid;
@@ -351,6 +384,8 @@ p { text-wrap: pretty; }
 .panel-info p { margin-top: 10px; max-width: 58ch; color: var(--text-soft); }
 .panel-link { display: grid; justify-items: end; gap: 6px; }
 .panel-link small { color: var(--muted); font-size: 13px; }
+.link-arrow { min-height: 44px; }
+.footer-links a { display: inline-block; padding-block: 10px; }
 
 .facts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 .facts li {
@@ -478,7 +513,7 @@ p { text-wrap: pretty; }
   text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong);
   overflow-wrap: anywhere;
 }
-@media (hover: hover) { .contacto-alt a:hover { text-decoration-color: var(--text); } }
+@media (hover: hover) and (pointer: fine) { .contacto-alt a:hover { text-decoration-color: var(--text); } }
 
 .form {
   display: grid;
@@ -508,6 +543,8 @@ p { text-wrap: pretty; }
 
 .form-status { font-size: 14px; min-height: 1.4em; }
 .form-status:empty { display: none; }
+@keyframes status-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.form-status.is-ok, .form-status.is-error { animation: status-in 200ms var(--ease-out); }
 .form-status.is-ok { color: var(--ok); }
 .form-status.is-error { color: var(--error); }
 .form-status a { text-decoration: underline; text-underline-offset: 3px; }
@@ -518,13 +555,13 @@ p { text-wrap: pretty; }
 .footer-name { font-family: var(--f-display); font-size: 22px; color: var(--text); }
 .footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .footer-links a { transition: color 160ms var(--ease-out); overflow-wrap: anywhere; }
-@media (hover: hover) { .footer-links a:hover { color: var(--text); } }
+@media (hover: hover) and (pointer: fine) { .footer-links a:hover { color: var(--text); } }
 
 /* ── Botón flotante de WhatsApp (solo celular) ────────── */
 .fab {
   position: fixed;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: var(--z-fab);
   display: none;
   width: 56px; height: 56px;
@@ -534,9 +571,18 @@ p { text-wrap: pretty; }
   color: #fff;
   box-shadow: 0 12px 28px -10px var(--shadow);
   -webkit-tap-highlight-color: transparent;
-  transition: transform 120ms var(--ease-out);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.92);
+  transition: opacity 130ms var(--ease-out), transform 130ms var(--ease-out), visibility 0s linear 130ms;
 }
-.fab:active { transform: scale(0.95); }
+.fab.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s;
+}
+.fab.is-visible:active { transform: scale(0.95); transition-duration: 100ms; }
 .fab svg { width: 26px; height: 26px; }
 
 /* ── Responsive ───────────────────────────────────────── */
@@ -561,7 +607,7 @@ p { text-wrap: pretty; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute;
-    top: var(--header-h);
+    top: 100%;
     left: 0; right: 0;
     flex-direction: column;
     align-items: stretch;
@@ -573,13 +619,13 @@ p { text-wrap: pretty; }
     visibility: hidden;
     opacity: 0;
     transform: translateY(-6px);
-    transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s linear 180ms;
+    transition: opacity 140ms var(--ease-out), transform 140ms var(--ease-out), visibility 0s linear 140ms;
   }
   .nav-links.open {
     visibility: visible;
     opacity: 1;
     transform: none;
-    transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s;
+    transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s;
   }
   .nav-links a:not(.btn) { display: block; padding: 14px 0; color: var(--text); border-bottom: 1px solid var(--line); }
   .nav-links-wa { padding-top: 16px; }
@@ -600,8 +646,15 @@ p { text-wrap: pretty; }
 }
 
 /* ── Movimiento reducido ──────────────────────────────── */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-in { animation: none; }
-  .btn, .tab, .fab, .link-arrow::after, .nav-toggle span, .nav-links, .site-header { transition: none !important; }
+  /* Sin desplazamientos: solo fundidos breves que ayudan a entender el cambio */
+  .hero-in { animation: fade-in 200ms ease both; }
+  .form-status.is-ok, .form-status.is-error { animation: fade-in 200ms ease; }
+  .btn:active, .fab.is-visible:active { transform: none; }
+  .fab, .fab.is-visible { transform: none; }
+  .nav-links, .nav-links.open { transform: none; }
+  .link-arrow::after, .nav-toggle span { transition: none; }
+  .link-arrow:hover::after { transform: none; }
 }
