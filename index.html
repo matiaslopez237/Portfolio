@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matias Lopez — Diseño Web</title>
   <meta name="description" content="Diseñador web freelance. Creá páginas web a medida para negocios, profesionales y emprendimientos." />
-  <meta name="theme-color" content="#080808" />
+  <meta name="theme-color" content="#09090b" />
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236c63ff'/><text x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='13' fill='white'>ML</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2309090b'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23a29dff'>M</text></svg>" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Matias Lopez — Diseño Web" />
@@ -18,7 +18,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <!-- PostHog Analytics -->
@@ -35,1128 +35,420 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <!-- NAV -->
-  <nav id="nav" aria-label="Navegación principal">
-    <a href="#" class="nav-logo" aria-label="Matias Lopez — Inicio">ML<span>.</span></a>
-    <ul class="nav-links" id="nav-links" role="list">
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#precios">Precios</a></li>
-      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
-    </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  <header class="site-header" id="nav">
+    <nav class="nav wrap" aria-label="Navegación principal">
+      <a href="#inicio" class="nav-logo">Matias Lopez</a>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#proceso">Cómo trabajo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="nav-links-wa"><a class="btn btn-wa btn-sm" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio" aria-labelledby="hero-heading">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot" aria-hidden="true"></span>
-        Disponible para nuevos proyectos
-      </div>
-      <h1 id="hero-heading">
-        <span class="hero-intro">Hola, soy</span>
-        <span class="hero-name">Matias Lopez</span>
-      </h1>
-      <p class="hero-sub">
-        Diseño y desarrollo páginas web a medida para negocios, profesionales y emprendimientos. Cada proyecto pensado para quien lo necesita.
-      </p>
-      <div class="hero-btns">
-        <a href="#proyectos" class="btn-primary">Ver proyectos</a>
-        <a href="#contacto" class="btn-ghost">Hablemos →</a>
-      </div>
-      <div class="hero-meta">
-        <span>Ing. en Sistemas — UTN San Rafael</span>
-        <span class="meta-sep" aria-hidden="true">·</span>
-        <span>4° año</span>
-      </div>
-    </div>
+  <main id="main">
 
-    <!-- ROBOT 3D CUSTOM -->
-    <div class="hero-3d" aria-hidden="true">
-      <div class="robot-spotlight" id="robotSpotlight"></div>
-
-      <svg class="robot-svg" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Glow filters -->
-          <filter id="gf-s" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="2.5" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="gf-m" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="7" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="gf-l" x="-200%" y="-200%" width="500%" height="500%">
-            <feGaussianBlur stdDeviation="14" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-
-          <!-- Panel gradients -->
-          <linearGradient id="rg-panel" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#141428"/>
-            <stop offset="100%" stop-color="#09090f"/>
-          </linearGradient>
-          <linearGradient id="rg-panel-b" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a1a30"/>
-            <stop offset="100%" stop-color="#0d0d1c"/>
-          </linearGradient>
-
-          <!-- Eye iris gradient -->
-          <radialGradient id="rg-eye" cx="34%" cy="32%" r="66%">
-            <stop offset="0%"   stop-color="#e4e0ff"/>
-            <stop offset="38%"  stop-color="#9d95ff"/>
-            <stop offset="100%" stop-color="#4a43c8"/>
-          </radialGradient>
-
-          <!-- Core gradient -->
-          <radialGradient id="rg-core" cx="38%" cy="32%" r="68%">
-            <stop offset="0%"   stop-color="#ddd8ff"/>
-            <stop offset="100%" stop-color="#6c63ff"/>
-          </radialGradient>
-
-          <!-- Ground glow -->
-          <radialGradient id="rg-base" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="rgba(108,99,255,0.30)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-        </defs>
-
-        <!-- Ground glow shadow -->
-        <ellipse cx="200" cy="497" rx="86" ry="13" fill="url(#rg-base)"/>
-
-        <!-- ════════════════════════════ -->
-        <!--         FLOAT GROUP         -->
-        <!-- ════════════════════════════ -->
-        <g id="robot-float">
-
-          <!-- ── LEGS ── -->
-          <!-- Left leg -->
-          <rect x="158" y="371" width="40" height="50" rx="10" fill="url(#rg-panel)"   stroke="#252538" stroke-width="1.5"/>
-          <rect x="164" y="381" width="11" height="3"  rx="1.5" fill="#6c63ff" opacity="0.45"/>
-          <circle cx="178" cy="421" r="9" fill="#0c0c1a" stroke="#6c63ff" stroke-width="1" stroke-opacity="0.6"/>
-          <circle cx="178" cy="421" r="4" fill="#6c63ff" opacity="0.4" filter="url(#gf-s)"/>
-          <rect x="155" y="428" width="44" height="38" rx="9"  fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1"/>
-          <rect x="147" y="461" width="55" height="17" rx="8.5" fill="#080812" stroke="#6c63ff" stroke-width="0.8" stroke-opacity="0.55"/>
-          <rect x="155" y="472" width="37" height="2"  rx="1"   fill="#6c63ff" opacity="0.38" filter="url(#gf-s)"/>
-
-          <!-- Right leg -->
-          <rect x="202" y="371" width="40" height="50" rx="10" fill="url(#rg-panel)"   stroke="#252538" stroke-width="1.5"/>
-          <rect x="225" y="381" width="11" height="3"  rx="1.5" fill="#6c63ff" opacity="0.45"/>
-          <circle cx="222" cy="421" r="9" fill="#0c0c1a" stroke="#6c63ff" stroke-width="1" stroke-opacity="0.6"/>
-          <circle cx="222" cy="421" r="4" fill="#6c63ff" opacity="0.4" filter="url(#gf-s)"/>
-          <rect x="201" y="428" width="44" height="38" rx="9"  fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1"/>
-          <rect x="198" y="461" width="55" height="17" rx="8.5" fill="#080812" stroke="#6c63ff" stroke-width="0.8" stroke-opacity="0.55"/>
-          <rect x="208" y="472" width="37" height="2"  rx="1"   fill="#6c63ff" opacity="0.38" filter="url(#gf-s)"/>
-
-          <!-- ── BODY ── -->
-          <!-- Main torso -->
-          <rect x="143" y="232" width="114" height="140" rx="14" fill="url(#rg-panel)" stroke="#252538" stroke-width="1.5"/>
-          <!-- Top sheen -->
-          <rect x="151" y="234" width="98"  height="26" rx="10" fill="rgba(255,255,255,0.022)"/>
-          <!-- Panel dividers -->
-          <line x1="156" y1="269" x2="244" y2="269" stroke="#1d1d34" stroke-width="1"/>
-          <line x1="156" y1="315" x2="244" y2="315" stroke="#1d1d34" stroke-width="1"/>
-          <line x1="200" y1="269" x2="200" y2="370" stroke="#161626" stroke-width="0.75"/>
-          <!-- Side rails -->
-          <rect x="143" y="252" width="11" height="68" rx="4" fill="#0c0c1a" stroke="#1d1d34" stroke-width="1"/>
-          <rect x="246" y="252" width="11" height="68" rx="4" fill="#0c0c1a" stroke="#1d1d34" stroke-width="1"/>
-          <!-- Core outer ring -->
-          <circle cx="200" cy="289" r="26" fill="#050510" stroke="#6c63ff" stroke-width="1.5" stroke-opacity="0.65"/>
-          <!-- Core inner glow (animated) -->
-          <circle cx="200" cy="289" r="19" fill="url(#rg-core)" class="robot-core-glow" filter="url(#gf-m)"/>
-          <!-- Core center -->
-          <circle cx="200" cy="289" r="11" fill="#f0eeff"/>
-          <circle cx="196" cy="285" r="4.5" fill="white" opacity="0.65"/>
-          <!-- Circuit traces -->
-          <path d="M156 334 L169 334 L169 346 L186 346" fill="none" stroke="#6c63ff" stroke-width="0.65" stroke-opacity="0.32"/>
-          <path d="M244 334 L231 334 L231 346 L214 346" fill="none" stroke="#6c63ff" stroke-width="0.65" stroke-opacity="0.32"/>
-          <circle cx="156" cy="334" r="2.5" fill="#6c63ff" opacity="0.48"/>
-          <circle cx="244" cy="334" r="2.5" fill="#6c63ff" opacity="0.48"/>
-          <!-- Waist connector -->
-          <rect x="163" y="368" width="74" height="8" rx="4" fill="#0b0b18" stroke="#1d1d34" stroke-width="1"/>
-
-          <!-- ── SHOULDERS ── -->
-          <rect x="100" y="232" width="46" height="23" rx="11" fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1.5"/>
-          <rect x="254" y="232" width="46" height="23" rx="11" fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1.5"/>
-          <line x1="112" y1="243" x2="138" y2="243" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.35"/>
-          <line x1="262" y1="243" x2="288" y2="243" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.35"/>
-
-          <!-- ── LEFT ARM ── -->
-          <rect x="95"  y="252" width="30" height="64" rx="10" fill="url(#rg-panel)"   stroke="#252538" stroke-width="1"/>
-          <circle cx="110" cy="316" r="10" fill="#0c0c1a" stroke="#252538" stroke-width="1.5"/>
-          <circle cx="110" cy="316" r="5"  fill="url(#rg-panel-b)" stroke="#6c63ff" stroke-width="0.6" stroke-opacity="0.5"/>
-          <rect x="93"  y="322" width="30" height="48" rx="9"  fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1"/>
-          <rect x="89"  y="366" width="35" height="19" rx="8"  fill="#080812" stroke="#6c63ff" stroke-width="0.7" stroke-opacity="0.5"/>
-          <line x1="100" y1="276" x2="121" y2="276" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.3"/>
-
-          <!-- ── RIGHT ARM ── -->
-          <rect x="275" y="252" width="30" height="64" rx="10" fill="url(#rg-panel)"   stroke="#252538" stroke-width="1"/>
-          <circle cx="290" cy="316" r="10" fill="#0c0c1a" stroke="#252538" stroke-width="1.5"/>
-          <circle cx="290" cy="316" r="5"  fill="url(#rg-panel-b)" stroke="#6c63ff" stroke-width="0.6" stroke-opacity="0.5"/>
-          <rect x="275" y="322" width="30" height="48" rx="9"  fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1"/>
-          <rect x="276" y="366" width="35" height="19" rx="8"  fill="#080812" stroke="#6c63ff" stroke-width="0.7" stroke-opacity="0.5"/>
-          <line x1="279" y1="276" x2="300" y2="276" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.3"/>
-
-          <!-- ── NECK ── -->
-          <rect x="180" y="208" width="40" height="9" rx="4" fill="#0d0d1c" stroke="#1d1d34" stroke-width="1"/>
-          <rect x="183" y="218" width="34" height="7" rx="3" fill="#0a0a16" stroke="#1d1d34" stroke-width="0.75"/>
-          <rect x="180" y="226" width="40" height="9" rx="4" fill="#0d0d1c" stroke="#1d1d34" stroke-width="1"/>
-          <line x1="187" y1="213" x2="213" y2="213" stroke="#6c63ff" stroke-width="0.4" stroke-opacity="0.4"/>
-          <line x1="187" y1="222" x2="213" y2="222" stroke="#6c63ff" stroke-width="0.4" stroke-opacity="0.4"/>
-
-          <!-- ════════════════ -->
-          <!--      HEAD       -->
-          <!-- ════════════════ -->
-          <g id="robot-head">
-
-            <!-- Main head shell -->
-            <rect x="133" y="105" width="134" height="106" rx="20" fill="url(#rg-panel)" stroke="#252538" stroke-width="1.5"/>
-            <!-- Crown plate -->
-            <rect x="148" y="105" width="104" height="27" rx="13" fill="url(#rg-panel-b)" stroke="#252538" stroke-width="1"/>
-            <!-- Crown highlight sheen -->
-            <rect x="155" y="107" width="90"  height="12" rx="9"  fill="rgba(255,255,255,0.025)"/>
-
-            <!-- Side ear panels -->
-            <rect x="123" y="138" width="14" height="40" rx="7" fill="url(#rg-panel-b)" stroke="#6c63ff" stroke-width="0.8" stroke-opacity="0.5"/>
-            <rect x="263" y="138" width="14" height="40" rx="7" fill="url(#rg-panel-b)" stroke="#6c63ff" stroke-width="0.8" stroke-opacity="0.5"/>
-            <!-- Ear indicator dots -->
-            <circle cx="130" cy="157" r="3.5" fill="#6c63ff" opacity="0.65" filter="url(#gf-s)"/>
-            <circle cx="270" cy="157" r="3.5" fill="#6c63ff" opacity="0.65" filter="url(#gf-s)"/>
-
-            <!-- Face plate housing -->
-            <rect x="146" y="130" width="108" height="70" rx="13" fill="#04040b" stroke="#16162a" stroke-width="1"/>
-
-            <!-- ── EYE SOCKETS ── -->
-            <!-- Left -->
-            <ellipse cx="175" cy="163" rx="23" ry="17" fill="#04040b" stroke="#6c63ff" stroke-width="1.5" stroke-opacity="0.78"/>
-            <ellipse cx="175" cy="163" rx="18" ry="12" fill="#6c63ff" opacity="0.05" filter="url(#gf-s)"/>
-            <!-- Right -->
-            <ellipse cx="225" cy="163" rx="23" ry="17" fill="#04040b" stroke="#6c63ff" stroke-width="1.5" stroke-opacity="0.78"/>
-            <ellipse cx="225" cy="163" rx="18" ry="12" fill="#6c63ff" opacity="0.05" filter="url(#gf-s)"/>
-
-            <!-- ── LEFT PUPIL GROUP — moved by JS ── -->
-            <g id="pupil-left-group">
-              <circle cx="175" cy="163" r="10" fill="url(#rg-eye)" filter="url(#gf-s)"/>
-              <circle cx="172" cy="160" r="3.5" fill="white" opacity="0.72"/>
-            </g>
-
-            <!-- ── RIGHT PUPIL GROUP — moved by JS ── -->
-            <g id="pupil-right-group">
-              <circle cx="225" cy="163" r="10" fill="url(#rg-eye)" filter="url(#gf-s)"/>
-              <circle cx="222" cy="160" r="3.5" fill="white" opacity="0.72"/>
-            </g>
-
-            <!-- Chin / mouth bar -->
-            <rect x="174" y="188" width="52" height="7" rx="3.5" fill="#0f0f1e" stroke="#1d1d34" stroke-width="0.5"/>
-            <rect x="181" y="190" width="38" height="3"  rx="1.5" fill="#6c63ff" opacity="0.55" filter="url(#gf-s)"/>
-
-            <!-- Forehead circuit details -->
-            <line x1="158" y1="119" x2="186" y2="119" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.4"/>
-            <circle cx="154" cy="119" r="2.5" fill="#6c63ff" opacity="0.42"/>
-            <line x1="214" y1="119" x2="242" y2="119" stroke="#6c63ff" stroke-width="0.5" stroke-opacity="0.4"/>
-            <circle cx="246" cy="119" r="2.5" fill="#6c63ff" opacity="0.42"/>
-
-            <!-- ── ANTENNA ── -->
-            <rect x="192" y="68" width="16" height="40" rx="5" fill="url(#rg-panel-b)" stroke="#1d1d34" stroke-width="1"/>
-            <line x1="196" y1="76" x2="208" y2="76" stroke="#6c63ff" stroke-width="0.45" stroke-opacity="0.42"/>
-            <line x1="196" y1="83" x2="208" y2="83" stroke="#6c63ff" stroke-width="0.45" stroke-opacity="0.42"/>
-            <!-- Branch -->
-            <line x1="208" y1="72" x2="232" y2="47" stroke="#252538" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Tip — outer glow (pulsing) -->
-            <circle cx="232" cy="45" r="9"  fill="#6c63ff" class="robot-antenna-pulse" filter="url(#gf-l)"/>
-            <!-- Tip — core -->
-            <circle cx="232" cy="45" r="5"  fill="#a78bfa"/>
-            <circle cx="230" cy="43" r="2"  fill="white" opacity="0.82"/>
-
-          </g>
-          <!-- end HEAD -->
-
-        </g>
-        <!-- end FLOAT GROUP -->
-      </svg>
-    </div>
-    <!-- end hero-3d -->
-
-  </section>
-
-  <!-- SERVICIOS -->
-  <section id="servicios" class="circuit-bg" aria-labelledby="servicios-heading">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Lo que hago</p>
-        <h2 class="section-title" id="servicios-heading">Servicios</h2>
-        <p class="section-sub">Diseño páginas adaptadas a cada tipo de negocio, con foco en la experiencia del usuario y los resultados.</p>
-      </div>
-
-      <div class="servicios-grid">
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <path d="M3 21h18M9 21V9l3-6 3 6v12M9 12h6"/>
-              <rect x="10" y="15" width="4" height="6"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">01</div>
-          <h3>Páginas Institucionales</h3>
-          <p>Para centros médicos, consultorios, clínicas y profesionales de salud. Con información de servicios, contacto y turnos.</p>
-        </div>
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">02</div>
-          <h3>Tiendas Online</h3>
-          <p>Catálogo de productos, carrito de compras y pagos integrados. Ideal para negocios que quieren vender en internet.</p>
-        </div>
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <path d="M18 8h1a4 4 0 010 8h-1"/>
-              <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
-              <line x1="6" y1="1" x2="6" y2="4"/>
-              <line x1="10" y1="1" x2="10" y2="4"/>
-              <line x1="14" y1="1" x2="14" y2="4"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">03</div>
-          <h3>Restaurantes y Cafés</h3>
-          <p>Menú digital, galería de fotos, reservas y contacto por WhatsApp. Para que tus clientes te encuentren fácil.</p>
-        </div>
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <rect x="3" y="3" width="7" height="7" rx="1"/>
-              <rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/>
-              <rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">04</div>
-          <h3>Portfolios Profesionales</h3>
-          <p>Para freelancers, artistas, fotógrafos y cualquier profesional que quiera mostrar su trabajo en internet.</p>
-        </div>
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">05</div>
-          <h3>Inmobiliarias</h3>
-          <p>Listado de propiedades con filtros, fotos y formulario de contacto. Tu catálogo inmobiliario siempre actualizado.</p>
-        </div>
-
-        <div class="servicio-card reveal-item">
-          <div class="servicio-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-          </div>
-          <div class="servicio-num" aria-hidden="true">06</div>
-          <h3>Landing Pages</h3>
-          <p>Páginas enfocadas en convertir visitas en clientes. Para campañas, productos o servicios específicos.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PROYECTOS -->
-  <section id="proyectos" class="circuit-bg" aria-labelledby="proyectos-heading">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Mi trabajo</p>
-        <h2 class="section-title" id="proyectos-heading">Proyectos</h2>
-        <p class="section-sub">Páginas reales que diseñé y desarrollé para clientes.</p>
-      </div>
-
-      <div class="proyectos-grid">
-
-        <div class="proyecto-card reveal-item">
-          <a href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cmsd" aria-label="Ver proyecto Centro Médico Santo Domingo">
-            <div class="proyecto-preview-inner" aria-hidden="true">
-              <svg width="218" height="109" viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="grad-cmsd-text" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#a78bfa"></stop>
-                    <stop offset="55%" stop-color="#8c7bff"></stop>
-                    <stop offset="100%" stop-color="#6c63ff"></stop>
-                  </linearGradient>
-                </defs>
-                <g fill="url(#grad-cmsd-text)" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="110" letter-spacing="-3">
-                  <text x="180" y="105" text-anchor="middle">CMSD</text>
-                </g>
-              </svg>
-            </div>
-            <div class="proyecto-overlay" aria-hidden="true"><span>Ver proyecto →</span></div>
-            <span class="proyecto-badge proyecto-badge-live">En vivo</span>
+    <!-- HERO -->
+    <section class="hero wrap" id="inicio" aria-labelledby="hero-heading">
+      <div class="hero-main">
+        <h1 id="hero-heading" class="hero-in" style="--i:0">Páginas web que le traen <em>clientes</em> a tu negocio.</h1>
+        <p class="hero-sub hero-in" style="--i:1">Diseño y programo páginas, tiendas online y catálogos con pedidos por WhatsApp para comercios, profesionales y emprendimientos.</p>
+        <div class="hero-ctas hero-in" style="--i:2">
+          <a class="btn btn-wa" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener">
+            <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+            Escribime por WhatsApp
           </a>
-          <div class="proyecto-body">
-            <div class="proyecto-tags" aria-label="Tecnologías">
-              <span class="tag">Salud</span>
-              <span class="tag">React</span>
-              <span class="tag">E-commerce</span>
-            </div>
-            <h3>Centro Médico Santo Domingo</h3>
-            <p>Página completa para un centro médico en San Rafael, Mendoza. Servicios, catálogo con carrito y pagos online vía Mercado Pago.</p>
-            <a href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" class="proyecto-link" tabindex="-1" aria-hidden="true">
-              Ver proyecto
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M7 17L17 7M7 7h10v10"/>
-              </svg>
-            </a>
-          </div>
+          <a class="btn btn-plain" href="#trabajos">Ver trabajos</a>
         </div>
-
-        <div class="proyecto-card reveal-item">
-          <a href="https://quiropraxiacipolletti.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-quiro" aria-label="Ver proyecto Quiropraxia Cipolletti">
-            <div class="proyecto-preview-inner" aria-hidden="true">
-              <svg width="95" height="200" viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="quiro-sg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6c63ff"></stop><stop offset="50%" stop-color="#8c7bff"></stop><stop offset="100%" stop-color="#a78bfa"></stop>
-                  </linearGradient>
-                  <linearGradient id="quiro-dg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#8c7bff"></stop><stop offset="100%" stop-color="#a78bfa"></stop>
-                  </linearGradient>
-                </defs>
-                <g fill="url(#quiro-dg)" opacity="0.5">
-                  <rect x="-4.34" y="-0.68" width="8.68" height="1.36" rx="0.68" transform="translate(110.73 35.82) rotate(-1.04)"></rect>
-                  <rect x="-4.34" y="-0.68" width="8.68" height="1.36" rx="0.68" transform="translate(107.35 44.64) rotate(-1.07)"></rect>
-                  <rect x="-4.34" y="-0.68" width="8.68" height="1.36" rx="0.68" transform="translate(103.91 53.46) rotate(-1.06)"></rect>
-                  <rect x="-4.34" y="-0.68" width="8.68" height="1.36" rx="0.68" transform="translate(100.57 62.28) rotate(-1.01)"></rect>
-                  <rect x="-4.34" y="-0.68" width="8.68" height="1.36" rx="0.68" transform="translate(97.47 71.10) rotate(-0.90)"></rect>
-                  <rect x="-4.60" y="-0.72" width="9.21" height="1.45" rx="0.72" transform="translate(94.81 80.13) rotate(-0.70)"></rect>
-                  <rect x="-5.39" y="-0.85" width="10.78" height="1.69" rx="0.85" transform="translate(92.77 90.23) rotate(-0.43)"></rect>
-                  <rect x="-6.18" y="-0.97" width="12.36" height="1.94" rx="0.97" transform="translate(91.53 101.82) rotate(-0.17)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(91.23 114.23) rotate(0.05)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(91.92 126.85) rotate(0.27)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(93.58 139.47) rotate(0.47)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(96.08 152.09) rotate(0.63)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(99.17 164.71) rotate(0.72)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(102.53 177.33) rotate(0.73)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(105.77 189.95) rotate(0.65)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(108.47 202.57) rotate(0.49)"></rect>
-                  <rect x="-6.44" y="-1.01" width="12.88" height="2.02" rx="1.01" transform="translate(110.23 215.19) rotate(0.24)"></rect>
-                  <rect x="-6.79" y="-1.07" width="13.58" height="2.13" rx="1.07" transform="translate(110.74 228.09) rotate(-0.05)"></rect>
-                  <rect x="-7.84" y="-1.23" width="15.68" height="2.46" rx="1.23" transform="translate(109.78 242.33) rotate(-0.32)"></rect>
-                  <rect x="-8.89" y="-1.40" width="17.78" height="2.79" rx="1.40" transform="translate(107.28 258.48) rotate(-0.54)"></rect>
-                  <rect x="-9.24" y="-1.45" width="18.48" height="2.90" rx="1.45" transform="translate(103.34 275.72) rotate(-0.73)"></rect>
-                  <rect x="-9.24" y="-1.45" width="18.48" height="2.90" rx="1.45" transform="translate(98.20 293.24) rotate(-0.89)"></rect>
-                  <rect x="-9.24" y="-1.45" width="18.48" height="2.90" rx="1.45" transform="translate(92.27 310.76) rotate(-0.97)"></rect>
-                </g>
-                <g fill="url(#quiro-sg)">
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(112.40 31.41) rotate(-1.02)"></path>
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(109.06 40.23) rotate(-1.06)"></path>
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(105.63 49.05) rotate(-1.08)"></path>
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(102.20 57.87) rotate(-1.05)"></path>
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(98.93 66.69) rotate(-0.97)"></path>
-                  <path d="M -5.89 -2.2319999999999998 Q -7.13 -3.348 -5.89 -4.65 Q -1.58 -4.96 2.11 -4.46 Q 7.50 -4.46 11.59 -2.23 Q 13.64 -0.37 12.96 1.12 Q 10.23 2.42 6.14 2.23 Q 1.05 2.05 -2.11 4.03 Q -6.51 4.34 -6.82 1.49 Q -7.13 -0.37 -5.89 -2.23 Z" transform="translate(96.01 75.51) rotate(-0.83)"></path>
-                  <path d="M -6.60 -2.502 Q -7.99 -3.753 -6.60 -5.21 Q -1.77 -5.56 2.36 -5.00 Q 8.41 -5.00 13.00 -2.50 Q 15.29 -0.42 14.53 1.25 Q 11.47 2.71 6.88 2.50 Q 1.18 2.29 -2.36 4.52 Q -7.30 4.87 -7.64 1.67 Q -7.99 -0.42 -6.60 -2.50 Z" transform="translate(93.61 84.74) rotate(-0.58)"></path>
-                  <path d="M -8.03 -3.0420000000000003 Q -9.72 -4.563000000000001 -8.03 -6.34 Q -2.15 -6.76 2.87 -6.08 Q 10.22 -6.08 15.80 -3.04 Q 18.59 -0.51 17.66 1.52 Q 13.94 3.30 8.37 3.04 Q 1.44 2.79 -2.87 5.49 Q -8.87 5.92 -9.29 2.03 Q -9.72 -0.51 -8.03 -3.04 Z" transform="translate(91.93 95.71) rotate(-0.28)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(91.13 107.92) rotate(-0.06)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(91.32 120.54) rotate(0.17)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(92.52 133.16) rotate(0.38)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(94.64 145.78) rotate(0.56)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(97.51 158.40) rotate(0.69)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(100.83 171.02) rotate(0.75)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(104.24 183.64) rotate(0.72)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(107.31 196.26) rotate(0.59)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(109.63 208.88) rotate(0.38)"></path>
-                  <path d="M -8.74 -3.3120000000000003 Q -10.58 -4.968000000000001 -8.74 -6.90 Q -2.35 -7.36 3.13 -6.62 Q 11.13 -6.62 17.20 -3.31 Q 20.24 -0.55 19.23 1.66 Q 15.18 3.59 9.11 3.31 Q 1.56 3.04 -3.13 5.98 Q -9.66 6.44 -10.12 2.21 Q -10.58 -0.55 -8.74 -3.31 Z" transform="translate(110.84 221.50) rotate(0.10)"></path>
-                  <path d="M -9.69 -3.6719999999999997 Q -11.73 -5.508 -9.69 -7.65 Q -2.60 -8.16 3.47 -7.34 Q 12.34 -7.34 19.07 -3.67 Q 22.44 -0.61 21.32 1.84 Q 16.83 3.98 10.10 3.67 Q 1.73 3.37 -3.47 6.63 Q -10.71 7.14 -11.22 2.45 Q -11.73 -0.61 -9.69 -3.67 Z" transform="translate(110.65 234.67) rotate(-0.21)"></path>
-                  <path d="M -11.59 -4.392 Q -14.03 -6.588 -11.59 -9.15 Q -3.11 -9.76 4.15 -8.78 Q 14.76 -8.78 22.81 -4.39 Q 26.84 -0.73 25.50 2.20 Q 20.13 4.76 12.08 4.39 Q 2.07 4.03 -4.15 7.93 Q -12.81 8.54 -13.42 2.93 Q -14.03 -0.73 -11.59 -4.39 Z" transform="translate(108.91 249.99) rotate(-0.44)"></path>
-                  <path d="M -12.54 -4.752 Q -15.18 -7.128 -12.54 -9.90 Q -3.37 -10.56 4.49 -9.50 Q 15.97 -9.50 24.68 -4.75 Q 29.04 -0.79 27.59 2.38 Q 21.78 5.15 13.07 4.75 Q 2.24 4.36 -4.49 8.58 Q -13.86 9.24 -14.52 3.17 Q -15.18 -0.79 -12.54 -4.75 Z" transform="translate(105.65 266.96) rotate(-0.64)"></path>
-                  <path d="M -12.54 -4.752 Q -15.18 -7.128 -12.54 -9.90 Q -3.37 -10.56 4.49 -9.50 Q 15.97 -9.50 24.68 -4.75 Q 29.04 -0.79 27.59 2.38 Q 21.78 5.15 13.07 4.75 Q 2.24 4.36 -4.49 8.58 Q -13.86 9.24 -14.52 3.17 Q -15.18 -0.79 -12.54 -4.75 Z" transform="translate(101.03 284.48) rotate(-0.83)"></path>
-                  <path d="M -12.54 -4.752 Q -15.18 -7.128 -12.54 -9.90 Q -3.37 -10.56 4.49 -9.50 Q 15.97 -9.50 24.68 -4.75 Q 29.04 -0.79 27.59 2.38 Q 21.78 5.15 13.07 4.75 Q 2.24 4.36 -4.49 8.58 Q -13.86 9.24 -14.52 3.17 Q -15.18 -0.79 -12.54 -4.75 Z" transform="translate(95.38 302.00) rotate(-0.95)"></path>
-                  <path d="M -12.54 -4.752 Q -15.18 -7.128 -12.54 -9.90 Q -3.37 -10.56 4.49 -9.50 Q 15.97 -9.50 24.68 -4.75 Q 29.04 -0.79 27.59 2.38 Q 21.78 5.15 13.07 4.75 Q 2.24 4.36 -4.49 8.58 Q -13.86 9.24 -14.52 3.17 Q -15.18 -0.79 -12.54 -4.75 Z" transform="translate(89.16 319.52) rotate(-0.99)"></path>
-                </g>
-                <g fill="#2e1c80" opacity="0.45">
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(112.40 31.41) rotate(-1.02)"></path>
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(109.06 40.23) rotate(-1.06)"></path>
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(105.63 49.05) rotate(-1.08)"></path>
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(102.20 57.87) rotate(-1.05)"></path>
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(98.93 66.69) rotate(-0.97)"></path>
-                  <path d="M 0.53 1.30 Q 5.46 1.67 9.55 1.30 Q 7.50 2.05 4.77 1.86 Q 0.00 1.86 0.53 1.30 Z" transform="translate(96.01 75.51) rotate(-0.83)"></path>
-                  <path d="M 0.59 1.46 Q 6.12 1.88 10.70 1.46 Q 8.41 2.29 5.35 2.08 Q 0.00 2.08 0.59 1.46 Z" transform="translate(93.61 84.74) rotate(-0.58)"></path>
-                  <path d="M 0.72 1.77 Q 7.44 2.28 13.01 1.77 Q 10.22 2.79 6.51 2.54 Q 0.00 2.54 0.72 1.77 Z" transform="translate(91.93 95.71) rotate(-0.28)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(91.13 107.92) rotate(-0.06)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(91.32 120.54) rotate(0.17)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(92.52 133.16) rotate(0.38)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(94.64 145.78) rotate(0.56)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(97.51 158.40) rotate(0.69)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(100.83 171.02) rotate(0.75)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(104.24 183.64) rotate(0.72)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(107.31 196.26) rotate(0.59)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(109.63 208.88) rotate(0.38)"></path>
-                  <path d="M 0.78 1.93 Q 8.10 2.48 14.17 1.93 Q 11.13 3.04 7.08 2.76 Q 0.00 2.76 0.78 1.93 Z" transform="translate(110.84 221.50) rotate(0.10)"></path>
-                  <path d="M 0.87 2.14 Q 8.98 2.75 15.71 2.14 Q 12.34 3.37 7.85 3.06 Q 0.00 3.06 0.87 2.14 Z" transform="translate(110.65 234.67) rotate(-0.21)"></path>
-                  <path d="M 1.04 2.56 Q 10.74 3.29 18.79 2.56 Q 14.76 4.03 9.39 3.66 Q 0.00 3.66 1.04 2.56 Z" transform="translate(108.91 249.99) rotate(-0.44)"></path>
-                  <path d="M 1.12 2.77 Q 11.62 3.56 20.33 2.77 Q 15.97 4.36 10.16 3.96 Q 0.00 3.96 1.12 2.77 Z" transform="translate(105.65 266.96) rotate(-0.64)"></path>
-                  <path d="M 1.12 2.77 Q 11.62 3.56 20.33 2.77 Q 15.97 4.36 10.16 3.96 Q 0.00 3.96 1.12 2.77 Z" transform="translate(101.03 284.48) rotate(-0.83)"></path>
-                  <path d="M 1.12 2.77 Q 11.62 3.56 20.33 2.77 Q 15.97 4.36 10.16 3.96 Q 0.00 3.96 1.12 2.77 Z" transform="translate(95.38 302.00) rotate(-0.95)"></path>
-                  <path d="M 1.12 2.77 Q 11.62 3.56 20.33 2.77 Q 15.97 4.36 10.16 3.96 Q 0.00 3.96 1.12 2.77 Z" transform="translate(89.16 319.52) rotate(-0.99)"></path>
-                </g>
-                <g fill="#e9defe" opacity="0.55">
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(112.40 31.41) rotate(-1.02)"></path>
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(109.06 40.23) rotate(-1.06)"></path>
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(105.63 49.05) rotate(-1.08)"></path>
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(102.20 57.87) rotate(-1.05)"></path>
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(98.93 66.69) rotate(-0.97)"></path>
-                  <path d="M -4.22 -2.23 Q -1.58 -4.53 1.58 -4.09 Q 0.53 -1.49 -4.22 -2.23 Z" transform="translate(96.01 75.51) rotate(-0.83)"></path>
-                  <path d="M -4.73 -2.50 Q -1.77 -5.07 1.77 -4.59 Q 0.59 -1.67 -4.73 -2.50 Z" transform="translate(93.61 84.74) rotate(-0.58)"></path>
-                  <path d="M -5.75 -3.04 Q -2.15 -6.17 2.15 -5.58 Q 0.72 -2.03 -5.75 -3.04 Z" transform="translate(91.93 95.71) rotate(-0.28)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(91.13 107.92) rotate(-0.06)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(91.32 120.54) rotate(0.17)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(92.52 133.16) rotate(0.38)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(94.64 145.78) rotate(0.56)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(97.51 158.40) rotate(0.69)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(100.83 171.02) rotate(0.75)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(104.24 183.64) rotate(0.72)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(107.31 196.26) rotate(0.59)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(109.63 208.88) rotate(0.38)"></path>
-                  <path d="M -6.26 -3.31 Q -2.35 -6.72 2.35 -6.07 Q 0.78 -2.21 -6.26 -3.31 Z" transform="translate(110.84 221.50) rotate(0.10)"></path>
-                  <path d="M -6.94 -3.67 Q -2.60 -7.45 2.60 -6.73 Q 0.87 -2.45 -6.94 -3.67 Z" transform="translate(110.65 234.67) rotate(-0.21)"></path>
-                  <path d="M -8.30 -4.39 Q -3.11 -8.91 3.11 -8.05 Q 1.04 -2.93 -8.30 -4.39 Z" transform="translate(108.91 249.99) rotate(-0.44)"></path>
-                  <path d="M -8.98 -4.75 Q -3.37 -9.64 3.37 -8.71 Q 1.12 -3.17 -8.98 -4.75 Z" transform="translate(105.65 266.96) rotate(-0.64)"></path>
-                  <path d="M -8.98 -4.75 Q -3.37 -9.64 3.37 -8.71 Q 1.12 -3.17 -8.98 -4.75 Z" transform="translate(101.03 284.48) rotate(-0.83)"></path>
-                  <path d="M -8.98 -4.75 Q -3.37 -9.64 3.37 -8.71 Q 1.12 -3.17 -8.98 -4.75 Z" transform="translate(95.38 302.00) rotate(-0.95)"></path>
-                  <path d="M -8.98 -4.75 Q -3.37 -9.64 3.37 -8.71 Q 1.12 -3.17 -8.98 -4.75 Z" transform="translate(89.16 319.52) rotate(-0.99)"></path>
-                </g>
-                <g fill="#2e1c80" opacity="0.55">
-                  <circle cx="112.40" cy="31.41" r="0.74"></circle>
-                  <circle cx="109.06" cy="40.23" r="0.74"></circle>
-                  <circle cx="105.63" cy="49.05" r="0.74"></circle>
-                  <circle cx="102.20" cy="57.87" r="0.74"></circle>
-                  <circle cx="98.93" cy="66.69" r="0.74"></circle>
-                  <circle cx="96.01" cy="75.51" r="0.74"></circle>
-                  <circle cx="93.61" cy="84.74" r="0.83"></circle>
-                  <circle cx="91.93" cy="95.71" r="1.01"></circle>
-                  <circle cx="91.13" cy="107.92" r="1.10"></circle>
-                  <circle cx="91.32" cy="120.54" r="1.10"></circle>
-                  <circle cx="92.52" cy="133.16" r="1.10"></circle>
-                  <circle cx="94.64" cy="145.78" r="1.10"></circle>
-                  <circle cx="97.51" cy="158.40" r="1.10"></circle>
-                  <circle cx="100.83" cy="171.02" r="1.10"></circle>
-                  <circle cx="104.24" cy="183.64" r="1.10"></circle>
-                  <circle cx="107.31" cy="196.26" r="1.10"></circle>
-                  <circle cx="109.63" cy="208.88" r="1.10"></circle>
-                  <circle cx="110.84" cy="221.50" r="1.10"></circle>
-                  <circle cx="110.65" cy="234.67" r="1.22"></circle>
-                  <circle cx="108.91" cy="249.99" r="1.46"></circle>
-                  <circle cx="105.65" cy="266.96" r="1.58"></circle>
-                  <circle cx="101.03" cy="284.48" r="1.58"></circle>
-                  <circle cx="95.38" cy="302.00" r="1.58"></circle>
-                  <circle cx="89.16" cy="319.52" r="1.58"></circle>
-                </g>
-                <g fill="url(#quiro-sg)">
-                  <path d="M 67.16 335.78 Q 84.16 333.78 101.16 339.78 L 93.16 368.78 Q 83.16 382.78 72.16 378.78 Q 63.16 368.78 67.16 335.78 Z"></path>
-                </g>
-                <g fill="#2e1c80" opacity="0.4">
-                  <path d="M 75.16 344.78 Q 83.16 346.78 93.16 343.78 L 90.16 352.78 Q 82.16 354.78 76.16 351.78 Z"></path>
-                  <path d="M 77.16 358.78 Q 83.16 360.78 89.16 357.78 L 87.16 366.78 Q 82.16 368.78 77.16 365.78 Z"></path>
-                </g>
-                <g fill="#e9defe" opacity="0.55">
-                  <path d="M 71.16 337.78 Q 83.16 335.78 97.16 339.78 Q 83.16 340.78 71.16 337.78 Z"></path>
-                </g>
-              </svg>
-            </div>
-            <div class="proyecto-overlay" aria-hidden="true"><span>Ver proyecto →</span></div>
-            <span class="proyecto-badge proyecto-badge-live">En vivo</span>
-          </a>
-          <div class="proyecto-body">
-            <div class="proyecto-tags" aria-label="Tecnologías">
-              <span class="tag">Salud</span>
-              <span class="tag">Landing Page</span>
-            </div>
-            <h3>Quiropraxia Cipolletti</h3>
-            <p>Landing page para el Lic. Juan Manuel Martinez, quiropráctor en Cipolletti. Servicios, beneficios, FAQ y reserva de turnos online.</p>
-            <a href="https://quiropraxiacipolletti.com" target="_blank" rel="noopener" class="proyecto-link" tabindex="-1" aria-hidden="true">
-              Ver proyecto
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M7 17L17 7M7 7h10v10"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="proyecto-card reveal-item">
-          <a href="https://coffea-front.onrender.com" target="_blank" rel="noopener" class="proyecto-preview proyecto-preview-cafe" aria-label="Ver proyecto Café Demo">
-            <div class="proyecto-preview-inner" aria-hidden="true">
-              <svg width="130" height="121" viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" focusable="false">
-                <defs>
-                  <linearGradient id="cafe-mug" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffb27a"></stop>
-                    <stop offset="50%" stop-color="#f47b3a"></stop>
-                    <stop offset="100%" stop-color="#c8531a"></stop>
-                  </linearGradient>
-                  <linearGradient id="cafe-rim" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffd2a8"></stop>
-                    <stop offset="100%" stop-color="#e88a4a"></stop>
-                  </linearGradient>
-                  <radialGradient id="cafe-coffee" cx="0.5" cy="0.4" r="0.7">
-                    <stop offset="0%" stop-color="#6b3a18"></stop>
-                    <stop offset="100%" stop-color="#2a1408"></stop>
-                  </radialGradient>
-                  <linearGradient id="cafe-steam" x1="0" y1="1" x2="0" y2="0">
-                    <stop offset="0%" stop-color="#a86a3c" stop-opacity="0.85"></stop>
-                    <stop offset="60%" stop-color="#c4865a" stop-opacity="0.6"></stop>
-                    <stop offset="100%" stop-color="#c4865a" stop-opacity="0"></stop>
-                  </linearGradient>
-                </defs>
-                <g fill="none" stroke="url(#cafe-steam)" stroke-width="5" stroke-linecap="round">
-                  <path d="M 100 100 C 92 86 108 76 100 60 C 92 44 106 32 100 14"></path>
-                  <path d="M 140 100 C 132 86 148 76 140 60 C 132 44 146 32 140 14"></path>
-                  <path d="M 180 100 C 172 86 188 76 180 60 C 172 44 186 32 180 14"></path>
-                </g>
-                <path d="M 198 140 C 240 138 246 168 240 188 C 236 208 220 218 200 218 L 200 200 C 214 200 224 192 226 180 C 228 168 222 158 200 158 Z" fill="url(#cafe-mug)"></path>
-                <path d="M 200 160 C 218 160 224 168 224 178 C 224 188 218 196 200 196 L 200 200 C 222 200 230 188 230 178 C 230 166 222 158 200 158 Z" fill="#6b2e0e" opacity="0.45"></path>
-                <path d="M 56 132 Q 56 124 64 122 L 200 122 Q 208 124 208 132 L 204 210 Q 200 240 170 244 L 94 244 Q 64 240 60 210 Z" fill="url(#cafe-mug)"></path>
-                <ellipse cx="132" cy="128" rx="78" ry="14" fill="url(#cafe-rim)"></ellipse>
-                <ellipse cx="132" cy="128" rx="68" ry="10" fill="url(#cafe-coffee)"></ellipse>
-                <ellipse cx="116" cy="125" rx="22" ry="3" fill="#c4865a" opacity="0.55"></ellipse>
-                <path d="M 60 138 L 64 210 Q 67 234 86 240 L 86 240 Q 76 232 73 212 L 70 142 Z" fill="#ffffff" opacity="0.2"></path>
-                <path d="M 204 138 L 200 210 Q 197 234 178 240 L 178 240 Q 188 232 191 212 L 194 142 Z" fill="#6b2e0e" opacity="0.38"></path>
-                <path d="M 60 128 Q 90 116 132 116 Q 174 116 204 128 Q 174 122 132 122 Q 90 122 60 128 Z" fill="#ffffff" opacity="0.38"></path>
-                <ellipse cx="132" cy="248" rx="60" ry="4" fill="#6b2e0e" opacity="0.5"></ellipse>
-              </svg>
-            </div>
-            <div class="proyecto-overlay" aria-hidden="true"><span>Ver proyecto →</span></div>
-            <span class="proyecto-badge proyecto-badge-live">En vivo</span>
-          </a>
-          <div class="proyecto-body">
-            <div class="proyecto-tags" aria-label="Tecnologías">
-              <span class="tag">Gastronomía</span>
-              <span class="tag">React</span>
-            </div>
-            <h3>Café — Demo</h3>
-            <p>Página demo para un café o restaurante. Menú digital, galería, reservas y contacto directo por WhatsApp.</p>
-            <a href="https://coffea-front.onrender.com" target="_blank" rel="noopener" class="proyecto-link" tabindex="-1" aria-hidden="true">
-              Ver proyecto
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M7 17L17 7M7 7h10v10"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
+      <div class="hero-side hero-in" style="--i:2">
+        <dl class="ficha">
+          <div><dt>Qué hago</dt><dd>Páginas, tiendas online con carrito y pagos, catálogos con pedidos por WhatsApp.</dd></div>
+          <div><dt>Para quién</dt><dd>Comercios, profesionales y emprendimientos. Y empresas que necesitan un <a href="#a-medida">sistema a medida</a>.</dd></div>
+          <div><dt>Cómo trabajo</dt><dd>Hablamos por WhatsApp, te paso un presupuesto y armamos tu página juntos. La consulta es sin costo.</dd></div>
+        </dl>
+        <p class="firma"><strong>Matias Lopez</strong> · Ing. en Sistemas, UTN San Rafael</p>
+      </div>
+    </section>
 
-  <!-- PROCESO -->
-  <section id="proceso" class="circuit-bg" aria-labelledby="proceso-heading">
-    <div class="container">
-      <div class="section-header proceso-header">
-        <p class="section-label">Cómo trabajo</p>
-        <h2 class="section-title" id="proceso-heading">Mi plan de trabajo</h2>
-        <p class="section-sub">Un proceso claro y probado, desde la primera charla hasta el lanzamiento.</p>
+    <!-- TRABAJOS -->
+    <section class="section wrap" id="trabajos" aria-labelledby="trabajos-heading">
+      <div class="section-head">
+        <h2 id="trabajos-heading">Trabajos</h2>
+        <p>Páginas reales que diseñé y programé. Tocá cada una para verla en compu y en celular.</p>
       </div>
 
-      <div class="proceso-rows">
-
-        <div class="proceso-list proceso-row-4">
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-              </svg>
-            </div>
-            <div class="paso-num-label" aria-hidden="true">01</div>
-            <h3>Consulta</h3>
-            <p>Entendemos tu negocio, tu público y qué querés comunicar. Sin costo.</p>
-          </div>
-
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
-              </svg>
-            </div>
-            <div class="paso-num-label" aria-hidden="true">02</div>
-            <h3>Objetivos</h3>
-            <p>Definimos metas claras: qué tiene que lograr la página para tu negocio.</p>
-          </div>
-
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-              </svg>
-            </div>
-            <div class="paso-num-label" aria-hidden="true">03</div>
-            <h3>Diseño UI/UX</h3>
-            <p>Creo la identidad visual y estructura pensada para tus usuarios.</p>
-          </div>
-
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-              </svg>
-            </div>
-            <div class="paso-num-label" aria-hidden="true">04</div>
-            <h3>Desarrollo</h3>
-            <p>Construyo la página con código limpio, rápido y responsive.</p>
-          </div>
+      <div class="showcase" data-tabs>
+        <div class="tabs" role="tablist" aria-label="Proyectos">
+          <button class="tab" role="tab" id="tab-bacssa" aria-controls="panel-bacssa" aria-selected="true">Bacssa</button>
+          <button class="tab" role="tab" id="tab-zenti" aria-controls="panel-zenti" aria-selected="false" tabindex="-1">Zenti</button>
+          <button class="tab" role="tab" id="tab-quiro" aria-controls="panel-quiro" aria-selected="false" tabindex="-1">Quiropraxia</button>
+          <button class="tab" role="tab" id="tab-tienda" aria-controls="panel-tienda" aria-selected="false" tabindex="-1">Tienda con panel</button>
+          <button class="tab" role="tab" id="tab-cafe" aria-controls="panel-cafe" aria-selected="false" tabindex="-1">Café</button>
         </div>
 
-        <div class="proceso-list proceso-row-3">
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
+        <article class="panel" role="tabpanel" id="panel-bacssa" aria-labelledby="tab-bacssa">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">matiaslopez237.github.io/Bacssa</span></div>
+              <div class="frame-shot"><img src="assets/proyectos/bacssa-desktop.jpg" width="1440" height="900" alt="Página de inicio de Bacssa en computadora: foto de un equipo de perforación y el menú de servicios." loading="lazy" decoding="async"></div>
             </div>
-            <div class="paso-num-label" aria-hidden="true">05</div>
-            <h3>Revisión</h3>
-            <p>Ajustamos juntos hasta que quede exactamente como lo imaginaste.</p>
-          </div>
-
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M12 19V5M5 12l7-7 7 7"/>
-              </svg>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="assets/proyectos/bacssa-mobile.jpg" width="780" height="1688" alt="La página de Bacssa en celular." loading="lazy" decoding="async"></div>
             </div>
-            <div class="paso-num-label" aria-hidden="true">06</div>
-            <h3>Publicación</h3>
-            <p>Lanzamos la página al mundo y te entrego todo listo para administrar.</p>
           </div>
-
-          <div class="proceso-step reveal-item">
-            <div class="paso-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-              </svg>
-            </div>
-            <div class="paso-num-label" aria-hidden="true">07</div>
-            <h3>Mantenimiento</h3>
-            <p>Soporte continuo, actualizaciones y mejoras para que tu página siempre funcione bien.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PRECIOS -->
-  <section id="precios" class="circuit-bg" aria-labelledby="precios-heading">
-    <div class="container">
-      <div class="section-header reveal-item">
-        <span class="section-label">Inversión</span>
-        <h2 id="precios-heading">Planes y precios</h2>
-        <p>Elegí la solución que mejor se adapta a tu negocio. Sin costos ocultos.</p>
-      </div>
-
-      <div class="planes-grid">
-
-        <!-- Landing Page -->
-        <article class="plan-card reveal-item">
-          <div class="plan-card-icon">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 4c-5 1-9 5-11 10l-3 1 4 4 1-3c5-2 9-6 10-11l-1-1z"/>
-              <path d="M11 19l2 2"/>
-              <circle cx="19" cy="13" r="1.6" fill="currentColor" stroke="none"/>
-              <path d="M7 22c-2 1-3 3-3 5 2 0 4-1 5-3"/>
-            </svg>
-          </div>
-          <h3 class="plan-card-name">Landing Page</h3>
-          <p class="plan-card-ideal">Ideal para: negocios locales, profesionales y emprendedores que quieren presencia online.</p>
-          <p class="plan-card-desc">Una página web de una sola pantalla diseñada para presentar tu negocio y convertir visitas en consultas. Rápida de cargar, adaptada al celular y pensada para que el cliente te contacte de inmediato.</p>
-          <ul class="plan-card-features">
-            <li>Diseño personalizado a tu marca</li>
-            <li>Adaptada para celular y desktop</li>
-            <li>Sección de servicios, sobre vos y contacto</li>
-            <li>Formulario de contacto + botón WhatsApp</li>
-            <li>SEO básico para aparecer en Google</li>
-            <li>Análisis — Estadísticas de visitas y comportamiento</li>
-          </ul>
-          <div class="plan-card-precio">
+          <div class="panel-info">
             <div>
-              <p class="plan-card-precio-old"><sup>$</sup>300.000</p>
-              <div class="plan-card-precio-row">
-                <p class="plan-card-precio-num"><sup>$</sup>255.000</p>
-                <span class="plan-card-descuento">15% OFF</span>
-              </div>
-              <p class="plan-card-currency">ARS · precio desde</p>
+              <h3>Bacssa <span>· Servicios Oil &amp; Gas</span></h3>
+              <p>Página institucional para una empresa de campamentos, logística y mantenimiento para operaciones en el sur del país.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Empresa</li><li>Página institucional</li><li>Pensada para celular</li>
+              </ul>
             </div>
-            <a href="#contacto" class="plan-card-cta plan-card-cta--outline">Consultar</a>
+            <a class="link-arrow" href="https://matiaslopez237.github.io/Bacssa/" target="_blank" rel="noopener"><span class="link-text">Ver sitio</span><span class="sr-only"> de Bacssa (se abre en otra pestaña)</span></a>
           </div>
         </article>
 
-        <!-- Tienda WhatsApp -->
-        <article class="plan-card plan-card--featured reveal-item">
-          <div class="plan-card-icon">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 11l1.5-4h19L27 11"/>
-              <path d="M5 11v15h22V11"/>
-              <path d="M5 11c0 2 1.5 3.5 3.5 3.5S12 13 12 11c0 2 1.5 3.5 3.5 3.5S19 13 19 11c0 2 1.5 3.5 3.5 3.5S26 13 26 11"/>
-              <path d="M12 26v-7h8v7"/>
-              <path d="M22 17.8a3.2 3.2 0 1 0 2.7 4.9l1.1.3-.3-1a3.2 3.2 0 0 0-3.5-4.2z"/>
-            </svg>
+        <article class="panel" role="tabpanel" id="panel-zenti" aria-labelledby="tab-zenti">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">app-zenti-front.onrender.com</span></div>
+              <div class="frame-shot" data-label="Zenti"><img src="assets/proyectos/zenti-desktop.jpg" width="1440" height="900" alt="Página de inicio de la tienda Zenti en computadora." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot" data-label="Zenti"><img src="assets/proyectos/zenti-mobile.jpg" width="780" height="1688" alt="La tienda Zenti en celular." loading="lazy" decoding="async"></div>
+            </div>
           </div>
-          <h3 class="plan-card-name">Tienda WhatsApp</h3>
-          <p class="plan-card-ideal">Ideal para: tiendas de ropa, accesorios, comida, productos artesanales o cualquier negocio que vende por chat.</p>
-          <p class="plan-card-desc">Una web con catálogo de productos donde cada artículo tiene un botón que abre WhatsApp con el pedido listo. Vendés sin intermediarios, sin plataformas y sin pagar comisión por cada venta.</p>
-          <ul class="plan-card-features">
-            <li>Todo lo de Landing Page incluido</li>
-            <li>Catálogo de productos con fotos y precios</li>
-            <li>Botón "Pedir por WhatsApp" por producto</li>
+          <div class="panel-info">
+            <div>
+              <h3>Zenti <span>· Tienda de tecnología</span></h3>
+              <p>Tienda online de tecnología con catálogo, carrito y pagos, hecha a medida con un servidor propio.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Tienda online</li><li>Carrito y pagos</li><li>Hecha a medida</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://app-zenti-front.onrender.com" target="_blank" rel="noopener"><span class="link-text">Ver sitio</span><span class="sr-only"> de Zenti (se abre en otra pestaña)</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-quiro" aria-labelledby="tab-quiro">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">quiropraxiacipolletti.com</span></div>
+              <div class="frame-shot"><img src="assets/proyectos/quiropraxia-desktop.jpg" width="1440" height="900" alt="Página de inicio de Quiropraxia Cipolletti en computadora." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="assets/proyectos/quiropraxia-mobile.jpg" width="780" height="1688" alt="La página de Quiropraxia Cipolletti en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Quiropraxia Cipolletti <span>· Salud</span></h3>
+              <p>Landing page para el Lic. Juan Manuel Martinez, quiropráctor en Cipolletti. Servicios, beneficios, preguntas frecuentes y reserva de turnos online.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Dominio propio</li><li>Turnos online</li><li>Landing page</li>
+              </ul>
+            </div>
+            <a class="link-arrow" href="https://quiropraxiacipolletti.com" target="_blank" rel="noopener"><span class="link-text">Ver sitio</span><span class="sr-only"> de Quiropraxia Cipolletti (se abre en otra pestaña)</span></a>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-tienda" aria-labelledby="tab-tienda">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">ecommerce-5bt9.onrender.com</span></div>
+              <div class="frame-shot"><img src="assets/proyectos/tienda-desktop.jpg" width="1440" height="900" alt="Portada de la tienda en computadora: servicios de salud y estética con reserva de turnos." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="assets/proyectos/tienda-mobile.jpg" width="780" height="1688" alt="La portada de la tienda en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Sistema de tienda <span>· con panel de administración</span></h3>
+              <p>Tienda online completa: catálogo, carrito, cuentas de usuario, pagos con Mercado Pago y un panel para cargar productos y ver pedidos sin ayuda.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Carrito y pagos</li><li>Panel de administración</li><li>Cuentas de usuario</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener"><span class="link-text">Ver sitio</span><span class="sr-only"> de la tienda (se abre en otra pestaña)</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-cafe" aria-labelledby="tab-cafe">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">coffea-front.onrender.com</span></div>
+              <div class="frame-shot"><img src="assets/proyectos/cafe-desktop.jpg" width="1440" height="900" alt="Página de muestra de un café, con granos de café de fondo." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="assets/proyectos/cafe-mobile.jpg" width="780" height="1688" alt="La página de muestra del café en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Café <span>· Proyecto de muestra</span></h3>
+              <p>Página de muestra para un café o restaurante: menú digital, galería, reservas y contacto directo por WhatsApp.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Proyecto de muestra</li><li>Gastronomía</li><li>Menú digital</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://coffea-front.onrender.com" target="_blank" rel="noopener"><span class="link-text">Ver sitio</span><span class="sr-only"> del café de muestra (se abre en otra pestaña)</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- RUBROS (antes Servicios) -->
+    <section class="section wrap" id="rubros" aria-labelledby="rubros-heading">
+      <div class="section-head">
+        <h2 id="rubros-heading">Páginas para cada tipo de negocio</h2>
+        <p>Cada página se arma según lo que tu negocio necesita mostrar y vender.</p>
+      </div>
+      <ul class="rubros" role="list">
+        <li><h3>Salud y consultorios</h3><p>Para centros médicos, consultorios, clínicas y profesionales de salud. Con información de servicios, contacto y turnos.</p></li>
+        <li><h3>Tiendas online</h3><p>Catálogo de productos, carrito de compras y pagos integrados. Ideal para negocios que quieren vender en internet.</p></li>
+        <li><h3>Restaurantes y cafés</h3><p>Menú digital, galería de fotos, reservas y contacto por WhatsApp. Para que tus clientes te encuentren fácil.</p></li>
+        <li><h3>Profesionales</h3><p>Para freelancers, artistas, fotógrafos y cualquier profesional que quiera mostrar su trabajo en internet.</p></li>
+        <li><h3>Inmobiliarias</h3><p>Listado de propiedades con filtros, fotos y formulario de contacto. Tu catálogo inmobiliario siempre actualizado.</p></li>
+        <li><h3>Campañas y lanzamientos</h3><p>Páginas enfocadas en convertir visitas en clientes. Para campañas, productos o servicios específicos.</p></li>
+      </ul>
+    </section>
+
+    <!-- PLANES -->
+    <section class="section wrap" id="planes" aria-labelledby="planes-heading">
+      <div class="section-head">
+        <h2 id="planes-heading">Planes y precios</h2>
+        <p>Precios de referencia en pesos. El valor final depende de lo que necesite tu proyecto.</p>
+      </div>
+
+      <div class="planes">
+        <article class="plan">
+          <h3>Landing Page</h3>
+          <p class="plan-ideal">Para negocios locales, profesionales y emprendedores que quieren presencia online.</p>
+          <p class="plan-desc">Una página de una sola pantalla para presentar tu negocio y convertir visitas en consultas. Rápida, adaptada al celular y pensada para que el cliente te contacte de inmediato.</p>
+          <ul class="plan-list">
+            <li>Diseño personalizado a tu marca</li>
+            <li>Adaptada a celular y computadora</li>
+            <li>Servicios, sobre vos y contacto</li>
+            <li>Formulario de contacto y botón de WhatsApp</li>
+            <li>Preparada para aparecer en Google</li>
+            <li>Estadísticas de visitas y comportamiento</li>
+          </ul>
+          <div class="plan-precio">
+            <p><small>Desde</small> <b>$255.000</b></p>
+            <a class="btn btn-wa btn-block" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Landing%20Page." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="plan">
+          <h3>Tienda WhatsApp</h3>
+          <p class="plan-ideal">Para tiendas de ropa, accesorios, comida, productos artesanales o cualquier negocio que vende por chat.</p>
+          <p class="plan-desc">Un catálogo de productos donde cada artículo tiene un botón que abre WhatsApp con el pedido listo. Vendés sin intermediarios y sin pagar comisión por cada venta.</p>
+          <ul class="plan-list">
+            <li>Todo lo de Landing Page</li>
+            <li>Catálogo con fotos y precios</li>
+            <li>Botón "Pedir por WhatsApp" en cada producto</li>
             <li>Sin comisiones por venta</li>
             <li>Fácil de actualizar con nuevos productos</li>
           </ul>
-          <div class="plan-card-precio">
-            <div>
-              <p class="plan-card-precio-num"><sup>$</sup>500.000</p>
-              <p class="plan-card-currency">ARS · precio desde</p>
-            </div>
-            <a href="#contacto" class="plan-card-cta plan-card-cta--filled">Consultar</a>
+          <div class="plan-precio">
+            <p><small>Desde</small> <b>$500.000</b></p>
+            <a class="btn btn-wa btn-block" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Tienda%20WhatsApp." target="_blank" rel="noopener">Consultar por WhatsApp</a>
           </div>
         </article>
 
-        <!-- Tienda con pagos -->
-        <article class="plan-card reveal-item">
-          <div class="plan-card-icon">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="8" width="24" height="16" rx="3"/>
-              <path d="M4 13h24"/>
-              <path d="M8 19h4"/>
-              <path d="M16 19h2"/>
-              <path d="M21.3 20.2l1.3 1.3 2.6-2.7"/>
-            </svg>
-          </div>
-          <h3 class="plan-card-name">Tienda con pagos</h3>
-          <p class="plan-card-ideal">Ideal para: negocios que quieren cobrar online con tarjeta, transferencia o Mercado Pago.</p>
-          <p class="plan-card-desc">Una tienda online completa con checkout integrado. Tus clientes agregan productos al carrito y pagan directamente en tu web, sin necesidad de coordinarse por chat. Incluye panel para ver y gestionar los pedidos.</p>
-          <ul class="plan-card-features">
-            <li>Todo lo de Tienda WhatsApp incluido</li>
-            <li>Checkout online integrado</li>
-            <li>Pagos con tarjeta, transferencia o MP</li>
+        <article class="plan">
+          <h3>Tienda con pagos</h3>
+          <p class="plan-ideal">Para negocios que quieren cobrar online con tarjeta, transferencia o Mercado Pago.</p>
+          <p class="plan-desc">Una tienda online completa: tus clientes agregan productos al carrito y pagan directo en tu web. Incluye un panel para ver y gestionar los pedidos.</p>
+          <ul class="plan-list">
+            <li>Todo lo de Tienda WhatsApp</li>
+            <li>Carrito y pago online</li>
+            <li>Tarjeta, transferencia o Mercado Pago</li>
             <li>Panel de gestión de pedidos</li>
             <li>Stock y notificaciones automáticas</li>
           </ul>
-          <div class="plan-card-precio">
-            <div>
-              <p class="plan-card-precio-num"><sup>$</sup>800.000</p>
-              <p class="plan-card-currency">ARS · precio desde</p>
-            </div>
-            <a href="#contacto" class="plan-card-cta plan-card-cta--outline">Consultar</a>
+          <div class="plan-precio">
+            <p><small>Desde</small> <b>$800.000</b></p>
+            <a class="btn btn-wa btn-block" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Tienda%20con%20pagos." target="_blank" rel="noopener">Consultar por WhatsApp</a>
           </div>
         </article>
-
       </div>
 
-      <p class="precios-nota reveal-item">
-        Los precios reflejan el desarrollo del sitio. Según los requisitos técnicos del proyecto
-        (dominio, hosting, base de datos, volumen de tráfico, etc.) puede aplicar un
-        <strong>costo de mantenimiento mensual</strong> adicional. Lo definimos juntos antes de arrancar.
-      </p>
+      <p class="planes-nota">Los precios corresponden al desarrollo del sitio. Según el proyecto (dominio, hosting, base de datos, volumen de visitas) puede sumarse un <strong>costo de mantenimiento mensual</strong>, que definimos juntos antes de arrancar.</p>
 
-    </div>
-  </section>
+      <div class="a-medida" id="a-medida">
+        <div>
+          <h3>¿Sos empresa o necesitás algo a medida?</h3>
+          <p>Sistemas, paneles de gestión, tiendas con pagos e integraciones. Contame qué necesitás y armamos un presupuesto.</p>
+        </div>
+        <a class="btn btn-plain" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20te%20escribo%20por%20un%20proyecto%20a%20medida." target="_blank" rel="noopener">Pedir presupuesto</a>
+      </div>
+    </section>
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="circuit-bg" aria-labelledby="contacto-heading">
-    <div class="container">
-      <div class="contacto-layout">
+    <!-- PROCESO -->
+    <section class="section wrap" id="proceso" aria-labelledby="proceso-heading">
+      <div class="section-head">
+        <h2 id="proceso-heading">Cómo trabajo</h2>
+        <p>Un proceso simple, desde la primera charla hasta que tu página está online.</p>
+      </div>
+      <ol class="pasos">
+        <li><h3>Consulta</h3><p>Hablamos por WhatsApp sobre tu negocio, tu público y qué tiene que lograr la página. Sin costo.</p></li>
+        <li><h3>Diseño y desarrollo</h3><p>Armo el diseño con tu marca y construyo la página: rápida y adaptada al celular.</p></li>
+        <li><h3>Revisión</h3><p>Ajustamos juntos hasta que quede exactamente como lo imaginaste.</p></li>
+        <li><h3>Publicación</h3><p>Publicamos la página y te entrego todo listo. Si querés, sigo con el mantenimiento mensual.</p></li>
+      </ol>
+    </section>
 
-        <!-- Texto izquierda -->
-        <div class="contacto-texto reveal-item">
-          <p class="section-label">Hablemos</p>
-          <h2 id="contacto-heading">¿Tenés un proyecto<br>en mente?</h2>
-          <p class="contacto-sub">La consulta inicial es sin costo. Completá el formulario y te respondo en el día.</p>
-          <a href="https://wa.me/542995560164" target="_blank" rel="noopener" class="contacto-btn contacto-btn-wa">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            O escribime por WhatsApp
+    <!-- CONTACTO -->
+    <section class="section wrap" id="contacto" aria-labelledby="contacto-heading">
+      <div class="contacto">
+        <div class="contacto-texto">
+          <h2 id="contacto-heading">Contame de tu negocio y te paso un presupuesto.</h2>
+          <p>La consulta es sin costo y te respondo en el día.</p>
+          <a class="btn btn-wa btn-lg" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener">
+            <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+            Escribime por WhatsApp
           </a>
+          <p class="contacto-alt">También podés escribirme a <a href="mailto:matias.e.lopez747@gmail.com">matias.e.lopez747@gmail.com</a></p>
         </div>
 
-        <!-- Formulario derecha -->
-        <form
-          class="contacto-form reveal-item"
-          action="https://formspree.io/f/xojbrbwd"
-          method="POST"
-        >
-          <div class="form-group">
+        <form class="form" id="contact-form" action="https://formspree.io/f/xojbrbwd" method="POST">
+          <p class="form-title">¿Preferís dejarme un mensaje?</p>
+          <div class="field">
             <label for="nombre">¿Cómo te llamás?</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name" required />
           </div>
-          <div class="form-group">
+          <div class="field">
             <label for="contacto-input">¿Cómo te contacto?</label>
-            <input type="text" id="contacto-input" name="contacto" placeholder="Email o teléfono" required />
+            <input type="text" id="contacto-input" name="contacto" placeholder="Email o teléfono" autocomplete="email" required />
           </div>
-          <div class="form-group">
+          <div class="field">
             <label for="proyecto">¿Qué querés hacer?</label>
-            <textarea id="proyecto" name="proyecto" rows="4" placeholder="Contame sobre tu negocio y qué tipo de página necesitás..." required></textarea>
+            <textarea id="proyecto" name="proyecto" rows="4" placeholder="Contame sobre tu negocio y qué tipo de página necesitás" required></textarea>
           </div>
-          <button type="submit" class="form-submit">Enviar mensaje →</button>
-          <p class="form-nota">Sin costo ni compromiso. Te respondo en el día.</p>
+          <button type="submit" class="btn btn-plain btn-block" id="form-submit">Enviar mensaje</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
-
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container footer-inner">
-      <a href="#" class="nav-logo" aria-label="Matias Lopez — Inicio">ML<span>.</span></a>
-      <p>© 2026 Matias Emanuel Lopez</p>
-      <div class="footer-links">
-        <a href="https://wa.me/542995560164" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p class="footer-name">Matias Lopez</p>
+      <p>© 2026 Matias Emanuel Lopez · Desarrollo web</p>
+      <ul class="footer-links" role="list">
+        <li><a href="https://wa.me/542995560164" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="mailto:matias.e.lopez747@gmail.com">matias.e.lopez747@gmail.com</a></li>
+      </ul>
     </div>
   </footer>
 
+  <a class="fab" href="https://wa.me/542995560164?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-label="Escribime por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+  </a>
+
   <script>
-    /* ── Scroll reveal ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+    /* ── Nav: borde al hacer scroll ── */
+    const header = document.getElementById('nav');
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    /* ── Nav scroll ── */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    /* ── Mobile nav ── */
-    const toggle   = document.getElementById('nav-toggle');
+    /* ── Menú móvil ── */
+    const toggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
-    function openMenu()  { navLinks.classList.add('open');    toggle.classList.add('open');    toggle.setAttribute('aria-expanded','true');  }
-    function closeMenu() { navLinks.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
-    toggle.addEventListener('click', () => navLinks.classList.contains('open') ? closeMenu() : openMenu());
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && navLinks.classList.contains('open')) { closeMenu(); toggle.focus(); } });
+    function setMenu(open) {
+      navLinks.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    }
+    toggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); toggle.focus(); }
+    });
 
-    /* ── Robot eye & head tracking ── */
-    (function () {
-      const svg      = document.querySelector('.robot-svg');
-      if (!svg) return;
-
-      const pupilL   = document.getElementById('pupil-left-group');
-      const pupilR   = document.getElementById('pupil-right-group');
-      const head     = document.getElementById('robot-head');
-      const spot     = document.getElementById('robotSpotlight');
-      const hero     = document.querySelector('.hero');
-
-      /* Eye base centres in SVG viewBox (0 0 400 520) */
-      const EL = { x: 175, y: 163 };
-      const ER = { x: 225, y: 163 };
-      const MAX = 6; /* max pupil offset in SVG units */
-
-      let targetTilt  = 0;
-      let currentTilt = 0;
-
-      function pupilOffset(eye, mx, my) {
-        const dx = mx - eye.x, dy = my - eye.y;
-        const d  = Math.sqrt(dx * dx + dy * dy) || 1;
-        const f  = Math.min(d, 90) / 90;
-        return { x: (dx / d) * MAX * f, y: (dy / d) * MAX * f };
+    /* ── Pestañas de trabajos (sin JS se ven todos los proyectos uno debajo del otro) ── */
+    document.querySelectorAll('[data-tabs]').forEach(root => {
+      const tabs = [...root.querySelectorAll('[role="tab"]')];
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+      root.classList.add('is-enhanced');
+      function select(i, focus) {
+        tabs.forEach((t, j) => {
+          const on = i === j;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+        });
+        if (focus) tabs[i].focus();
       }
-
-      window.addEventListener('mousemove', (e) => {
-        const r  = svg.getBoundingClientRect();
-        const sx = (e.clientX - r.left)  * (400 / r.width);
-        const sy = (e.clientY - r.top)   * (520 / r.height);
-
-        /* Move pupils */
-        const ol = pupilOffset(EL, sx, sy);
-        const or = pupilOffset(ER, sx, sy);
-        pupilL.setAttribute('transform', `translate(${ol.x.toFixed(2)},${ol.y.toFixed(2)})`);
-        pupilR.setAttribute('transform', `translate(${or.x.toFixed(2)},${or.y.toFixed(2)})`);
-
-        /* Head tilt target: ±4° based on horizontal mouse in hero */
-        const hr   = hero.getBoundingClientRect();
-        targetTilt = ((e.clientX - hr.left) / hr.width - 0.5) * 8;
-
-        /* Spotlight */
-        if (spot) {
-          spot.style.left = (e.clientX - r.left - 160) + 'px';
-          spot.style.top  = (e.clientY - r.top  - 160) + 'px';
-        }
-      }, { passive: true });
-
-      /* Smooth head tilt via lerp in rAF */
-      (function tick() {
-        currentTilt += (targetTilt - currentTilt) * 0.065;
-        if (head) head.setAttribute('transform', `rotate(${currentTilt.toFixed(2)},200,207)`);
-        requestAnimationFrame(tick);
-      })();
-    })();
-  </script>
-
-  <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Waves background -->
-  <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js"></script>
-  <script>
-    (function () {
-      const STROKE   = 'rgba(108,99,255,0.18)';
-      const isMobile = window.innerWidth < 768;
-      // Larger gaps = far fewer points: desktop ~120×68=8k vs old 192×108=20k
-      const X_GAP    = isMobile ? 24 : 16;
-      const Y_GAP    = isMobile ? 24 : 16;
-      const DPR      = Math.min(window.devicePixelRatio || 1, 2);
-
-      // Helpers
-      const lerp  = (a, b, t) => a + (b - a) * t;
-      const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
-
-      const canvas = document.createElement('canvas');
-      canvas.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;will-change:transform;';
-      document.body.prepend(canvas);
-      const ctx = canvas.getContext('2d');
-
-      const noise = new SimplexNoise();
-      const mouse = { x:-10, y:0, lx:0, ly:0, sx:0, sy:0, vs:0, a:0, set:false };
-      let lines = [], W = 0, H = 0, raf, lastFrameTime = 0;
-
-      function setSize() {
-        W = window.innerWidth; H = window.innerHeight;
-        canvas.width  = W * DPR; canvas.height = H * DPR;
-        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-        ctx.scale(DPR, DPR);
-      }
-
-      function setLines() {
-        lines = [];
-        const cols = Math.ceil((W + 200) / X_GAP);
-        const rows = Math.ceil((H +  30) / Y_GAP);
-        const x0 = (W - X_GAP * cols) / 2;
-        const y0 = (H - Y_GAP * rows) / 2;
-        for (let i = 0; i < cols; i++) {
-          const pts = [];
-          for (let j = 0; j < rows; j++)
-            pts.push({ x: x0 + X_GAP*i, y: y0 + Y_GAP*j, wx:0, wy:0, cx:0, cy:0, cvx:0, cvy:0 });
-          lines.push(pts);
-        }
-      }
-
-      function onResize() { ctx.setTransform(1,0,0,1,0,0); setSize(); setLines(); }
-
-      function updateInput(px, py) {
-        // Canvas is position:fixed — use viewport coords only (no scrollY)
-        mouse.x = px; mouse.y = py;
-        if (!mouse.set) {
-          mouse.sx = px; mouse.sy = py;
-          mouse.lx = px; mouse.ly = py;
-          mouse.set = true;
-        }
-      }
-
-      function movePoints(t, msx, msy, mvsMax, mCos, mSin) {
-        for (let i = 0; i < lines.length; i++) {
-          const pts = lines[i];
-          for (let j = 0; j < pts.length; j++) {
-            const p = pts[j];
-            const m = noise.noise2D((p.x + t*0.008)*0.003, (p.y + t*0.003)*0.002) * 8;
-            p.wx = Math.cos(m) * 12;
-            p.wy = Math.sin(m) * 6;
-            const dx = p.x - msx, dy = p.y - msy;
-            const d  = Math.hypot(dx, dy);
-            if (d < mvsMax) {
-              const f = Math.cos(d*0.001) * (1 - d/mvsMax);
-              const k = f * mvsMax * mouse.vs * 0.00035;
-              p.cvx += mCos * k; p.cvy += mSin * k;
-            }
-            p.cvx += -p.cx * 0.01; p.cvy += -p.cy * 0.01;
-            p.cvx *= 0.95;         p.cvy *= 0.95;
-            p.cx = clamp(p.cx + p.cvx, -50, 50);
-            p.cy = clamp(p.cy + p.cvy, -50, 50);
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => select(i, false));
+        t.addEventListener('keydown', e => {
+          const k = e.key;
+          if (k === 'ArrowRight' || k === 'ArrowLeft' || k === 'Home' || k === 'End') {
+            e.preventDefault();
+            const n = k === 'Home' ? 0 : k === 'End' ? tabs.length - 1
+              : (i + (k === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            select(n, true);
           }
-        }
-      }
-
-      function drawLines() {
-        ctx.clearRect(0, 0, W, H);
-        ctx.beginPath();
-        ctx.strokeStyle = STROKE;
-        ctx.lineWidth   = 1;
-        for (let i = 0; i < lines.length; i++) {
-          const pts = lines[i];
-          if (pts.length < 2) continue;
-          const f = pts[0];
-          ctx.moveTo(f.x + f.wx, f.y + f.wy);
-          for (let j = 1; j < pts.length; j++) {
-            const p = pts[j];
-            ctx.lineTo(p.x + p.wx + p.cx, p.y + p.wy + p.cy);
-          }
-        }
-        ctx.stroke();
-      }
-
-      function tick(t) {
-        // Throttle to ~12 fps when mouse is idle, full 60 fps when active
-        const idle = mouse.vs < 0.5;
-        if (idle && t - lastFrameTime < 80) { raf = requestAnimationFrame(tick); return; }
-        lastFrameTime = t;
-
-        const dx = mouse.x - mouse.lx, dy = mouse.y - mouse.ly;
-        mouse.vs = clamp(lerp(mouse.vs, Math.hypot(dx, dy), 0.1), 0, 100);
-        mouse.lx = mouse.x; mouse.ly = mouse.y;
-        mouse.a  = Math.atan2(dy, dx);
-        mouse.sx = lerp(mouse.sx, mouse.x, 0.1);
-        mouse.sy = lerp(mouse.sy, mouse.y, 0.1);
-
-        // Pre-compute derived values once per frame (not per point)
-        const mvsMax = Math.max(175, mouse.vs);
-        const mCos   = Math.cos(mouse.a);
-        const mSin   = Math.sin(mouse.a);
-
-        movePoints(t, mouse.sx, mouse.sy, mvsMax, mCos, mSin);
-        drawLines();
-        raf = requestAnimationFrame(tick);
-      }
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) cancelAnimationFrame(raf);
-        else raf = requestAnimationFrame(tick);
+        });
       });
+      select(0, false);
+    });
 
-      const glow = document.getElementById('cursor-glow');
-      function updateGlow(cx, cy) {
-        document.documentElement.style.setProperty('--mx', cx + 'px');
-        document.documentElement.style.setProperty('--my', cy + 'px');
-        if (glow && !glow.classList.contains('active')) glow.classList.add('active');
+    /* ── Captura faltante: muestra el nombre del proyecto en lugar de una imagen rota ── */
+    document.querySelectorAll('.frame-shot img').forEach(img => {
+      const fail = () => { img.parentElement.classList.add('is-missing'); img.remove(); };
+      if (img.complete && img.naturalWidth === 0) fail(); else img.addEventListener('error', fail);
+    });
+
+    /* ── Formulario: envía sin salir de la página (Formspree), con aviso de éxito o error ── */
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submit = document.getElementById('form-submit');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      submit.disabled = true;
+      submit.textContent = 'Enviando…';
+      status.className = 'form-status';
+      status.textContent = '';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        status.classList.add('is-ok');
+        status.textContent = 'Mensaje enviado. Te respondo en el día.';
+      } catch {
+        status.classList.add('is-error');
+        status.innerHTML = 'No se pudo enviar el mensaje. Probá de nuevo o <a href="https://wa.me/542995560164" target="_blank" rel="noopener">escribime por WhatsApp</a>.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Enviar mensaje';
       }
-
-      // Merged mouse/touch handlers — single normalisation point
-      window.addEventListener('mousemove', e => {
-        updateInput(e.clientX, e.clientY);
-        updateGlow(e.clientX, e.clientY);
-      }, { passive:true });
-      window.addEventListener('touchmove', e => {
-        const t0 = e.touches[0];
-        updateInput(t0.clientX, t0.clientY);
-        updateGlow(t0.clientX, t0.clientY);
-      }, { passive:true });
-      window.addEventListener('resize', onResize, { passive:true });
-
-      setSize(); setLines();
-      raf = requestAnimationFrame(tick);
-    })();
+    });
   </script>
 </body>
 </html>
