@@ -428,16 +428,18 @@
           <p class="form-title">¿Preferís dejarme un mensaje?</p>
           <div class="field">
             <label for="nombre">¿Cómo te llamás?</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name" autocapitalize="words" enterkeyhint="next" required />
+            <input type="text" id="nombre" name="nombre" maxlength="100" placeholder="Tu nombre" autocomplete="name" autocapitalize="words" enterkeyhint="next" required />
           </div>
           <div class="field">
             <label for="contacto-input">¿Cómo te contacto?</label>
-            <input type="text" id="contacto-input" name="contacto" placeholder="Email o teléfono" autocomplete="on" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" required />
+            <input type="text" id="contacto-input" name="contacto" maxlength="150" placeholder="Email o teléfono" autocomplete="on" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" required />
           </div>
           <div class="field">
             <label for="proyecto">¿Qué querés hacer?</label>
-            <textarea id="proyecto" name="proyecto" rows="4" placeholder="Contame sobre tu negocio y qué tipo de página necesitás" required></textarea>
+            <textarea id="proyecto" name="proyecto" rows="4" maxlength="3000" placeholder="Contame sobre tu negocio y qué tipo de página necesitás" required></textarea>
           </div>
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="Nueva consulta desde el portfolio" />
           <button type="submit" class="btn btn-plain btn-block" id="form-submit">Enviar mensaje</button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
