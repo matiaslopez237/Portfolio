@@ -196,7 +196,7 @@ p { text-wrap: pretty; }
 .nav-logo { font-family: var(--f-display); font-size: 26px; line-height: 1; letter-spacing: -0.01em; }
 
 .nav-links { display: flex; align-items: center; gap: 30px; font-size: 14px; }
-.nav-links a:not(.btn) { color: var(--muted); transition: color 160ms var(--ease-out); }
+.nav-links a:not(.btn) { display: inline-block; padding-block: 12px; color: var(--muted); transition: color 160ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .nav-links a:not(.btn):hover { color: var(--text); } }
 
 .nav-toggle {
