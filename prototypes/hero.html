@@ -108,15 +108,15 @@
   .v2 h1 { font: 600 clamp(36px, 4.6vw, 64px)/1.02 var(--f-display); letter-spacing: -0.035em; max-width: 15em; text-wrap: balance; }
   .v2 .sub { margin-top: 18px; max-width: 40em; font-size: 17px; line-height: 1.55; color: var(--muted); }
   .v2 .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
-  .v2 .show { border-radius: 20px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); padding: clamp(14px, 2vw, 24px); }
-  .v2 .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
-  .v2 .tab { border: 0; background: transparent; color: var(--muted); font: 500 14px/1 var(--f-body); height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer; transition: background-color 150ms ease-out, color 150ms ease-out; }
-  .v2 .tab:hover { color: var(--text); }
-  .v2 .tab[aria-selected="true"] { background: var(--bar); color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
-  .v2 .stage-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.24fr); gap: clamp(12px, 2vw, 24px); align-items: end; }
-  .v2 .info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 18px; font-size: 14px; color: var(--muted); }
-  .v2 .info b { color: var(--text); font-weight: 600; }
-  .v2 .info .link { color: var(--accent-text); }
+  :is(.v2, .v5) .show { border-radius: 20px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); padding: clamp(14px, 2vw, 24px); }
+  :is(.v2, .v5) .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
+  :is(.v2, .v5) .tab { border: 0; background: transparent; color: var(--muted); font: 500 14px/1 var(--f-body); height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer; transition: background-color 150ms ease-out, color 150ms ease-out; }
+  :is(.v2, .v5) .tab:hover { color: var(--text); }
+  :is(.v2, .v5) .tab[aria-selected="true"] { background: var(--bar); color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
+  :is(.v2, .v5) .stage-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.24fr); gap: clamp(12px, 2vw, 24px); align-items: end; }
+  :is(.v2, .v5) .info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 18px; font-size: 14px; color: var(--muted); }
+  :is(.v2, .v5) .info b { color: var(--text); font-weight: 600; }
+  :is(.v2, .v5) .info .link { color: var(--accent-text); }
   .v2 .empresas { padding: 28px 0 0; font-size: 15px; color: var(--muted); }
   .v2 .empresas a { color: var(--text); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
   .v2 .muestra { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 72px 0 120px; }
@@ -147,7 +147,7 @@
   .v3 .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
   .v3 .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); padding: clamp(48px, 9vh, 104px) 0 clamp(48px, 8vh, 88px); align-items: start; }
   .v3 h1 { font: 400 clamp(46px, 6.2vw, 90px)/0.98 var(--f-display); letter-spacing: -0.02em; text-wrap: balance; }
-  .v3 h1 em { font-style: italic; color: var(--accent); }
+  .v3 h1 em { font-style: italic; color: var(--accent-text); }
   .v3 .sub { margin-top: 26px; max-width: 32em; font-size: 18px; line-height: 1.6; color: var(--muted); }
   .v3 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
   .v3 .ficha { border-top: 2px solid var(--text); }
@@ -179,6 +179,17 @@
     .v3 .nav-links { display: none; }
   }
 
+  /* ── 4/5 · MEZCLA: Claro's type & layout, Vitrina's colors ── */
+  .v3.dark {
+    --bg: #09090b; --surface: #111114; --bar: #18181c; --phone: #18181c; --line: #232328; --line-strong: #37373e; --hover: #141417;
+    --text: #f4f4f6; --muted: #9696a0; --accent: #5b52f0; --accent-hover: #4d44e0; --accent-text: #a29dff; --shadow: rgba(0,0,0,.75);
+  }
+  .v3.dark .ficha { border-top-color: var(--line-strong); }
+  .v3.dark .muestra { border-top-color: var(--line-strong); }
+  .v5 .show { margin-bottom: 8px; }
+  .v5 .stage-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 0.24fr); }
+  @media (max-width: 900px) { .v5 .stage-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 0.34fr); } }
+
   /* ── Picker (verbatim from PICKER.md) ─────────────────── */
   .proto-picker { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2147483647; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(10, 10, 10, 0.82); -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 8px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.12); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; line-height: 1; -webkit-font-smoothing: antialiased; user-select: none; -webkit-user-select: none; }
   .proto-picker-highlight { position: absolute; top: 4px; left: 0; height: 28px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); will-change: transform; }
@@ -202,6 +213,8 @@
   <button class="proto-picker-item" data-active aria-current="true">Estudio</button>
   <button class="proto-picker-item">Vitrina</button>
   <button class="proto-picker-item">Claro</button>
+  <button class="proto-picker-item">Mezcla</button>
+  <button class="proto-picker-item">Mezcla + pestañas</button>
   <span class="proto-picker-divider" aria-hidden="true"></span>
   <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
 </nav>
@@ -304,8 +317,31 @@ const variants = [
   </div>`,
 
   // 3 · Claro
-  () => `
-  <div class="v v3">
+  () => claro('', 'strip'),
+  // 4 · Mezcla: Claro layout + Vitrina colors
+  () => claro('dark', 'strip'),
+  // 5 · Mezcla + pestañas: same, with Vitrina's tabbed showcase
+  () => claro('dark v5', 'tabs'),
+];
+
+function claro(cls, work) {
+  const strip = `
+      <section class="strip in" style="--i:3">
+        <figure>${browser('bacssa-desktop.jpg', 'Bacssa', 'bacssa')}<figcaption><b>Bacssa</b> · Empresa de servicios Oil &amp; Gas</figcaption></figure>
+        <figure class="only-wide">${browser('zenti-desktop.jpg', 'Zenti', 'zenti')}<figcaption><b>Zenti</b> · Tienda de tecnología</figcaption></figure>
+        <figure>${phone('quiropraxia-mobile.jpg', 'Quiropraxia Cipolletti')}<figcaption><b>Quiropraxia</b></figcaption></figure>
+      </section>`;
+  const tabs = `
+      <section class="show in" style="--i:3" data-show>
+        <div class="tabs" role="tablist" aria-label="Trabajos">
+          <button class="tab" role="tab" aria-selected="true" data-p="0">Bacssa</button>
+          <button class="tab" role="tab" aria-selected="false" data-p="1">Zenti</button>
+          <button class="tab" role="tab" aria-selected="false" data-p="2">Quiropraxia Cipolletti</button>
+        </div>
+        <div data-panel></div>
+      </section>`;
+  return `
+  <div class="v v3 ${cls}">
     <div class="wrap">
       <nav><span class="logo">Matias Lopez</span>${links}</nav>
       <section class="hero">
@@ -326,11 +362,7 @@ const variants = [
           <p class="firma"><strong>Matias Lopez</strong> · Ing. en Sistemas, UTN</p>
         </div>
       </section>
-      <section class="strip in" style="--i:3">
-        <figure>${browser('bacssa-desktop.jpg', 'Bacssa', 'bacssa')}<figcaption><b>Bacssa</b> · Empresa de servicios Oil &amp; Gas</figcaption></figure>
-        <figure class="only-wide">${browser('zenti-desktop.jpg', 'Zenti', 'zenti')}<figcaption><b>Zenti</b> · Tienda de tecnología</figcaption></figure>
-        <figure>${phone('quiropraxia-mobile.jpg', 'Quiropraxia Cipolletti')}<figcaption><b>Quiropraxia</b></figcaption></figure>
-      </section>
+      ${work === 'tabs' ? tabs : strip}
       <section class="muestra">
         <article>
           <h3>Bacssa</h3>
@@ -347,8 +379,8 @@ const variants = [
       </section>
     </div>
     ${fab}
-  </div>`,
-];
+  </div>`;
+}
 
 /* Vitrina tabs: switches the showcased project (instant swap, no animation) */
 const showcase = [
