@@ -507,7 +507,7 @@ p { text-wrap: pretty; }
 .contacto-texto h2 { font-size: clamp(40px, 5vw, 68px); }
 .contacto-texto > p { margin-top: 18px; color: var(--muted); font-size: 17px; }
 .contacto-texto .btn { margin-top: 32px; }
-.contacto-alt { margin-top: 20px !important; font-size: 15px !important; }
+.contacto-texto > .contacto-alt { margin-top: 20px; font-size: 15px; }
 .contacto-alt a {
   color: var(--text);
   text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong);
@@ -639,8 +639,8 @@ p { text-wrap: pretty; }
 @media (max-width: 560px) {
   .rubros li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .pasos { grid-template-columns: minmax(0, 1fr); }
-  .pasos li, .pasos li:first-child, .pasos li:nth-child(3) { padding: 24px 0 0; border-left: 0; margin-top: 0; }
-  .pasos li + li { border-top: 1px solid var(--line); margin-top: 24px; }
+  .pasos li:nth-child(n) { padding: 24px 0 0; margin-top: 0; border-left: 0; border-top: 0; }
+  .pasos li:nth-child(n+2) { margin-top: 24px; border-top: 1px solid var(--line); }
   .ficha div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .hero-ctas .btn { width: 100%; }
   .contacto-texto .btn { width: 100%; }
