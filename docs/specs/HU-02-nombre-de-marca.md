@@ -44,3 +44,4 @@ Proponer candidatos de nombre que cumplan el brief (`PRODUCT.md` › `## Marca`)
 ## Historial
 - 2026-11-07: creada.
 - 2026-11-07: aprobada por Matias (sin nombre previo en mente).
+- 2026-11-07: el `.com` deja de ser requisito (pedido de Matias): se informa en la tabla pero no descarta nombres; alcanza con `.com.ar` libre.
