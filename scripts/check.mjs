@@ -107,9 +107,10 @@ const chequeos = [
     },
   },
   {
-    ca: 'CA-02.2', desc: 'Todos los candidatos: una palabra, 4 a 9 letras, sin tildes, ñ, números ni guiones',
+    ca: 'CA-02.2', desc: 'Todos los candidatos: nombre principal de una palabra (4 a 9 letras, sin tildes, ñ, números ni guiones) + descriptor opcional "Webs"',
     run: () => {
-      const malos = candidatos().map(f => f.nombre).filter(n => !/^[a-z]{4,9}$/i.test(n));
+      // RN-02.1 (modificada el 2026-11-07): se permite el descriptor " Webs" después del nombre principal.
+      const malos = candidatos().map(f => f.nombre).filter(n => !/^[a-z]{4,9}( Webs)?$/i.test(n));
       if (malos.length) throw new Error('no cumplen: ' + malos.join(', '));
       return true;
     },
