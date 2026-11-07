@@ -1,8 +1,59 @@
 // Chequeos automáticos de criterios de aceptación (modo liviano).
 // Cada chequeo lleva el ID del criterio que verifica: así lo encuentra la trazabilidad.
 // Correr: npm run check
+import { readFileSync } from 'node:fs';
+
+const leer = (ruta) => readFileSync(new URL('../' + ruta, import.meta.url), 'utf8');
+
+// Devuelve el texto de una sección "## Titulo" (hasta el próximo "## ") o null si no existe.
+function seccion(md, titulo) {
+  const m = md.match(new RegExp(`^## ${titulo}\\s*$([\\s\\S]*?)(?=^## |$(?![\\s\\S]))`, 'm'));
+  return m ? m[1] : null;
+}
+function subseccion(md, titulo) {
+  const m = md.match(new RegExp(`^### ${titulo}\\s*$([\\s\\S]*?)(?=^##+ |$(?![\\s\\S]))`, 'm'));
+  return m ? m[1] : null;
+}
+const marca = () => seccion(leer('PRODUCT.md'), 'Marca');
+const palabras = (linea) => linea.split(':').slice(1).join(':').split(',').map(s => s.replace(/[*.]/g, '').trim()).filter(Boolean);
+
 const chequeos = [
-  // { ca: 'CA-01.1', desc: 'PRODUCT.md tiene la sección ## Marca', run: async () => true },
+  // ── HU-01: Brief de marca ──
+  {
+    ca: 'CA-01.1', desc: 'PRODUCT.md tiene ## Marca con sus 6 subsecciones',
+    run: () => {
+      const m = marca(); if (!m) throw new Error('falta la sección ## Marca');
+      const faltan = ['Tipo', 'Ubicación y alcance', 'Personalidad', 'Voz', 'Canales', 'Pistas para nombre y estilo'].filter(t => subseccion(m, t) === null);
+      if (faltan.length) throw new Error('faltan: ' + faltan.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-01.2', desc: 'Personalidad tiene exactamente 3 palabras "sí" y 3 "no"',
+    run: () => {
+      const p = subseccion(marca() ?? '', 'Personalidad'); if (!p) throw new Error('falta ### Personalidad');
+      const si = p.split('\n').find(l => /^\s*-\s*\*\*Sí:\*\*/.test(l));
+      const no = p.split('\n').find(l => /^\s*-\s*\*\*No:\*\*/.test(l));
+      if (!si || !no) throw new Error('faltan las líneas **Sí:** / **No:**');
+      const [a, b] = [palabras(si).length, palabras(no).length];
+      if (a !== 3 || b !== 3) throw new Error(`hay ${a} "sí" y ${b} "no"`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-01.3', desc: 'Ubicación dice "San Rafael, Mendoza" y el alcance de venta',
+    run: () => {
+      const u = subseccion(marca() ?? '', 'Ubicación y alcance') ?? '';
+      return u.includes('San Rafael, Mendoza') && /alcance/i.test(u);
+    },
+  },
+  {
+    ca: 'CA-01.4', desc: 'Canales incluye Instagram, WhatsApp Business (número aparte) y el portfolio',
+    run: () => {
+      const c = subseccion(marca() ?? '', 'Canales') ?? '';
+      return /Instagram/.test(c) && /WhatsApp Business/.test(c) && /número/i.test(c) && /portfolio/i.test(c);
+    },
+  },
 ];
 
 let fallas = 0;

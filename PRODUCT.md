@@ -43,11 +43,42 @@ Una persona (no una agencia) que diseña **y** programa: desde una landing simpl
 
 ## Brand Commitments
 
-- Nombre: **Matias Lopez**. Título: **Ing. en Sistemas (UTN San Rafael)**, sin mencionar el año de cursada.
+- Nombre: **Matias Lopez**, como firma personal ("por Matias Lopez") de la marca del estudio definida en `## Marca`. Título: **Ing. en Sistemas (UTN San Rafael)**, sin mencionar el año de cursada.
 - Voz: español rioplatense con voseo ("contame", "escribime"), cercano pero profesional. Nada de jerga técnica cuando le habla al cliente chico.
 - El mensaje principal habla del resultado para el negocio del cliente. El nombre de Matias va como firma y hay una línea secundaria para empresas.
 - Sin foto personal (decisión del usuario).
 - Personalidad buscada: **moderna y seria**. El usuario siente que el sitio actual parece "proyecto de secundaria" y eso es lo que hay que resolver.
+
+## Marca
+
+Brief de la marca del estudio (HU-01, `docs/specs/HU-01-brief-de-marca.md`). Base para el nombre (HU-02), la identidad visual (HU-03) y las piezas (HU-04 a HU-06).
+
+### Tipo
+- Estudio con **nombre propio**, de una sola palabra, corto y moderno. El nombre se elige en HU-02.
+- Firma personal: **"por Matias Lopez"**. La persona sigue presente (trato directo, Ing. en Sistemas), pero la marca suena a negocio y puede crecer.
+- Estilo visual **nuevo**, distinto del portfolio actual. Se define en HU-03.
+
+### Ubicación y alcance
+- Base: **San Rafael, Mendoza**.
+- Alcance: **toda Argentina**. Se trabaja a distancia por WhatsApp; la zona se menciona como origen ("desde San Rafael, Mendoza") y no como límite.
+
+### Personalidad
+- **Sí:** confiable, moderna, simple.
+- **No:** infantil, recargada, improvisada.
+
+### Voz
+- La de `## Brand Commitments`: español rioplatense con voseo, cercano pero profesional, sin jerga técnica con el cliente chico.
+- Confiable: promete solo lo que se cumple (plazos, precios "desde", nada de opiniones inventadas).
+- Simple: frases cortas, una idea por mensaje, el resultado para el negocio primero.
+
+### Canales
+- **Instagram** de la marca (nuevo): vidriera de trabajos y punto de contacto.
+- **WhatsApp Business** con un **número aparte** del personal: donde se cierra la venta. El número se carga en HU-05.
+- **Portfolio** (`matiaslopez237.github.io/Portfolio`, o un dominio propio si se compra): pasa a ser la web de la marca en HU-06.
+
+### Pistas para nombre y estilo
+- **Nombre (HU-02):** una palabra, fácil de decir por teléfono y de escribir sin errores, sin referencias locales (el alcance es todo el país) y que funcione en español. Que se pueda conseguir el @ de Instagram y el dominio `.com.ar`.
+- **Estilo (HU-03):** que transmita confianza y orden (nada infantil), con pocos elementos y bien resueltos (nada recargado) y un acabado prolijo en cada detalle (nada improvisado). Sin referencias visuales previas: se proponen 3 direcciones para elegir viendo.
 
 ## Evidence on Hand
 
