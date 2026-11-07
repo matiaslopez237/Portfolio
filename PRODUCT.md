@@ -34,9 +34,10 @@ Una persona (no una agencia) que diseña **y** programa: desde una landing simpl
 - Analítica con PostHog (snippet en `<head>`); se mantiene.
 - Formulario de contacto con Formspree (`action="https://formspree.io/f/xojbrbwd"`, campos `nombre`, `contacto`, `proyecto`). No se puede romper.
 - **Planes** (precios de referencia en ARS, se cotiza según el proyecto):
-  - Landing Page — desde $255.000 (única que incluye "Análisis: estadísticas de visitas y comportamiento")
-  - Tienda WhatsApp — desde $500.000
-  - Tienda con pagos — desde $800.000
+  - Landing Page — desde $150.000
+  - Tienda WhatsApp — desde $350.000
+  - Tienda con pagos — desde $900.000
+  - Los tres planes incluyen "Estadísticas de visitas y comportamiento" (HU-07, 2026-11-07).
   - Se muestran como "Desde $X" con la aclaración de que el precio final depende del proyecto. **Sin descuentos permanentes** (se sacó el 15% OFF).
   - Debajo de los planes: aviso para empresas y proyectos a medida, con presupuesto por WhatsApp.
 - Mantenimiento mensual ofrecido aparte (~$25.000 ARS/mes); no es obligatorio mostrarlo en el sitio.

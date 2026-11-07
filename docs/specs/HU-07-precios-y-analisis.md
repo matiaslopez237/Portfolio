@@ -1,7 +1,7 @@
 # HU-07: Precios nuevos y análisis en todos los planes
 
 **Historia:** Como dueño del estudio, quiero actualizar los precios de referencia y que los tres planes incluyan el análisis de visitas, para que la oferta sea más accesible en la entrada y el análisis sea parte de todos los planes.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Cambiar los precios "desde" de los tres planes y sumar "Estadísticas de visitas y comportamiento" a todos, en el mismo valor y con la misma redacción en todos los lugares donde aparecen.
@@ -27,3 +27,4 @@ Cambiar los precios "desde" de los tres planes y sumar "Estadísticas de visitas
 
 ## Historial
 - 2026-11-07: creada y aprobada a partir del pedido de Matias (precios 255→150, 500→350, 800→900; análisis en los tres planes).
+- 2026-11-07: implementada.
