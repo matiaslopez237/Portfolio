@@ -7,7 +7,7 @@
 Proponer candidatos de nombre que cumplan el brief (`PRODUCT.md` › `## Marca`), verificar su disponibilidad con fuentes reales y que Matias elija uno. El resultado queda en `brand/nombres.md` y el nombre elegido en `PRODUCT.md`.
 
 ## Reglas
-- **RN-02.1 (formato):** una sola palabra, de 4 a 9 letras, sin tildes, sin ñ, sin números ni guiones. Así el @, el dominio y el nombre de WhatsApp son iguales.
+- **RN-02.1 (formato):** un nombre principal de una palabra, de 4 a 9 letras, sin tildes, sin ñ, sin números ni guiones. Puede llevar un descriptor como "Webs" (ej. "Efesto Webs"): el @ y el dominio van todo junto (`efestowebs`). *(Modificada el 2026-11-07: antes era una sola palabra sin descriptor.)*
 - **RN-02.2 (decirlo y escribirlo):** que al dictarlo por teléfono se escriba de una sola forma (evitar dudas tipo b/v, s/c/z, h muda o letras dobles), y que se pronuncie igual de cómo se escribe.
 - **RN-02.3 (brief):** que transmita confiable, moderna y simple, y nada infantil, recargado ni improvisado. Sin referencias locales, porque el alcance es todo el país. Que funcione en español.
 - **RN-02.4 (disponibilidad, sin inventar):** cada dato de disponibilidad lleva su fuente y fecha. Lo que no se puede comprobar desde acá se marca **"a confirmar"**, nunca "libre".
@@ -45,3 +45,4 @@ Proponer candidatos de nombre que cumplan el brief (`PRODUCT.md` › `## Marca`)
 - 2026-11-07: creada.
 - 2026-11-07: aprobada por Matias (sin nombre previo en mente).
 - 2026-11-07: el `.com` deja de ser requisito (pedido de Matias): se informa en la tabla pero no descarta nombres; alcanza con `.com.ar` libre.
+- 2026-11-07: dirección elegida por Matias: mitología (griega) y herrería; no le gustan las palabras comunes en español. RN-02.1 permite un descriptor tipo "Webs" (pedido de Matias: "Efesto Webs").
