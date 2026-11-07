@@ -94,7 +94,66 @@ const chequeos = [
         && /los tres planes incluyen/i.test(p);
     },
   },
+
+  // ── HU-02: Nombre de la marca ──
+  {
+    ca: 'CA-02.1', desc: 'brand/nombres.md tiene entre 12 y 15 candidatos, cada uno con su por qué',
+    run: () => {
+      const c = candidatos();
+      if (c.length < 12 || c.length > 15) throw new Error(`hay ${c.length} candidatos`);
+      const sinPorque = c.filter(f => !f.porque).map(f => f.nombre);
+      if (sinPorque.length) throw new Error('sin por qué: ' + sinPorque.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-02.2', desc: 'Todos los candidatos: una palabra, 4 a 9 letras, sin tildes, ñ, números ni guiones',
+    run: () => {
+      const malos = candidatos().map(f => f.nombre).filter(n => !/^[a-z]{4,9}$/i.test(n));
+      if (malos.length) throw new Error('no cumplen: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-02.3', desc: 'La lista corta (3 a 5) tiene estado de .com.ar, .com, @ e INPI',
+    run: () => {
+      const lc = listaCorta();
+      if (lc.length < 3 || lc.length > 5) throw new Error(`la lista corta tiene ${lc.length}`);
+      const estado = /^(libre|ocupado|a confirmar)\b/i;
+      const malos = lc.filter(f => ![f.comar, f.com, f.arroba, f.inpi].every(v => estado.test(v))).map(f => f.nombre);
+      if (malos.length) throw new Error('estados incompletos: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-02.4', desc: 'Todo dato "libre" u "ocupado" tiene fuente y fecha',
+    run: () => {
+      const malos = listaCorta().filter(f => [f.comar, f.com, f.arroba, f.inpi].some(v => /^(libre|ocupado)/i.test(v)) && !/\d{4}-\d{2}-\d{2}/.test(f.fuente)).map(f => f.nombre);
+      if (malos.length) throw new Error('sin fuente/fecha: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-02.5', desc: 'El nombre elegido está en PRODUCT.md › Marca › Tipo y en la lista corta',
+    run: () => {
+      const tipo = subseccion(marca() ?? '', 'Tipo') ?? '';
+      const m = tipo.match(/Nombre elegido:\s*\*\*([^*]+)\*\*/);
+      if (!m) throw new Error('falta "Nombre elegido: **X**" en ### Tipo');
+      if (!listaCorta().some(f => f.nombre.toLowerCase() === m[1].trim().toLowerCase())) throw new Error(`"${m[1]}" no está en la lista corta`);
+      return true;
+    },
+  },
 ];
+
+// Filas de una tabla markdown que está debajo de "## Titulo" en brand/nombres.md.
+function tablaNombres(titulo) {
+  let md; try { md = leer('brand/nombres.md'); } catch { throw new Error('no existe brand/nombres.md'); }
+  const s = seccion(md, titulo); if (s === null) throw new Error(`falta ## ${titulo}`);
+  return s.split('\n').filter(l => /^\|/.test(l)).slice(2).map(l => l.split('|').slice(1, -1).map(c => c.trim()));
+}
+const limpiar = (n) => n.replace(/[*`]/g, '').trim();
+const candidatos = () => tablaNombres('Candidatos').map(([nombre, porque]) => ({ nombre: limpiar(nombre), porque }));
+const listaCorta = () => tablaNombres('Lista corta').map(([nombre, comar, com, arroba, inpi, choque, fuente]) => ({ nombre: limpiar(nombre), comar, com, arroba, inpi, choque, fuente }));
 
 // Texto de una <section id="..."> de index.html.
 function seccionHtml(id) {
