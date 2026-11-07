@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "playwright": "^1.60.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.3.0"
+  },
+  "name": "portfolio",
+  "private": true,
+  "scripts": {
+    "test": "cucumber-js --config cucumber.mjs",
+    "check": "node scripts/check.mjs"
+  }
+}
