@@ -1,7 +1,7 @@
 # HU-01: Brief de marca
 
 **Historia:** Como dueño del estudio, quiero dejar por escrito qué es y qué transmite mi marca, para que el nombre, el logo y las piezas (HU-02 a HU-06) salgan de decisiones claras y no del gusto del momento.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Definir la base de la marca antes de elegir nombre o estilo: qué tipo de marca es, desde dónde trabaja, qué personalidad tiene y qué no quiere ser, cómo habla y en qué canales vive. Queda en la sección `## Marca` de `PRODUCT.md`, que es la fuente que leen las demás historias.
@@ -30,8 +30,8 @@ Definir la base de la marca antes de elegir nombre o estilo: qué tipo de marca 
 | CA-01.6 | Dado el brief, entonces no contradice lo definido en `PRODUCT.md` (público, objetivo, precios, sin opiniones inventadas) | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-01.5: ¿El brief te representa? — firmado:
-- [ ] CA-01.6: ¿No contradice nada de lo que ya estaba definido? — firmado:
+- [x] CA-01.5: ¿El brief te representa? — firmado: 2026-11-07
+- [x] CA-01.6: ¿No contradice nada de lo que ya estaba definido? — firmado: 2026-11-07
 
 ## Preguntas abiertas (se responden durante la historia)
 - Las 3 palabras que sí y las 3 que no.
@@ -41,3 +41,4 @@ Definir la base de la marca antes de elegir nombre o estilo: qué tipo de marca 
 ## Historial
 - 2026-11-07: creada.
 - 2026-11-07: aprobada por Matias.
+- 2026-11-07: implementada; checklist firmado por Matias.
