@@ -54,7 +54,56 @@ const chequeos = [
       return /Instagram/.test(c) && /WhatsApp Business/.test(c) && /número/i.test(c) && /portfolio/i.test(c);
     },
   },
+
+  // ── HU-07: Precios nuevos y análisis en todos los planes ──
+  {
+    ca: 'CA-07.1', desc: 'Planes muestra $150.000, $350.000 y $900.000, sin precios anteriores',
+    run: () => {
+      const planes = seccionHtml('planes');
+      const faltan = ['$150.000', '$350.000', '$900.000'].filter(p => !planes.includes(p));
+      const viejos = ['$255.000', '$500.000', '$800.000'].filter(p => planes.includes(p));
+      if (faltan.length || viejos.length) throw new Error(`faltan: ${faltan.join(' ') || '—'} · quedan viejos: ${viejos.join(' ') || '—'}`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-07.2', desc: 'JSON-LD con minPrice 150000, 350000 y 900000',
+    run: () => {
+      const ld = leer('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+      if (!ld) throw new Error('no hay JSON-LD');
+      const precios = [...ld[1].matchAll(/"minPrice":\s*(\d+)/g)].map(m => +m[1]);
+      if (precios.join() !== '150000,350000,900000') throw new Error('minPrice actuales: ' + precios.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-07.3', desc: 'Las 3 tarjetas de planes listan "Estadísticas de visitas y comportamiento"',
+    run: () => {
+      const tarjetas = seccionHtml('planes').split('<article class="plan">').slice(1);
+      const con = tarjetas.filter(t => t.includes('Estadísticas de visitas y comportamiento')).length;
+      if (tarjetas.length !== 3 || con !== 3) throw new Error(`${con} de ${tarjetas.length} tarjetas lo incluyen`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-07.4', desc: 'PRODUCT.md tiene los precios nuevos y el análisis en los tres planes',
+    run: () => {
+      const p = leer('PRODUCT.md');
+      return ['$150.000', '$350.000', '$900.000'].every(x => p.includes(x))
+        && !['$255.000', '$500.000', '$800.000'].some(x => p.includes(x))
+        && /los tres planes incluyen/i.test(p);
+    },
+  },
 ];
+
+// Texto de una <section id="..."> de index.html.
+function seccionHtml(id) {
+  const html = leer('index.html');
+  const i = html.indexOf(`id="${id}"`);
+  if (i < 0) throw new Error(`no existe la sección #${id}`);
+  const fin = html.indexOf('</section>', i);
+  return html.slice(i, fin);
+}
 
 let fallas = 0;
 for (const c of chequeos) {
