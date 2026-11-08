@@ -44,3 +44,4 @@ Hacer 5 mejoras al diseño aplicado en la HU-06, sin cambiar los textos, los pre
 ## Historial
 - 2026-11-08: creada a partir de la revisión de diseño posterior a la HU-05.
 - 2026-11-08: aprobada por Matias.
+- 2026-11-08: implementada; 6 escenarios en verde. El símbolo quedó en la columna derecha, bajo la ficha (absoluto tapaba la firma). Falta la firma de CA-08.7.
