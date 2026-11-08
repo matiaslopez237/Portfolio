@@ -26,11 +26,11 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-03 | CA-03.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/logo/*.svg` (trazos, `brand/trazar-logo.mjs`) |
 | HU-03 | CA-03.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/export/*.png` (`brand/export.mjs`) |
 | HU-03 | CA-03.5 | Chequeo `scripts/check.mjs` | ✓ | `brand/marca.html` |
-| HU-03 | CA-03.6 | Checklist (firma Matias) | pendiente | Dirección elegida: Barra al rojo + Hexágono con </> |
-| HU-03 | CA-03.7 | Checklist (firma Matias) | pendiente | Logo en 32 px y en círculo (`brand/marca.html` › Logo) |
+| HU-03 | CA-03.6 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | Dirección elegida: Barra al rojo + Hexágono con </> |
+| HU-03 | CA-03.7 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | Logo en 32 px y en círculo (`brand/marca.html` › Logo) |
 
 ## Huecos
-- HU-03: CA-03.6 y CA-03.7 sin firmar.
+- HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
 - HU-02: CA-02.6 y CA-02.7 sin firmar (nombre provisorio; falta registrar @ y dominio).
 - HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp (catalogo.html, flyer.html) tienen los precios anteriores: se rehacen en HU-05.
 - HU-01: ninguno.

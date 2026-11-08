@@ -1,7 +1,7 @@
 # HU-03: Identidad visual
 
 **Historia:** Como dueño del estudio, quiero un logo, una paleta y unas tipografías propias, con una guía de uso, para que Instagram, WhatsApp y la web se vean como una misma marca seria.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a partir del brief: confiable, moderna y simple, en la línea de la herrería y la mitología griega. Primero se muestran 3 direcciones distintas para elegir viendo; con la elegida se arma el logo, sus versiones en el tamaño de cada plataforma y una guía de marca.
@@ -33,8 +33,8 @@ Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a part
 | CA-03.7 | Dado el logo, entonces se lee bien en 32 px y recortado en círculo | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-03.6: ¿La dirección elegida es confiable, moderna y simple, y no infantil, recargada ni improvisada? — firmado:
-- [ ] CA-03.7: ¿El logo se lee bien chiquito y en la foto de perfil redonda? — firmado:
+- [x] CA-03.6: ¿La dirección elegida es confiable, moderna y simple, y no infantil, recargada ni improvisada? — firmado: 2026-11-07
+- [x] CA-03.7: ¿El logo se lee bien chiquito y en la foto de perfil redonda? — firmado: 2026-11-07 (visto en la notebook)
 
 ## Preguntas abiertas
 - Ninguna por ahora (la dirección se elige viendo las 3 opciones).
@@ -45,3 +45,4 @@ Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a part
 - 2026-11-07: ronda 1 (Taller, Fragua, Bronce) descartada: colores; el yunque de Fragua se parece a CurseForge. Ronda 2 (Barra al rojo, Llama azul, Ceniza) + 2 tandas de logos de herrero.
 - 2026-11-07: elegido: paleta **Barra al rojo**, letras **Archivo condensada + Public Sans**, logo **Hexágono con </>** (yunque forjando código). Sistema en `DESIGN.md`.
 - 2026-11-07: el logo pasa a trazos (como <img> no cargaba la tipografía y se cortaba).
+- 2026-11-07: implementada; checklist CA-03.6 y CA-03.7 firmado por Matias.
