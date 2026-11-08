@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Efesto Webs · Logos herrero + digital (HU-03)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  /* Paleta "Barra al rojo": acero + brasa */
+  :root { --bg: #1b2128; --sup: #222a33; --linea: #323c47; --texto: #eef1f4; --sec: #9aa6b2; --brasa: #ff7a1a; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--texto); font-family: 'Public Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 48px) 64px; }
+  header { max-width: 1180px; margin: 0 auto 28px; }
+  h1 { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; font-size: clamp(34px, 5vw, 52px); line-height: 1; }
+  header p { margin-top: 10px; color: var(--sec); max-width: 72ch; line-height: 1.55; }
+  .grupo { max-width: 1180px; margin: 30px auto 14px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sec); }
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+  .card { background: var(--sup); border-radius: 18px; padding: 22px; box-shadow: 0 0 0 1px var(--linea); }
+  .num { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--brasa); }
+  .card h2 { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 80; font-weight: 800; font-size: 22px; margin: 4px 0 6px; }
+  .card > p { font-size: 13.5px; color: var(--sec); line-height: 1.5; min-height: 4.5em; }
+  .main { display: flex; align-items: center; gap: 14px; margin: 18px 0; padding: 18px; border-radius: 12px; background: var(--bg); color: var(--texto); }
+  .wm { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; font-size: 34px; line-height: .85; text-transform: uppercase; }
+  .wm span { color: var(--brasa); }
+  .wm small { display: block; font-family: 'Public Sans'; font-weight: 500; font-size: 10px; letter-spacing: .14em; color: var(--sec); margin-top: 7px; }
+  .vars { display: flex; gap: 14px; align-items: end; }
+  .vars figure { display: grid; justify-items: center; gap: 6px; font-size: 10.5px; color: var(--sec); }
+  .circ { width: 72px; height: 72px; border-radius: 50%; background: var(--bg); display: grid; place-items: center; overflow: hidden; color: var(--texto); }
+  .fav { width: 32px; height: 32px; border-radius: 6px; background: var(--bg); display: grid; place-items: center; color: var(--texto); }
+  .uno { width: 72px; height: 72px; border-radius: 12px; background: #fff; color: #111; display: grid; place-items: center; }
+  .claro { width: 72px; height: 72px; border-radius: 12px; background: #ecebe7; color: #191817; display: grid; place-items: center; }
+  .nota { max-width: 1180px; margin: 28px auto 0; font-size: 13px; color: var(--sec); line-height: 1.6; }
+  .replay { margin-left: 10px; border: 0; background: none; color: var(--sec); font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+  /* Cursor que parpadea dos veces y queda encendido (no infinito) */
+  .parpadeo { animation: parpadeo 1.1s linear 2; }
+  @keyframes parpadeo { 0%, 49.9% { opacity: 1; } 50%, 99.9% { opacity: 0; } 100% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .parpadeo { animation: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Base: Yunque-E (logo 2) -->
+    <path id="yunqueE" d="M8 24 C14 24 22 26 28 28 H86 V42 H44 V70 H80 V84 H24 V70 H30 V42 C22 40 13 34 8 24 Z"/>
+    <!-- Base: yunque del logo 5 -->
+    <path id="yunque" d="M22 52 H78 V59 C71 60 65 62 61 64 V70 H67 V77 H33 V70 H39 V64 C34 62 27 60 22 57 Z"/>
+    <path id="hex" d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z"/>
+
+    <!-- 1 · Yunque-E entre corchetes de código -->
+    <symbol id="v1" viewBox="0 0 100 100">
+      <path d="M14 30 L3 50 L14 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M86 30 L97 50 L86 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(20 20) scale(.6)"><use href="#yunqueE" fill="currentColor"/><rect x="48" y="50" width="30" height="12" rx="2" fill="#ff7a1a"/></g>
+    </symbol>
+
+    <!-- 2 · Yunque-E en píxeles, con chispas de píxeles -->
+    <symbol id="v2" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <!-- fila 2: cara del yunque con cuerno -->
+        <rect x="1" y="21" width="8" height="8"/><rect x="11" y="21" width="8" height="8"/><rect x="21" y="21" width="8" height="8"/><rect x="31" y="21" width="8" height="8"/><rect x="41" y="21" width="8" height="8"/><rect x="51" y="21" width="8" height="8"/><rect x="61" y="21" width="8" height="8"/><rect x="71" y="21" width="8" height="8"/><rect x="81" y="21" width="8" height="8"/>
+        <rect x="21" y="31" width="8" height="8"/><rect x="31" y="31" width="8" height="8"/><rect x="41" y="31" width="8" height="8"/><rect x="51" y="31" width="8" height="8"/><rect x="61" y="31" width="8" height="8"/><rect x="71" y="31" width="8" height="8"/><rect x="81" y="31" width="8" height="8"/>
+        <!-- columna (cintura del yunque = espina de la E) -->
+        <rect x="31" y="41" width="8" height="8"/><rect x="41" y="41" width="8" height="8"/>
+        <rect x="31" y="51" width="8" height="8"/><rect x="41" y="51" width="8" height="8"/>
+        <rect x="31" y="61" width="8" height="8"/><rect x="41" y="61" width="8" height="8"/>
+        <!-- base -->
+        <rect x="21" y="71" width="8" height="8"/><rect x="31" y="71" width="8" height="8"/><rect x="41" y="71" width="8" height="8"/><rect x="51" y="71" width="8" height="8"/><rect x="61" y="71" width="8" height="8"/><rect x="71" y="71" width="8" height="8"/><rect x="81" y="71" width="8" height="8"/>
+      </g>
+      <g fill="#ff7a1a"><rect x="51" y="51" width="8" height="8"/><rect x="61" y="51" width="8" height="8"/><rect x="71" y="51" width="8" height="8"/><rect x="83" y="7" width="6" height="6"/><rect x="92" y="13" width="5" height="5"/></g>
+    </symbol>
+
+    <!-- 3 · Hexágono + Yunque-E (logo 2 dentro del 5) -->
+    <symbol id="v3" viewBox="0 0 100 100">
+      <use href="#hex" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+      <g transform="translate(22 22) scale(.56)"><use href="#yunqueE" fill="currentColor"/><rect x="48" y="50" width="30" height="12" rx="2" fill="#ff7a1a"/></g>
+    </symbol>
+
+    <!-- 4 · Hexágono + yunque + cursor de texto en lugar de la chispa -->
+    <symbol id="v4" viewBox="0 0 100 100">
+      <use href="#hex" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+      <use href="#yunque" fill="currentColor"/>
+      <rect class="parpadeo" x="47" y="24" width="6" height="20" rx="1" fill="#ff7a1a"/>
+    </symbol>
+
+    <!-- 5 · Yunque dentro de una ventana de navegador -->
+    <symbol id="v5" viewBox="0 0 100 100">
+      <rect x="6" y="12" width="88" height="76" rx="9" fill="none" stroke="currentColor" stroke-width="4"/>
+      <path d="M6 30 H94" stroke="currentColor" stroke-width="4"/>
+      <circle cx="17" cy="21" r="3" fill="#ff7a1a"/><circle cx="27" cy="21" r="3" fill="currentColor"/><circle cx="37" cy="21" r="3" fill="currentColor"/>
+      <g transform="translate(0 6)"><use href="#yunque" fill="currentColor"/></g>
+      <path d="M50 38 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#ff7a1a"/>
+    </symbol>
+
+    <!-- 6 · Yunque-E con la pieza al rojo en forma de barra "/" de código -->
+    <symbol id="v6" viewBox="0 0 100 100">
+      <use href="#yunqueE" fill="currentColor"/>
+      <polygon points="50,63 58,49 80,49 72,63" fill="#ff7a1a"/>
+    </symbol>
+
+    <!-- 7 · Yunque-E con la pieza al rojo como cursor que parpadea -->
+    <symbol id="v7" viewBox="0 0 100 100">
+      <use href="#yunqueE" fill="currentColor"/>
+      <rect class="parpadeo" x="48" y="50" width="30" height="12" rx="2" fill="#ff7a1a"/>
+    </symbol>
+
+    <!-- 8 · Hexágono con "</>" y el yunque como base -->
+    <symbol id="v8" viewBox="0 0 100 100">
+      <use href="#hex" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M36 30 L26 40 L36 50 M64 30 L74 40 L64 50" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M55 27 L45 53" stroke="#ff7a1a" stroke-width="5" stroke-linecap="round"/>
+      <path d="M24 62 H76 V67 C70 68 65 69 61 71 V75 H66 V80 H34 V75 H39 V71 C34 69 29 68 24 66 Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <h1>Logos herrero + digital</h1>
+  <p>Variantes de los logos <b>2 (Yunque-E)</b> y <b>5 (El taller)</b>, mezclados con lo digital: código, píxeles, el cursor y la ventana del navegador. Con la paleta de <b>Barra al rojo</b>. Las variantes 4 y 7 tienen un cursor que parpadea dos veces al cargar <button class="replay" onclick="location.reload()">(ver de nuevo)</button>.</p>
+</header>
+
+<p class="grupo">Basados en el 2 · Yunque-E</p>
+<main class="grid">
+  <article class="card"><p class="num">1</p><h2>Yunque-E entre corchetes</h2><p>El yunque-E entre los signos &lt; &gt; del código: el herrero que forja páginas web. Se entiende al instante qué hacés.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v1"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="60" height="60"><use href="#v1"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v1"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v1"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v1"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">2</p><h2>Yunque-E en píxeles</h2><p>El mismo yunque-E armado con píxeles, y dos chispas que también son píxeles. Herrería digital, con un guiño retro.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v2"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="56" height="56"><use href="#v2"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v2"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v2"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v2"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">6</p><h2>Yunque-E con barra de código</h2><p>La pieza al rojo se inclina y se vuelve la barra "/" del código. Sutil: de lejos es un yunque, de cerca es código.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v6"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="56" height="56"><use href="#v6"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v6"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v6"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v6"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">7</p><h2>Yunque-E con cursor</h2><p>La pieza al rojo es también el cursor que parpadea cuando escribís código. En la página, parpadea dos veces al cargar.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v7"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="56" height="56"><use href="#v7"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v7"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v7"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v7"/></svg></div>Fondo claro</figure></div>
+  </article>
+</main>
+
+<p class="grupo">Basados en el 5 · El taller (hexágono)</p>
+<section class="grid">
+  <article class="card"><p class="num">3</p><h2>Hexágono + Yunque-E</h2><p>Los dos que te gustaron juntos: el yunque-E dentro del hexágono-tuerca.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v3"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="60" height="60"><use href="#v3"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v3"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v3"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v3"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">4</p><h2>Taller con cursor</h2><p>El hexágono y el yunque, pero la chispa se cambia por un cursor de texto: el herrero que escribe código.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v4"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="60" height="60"><use href="#v4"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v4"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v4"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v4"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">5</p><h2>Yunque en la ventana</h2><p>El yunque dentro de una ventana de navegador, con una chispa: "acá se forjan páginas". El punto naranja de la barra es un guiño.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v5"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="58" height="58"><use href="#v5"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v5"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v5"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v5"/></svg></div>Fondo claro</figure></div>
+  </article>
+  <article class="card"><p class="num">8</p><h2>Hexágono con &lt;/&gt;</h2><p>El signo de código "&lt;/&gt;" forjado sobre el yunque, dentro del hexágono: el más explícito sobre lo digital.</p>
+    <div class="main"><svg width="72" height="72"><use href="#v8"/></svg><div class="wm">Efesto <span>webs</span><small>POR MATIAS LOPEZ</small></div></div>
+    <div class="vars"><figure><div class="circ"><svg width="60" height="60"><use href="#v8"/></svg></div>Perfil</figure><figure><div class="fav"><svg width="30" height="30"><use href="#v8"/></svg></div>32 px</figure><figure><div class="uno"><svg width="58" height="58"><use href="#v8"/></svg></div>1 color</figure><figure><div class="claro"><svg width="58" height="58"><use href="#v8"/></svg></div>Fondo claro</figure></div>
+  </article>
+</section>
+
+<p class="nota">Bocetos para elegir la idea: el elegido se redibuja con cuidado (proporciones, grosores, cómo se ve en 16 px) antes de exportarlo. Ninguno usa el yunque solo y relleno de CurseForge.</p>
+</body>
+</html>
