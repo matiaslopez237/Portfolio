@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Efesto Webs · 3 direcciones de identidad (HU-03)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;700&family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;700&family=Marcellus&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+  #stage { min-height: 100dvh; }
+  img, svg { display: block; }
+
+  /* ── Estructura común de cada dirección ───────────────── */
+  .dir { min-height: 100dvh; background: var(--bg); color: var(--texto); font-family: var(--f-texto); padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 48px) 120px; }
+  .dir-head { max-width: 1180px; margin: 0 auto 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end; }
+  .dir-num { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--secundario); }
+  .dir-head h1 { font-family: var(--f-titulo); font-size: clamp(34px, 5vw, 56px); line-height: 1; margin-top: 6px; }
+  .dir-head p { margin-top: 12px; max-width: 60ch; color: var(--secundario); line-height: 1.55; }
+  .swatches { display: flex; gap: 8px; }
+  .sw { width: 54px; text-align: center; font-size: 10.5px; color: var(--secundario); }
+  .sw i { display: block; height: 54px; border-radius: 10px; margin-bottom: 6px; box-shadow: inset 0 0 0 1px var(--linea); }
+
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+  .card { background: var(--superficie); border-radius: 18px; padding: 22px; box-shadow: 0 0 0 1px var(--linea); }
+  .card h2 { font-family: var(--f-texto); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--secundario); margin-bottom: 16px; }
+  .c-logo { grid-column: span 7; }
+  .c-web { grid-column: span 5; }
+  .c-post { grid-column: span 4; }
+  .c-historia { grid-column: span 3; }
+  .c-perfil { grid-column: span 5; }
+  .c-ideas { grid-column: span 12; }
+  @media (max-width: 960px) {
+    .c-logo, .c-web, .c-post, .c-historia, .c-perfil, .c-ideas { grid-column: span 12; }
+    .dir-head { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* Logo: versiones */
+  .logo-main { padding: 18px 0 22px; }
+  .logo-vars { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; padding-top: 18px; border-top: 1px solid var(--linea); }
+  .logo-vars figure { display: grid; justify-items: center; gap: 8px; font-size: 11px; color: var(--secundario); }
+  .tile { display: grid; place-items: center; }
+  .tile-perfil { width: 88px; height: 88px; border-radius: 50%; overflow: hidden; background: var(--acento-fondo, var(--bg)); }
+  .tile-fav { width: 32px; height: 32px; border-radius: 6px; overflow: hidden; background: var(--acento-fondo, var(--bg)); }
+  .tile-1c { width: 88px; height: 88px; border-radius: 14px; background: #fff; color: #111; }
+  .tile-1c-inv { width: 88px; height: 88px; border-radius: 14px; background: #111; color: #fff; }
+
+  /* Post 1080×1350 a escala, historia 1080×1920 a escala */
+  .post { aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; }
+  .historia { aspect-ratio: 1080 / 1920; border-radius: 12px; overflow: hidden; position: relative; }
+
+  /* Perfil de Instagram */
+  .ig { max-width: 380px; margin: 0 auto; background: #fff; color: #111; border-radius: 22px; padding: 18px; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; box-shadow: 0 10px 30px -18px rgba(0,0,0,.4); }
+  .ig-top { display: flex; align-items: center; gap: 18px; }
+  .ig-av { width: 76px; height: 76px; border-radius: 50%; overflow: hidden; flex: none; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #ddd; }
+  .ig-stats { display: flex; gap: 16px; font-size: 12px; text-align: center; }
+  .ig-stats b { display: block; font-size: 15px; }
+  .ig-name { margin-top: 12px; font-size: 13px; font-weight: 600; }
+  .ig-bio { font-size: 13px; line-height: 1.4; white-space: pre-line; }
+  .ig-link { font-size: 13px; color: #00376b; font-weight: 600; }
+  .ig-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+  .ig-btns span { background: #efefef; border-radius: 8px; font-size: 12.5px; font-weight: 600; text-align: center; padding: 7px 0; }
+  .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 14px -18px -18px; border-radius: 0 0 22px 22px; overflow: hidden; }
+  .ig-grid > div { aspect-ratio: 4 / 5; position: relative; overflow: hidden; }
+
+  .ideas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .ideas div { font-size: 14px; line-height: 1.55; color: var(--texto); }
+  .ideas b { display: block; font-family: var(--f-titulo); font-size: 18px; margin-bottom: 4px; }
+  .ideas span { color: var(--secundario); }
+  @media (max-width: 760px) { .ideas { grid-template-columns: minmax(0, 1fr); } }
+
+  .web { border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--linea); }
+  .web-bar { height: 26px; background: var(--linea); display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: var(--secundario); }
+  .web-body { background: var(--bg); padding: 26px 22px 30px; }
+  .replay { margin-top: 12px; border: 0; background: none; color: var(--secundario); font: inherit; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  /* ── A · TALLER ───────────────────────────────────────── */
+  .A { --bg: #f4efe6; --superficie: #fbf8f2; --linea: #e3dbcd; --texto: #1c1a17; --secundario: #5f574b; --acento: #b4410f; --acento-fondo: #1c1a17;
+       --f-titulo: 'Fraunces', Georgia, serif; --f-texto: 'Manrope', system-ui, sans-serif; }
+  .A .grano { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .A .wm { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144; font-weight: 600; letter-spacing: -.02em; }
+  .A .wm-s { font-family: 'Manrope', sans-serif; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+  .A .sello-in { animation: sello 520ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes sello { from { opacity: 0; transform: scale(1.18) rotate(-8deg); } to { opacity: 1; transform: none; } }
+  .A .btn { display: inline-block; background: var(--texto); color: var(--bg); font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 6px; box-shadow: 0 3px 0 var(--acento); transition: transform 120ms ease-out, box-shadow 120ms ease-out; }
+  .A .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--acento); }
+  .A .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--acento); }
+
+  /* ── B · FRAGUA ───────────────────────────────────────── */
+  .B { --bg: #14120f; --superficie: #1c1915; --linea: #2c2822; --texto: #f3eee6; --secundario: #a39b8f; --acento: #f2711c; --acento-fondo: #14120f;
+       --f-titulo: 'Archivo', system-ui, sans-serif; --f-texto: 'Public Sans', system-ui, sans-serif; }
+  .B .wm { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; letter-spacing: .01em; text-transform: uppercase; }
+  .B .dir-head h1 { font-variation-settings: "wdth" 72; font-weight: 800; text-transform: uppercase; }
+  .B .enfria { animation: enfriar 1100ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes enfriar { 0% { color: #fff3c4; text-shadow: 0 0 18px rgba(242, 113, 28, .9); } 40% { color: #f2711c; text-shadow: 0 0 10px rgba(242, 113, 28, .5); } 100% { color: inherit; text-shadow: none; } }
+  .B .btn { display: inline-block; background: var(--acento); color: #14120f; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 4px; transition: box-shadow 200ms ease-out, transform 120ms ease-out; }
+  .B .btn:hover { box-shadow: 0 0 0 1px #f2711c, 0 6px 22px -6px rgba(242, 113, 28, .8); }
+  .B .btn:active { transform: scale(.97); }
+
+  /* ── C · BRONCE ───────────────────────────────────────── */
+  .C { --bg: #f8f6f1; --superficie: #ffffff; --linea: #e6e1d6; --texto: #1e2320; --secundario: #55605a; --acento: #8b5a2b; --patina: #2f5d50; --acento-fondo: #2f5d50;
+       --f-titulo: 'Marcellus', Georgia, serif; --f-texto: 'Figtree', system-ui, sans-serif; }
+  .C .wm { font-family: 'Marcellus', serif; letter-spacing: .14em; text-transform: uppercase; }
+  .C .linea-in { transform-origin: left; animation: trazo 700ms cubic-bezier(.77, 0, .175, 1) 250ms both; }
+  @keyframes trazo { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .C .letra { display: inline-block; animation: tallar 420ms cubic-bezier(.23, 1, .32, 1) both; animation-delay: calc(var(--i) * 45ms); }
+  @keyframes tallar { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .C .btn { display: inline-block; background: var(--patina); color: #fff; font-weight: 600; font-size: 14px; padding: 11px 20px; border-radius: 999px; transition: background-color 160ms ease-out, transform 120ms ease-out; }
+  .C .btn:hover { background: #244a3f; }
+  .C .btn:active { transform: scale(.97); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sello-in, .enfria, .linea-in, .letra { animation: none !important; }
+    .btn { transition: none !important; }
+  }
+
+  /* ── Selector (copiado de la skill prototype, sin cambios) ── */
+  .proto-picker { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2147483647; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(10, 10, 10, 0.82); -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 8px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.12); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; line-height: 1; -webkit-font-smoothing: antialiased; user-select: none; -webkit-user-select: none; }
+  .proto-picker-highlight { position: absolute; top: 4px; left: 0; height: 28px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); will-change: transform; }
+  .proto-picker[data-ready] .proto-picker-highlight { transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1), width 250ms cubic-bezier(0.23, 1, 0.32, 1); }
+  @media (prefers-reduced-motion: reduce) { .proto-picker[data-ready] .proto-picker-highlight { transition: none; } }
+  .proto-picker-item { position: relative; display: flex; align-items: center; height: 28px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: rgba(255, 255, 255, 0.55); font: inherit; cursor: pointer; transition: color 150ms ease-out; }
+  .proto-picker-item:hover { color: rgba(255, 255, 255, 0.85); }
+  .proto-picker-item:active { transform: scale(0.97); }
+  .proto-picker-item:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.4); outline-offset: 2px; }
+  .proto-picker-item[data-active] { color: #fff; }
+  .proto-picker-divider { width: 1px; height: 16px; margin: 0 4px; background: rgba(255, 255, 255, 0.12); }
+  .proto-picker-replay { padding: 0 10px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main id="stage"></main>
+
+<!-- ════════════════ A · TALLER ════════════════ -->
+<template data-direccion="A">
+<section class="dir A grano">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Dirección 1 de 3</p>
+      <h1>Taller</h1>
+      <p>El oficio del artesano, con prolijidad moderna. Fondo claro tipo papel, tinta casi negra y un solo acento color brasa. El símbolo es un <b>sello de artesano</b>, como la marca que el herrero estampa en su pieza: "esto lo hice yo".</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#f4efe6"></i>#F4EFE6</span>
+      <span class="sw"><i style="background:#1c1a17"></i>#1C1A17</span>
+      <span class="sw"><i style="background:#5f574b"></i>#5F574B</span>
+      <span class="sw"><i style="background:#b4410f"></i>#B4410F</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Fraunces + Manrope</h2>
+      <div class="logo-main" style="display:flex;align-items:center;gap:18px">
+        <svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45" fill="none" stroke="#b4410f" stroke-width="5"/><circle cx="50" cy="50" r="37" fill="none" stroke="#b4410f" stroke-width="1.5" stroke-dasharray="2 4"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="#1c1a17">e</text></svg>
+        <div>
+          <div class="wm" style="font-size:54px;line-height:.9">efesto</div>
+          <div class="wm-s" style="font-size:12px;margin-top:8px;color:#5f574b">webs · por Matias Lopez</div>
+        </div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="tile tile-perfil"><svg width="88" height="88" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c1a17"/><circle cx="50" cy="50" r="34" fill="none" stroke="#b4410f" stroke-width="4"/><text x="50" y="63" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="40" fill="#f4efe6">e</text></svg></div>Perfil (círculo)</figure>
+        <figure><div class="tile tile-fav"><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c1a17"/><text x="50" y="72" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="74" fill="#f4efe6">e</text></svg></div>32 px</figure>
+        <figure><div class="tile tile-1c"><svg width="70" height="70" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="currentColor">e</text></svg></div>1 color</figure>
+        <figure><div class="tile tile-1c-inv"><svg width="70" height="70" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="currentColor">e</text></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: el sello</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div>
+        <div class="web-body">
+          <svg class="sello-in" width="56" height="56" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45" fill="none" stroke="#b4410f" stroke-width="5"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="#1c1a17">e</text></svg>
+          <p style="font-family:Fraunces;font-size:30px;line-height:1.05;margin:14px 0 10px;font-weight:600">Tu página, hecha a mano y a medida.</p>
+          <p style="font-size:13.5px;color:#5f574b;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+          <span class="btn">Escribime por WhatsApp</span>
+        </div>
+      </div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post grano" style="background:#f4efe6;color:#1c1a17;padding:9%">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-family:Manrope;font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5f574b"><span>Hecho a mano</span><span>Nº 01</span></div>
+        <p style="font-family:Fraunces;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1;margin-top:18%">Cada página,<br>forjada <em style="color:#b4410f">a medida</em>.</p>
+        <p style="font-family:Manrope;font-size:12px;line-height:1.45;margin-top:10%;color:#5f574b;max-width:22ch">Nada de plantillas: diseño y programo la página de tu negocio, de principio a fin.</p>
+        <div style="position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;align-items:center;font-family:Manrope;font-size:10px;font-weight:700">
+          <span>efesto webs</span>
+          <svg width="30" height="30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#b4410f" stroke-width="6"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="#1c1a17">e</text></svg>
+        </div>
+      </div>
+    </article>
+
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#1c1a17;color:#f4efe6;padding:12% 10%">
+        <svg width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#b4410f" stroke-width="6"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="#f4efe6">e</text></svg>
+        <p style="font-family:Fraunces;font-weight:600;font-size:clamp(20px,2.2vw,26px);line-height:1.05;margin-top:40%">¿Tu negocio todavía no tiene página?</p>
+        <p style="font-family:Manrope;font-size:11px;line-height:1.45;margin-top:10%;color:#c9bfae">Te la hago a medida, desde $150.000.</p>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#f4efe6;color:#1c1a17;font-family:Manrope;font-weight:700;font-size:11px;text-align:center;padding:9px 0;border-radius:6px;box-shadow:0 3px 0 #b4410f">Escribime</span>
+      </div>
+    </article>
+
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top">
+          <div class="ig-av"><svg width="76" height="76" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c1a17"/><circle cx="50" cy="50" r="34" fill="none" stroke="#b4410f" stroke-width="4"/><text x="50" y="63" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="40" fill="#f4efe6">e</text></svg></div>
+          <div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div>
+        </div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web a medida para negocios 🔨
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div style="background:#f4efe6;display:grid;place-items:center;font-family:Fraunces;font-weight:600;font-size:15px;color:#1c1a17;text-align:center;padding:8px">Forjada<br>a medida</div>
+          <div style="background:#1c1a17;display:grid;place-items:center"><svg width="44" height="44" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#b4410f" stroke-width="6"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces" font-weight="700" font-size="50" fill="#f4efe6">e</text></svg></div>
+          <div style="background:#b4410f;display:grid;place-items:center;font-family:Manrope;font-weight:700;font-size:11px;color:#f4efe6;letter-spacing:.1em">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>El sello</b><span>El símbolo entra como si se estampara (una sola vez, al cargar). Es el momento "hecho a mano" de la página.</span></div>
+        <div><b>Botón con peso</b><span>Los botones tienen un borde color brasa abajo: al apretarlos se "hunden", como golpear sobre el yunque.</span></div>
+        <div><b>Textura de papel</b><span>Un grano muy sutil en el fondo da sensación de material, sin recargar.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<!-- ════════════════ B · FRAGUA ════════════════ -->
+<template data-direccion="B">
+<section class="dir B">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Dirección 2 de 3</p>
+      <h1>Fragua</h1>
+      <p>La fuerza del taller del herrero, ordenada y moderna. Fondo carbón, texto cálido y un naranja de metal al rojo como único acento. El símbolo es un <b>yunque geométrico con una chispa</b>: donde se forja el trabajo.</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#14120f"></i>#14120F</span>
+      <span class="sw"><i style="background:#f3eee6"></i>#F3EEE6</span>
+      <span class="sw"><i style="background:#a39b8f"></i>#A39B8F</span>
+      <span class="sw"><i style="background:#f2711c"></i>#F2711C</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Archivo + Public Sans</h2>
+      <div class="logo-main" style="display:flex;align-items:center;gap:16px">
+        <svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="#f2711c"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="#f3eee6"/></svg>
+        <div>
+          <div class="wm" style="font-size:58px;line-height:.85">Efesto<span style="color:#f2711c"> webs</span></div>
+          <div style="font-size:12px;margin-top:10px;color:#a39b8f;letter-spacing:.06em">POR MATIAS LOPEZ</div>
+        </div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="tile tile-perfil"><svg width="88" height="88" viewBox="0 0 100 100"><rect width="100" height="100" fill="#14120f"/><g transform="translate(14 12) scale(.72)"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="#f2711c"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="#f3eee6"/></g></svg></div>Perfil (círculo)</figure>
+        <figure><div class="tile tile-fav"><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#14120f"/><path d="M6 34 H94 V48 C84 50 76 53 70 55 V66 H78 V82 H22 V66 H30 V55 C22 53 14 49 6 42 Z" fill="#f2711c"/></svg></div>32 px</figure>
+        <figure><div class="tile tile-1c"><svg width="70" height="70" viewBox="0 0 100 100"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="currentColor"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="currentColor"/></svg></div>1 color</figure>
+        <figure><div class="tile tile-1c-inv"><svg width="70" height="70" viewBox="0 0 100 100"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="currentColor"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="currentColor"/></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: el metal que se enfría</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div>
+        <div class="web-body">
+          <p class="wm" style="font-size:38px;line-height:.9;margin-bottom:12px">Tu página,<br><span class="enfria">forjada</span> a medida.</p>
+          <p style="font-size:13.5px;color:#a39b8f;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+          <span class="btn">Escribime por WhatsApp</span>
+        </div>
+      </div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post" style="background:#14120f;color:#f3eee6;padding:9%;background-image:radial-gradient(120% 60% at 50% 115%, rgba(242,113,28,.28), transparent 60%)">
+        <svg width="34" height="34" viewBox="0 0 100 100"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="#f2711c"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="#f3eee6"/></svg>
+        <p class="wm" style="font-size:clamp(30px,3.8vw,46px);line-height:.88;margin-top:20%">Nada de<br>plantillas.<br><span style="color:#f2711c">Forjada<br>a medida.</span></p>
+        <div style="position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;font-size:10px;color:#a39b8f;letter-spacing:.08em"><span>EFESTO WEBS</span><span>DESDE $150.000</span></div>
+      </div>
+    </article>
+
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#14120f;color:#f3eee6;padding:12% 10%;background-image:radial-gradient(130% 45% at 50% 108%, rgba(242,113,28,.35), transparent 60%)">
+        <p style="font-size:10px;letter-spacing:.12em;color:#a39b8f">EFESTO WEBS</p>
+        <p class="wm" style="font-size:clamp(24px,2.6vw,32px);line-height:.9;margin-top:45%">¿Tu negocio<br>no aparece<br><span style="color:#f2711c">en Google?</span></p>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#f2711c;color:#14120f;font-weight:700;font-size:11px;text-align:center;padding:9px 0;border-radius:4px">Escribime</span>
+      </div>
+    </article>
+
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top">
+          <div class="ig-av"><svg width="76" height="76" viewBox="0 0 100 100"><rect width="100" height="100" fill="#14120f"/><g transform="translate(14 12) scale(.72)"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="#f2711c"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="#f3eee6"/></g></svg></div>
+          <div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div>
+        </div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web forjadas a medida 🔥
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div style="background:#14120f;display:grid;place-items:center;font-family:Archivo;font-variation-settings:'wdth' 70;font-weight:800;font-size:16px;color:#f2711c;text-align:center;text-transform:uppercase">Forjada<br>a medida</div>
+          <div style="background:#1c1915;display:grid;place-items:center"><svg width="46" height="46" viewBox="0 0 100 100"><path d="M70 10 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" fill="#f2711c"/><path d="M6 40 H94 V52 C84 54 76 56 70 58 V68 H78 V80 H22 V68 H30 V58 C22 56 14 52 6 46 Z" fill="#f3eee6"/></svg></div>
+          <div style="background:#f2711c;display:grid;place-items:center;font-weight:700;font-size:11px;color:#14120f;letter-spacing:.1em;text-align:center">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>Metal al rojo</b><span>La palabra clave del título aparece incandescente y se "enfría" a su color en un segundo. Una sola vez, al cargar.</span></div>
+        <div><b>Brasa en el botón</b><span>Al pasar el mouse, el botón de WhatsApp gana un brillo naranja suave, como una brasa que se aviva.</span></div>
+        <div><b>Calor de fondo</b><span>Un resplandor muy tenue abajo de las secciones clave, como la luz de la fragua. Quieto, sin animación.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<!-- ════════════════ C · BRONCE ════════════════ -->
+<template data-direccion="C">
+<section class="dir C">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Dirección 3 de 3</p>
+      <h1>Bronce</h1>
+      <p>Lo clásico griego, limpio y confiable. Fondo piedra clara, verde pátina (el color del bronce con los años) y un acento bronce. Letras de inscripción griega en mayúsculas. El símbolo es una <b>moneda acuñada</b>: algo hecho para durar.</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#f8f6f1"></i>#F8F6F1</span>
+      <span class="sw"><i style="background:#1e2320"></i>#1E2320</span>
+      <span class="sw"><i style="background:#2f5d50"></i>#2F5D50</span>
+      <span class="sw"><i style="background:#8b5a2b"></i>#8B5A2B</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Marcellus + Figtree</h2>
+      <div class="logo-main" style="display:flex;align-items:center;gap:18px">
+        <svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#2f5d50"/><circle cx="50" cy="50" r="39" fill="none" stroke="#c9a77c" stroke-width="1.5"/><text x="50" y="65" text-anchor="middle" font-family="Marcellus" font-size="44" fill="#f8f6f1">E</text></svg>
+        <div>
+          <div class="wm" style="font-size:44px;line-height:1">Efesto</div>
+          <div style="height:1.5px;background:#8b5a2b;margin:8px 0 7px;width:100%"></div>
+          <div style="font-size:12px;letter-spacing:.3em;color:#55605a">WEBS · POR MATIAS LOPEZ</div>
+        </div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="tile tile-perfil"><svg width="88" height="88" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2f5d50"/><circle cx="50" cy="50" r="34" fill="none" stroke="#c9a77c" stroke-width="1.5"/><text x="50" y="64" text-anchor="middle" font-family="Marcellus" font-size="40" fill="#f8f6f1">E</text></svg></div>Perfil (círculo)</figure>
+        <figure><div class="tile tile-fav"><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2f5d50"/><text x="50" y="74" text-anchor="middle" font-family="Marcellus" font-size="72" fill="#f8f6f1">E</text></svg></div>32 px</figure>
+        <figure><div class="tile tile-1c"><svg width="70" height="70" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="50" y="65" text-anchor="middle" font-family="Marcellus" font-size="44" fill="currentColor">E</text></svg></div>1 color</figure>
+        <figure><div class="tile tile-1c-inv"><svg width="70" height="70" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="50" y="65" text-anchor="middle" font-family="Marcellus" font-size="44" fill="currentColor">E</text></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: la inscripción</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div>
+        <div class="web-body">
+          <p class="wm" style="font-size:30px;line-height:1.1" data-tallar>Hecha a medida</p>
+          <div class="linea-in" style="height:1.5px;background:#8b5a2b;margin:10px 0 14px;width:60%"></div>
+          <p style="font-size:13.5px;color:#55605a;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+          <span class="btn">Escribime por WhatsApp</span>
+        </div>
+      </div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post" style="background:#f8f6f1;color:#1e2320;padding:10%;box-shadow:inset 0 0 0 1px #e6e1d6">
+        <svg width="34" height="34" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#2f5d50"/><text x="50" y="65" text-anchor="middle" font-family="Marcellus" font-size="44" fill="#f8f6f1">E</text></svg>
+        <p class="wm" style="font-size:clamp(20px,2.4vw,28px);line-height:1.15;margin-top:22%">Una página<br>hecha para<br>durar</p>
+        <div style="height:1.5px;background:#8b5a2b;width:40%;margin:9% 0"></div>
+        <p style="font-size:12px;line-height:1.45;color:#55605a;max-width:24ch">Diseño y programo la página de tu negocio, a medida y con oficio.</p>
+        <p style="position:absolute;left:10%;bottom:7%;font-family:Marcellus;font-size:10px;letter-spacing:.3em;color:#8b5a2b">EFESTO WEBS</p>
+      </div>
+    </article>
+
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#2f5d50;color:#f8f6f1;padding:12% 10%">
+        <p style="font-family:Marcellus;font-size:10px;letter-spacing:.3em;color:#c9a77c">EFESTO WEBS</p>
+        <p class="wm" style="font-size:clamp(17px,1.9vw,22px);line-height:1.2;margin-top:45%">¿Tu negocio<br>todavía no<br>tiene página?</p>
+        <div style="height:1.5px;background:#c9a77c;width:40%;margin:10% 0"></div>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#f8f6f1;color:#2f5d50;font-weight:600;font-size:11px;text-align:center;padding:9px 0;border-radius:999px">Escribime</span>
+      </div>
+    </article>
+
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top">
+          <div class="ig-av"><svg width="76" height="76" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2f5d50"/><circle cx="50" cy="50" r="34" fill="none" stroke="#c9a77c" stroke-width="1.5"/><text x="50" y="64" text-anchor="middle" font-family="Marcellus" font-size="40" fill="#f8f6f1">E</text></svg></div>
+          <div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div>
+        </div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web a medida, hechas para durar
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div style="background:#f8f6f1;display:grid;place-items:center;font-family:Marcellus;font-size:13px;letter-spacing:.12em;color:#1e2320;text-align:center">HECHA<br>PARA DURAR</div>
+          <div style="background:#2f5d50;display:grid;place-items:center"><svg width="46" height="46" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#c9a77c" stroke-width="2"/><text x="50" y="65" text-anchor="middle" font-family="Marcellus" font-size="44" fill="#f8f6f1">E</text></svg></div>
+          <div style="background:#8b5a2b;display:grid;place-items:center;font-family:Marcellus;font-size:11px;color:#f8f6f1;letter-spacing:.14em;text-align:center">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>La inscripción</b><span>Las letras del título aparecen una tras otra, como talladas en piedra, y una línea de bronce se dibuja abajo. Una sola vez.</span></div>
+        <div><b>Líneas de bronce</b><span>Separadores finos color bronce entre secciones, en lugar de cajas y bordes: orden clásico.</span></div>
+        <div><b>Moneda como sello</b><span>El símbolo acompaña cada trabajo en la sección de proyectos, como una marca de calidad.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<nav class="proto-picker" aria-label="Prototype variants">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item" data-active aria-current="true">Taller</button>
+  <button class="proto-picker-item">Fragua</button>
+  <button class="proto-picker-item">Bronce</button>
+  <span class="proto-picker-divider" aria-hidden="true"></span>
+  <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
+</nav>
+
+<script>
+// Cada dirección vive en un <template data-direccion>; el selector la monta de a una.
+const variants = [...document.querySelectorAll('template[data-direccion]')].map(t => () => t.innerHTML);
+
+// "Tallar" letra por letra (dirección Bronce)
+function prepararTallado(root) {
+  root.querySelectorAll('[data-tallar]').forEach(el => {
+    el.innerHTML = [...el.textContent].map((ch, i) => ch === ' ' ? ' ' : `<span class="letra" style="--i:${i}">${ch}</span>`).join('');
+  });
+}
+
+/* ── Picker wiring (verbatim de la skill prototype) ── */
+const stage = document.getElementById('stage');
+const picker = document.querySelector('.proto-picker');
+const highlight = picker.querySelector('.proto-picker-highlight');
+const items = [...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')];
+const replay = picker.querySelector('.proto-picker-replay');
+let current = 0;
+function moveHighlight() { const el = items[current]; highlight.style.width = el.offsetWidth + 'px'; highlight.style.transform = `translateX(${el.offsetLeft}px)`; }
+function mount(i) { stage.innerHTML = ''; requestAnimationFrame(() => { stage.innerHTML = variants[i](); prepararTallado(stage); }); }
+function setActive(i) {
+  if (i < 0 || i >= variants.length) return;
+  current = i;
+  items.forEach((el, j) => { el.toggleAttribute('data-active', j === i); if (j === i) el.setAttribute('aria-current', 'true'); else el.removeAttribute('aria-current'); });
+  moveHighlight();
+  const url = new URL(location); url.searchParams.set('v', i + 1); history.replaceState(null, '', url);
+  mount(i);
+}
+items.forEach((el, i) => el.addEventListener('click', () => setActive(i)));
+replay?.addEventListener('click', () => mount(current));
+document.addEventListener('click', e => { if (e.target.closest('[data-replay]')) mount(current); });
+window.addEventListener('resize', moveHighlight);
+document.addEventListener('keydown', (e) => {
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const num = parseInt(e.key, 10);
+  if (num >= 1 && num <= variants.length) setActive(num - 1);
+  else if (e.key === 'ArrowRight') setActive((current + 1) % variants.length);
+  else if (e.key === 'ArrowLeft') setActive((current - 1 + variants.length) % variants.length);
+  else if (e.key === 'r' || e.key === 'R') mount(current);
+});
+setActive((parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1);
+requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+</script>
+</body>
+</html>
