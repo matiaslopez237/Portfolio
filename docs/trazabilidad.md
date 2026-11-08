@@ -19,8 +19,8 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-02 | CA-02.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/nombres.md` § Lista corta (4) |
 | HU-02 | CA-02.4 | Chequeo `scripts/check.mjs` | ✓ | RDAP NIC.ar y Verisign + búsqueda web, 2026-11-07 |
 | HU-02 | CA-02.5 | Chequeo `scripts/check.mjs` | ✓ | `PRODUCT.md` › Marca › Tipo: Efesto Webs (provisorio) |
-| HU-02 | CA-02.6 | Checklist (firma Matias) | pendiente | Nombre provisorio hasta que Matias lo confirme |
-| HU-02 | CA-02.7 | Checklist (firma Matias) | pendiente | Registrar @ y dominio |
+| HU-02 | CA-02.6 | Checklist (firma Matias) | ✓ | Firmado 2026-11-08 |
+| HU-02 | CA-02.7 | Checklist (firma Matias) | pendiente | @efestowebs ✓ (2026-11-08) · falta dominio efestowebs.com.ar |
 | HU-03 | CA-03.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/direcciones.html` (ronda 2) · ronda 1 en `brand/direcciones-ronda1.html` |
 | HU-03 | CA-03.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/tokens.json` (15,5 / 6,7 / 6,4 : 1) |
 | HU-03 | CA-03.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/logo/*.svg` (trazos, `brand/trazar-logo.mjs`) |
@@ -40,6 +40,6 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 ## Huecos
 - HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
-- HU-02: CA-02.6 y CA-02.7 sin firmar (nombre provisorio; falta registrar @ y dominio).
+- HU-02: CA-02.7 pendiente (falta registrar el dominio efestowebs.com.ar; el @ ya está).
 - HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp (catalogo.html, flyer.html) tienen los precios anteriores: se rehacen en HU-05.
 - HU-01: ninguno.

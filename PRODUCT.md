@@ -56,7 +56,7 @@ Brief de la marca del estudio (HU-01, `docs/specs/HU-01-brief-de-marca.md`). Bas
 
 ### Tipo
 - Estudio con **nombre propio**: nombre principal corto + descriptor opcional ("Webs").
-- Nombre elegido: **Efesto Webs** (provisorio desde el 2026-11-07, hasta que Matias lo confirme). Hefesto, el dios herrero de la mitología griega: el artesano que forja a medida. Dominios libres: `efestowebs.com.ar`, `efesto.com.ar`, `efestowebs.com`. Detalle en `brand/nombres.md` (HU-02).
+- Nombre elegido: **Efesto Webs** (confirmado por Matias el 2026-11-08). Hefesto, el dios herrero de la mitología griega: el artesano que forja a medida. Dominios libres: `efestowebs.com.ar`, `efesto.com.ar`, `efestowebs.com`. Detalle en `brand/nombres.md` (HU-02).
 - Firma personal: **"por Matias Lopez"**. La persona sigue presente (trato directo, Ing. en Sistemas), pero la marca suena a negocio y puede crecer.
 - Estilo visual **nuevo**, distinto del portfolio actual. Se define en HU-03.
 
