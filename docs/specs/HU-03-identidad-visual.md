@@ -1,7 +1,7 @@
 # HU-03: Identidad visual
 
 **Historia:** Como dueño del estudio, quiero un logo, una paleta y unas tipografías propias, con una guía de uso, para que Instagram, WhatsApp y la web se vean como una misma marca seria.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a partir del brief: confiable, moderna y simple, en la línea de la herrería y la mitología griega. Primero se muestran 3 direcciones distintas para elegir viendo; con la elegida se arma el logo, sus versiones en el tamaño de cada plataforma y una guía de marca.
@@ -41,3 +41,4 @@ Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a part
 
 ## Historial
 - 2026-11-07: creada.
+- 2026-11-07: aprobada por Matias.

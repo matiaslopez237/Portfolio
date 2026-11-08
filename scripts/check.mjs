@@ -144,7 +144,84 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-03: Identidad visual ──
+  {
+    ca: 'CA-03.1', desc: 'brand/direcciones.html: 3 direcciones con selector, cada una con logo, post, historia y perfil',
+    run: () => {
+      const h = leerOpcional('brand/direcciones.html'); if (!h) throw new Error('no existe brand/direcciones.html');
+      if (!h.includes('proto-picker')) throw new Error('falta el selector');
+      const dirs = h.split('data-direccion=').slice(1);
+      if (dirs.length !== 3) throw new Error(`hay ${dirs.length} direcciones`);
+      const piezas = ['logo', 'post', 'historia', 'perfil'];
+      const faltan = dirs.flatMap((d, i) => piezas.filter(p => !d.includes(`data-pieza="${p}"`)).map(p => `${i + 1}:${p}`));
+      if (faltan.length) throw new Error('faltan piezas: ' + faltan.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-03.2', desc: 'Paleta elegida (brand/tokens.json): texto y secundario ≥ 4.5:1, acento ≥ 3:1 sobre el fondo',
+    run: () => {
+      const t = JSON.parse(leerOpcional('brand/tokens.json') ?? 'null'); if (!t) throw new Error('no existe brand/tokens.json');
+      const c = t.color ?? {};
+      const pares = [['texto', 4.5], ['textoSecundario', 4.5], ['acento', 3]];
+      const malos = pares.filter(([k, min]) => !(c[k] && c.fondo && contraste(c[k], c.fondo) >= min)).map(([k, min]) => `${k} (${c[k] && c.fondo ? contraste(c[k], c.fondo).toFixed(2) : 'falta'} < ${min})`);
+      if (malos.length) throw new Error(malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-03.3', desc: 'Logos SVG válidos: logo.svg, simbolo.svg y logo-1color.svg',
+    run: () => {
+      const malos = ['logo.svg', 'simbolo.svg', 'logo-1color.svg'].filter(f => {
+        const s = leerOpcional('brand/logo/' + f); return !(s && /<svg[\s>]/.test(s) && /viewBox="[^"]+"/.test(s));
+      });
+      if (malos.length) throw new Error('faltan o no son válidos: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-03.4', desc: 'Exportaciones PNG con medidas exactas',
+    run: () => {
+      const esperadas = { 'perfil-instagram.png': [1080, 1080], 'perfil-whatsapp.png': [640, 640], 'favicon-32.png': [32, 32], 'apple-touch-icon.png': [180, 180], 'og.png': [1200, 630] };
+      const malos = Object.entries(esperadas).filter(([f, [w, h]]) => { const d = medidasPng('brand/export/' + f); return !d || d[0] !== w || d[1] !== h; })
+        .map(([f, [w, h]]) => { const d = medidasPng('brand/export/' + f); return `${f} (${d ? d.join('×') : 'falta'}, esperado ${w}×${h})`; });
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-03.5', desc: 'brand/marca.html tiene Paleta, Tipografías, Logo (usos correctos e incorrectos) y Tono de voz',
+    run: () => {
+      const h = leerOpcional('brand/marca.html'); if (!h) throw new Error('no existe brand/marca.html');
+      const faltan = ['Paleta', 'Tipografías', 'Logo', 'Usos correctos', 'Usos incorrectos', 'Tono de voz'].filter(s => !new RegExp(`<h[23][^>]*>\\s*${s}`, 'i').test(h));
+      if (faltan.length) throw new Error('faltan secciones: ' + faltan.join(', '));
+      return true;
+    },
+  },
 ];
+
+function leerOpcional(ruta) { try { return leer(ruta); } catch { return null; } }
+
+// Contraste WCAG entre dos colores hex.
+function contraste(a, b) {
+  const lum = (hex) => {
+    const n = hex.replace('#', '');
+    const [r, g, bl] = [0, 2, 4].map(i => parseInt(n.slice(i, i + 2), 16) / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+  };
+  const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+  return (x + 0.05) / (y + 0.05);
+}
+
+// Ancho y alto de un PNG leyendo su encabezado (IHDR), sin dependencias.
+function medidasPng(ruta) {
+  try {
+    const buf = readFileSync(new URL('../' + ruta, import.meta.url));
+    if (buf.toString('ascii', 1, 4) !== 'PNG') return null;
+    return [buf.readUInt32BE(16), buf.readUInt32BE(20)];
+  } catch { return null; }
+}
 
 // Filas de una tabla markdown que está debajo de "## Titulo" en brand/nombres.md.
 function tablaNombres(titulo) {
