@@ -1,0 +1,33 @@
+{
+  "_nota": "Fuente única de las piezas de WhatsApp Business (HU-05). Si cambian el número o los precios, se editan acá y se corre node brand/whatsapp/generar.mjs.",
+  "numero": "5492604661138",
+  "numeroVisible": "260 466-1138",
+  "mensajeQr": "Hola Matias, vi tu flyer y quiero consultarte por una página web para mi negocio.",
+  "precios": { "landing": "$150.000", "tiendaWhatsapp": "$350.000", "tiendaPagos": "$900.000" },
+  "catalogo": [
+    {
+      "id": "landing",
+      "nombre": "Landing Page",
+      "precio": "landing",
+      "ideal": "Negocios locales, profesionales y emprendedores",
+      "items": ["Diseño a medida de tu marca", "Botón directo a WhatsApp", "Adaptada al celular", "Estadísticas de visitas"],
+      "descripcion": "Una página de una sola pantalla para presentar tu negocio y que te escriban.\n\nIncluye:\n• Diseño personalizado a tu marca\n• Adaptada a celular y computadora\n• Servicios, sobre vos y contacto\n• Formulario de contacto y botón de WhatsApp\n• Preparada para aparecer en Google\n• Estadísticas de visitas y comportamiento\n\nPrecio desde $150.000. El valor final depende de lo que necesites: escribime y te paso un presupuesto sin costo."
+    },
+    {
+      "id": "tienda-whatsapp",
+      "nombre": "Tienda WhatsApp",
+      "precio": "tiendaWhatsapp",
+      "ideal": "Negocios que ya venden por chat",
+      "items": ["Catálogo con fotos y precios", "Pedido directo por WhatsApp", "Sin comisiones por venta", "Estadísticas de visitas"],
+      "descripcion": "Tu catálogo online, con un botón en cada producto que abre WhatsApp con el pedido listo.\n\nIncluye todo lo de Landing Page, más:\n• Catálogo con fotos y precios\n• Botón \"Pedir por WhatsApp\" en cada producto\n• Sin comisiones por venta\n• Fácil de actualizar con productos nuevos\n• Estadísticas de visitas y comportamiento\n\nPrecio desde $350.000. Escribime y te paso un presupuesto sin costo."
+    },
+    {
+      "id": "tienda-pagos",
+      "nombre": "Tienda con pagos",
+      "precio": "tiendaPagos",
+      "ideal": "Negocios que quieren cobrar online",
+      "items": ["Carrito y pago online", "Tarjeta, transferencia o Mercado Pago", "Panel para gestionar pedidos", "Estadísticas de visitas"],
+      "descripcion": "Una tienda online completa: tus clientes agregan productos al carrito y pagan directo en tu web.\n\nIncluye todo lo de Tienda WhatsApp, más:\n• Carrito y pago online\n• Tarjeta, transferencia o Mercado Pago\n• Panel de gestión de pedidos\n• Stock y notificaciones automáticas\n• Estadísticas de visitas y comportamiento\n\nPrecio desde $900.000. El valor final depende del proyecto: escribime y te paso un presupuesto sin costo."
+    }
+  ]
+}

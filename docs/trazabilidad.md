@@ -44,11 +44,19 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-06 | CA-06.6 | Escenario BDD (375 px sin scroll ni errores) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
 | HU-06 | CA-06.7 | Escenario BDD (un solo número de WhatsApp) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
 | HU-06 | CA-06.8 | Checklist (firma Matias) | ✓ firmado 2026-11-08 | `docs/specs/HU-06-portfolio-con-la-marca.md` |
+| HU-05 | CA-05.1 | Escenario BDD (número nuevo, sin el viejo) | ✓ | `features/HU-05-whatsapp-business.feature` · `npm test` |
+| HU-05 | CA-05.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/perfil.md` |
+| HU-05 | CA-05.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/catalogo/*.png` · `contenido.json` |
+| HU-05 | CA-05.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/mensajes.md` |
+| HU-05 | CA-05.5 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/flyer.png` · `qr-whatsapp.png` |
+| HU-05 | CA-05.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/plantillas/*.html` |
+| HU-05 | CA-05.7 | Checklist (firma Matias) | pendiente | Cargar perfil, catálogo y mensajes en la app y verlos en el celular |
 
 ## Huecos
+- HU-05: CA-05.7 sin firmar. Commits [RED] a4be5b1 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Faltan definir plazos y formas de pago (quedan fuera de los mensajes).
 - HU-06: ninguno. Commits [RED] 90c99d7 → [GREEN] ff3990f. Pendiente de mirar en un celular real ya publicado. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).
 - HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
 - HU-02: CA-02.7 pendiente (falta registrar el dominio efestowebs.com.ar; el @ ya está).
-- HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp (catalogo.html, flyer.html) tienen los precios anteriores: se rehacen en HU-05.
+- HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp se reemplazaron en la HU-05.
 - HU-01: ninguno.

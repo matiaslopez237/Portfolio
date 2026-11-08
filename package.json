@@ -4,7 +4,8 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^13.3.0",
-    "opentype.js": "^2.0.0"
+    "opentype.js": "^2.0.0",
+    "qrcode": "^1.5.4"
   },
   "name": "portfolio",
   "private": true,

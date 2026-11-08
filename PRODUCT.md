@@ -25,7 +25,7 @@ Una persona (no una agencia) que diseña **y** programa: desde una landing simpl
 
 - El visitante suele entrar desde el celular, con un link de WhatsApp o de un anuncio de WhatsApp Business.
 - Decide comparando los proyectos que ve y los precios "desde".
-- La venta se cierra en una conversación de WhatsApp (+54 299 556-0164, `https://wa.me/542995560164`).
+- La venta se cierra en una conversación de WhatsApp (+54 9 260 466-1138, `https://wa.me/5492604661138`, número de Efesto Webs desde el 2026-11-08).
 - Publicado en GitHub Pages (`matiaslopez237.github.io/Portfolio`).
 
 ## Capabilities and Constraints

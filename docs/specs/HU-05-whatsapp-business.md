@@ -53,3 +53,4 @@ Las piezas se generan con la identidad de `DESIGN.md`, igual que las de Instagra
 ## Historial
 - 2026-11-08: creada, con el número nuevo de Matias.
 - 2026-11-08: aprobada por Matias; horario lunes a sábado de 9 a 21; flyer con QR.
+- 2026-11-08: implementada; 5 chequeos y 2 escenarios en verde. Piezas viejas borradas. Falta la firma de CA-05.7.
