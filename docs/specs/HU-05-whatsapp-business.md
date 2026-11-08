@@ -1,7 +1,7 @@
 # HU-05: WhatsApp Business
 
 **Historia:** Como dueño del estudio, quiero el WhatsApp Business de Efesto Webs configurado y el número nuevo en todos lados, para que cada consulta llegue al número del estudio y se atienda con la misma marca.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Dejar listo todo lo necesario para WhatsApp Business con el número nuevo **+54 9 260 466-1138** (`wa.me/5492604661138`):
@@ -36,10 +36,10 @@ Las piezas se generan con la identidad de `DESIGN.md`, igual que las de Instagra
 | CA | Dado / cuando / entonces | Se verifica con |
 | --- | --- | --- |
 | CA-05.1 | Dado el portfolio, entonces todos los links `wa.me` y el JSON-LD usan `5492604661138`, y el número viejo no aparece | Escenario BDD |
-| CA-05.2 | Dado `brand/whatsapp/perfil.md`, entonces tiene nombre, categoría, descripción (512 caracteres o menos), horario, email y sitio web | Chequeo automático |
+| CA-05.2 | Dado `brand/whatsapp/perfil.md`, entonces tiene nombre, categoría, descripción (512 caracteres o menos), horario (lunes a sábado de 9 a 21), email y sitio web | Chequeo automático |
 | CA-05.3 | Dado el catálogo, entonces hay 3 PNG de 800×800 (uno por plan), con nombre y descripción dentro de los límites | Chequeo automático |
 | CA-05.4 | Dado `brand/whatsapp/mensajes.md`, entonces hay bienvenida, ausencia y al menos 4 respuestas rápidas dentro de los límites | Chequeo automático |
-| CA-05.5 | Dado el flyer, entonces existe un PNG de 1080×1920 con los 3 precios vigentes y el número nuevo | Chequeo automático |
+| CA-05.5 | Dado el flyer, entonces existe un PNG de 1080×1920 con los 3 precios vigentes, el número nuevo y un QR que abre el chat | Chequeo automático |
 | CA-05.6 | Dadas las plantillas de WhatsApp, entonces solo usan colores de `brand/tokens.json` | Chequeo automático |
 | CA-05.7 | Dados el perfil, el catálogo y los mensajes cargados en la app, cuando Matias los ve en su celular, entonces se ven bien y dicen solo cosas reales | Checklist |
 
@@ -47,8 +47,9 @@ Las piezas se generan con la identidad de `DESIGN.md`, igual que las de Instagra
 - [ ] CA-05.7: ¿El WhatsApp Business se ve bien en el celular y dice solo cosas reales? — firmado:
 
 ## Preguntas abiertas
-- **Horario de atención:** ¿qué días y horas respondés? Hace falta para el perfil y para el mensaje de ausencia.
-- **QR en el flyer:** ¿querés un código QR que abra el chat? Necesita un paquete chico de npm (`qrcode`) solo para generar la imagen.
+- ~~¿Horario de atención?~~ Respondido: lunes a sábado de 9 a 21.
+- ~~¿QR en el flyer?~~ Respondido: sí (se instala `qrcode` como dependencia de desarrollo).
 
 ## Historial
 - 2026-11-08: creada, con el número nuevo de Matias.
+- 2026-11-08: aprobada por Matias; horario lunes a sábado de 9 a 21; flyer con QR.
