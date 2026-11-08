@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Efesto Webs · Ronda 2 de direcciones (HU-03)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+  #stage { min-height: 100dvh; }
+  svg { display: block; }
+
+  .dir { min-height: 100dvh; background: var(--bg); color: var(--texto); font-family: var(--f-texto); padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 48px) 120px; }
+  .dir-head { max-width: 1180px; margin: 0 auto 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end; }
+  .dir-num { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--secundario); }
+  .dir-head h1 { font-family: var(--f-titulo); font-size: clamp(34px, 5vw, 56px); line-height: 1; margin-top: 6px; }
+  .dir-head p { margin-top: 12px; max-width: 62ch; color: var(--secundario); line-height: 1.55; }
+  .dir-head p b { color: var(--texto); }
+  .swatches { display: flex; gap: 8px; }
+  .sw { width: 54px; text-align: center; font-size: 10.5px; color: var(--secundario); }
+  .sw i { display: block; height: 54px; border-radius: 10px; margin-bottom: 6px; box-shadow: inset 0 0 0 1px var(--linea); }
+
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+  .card { background: var(--superficie); border-radius: 18px; padding: 22px; box-shadow: 0 0 0 1px var(--linea); }
+  .card h2 { font-family: var(--f-texto); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--secundario); margin-bottom: 16px; }
+  .c-logo { grid-column: span 7; } .c-web { grid-column: span 5; } .c-post { grid-column: span 4; } .c-historia { grid-column: span 3; } .c-perfil { grid-column: span 5; } .c-ideas { grid-column: span 12; }
+  @media (max-width: 960px) { .c-logo, .c-web, .c-post, .c-historia, .c-perfil, .c-ideas { grid-column: span 12; } .dir-head { grid-template-columns: minmax(0, 1fr); } }
+
+  .logo-main { display: flex; align-items: center; gap: 18px; padding: 18px 0 22px; }
+  .logo-vars { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; padding-top: 18px; border-top: 1px solid var(--linea); }
+  .logo-vars figure { display: grid; justify-items: center; gap: 8px; font-size: 11px; color: var(--secundario); }
+  .t-perfil { width: 88px; height: 88px; border-radius: 50%; overflow: hidden; }
+  .t-fav { width: 32px; height: 32px; border-radius: 6px; overflow: hidden; }
+  .t-1c { width: 88px; height: 88px; border-radius: 14px; background: #fff; color: #111; display: grid; place-items: center; }
+  .t-1c.inv { background: #111; color: #fff; }
+
+  .post { aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; position: relative; }
+  .historia { aspect-ratio: 1080 / 1920; border-radius: 12px; overflow: hidden; position: relative; }
+
+  .ig { max-width: 380px; margin: 0 auto; background: #fff; color: #111; border-radius: 22px; padding: 18px; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; box-shadow: 0 10px 30px -18px rgba(0,0,0,.4); }
+  .ig-top { display: flex; align-items: center; gap: 18px; }
+  .ig-av { width: 76px; height: 76px; border-radius: 50%; overflow: hidden; flex: none; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #ddd; }
+  .ig-stats { display: flex; gap: 16px; font-size: 12px; text-align: center; } .ig-stats b { display: block; font-size: 15px; }
+  .ig-name { margin-top: 12px; font-size: 13px; font-weight: 600; }
+  .ig-bio { font-size: 13px; line-height: 1.4; white-space: pre-line; }
+  .ig-link { font-size: 13px; color: #00376b; font-weight: 600; }
+  .ig-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; } .ig-btns span { background: #efefef; border-radius: 8px; font-size: 12.5px; font-weight: 600; text-align: center; padding: 7px 0; }
+  .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 14px -18px -18px; border-radius: 0 0 22px 22px; overflow: hidden; }
+  .ig-grid > div { aspect-ratio: 4 / 5; display: grid; place-items: center; text-align: center; padding: 8px; }
+
+  .ideas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .ideas div { font-size: 14px; line-height: 1.55; } .ideas b { display: block; font-family: var(--f-titulo); font-size: 18px; margin-bottom: 4px; } .ideas span { color: var(--secundario); }
+  @media (max-width: 760px) { .ideas { grid-template-columns: minmax(0, 1fr); } }
+
+  .web { border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--linea); }
+  .web-bar { height: 26px; background: var(--linea); display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: var(--secundario); }
+  .web-body { background: var(--bg); padding: 26px 22px 30px; }
+  .replay { margin-top: 12px; border: 0; background: none; color: var(--secundario); font: inherit; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+
+  /* ── 1 · BARRA AL ROJO ─────────────────────────────────── */
+  .R { --bg: #1b2128; --superficie: #222a33; --linea: #323c47; --texto: #eef1f4; --secundario: #9aa6b2; --acento: #ff7a1a;
+       --f-titulo: 'Archivo', system-ui, sans-serif; --f-texto: 'Public Sans', system-ui, sans-serif; }
+  .R .dir-head h1 { font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; }
+  .R .calor { animation: calor 1400ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes calor { 0% { filter: brightness(1.8) drop-shadow(0 0 10px #ffb35a); } 100% { filter: none; } }
+  .R .btn { display: inline-block; background: var(--acento); color: #1b2128; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 4px; transition: box-shadow 200ms ease-out, transform 120ms ease-out; }
+  .R .btn:hover { box-shadow: 0 6px 22px -6px rgba(255, 122, 26, .8); } .R .btn:active { transform: scale(.97); }
+
+  /* ── 2 · LLAMA AZUL ────────────────────────────────────── */
+  .L { --bg: #0e1a2b; --superficie: #142338; --linea: #22344d; --texto: #f1f4f8; --secundario: #9db0c7; --acento: #4da3ff;
+       --f-titulo: 'Archivo', system-ui, sans-serif; --f-texto: 'Manrope', system-ui, sans-serif; }
+  .L .dir-head h1 { font-variation-settings: "wdth" 100; font-weight: 800; letter-spacing: -.01em; }
+  .L .temple { background: linear-gradient(90deg, #f1f4f8 0%, #f1f4f8 40%, #ffd27a 50%, #4da3ff 60%, #4da3ff 100%); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: temple 1500ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes temple { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+  .L .btn { display: inline-block; background: var(--acento); color: #0e1a2b; font-weight: 800; font-size: 14px; padding: 11px 18px; border-radius: 10px; transition: background-color 160ms ease-out, transform 120ms ease-out; }
+  .L .btn:hover { background: #7bbcff; } .L .btn:active { transform: scale(.97); }
+
+  /* ── 3 · CENIZA ────────────────────────────────────────── */
+  .Z { --bg: #ecebe7; --superficie: #f6f5f2; --linea: #d9d7d0; --texto: #191817; --secundario: #5a5853; --acento: #c23e14;
+       --f-titulo: 'Fraunces', Georgia, serif; --f-texto: 'Manrope', system-ui, sans-serif; }
+  .Z .dir-head h1 { font-weight: 700; }
+  .Z .golpe { animation: golpe 560ms cubic-bezier(.23, 1, .32, 1) both; transform-origin: 50% 0; }
+  @keyframes golpe { 0% { transform: translateY(-14px) rotate(-6deg); opacity: 0; } 55% { transform: translateY(2px) rotate(0); opacity: 1; } 100% { transform: none; } }
+  .Z .chispas circle { animation: chispa 600ms ease-out 300ms both; }
+  @keyframes chispa { 0% { opacity: 0; transform: scale(.4); } 40% { opacity: 1; } 100% { opacity: 0; transform: scale(1.4); } }
+  .Z .btn { display: inline-block; background: var(--texto); color: var(--bg); font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 8px; transition: background-color 160ms ease-out, transform 120ms ease-out; }
+  .Z .btn:hover { background: var(--acento); } .Z .btn:active { transform: scale(.97) translateY(1px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calor, .temple, .golpe, .chispas circle { animation: none !important; }
+    .L .temple { color: #4da3ff; background: none; }
+    .btn { transition: none !important; }
+  }
+
+  /* ── Selector (copiado de la skill prototype, sin cambios) ── */
+  .proto-picker { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2147483647; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(10, 10, 10, 0.82); -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 8px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.12); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 13px; line-height: 1; -webkit-font-smoothing: antialiased; user-select: none; -webkit-user-select: none; }
+  .proto-picker-highlight { position: absolute; top: 4px; left: 0; height: 28px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); will-change: transform; }
+  .proto-picker[data-ready] .proto-picker-highlight { transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1), width 250ms cubic-bezier(0.23, 1, 0.32, 1); }
+  @media (prefers-reduced-motion: reduce) { .proto-picker[data-ready] .proto-picker-highlight { transition: none; } }
+  .proto-picker-item { position: relative; display: flex; align-items: center; height: 28px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: rgba(255, 255, 255, 0.55); font: inherit; cursor: pointer; transition: color 150ms ease-out; }
+  .proto-picker-item:hover { color: rgba(255, 255, 255, 0.85); }
+  .proto-picker-item:active { transform: scale(0.97); }
+  .proto-picker-item:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.4); outline-offset: 2px; }
+  .proto-picker-item[data-active] { color: #fff; }
+  .proto-picker-divider { width: 1px; height: 16px; margin: 0 4px; background: rgba(255, 255, 255, 0.12); }
+  .proto-picker-replay { padding: 0 10px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main id="stage"></main>
+
+<!-- Símbolos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="rojo" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset=".45" stop-color="#ff7a1a"/><stop offset="1" stop-color="#c2410c"/></linearGradient>
+    <!-- E con la barra del medio al rojo -->
+    <symbol id="e-barra" viewBox="0 0 100 100"><rect x="22" y="16" width="14" height="68" rx="2" fill="currentColor"/><rect x="22" y="16" width="56" height="14" rx="2" fill="currentColor"/><rect x="22" y="70" width="56" height="14" rx="2" fill="currentColor"/><rect x="40" y="43" width="34" height="14" rx="2" fill="url(#rojo)"/></symbol>
+    <symbol id="e-barra-1c" viewBox="0 0 100 100"><rect x="22" y="16" width="14" height="68" rx="2"/><rect x="22" y="16" width="56" height="14" rx="2"/><rect x="22" y="70" width="56" height="14" rx="2"/><rect x="40" y="43" width="34" height="14" rx="2"/></symbol>
+    <!-- E de lingotes (brazos con punta biselada) -->
+    <symbol id="e-lingote" viewBox="0 0 100 100"><rect x="20" y="18" width="13" height="64" fill="currentColor"/><polygon points="20,18 74,18 81,34 20,34" fill="currentColor"/><polygon points="33,42 62,42 69,58 33,58" fill="#4da3ff"/><polygon points="20,66 74,66 81,82 20,82" fill="currentColor"/></symbol>
+    <symbol id="e-lingote-1c" viewBox="0 0 100 100"><rect x="20" y="18" width="13" height="64"/><polygon points="20,18 74,18 81,34 20,34"/><polygon points="37,42 62,42 69,58 37,58"/><polygon points="20,66 74,66 81,82 20,82"/></symbol>
+    <!-- E martillo: el brazo de arriba es la cabeza del martillo -->
+    <symbol id="e-martillo" viewBox="0 0 100 100"><rect x="12" y="14" width="72" height="20" rx="3" fill="currentColor"/><rect x="30" y="34" width="14" height="52" fill="currentColor"/><rect x="44" y="51" width="26" height="12" fill="#c23e14"/><rect x="30" y="74" width="46" height="12" fill="currentColor"/></symbol>
+    <symbol id="e-martillo-1c" viewBox="0 0 100 100"><rect x="12" y="14" width="72" height="20" rx="3"/><rect x="30" y="34" width="14" height="52"/><rect x="48" y="51" width="22" height="12"/><rect x="30" y="74" width="46" height="12"/></symbol>
+  </defs>
+</svg>
+
+<!-- ════════════════ 1 · BARRA AL ROJO ════════════════ -->
+<template data-direccion="R">
+<section class="dir R">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Ronda 2 · Dirección 1 de 3</p>
+      <h1>Barra al rojo</h1>
+      <p>Lo que te gustó de Fragua (las mayúsculas condensadas, la fuerza) pero con <b>colores fríos de acero</b> en vez del marrón, y un símbolo nuevo: la <b>"E" con la barra del medio al rojo</b>, como un hierro recién sacado de la fragua. Sin yunque.</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#1b2128"></i>#1B2128</span><span class="sw"><i style="background:#eef1f4"></i>#EEF1F4</span><span class="sw"><i style="background:#9aa6b2"></i>#9AA6B2</span><span class="sw"><i style="background:#ff7a1a"></i>#FF7A1A</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Archivo condensada + Public Sans</h2>
+      <div class="logo-main" style="color:#eef1f4">
+        <svg width="84" height="84"><use href="#e-barra"/></svg>
+        <div><div class="cond" style="font-size:60px;line-height:.85">Efesto <span style="color:#ff7a1a">webs</span></div><div style="font-size:12px;margin-top:10px;color:#9aa6b2;letter-spacing:.08em">POR MATIAS LOPEZ</div></div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="t-perfil" style="background:#1b2128;color:#eef1f4;display:grid;place-items:center"><svg width="62" height="62"><use href="#e-barra"/></svg></div>Perfil (círculo)</figure>
+        <figure><div class="t-fav" style="background:#1b2128;color:#eef1f4;display:grid;place-items:center"><svg width="30" height="30"><use href="#e-barra"/></svg></div>32 px</figure>
+        <figure><div class="t-1c"><svg width="64" height="64" fill="currentColor"><use href="#e-barra-1c"/></svg></div>1 color</figure>
+        <figure><div class="t-1c inv"><svg width="64" height="64" fill="currentColor"><use href="#e-barra-1c"/></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: el hierro al rojo</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div><div class="web-body">
+        <svg class="calor" width="52" height="52" style="color:#eef1f4"><use href="#e-barra"/></svg>
+        <p class="cond" style="font-size:36px;line-height:.9;margin:14px 0 12px">Tu página,<br><span style="color:#ff7a1a">forjada</span> a medida.</p>
+        <p style="font-size:13.5px;color:#9aa6b2;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+        <span class="btn">Escribime por WhatsApp</span>
+      </div></div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post" style="background:#1b2128;color:#eef1f4;padding:9%">
+        <svg width="34" height="34"><use href="#e-barra"/></svg>
+        <p class="cond" style="font-size:clamp(30px,3.8vw,46px);line-height:.88;margin-top:22%">Nada de<br>plantillas.<br><span style="color:#ff7a1a">Forjada<br>a medida.</span></p>
+        <div style="position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;font-size:10px;color:#9aa6b2;letter-spacing:.08em"><span>EFESTO WEBS</span><span>DESDE $150.000</span></div>
+      </div>
+    </article>
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#1b2128;color:#eef1f4;padding:12% 10%">
+        <svg width="34" height="34"><use href="#e-barra"/></svg>
+        <p class="cond" style="font-size:clamp(24px,2.6vw,32px);line-height:.9;margin-top:42%">¿Tu negocio<br>no aparece<br><span style="color:#ff7a1a">en Google?</span></p>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#ff7a1a;color:#1b2128;font-weight:700;font-size:11px;text-align:center;padding:9px 0;border-radius:4px">Escribime</span>
+      </div>
+    </article>
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top"><div class="ig-av" style="background:#1b2128;color:#eef1f4;display:grid;place-items:center"><svg width="54" height="54"><use href="#e-barra"/></svg></div><div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div></div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web forjadas a medida
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div class="cond" style="background:#1b2128;color:#ff7a1a;font-size:16px">Forjada<br>a medida</div>
+          <div style="background:#222a33;color:#eef1f4"><svg width="46" height="46"><use href="#e-barra"/></svg></div>
+          <div style="background:#ff7a1a;color:#1b2128;font-weight:700;font-size:11px;letter-spacing:.1em">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>Hierro al rojo</b><span>Al cargar, el símbolo aparece incandescente y en un segundo se enfría a su color. Una sola vez.</span></div>
+        <div><b>La barra como acento</b><span>La "barra al rojo" se repite como subrayado de títulos y separador: un mismo gesto en toda la marca.</span></div>
+        <div><b>Brasa en el botón</b><span>El botón de WhatsApp toma un brillo naranja suave al pasar el mouse.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<!-- ════════════════ 2 · LLAMA AZUL ════════════════ -->
+<template data-direccion="L">
+<section class="dir L">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Ronda 2 · Dirección 2 de 3</p>
+      <h1>Llama azul</h1>
+      <p>Un giro: en la fragua, <b>la llama más caliente es la azul</b>. Azul noche y azul llama, que además transmite confianza y tecnología, sin el violeta de antes. El símbolo es una <b>"E" hecha de lingotes</b>, con el del medio al azul.</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#0e1a2b"></i>#0E1A2B</span><span class="sw"><i style="background:#f1f4f8"></i>#F1F4F8</span><span class="sw"><i style="background:#9db0c7"></i>#9DB0C7</span><span class="sw"><i style="background:#4da3ff"></i>#4DA3FF</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Archivo + Manrope</h2>
+      <div class="logo-main" style="color:#f1f4f8">
+        <svg width="84" height="84"><use href="#e-lingote"/></svg>
+        <div><div style="font-family:Archivo;font-weight:800;font-size:50px;line-height:.9;letter-spacing:-.02em">efesto<span style="color:#4da3ff">.</span></div><div style="font-family:Manrope;font-weight:800;font-size:12px;margin-top:9px;color:#9db0c7;letter-spacing:.22em">WEBS · POR MATIAS LOPEZ</div></div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="t-perfil" style="background:#0e1a2b;color:#f1f4f8;display:grid;place-items:center"><svg width="62" height="62"><use href="#e-lingote"/></svg></div>Perfil (círculo)</figure>
+        <figure><div class="t-fav" style="background:#0e1a2b;color:#f1f4f8;display:grid;place-items:center"><svg width="30" height="30"><use href="#e-lingote"/></svg></div>32 px</figure>
+        <figure><div class="t-1c"><svg width="64" height="64" fill="currentColor"><use href="#e-lingote-1c"/></svg></div>1 color</figure>
+        <figure><div class="t-1c inv"><svg width="64" height="64" fill="currentColor"><use href="#e-lingote-1c"/></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: el temple</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div><div class="web-body">
+        <p style="font-family:Archivo;font-weight:800;font-size:32px;line-height:1;letter-spacing:-.02em;margin-bottom:12px">Tu página, <span class="temple">forjada a medida</span>.</p>
+        <p style="font-size:13.5px;color:#9db0c7;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+        <span class="btn">Escribime por WhatsApp</span>
+      </div></div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post" style="background:#0e1a2b;color:#f1f4f8;padding:9%;background-image:radial-gradient(90% 50% at 85% 0%, rgba(77,163,255,.22), transparent 60%)">
+        <svg width="34" height="34"><use href="#e-lingote"/></svg>
+        <p style="font-family:Archivo;font-weight:800;font-size:clamp(26px,3.2vw,38px);line-height:.98;letter-spacing:-.02em;margin-top:22%">El fuego más caliente es <span style="color:#4da3ff">azul</span>.</p>
+        <p style="font-size:12px;line-height:1.45;margin-top:9%;color:#9db0c7;max-width:24ch">Así trabajo tu página: a medida, con oficio y sin plantillas.</p>
+        <div style="position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;font-size:10px;font-weight:800;color:#9db0c7;letter-spacing:.14em"><span>EFESTO WEBS</span><span>DESDE $150.000</span></div>
+      </div>
+    </article>
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#0e1a2b;color:#f1f4f8;padding:12% 10%;background-image:radial-gradient(120% 40% at 50% 110%, rgba(77,163,255,.3), transparent 60%)">
+        <svg width="34" height="34"><use href="#e-lingote"/></svg>
+        <p style="font-family:Archivo;font-weight:800;font-size:clamp(21px,2.3vw,28px);line-height:1;letter-spacing:-.02em;margin-top:42%">¿Tu negocio todavía no tiene <span style="color:#4da3ff">página</span>?</p>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#4da3ff;color:#0e1a2b;font-weight:800;font-size:11px;text-align:center;padding:9px 0;border-radius:10px">Escribime</span>
+      </div>
+    </article>
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top"><div class="ig-av" style="background:#0e1a2b;color:#f1f4f8;display:grid;place-items:center"><svg width="54" height="54"><use href="#e-lingote"/></svg></div><div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div></div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web a medida, con oficio
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div style="background:#0e1a2b;color:#f1f4f8;font-family:Archivo;font-weight:800;font-size:15px">El fuego<br>más caliente<br>es <span style="color:#4da3ff">azul</span></div>
+          <div style="background:#142338;color:#f1f4f8"><svg width="46" height="46"><use href="#e-lingote"/></svg></div>
+          <div style="background:#4da3ff;color:#0e1a2b;font-weight:800;font-size:11px;letter-spacing:.1em">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>El temple</b><span>La frase clave pasa por los colores del temple del acero (de dorado a azul) y queda azul. Una sola vez, al cargar.</span></div>
+        <div><b>Lingotes como lista</b><span>Las características de cada plan se marcan con un pequeño lingote biselado en vez de viñetas comunes.</span></div>
+        <div><b>Brillo frío</b><span>Un resplandor azul muy suave en una esquina de las secciones clave, quieto.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<!-- ════════════════ 3 · CENIZA ════════════════ -->
+<template data-direccion="Z">
+<section class="dir Z">
+  <header class="dir-head">
+    <div>
+      <p class="dir-num">Ronda 2 · Dirección 3 de 3</p>
+      <h1>Ceniza</h1>
+      <p>Claro y sobrio: <b>gris ceniza, negro hierro y un rojo fuego</b> solo donde importa. Las letras de Taller (Fraunces y Manrope), que transmiten oficio. El símbolo es una <b>"E" martillo</b>: el brazo de arriba es la cabeza del martillo.</p>
+    </div>
+    <div class="swatches" aria-label="Paleta">
+      <span class="sw"><i style="background:#ecebe7"></i>#ECEBE7</span><span class="sw"><i style="background:#191817"></i>#191817</span><span class="sw"><i style="background:#5a5853"></i>#5A5853</span><span class="sw"><i style="background:#c23e14"></i>#C23E14</span>
+    </div>
+  </header>
+  <div class="grid">
+    <article class="card c-logo" data-pieza="logo">
+      <h2>Logo · Fraunces + Manrope</h2>
+      <div class="logo-main" style="color:#191817">
+        <svg width="84" height="84"><use href="#e-martillo"/></svg>
+        <div><div style="font-family:Fraunces;font-variation-settings:'opsz' 144;font-weight:600;font-size:54px;line-height:.9;letter-spacing:-.02em">Efesto</div><div style="font-family:Manrope;font-weight:800;font-size:12px;margin-top:9px;color:#5a5853;letter-spacing:.22em">WEBS · POR MATIAS LOPEZ</div></div>
+      </div>
+      <div class="logo-vars">
+        <figure><div class="t-perfil" style="background:#191817;color:#ecebe7;display:grid;place-items:center"><svg width="60" height="60"><use href="#e-martillo"/></svg></div>Perfil (círculo)</figure>
+        <figure><div class="t-fav" style="background:#191817;color:#ecebe7;display:grid;place-items:center"><svg width="30" height="30"><use href="#e-martillo"/></svg></div>32 px</figure>
+        <figure><div class="t-1c"><svg width="64" height="64" fill="currentColor"><use href="#e-martillo-1c"/></svg></div>1 color</figure>
+        <figure><div class="t-1c inv"><svg width="64" height="64" fill="currentColor"><use href="#e-martillo-1c"/></svg></div>1 color invertido</figure>
+      </div>
+    </article>
+    <article class="card c-web" data-pieza="web">
+      <h2>Idea para la página: el golpe</h2>
+      <div class="web"><div class="web-bar">efestowebs.com.ar</div><div class="web-body">
+        <div style="position:relative;width:56px;height:56px">
+          <svg class="golpe" width="56" height="56" style="color:#191817"><use href="#e-martillo"/></svg>
+          <svg class="chispas" width="56" height="56" viewBox="0 0 100 100" style="position:absolute;inset:0;overflow:visible"><circle cx="94" cy="20" r="3" fill="#c23e14" style="transform-origin:94px 20px"/><circle cx="100" cy="34" r="2" fill="#c23e14" style="transform-origin:100px 34px"/><circle cx="6" cy="18" r="2.5" fill="#c23e14" style="transform-origin:6px 18px"/></svg>
+        </div>
+        <p style="font-family:Fraunces;font-weight:600;font-size:30px;line-height:1.05;margin:14px 0 10px">Tu página, hecha a mano y a medida.</p>
+        <p style="font-size:13.5px;color:#5a5853;margin-bottom:16px">Páginas y tiendas para negocios, con trato directo por WhatsApp.</p>
+        <span class="btn">Escribime por WhatsApp</span>
+      </div></div>
+      <button class="replay" data-replay>Ver de nuevo la animación</button>
+    </article>
+    <article class="card c-post" data-pieza="post">
+      <h2>Post 1080×1350</h2>
+      <div class="post" style="background:#ecebe7;color:#191817;padding:9%">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-family:Manrope;font-weight:800;font-size:10px;letter-spacing:.16em;color:#5a5853"><span>HECHO A MANO</span><span>Nº 01</span></div>
+        <p style="font-family:Fraunces;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1;margin-top:18%">Cada página,<br>forjada <em style="color:#c23e14">a medida</em>.</p>
+        <p style="font-size:12px;line-height:1.45;margin-top:10%;color:#5a5853;max-width:22ch">Nada de plantillas: diseño y programo la página de tu negocio, de principio a fin.</p>
+        <div style="position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800"><span>EFESTO WEBS</span><svg width="28" height="28" style="color:#191817"><use href="#e-martillo"/></svg></div>
+      </div>
+    </article>
+    <article class="card c-historia" data-pieza="historia">
+      <h2>Historia 1080×1920</h2>
+      <div class="historia" style="background:#191817;color:#ecebe7;padding:12% 10%">
+        <svg width="34" height="34" style="color:#ecebe7"><use href="#e-martillo"/></svg>
+        <p style="font-family:Fraunces;font-weight:600;font-size:clamp(20px,2.2vw,26px);line-height:1.05;margin-top:40%">¿Tu negocio todavía no tiene página?</p>
+        <p style="font-size:11px;line-height:1.45;margin-top:10%;color:#b8b5ad">Te la hago a medida, desde $150.000.</p>
+        <span style="position:absolute;left:10%;right:10%;bottom:9%;background:#c23e14;color:#fff;font-weight:700;font-size:11px;text-align:center;padding:9px 0;border-radius:8px">Escribime</span>
+      </div>
+    </article>
+    <article class="card c-perfil" data-pieza="perfil">
+      <h2>Perfil de Instagram</h2>
+      <div class="ig">
+        <div class="ig-top"><div class="ig-av" style="background:#191817;color:#ecebe7;display:grid;place-items:center"><svg width="52" height="52"><use href="#e-martillo"/></svg></div><div class="ig-stats"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div></div>
+        <p class="ig-name">Efesto Webs</p>
+        <p class="ig-bio">Páginas web hechas a mano, a medida
+por Matias Lopez · Ing. en Sistemas
+San Rafael, Mza → todo el país</p>
+        <p class="ig-link">efestowebs.com.ar</p>
+        <div class="ig-btns"><span>Seguir</span><span>WhatsApp</span></div>
+        <div class="ig-grid">
+          <div style="background:#ecebe7;color:#191817;font-family:Fraunces;font-weight:600;font-size:15px">Forjada<br>a medida</div>
+          <div style="background:#191817;color:#ecebe7"><svg width="46" height="46"><use href="#e-martillo"/></svg></div>
+          <div style="background:#c23e14;color:#fff;font-weight:800;font-size:11px;letter-spacing:.1em">DESDE<br>$150.000</div>
+        </div>
+      </div>
+    </article>
+    <article class="card c-ideas" data-pieza="ideas">
+      <h2>Detalles para la página (HU-06)</h2>
+      <div class="ideas">
+        <div><b>El golpe</b><span>Al cargar, la "E" martillo cae, golpea y suelta tres chispas chiquitas. Una sola vez.</span></div>
+        <div><b>Rojo solo donde importa</b><span>Todo en grises y negro; el rojo fuego aparece únicamente en el botón de WhatsApp y en la palabra clave.</span></div>
+        <div><b>Botón que se hunde</b><span>Al apretar, el botón baja un píxel: la sensación de golpear algo sólido.</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+</template>
+
+<nav class="proto-picker" aria-label="Prototype variants">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item" data-active aria-current="true">Barra al rojo</button>
+  <button class="proto-picker-item">Llama azul</button>
+  <button class="proto-picker-item">Ceniza</button>
+  <span class="proto-picker-divider" aria-hidden="true"></span>
+  <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
+</nav>
+
+<script>
+// Cada dirección vive en un <template data-direccion>; el selector la monta de a una.
+const variants = [...document.querySelectorAll('template[data-direccion]')].map(t => () => t.innerHTML);
+
+/* ── Picker wiring (verbatim de la skill prototype) ── */
+const stage = document.getElementById('stage');
+const picker = document.querySelector('.proto-picker');
+const highlight = picker.querySelector('.proto-picker-highlight');
+const items = [...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')];
+const replay = picker.querySelector('.proto-picker-replay');
+let current = 0;
+function moveHighlight() { const el = items[current]; highlight.style.width = el.offsetWidth + 'px'; highlight.style.transform = `translateX(${el.offsetLeft}px)`; }
+function mount(i) { stage.innerHTML = ''; requestAnimationFrame(() => { stage.innerHTML = variants[i](); }); }
+function setActive(i) {
+  if (i < 0 || i >= variants.length) return;
+  current = i;
+  items.forEach((el, j) => { el.toggleAttribute('data-active', j === i); if (j === i) el.setAttribute('aria-current', 'true'); else el.removeAttribute('aria-current'); });
+  moveHighlight();
+  const url = new URL(location); url.searchParams.set('v', i + 1); history.replaceState(null, '', url);
+  mount(i);
+}
+items.forEach((el, i) => el.addEventListener('click', () => setActive(i)));
+replay?.addEventListener('click', () => mount(current));
+document.addEventListener('click', e => { if (e.target.closest('[data-replay]')) mount(current); });
+window.addEventListener('resize', moveHighlight);
+document.addEventListener('keydown', (e) => {
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const num = parseInt(e.key, 10);
+  if (num >= 1 && num <= variants.length) setActive(num - 1);
+  else if (e.key === 'ArrowRight') setActive((current + 1) % variants.length);
+  else if (e.key === 'ArrowLeft') setActive((current - 1 + variants.length) % variants.length);
+  else if (e.key === 'r' || e.key === 'R') mount(current);
+});
+setActive((parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1);
+requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+</script>
+</body>
+</html>
