@@ -1,7 +1,7 @@
 # HU-08: Pulido del portfolio
 
 **Historia:** Como dueño del estudio, quiero que el portfolio muestre el precio rápido, tenga más personalidad de marca y se vea prolijo en todos lados, para que quien entra entienda la oferta enseguida y recuerde a Efesto Webs.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Hacer 5 mejoras al diseño aplicado en la HU-06, sin cambiar los textos, los precios, los proyectos ni el formulario:
@@ -43,3 +43,4 @@ Hacer 5 mejoras al diseño aplicado en la HU-06, sin cambiar los textos, los pre
 
 ## Historial
 - 2026-11-08: creada a partir de la revisión de diseño posterior a la HU-05.
+- 2026-11-08: aprobada por Matias.
