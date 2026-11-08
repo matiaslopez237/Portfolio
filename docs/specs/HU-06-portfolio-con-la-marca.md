@@ -45,3 +45,4 @@ Aplicar la identidad de `DESIGN.md` (colores "Barra al rojo", Archivo condensada
 ## Historial
 - 2026-11-08: creada.
 - 2026-11-08: aprobada por Matias.
+- 2026-11-08: implementada; escenarios en verde (7/7). Falta la firma de CA-06.8.

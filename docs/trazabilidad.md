@@ -36,8 +36,17 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-04 | CA-04.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/calendario.md` (desde 2026-11-09) |
 | HU-04 | CA-04.7 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | `brand/instagram/vista-perfil.png` |
 | HU-04 | CA-04.8 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | `brand/instagram/textos.md` |
+| HU-06 | CA-06.1 | Escenario BDD (colores y tipografías) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.2 | Escenario BDD (logo y título) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.3 | Escenario BDD (og, JSON-LD y favicon) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.4 | Escenario BDD (Formspree intacto) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.5 | Escenario BDD (link a Instagram) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.6 | Escenario BDD (375 px sin scroll ni errores) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.7 | Escenario BDD (un solo número de WhatsApp) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
+| HU-06 | CA-06.8 | Checklist (firma Matias) | pendiente | Ver el sitio en la compu y en el celular |
 
 ## Huecos
+- HU-06: CA-06.8 sin firmar. Commits [RED] 90c99d7 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).
 - HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
 - HU-02: CA-02.7 pendiente (falta registrar el dominio efestowebs.com.ar; el @ ya está).

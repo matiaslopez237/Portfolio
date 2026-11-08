@@ -1,7 +1,7 @@
 # Design System — Efesto Webs
 
 > Marca definida en la HU-03 (`docs/specs/HU-03-identidad-visual.md`). Guía visual: `brand/marca.html`. Valores exactos: `brand/tokens.json`.
-> **Estado:** el portfolio publicado (`index.html` + `style.css`) todavía usa el estilo anterior (oscuro + violeta + Instrument Serif/Geist). Este sistema se aplica en la **HU-06**.
+> **Estado:** aplicado al portfolio en la HU-06 (2026-11-08).
 
 ## Product Context
 - **What this is:** Efesto Webs (nombre provisorio, HU-02): estudio de páginas web de Matias Lopez. Páginas, tiendas con WhatsApp y tiendas con pagos, a medida.
