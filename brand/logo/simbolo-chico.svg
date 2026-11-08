@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Efesto Webs">
+  <!-- Versión para 16 a 48 px: trazos más gruesos para que se lea chico. -->
+  <path d="M50 5 L89 27.5 V72.5 L50 95 L11 72.5 V27.5 Z" fill="none" stroke="#eef1f4" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M37 28 L26 39.5 L37 51 M63 28 L74 39.5 L63 51" fill="none" stroke="#eef1f4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56 25 L44 54" stroke="#ff7a1a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M23 61 H77 V67 C71 68 66 69.5 62 71.5 V75 H67 V82 H33 V75 H38 V71.5 C34 69.5 29 68 23 66 Z" fill="#eef1f4"/>
+</svg>

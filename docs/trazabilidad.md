@@ -21,8 +21,16 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-02 | CA-02.5 | Chequeo `scripts/check.mjs` | ✓ | `PRODUCT.md` › Marca › Tipo: Efesto Webs (provisorio) |
 | HU-02 | CA-02.6 | Checklist (firma Matias) | pendiente | Nombre provisorio hasta que Matias lo confirme |
 | HU-02 | CA-02.7 | Checklist (firma Matias) | pendiente | Registrar @ y dominio |
+| HU-03 | CA-03.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/direcciones.html` (ronda 2) · ronda 1 en `brand/direcciones-ronda1.html` |
+| HU-03 | CA-03.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/tokens.json` (15,5 / 6,7 / 6,4 : 1) |
+| HU-03 | CA-03.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/logo/*.svg` (trazos, `brand/trazar-logo.mjs`) |
+| HU-03 | CA-03.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/export/*.png` (`brand/export.mjs`) |
+| HU-03 | CA-03.5 | Chequeo `scripts/check.mjs` | ✓ | `brand/marca.html` |
+| HU-03 | CA-03.6 | Checklist (firma Matias) | pendiente | Dirección elegida: Barra al rojo + Hexágono con </> |
+| HU-03 | CA-03.7 | Checklist (firma Matias) | pendiente | Logo en 32 px y en círculo (`brand/marca.html` › Logo) |
 
 ## Huecos
+- HU-03: CA-03.6 y CA-03.7 sin firmar.
 - HU-02: CA-02.6 y CA-02.7 sin firmar (nombre provisorio; falta registrar @ y dominio).
 - HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp (catalogo.html, flyer.html) tienen los precios anteriores: se rehacen en HU-05.
 - HU-01: ninguno.

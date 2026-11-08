@@ -3,7 +3,8 @@
     "playwright": "^1.60.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^13.3.0"
+    "@cucumber/cucumber": "^13.3.0",
+    "opentype.js": "^2.0.0"
   },
   "name": "portfolio",
   "private": true,

@@ -42,3 +42,6 @@ Definir la identidad visual de **Efesto Webs** (nombre provisorio, HU-02) a part
 ## Historial
 - 2026-11-07: creada.
 - 2026-11-07: aprobada por Matias.
+- 2026-11-07: ronda 1 (Taller, Fragua, Bronce) descartada: colores; el yunque de Fragua se parece a CurseForge. Ronda 2 (Barra al rojo, Llama azul, Ceniza) + 2 tandas de logos de herrero.
+- 2026-11-07: elegido: paleta **Barra al rojo**, letras **Archivo condensada + Public Sans**, logo **Hexágono con </>** (yunque forjando código). Sistema en `DESIGN.md`.
+- 2026-11-07: el logo pasa a trazos (como <img> no cargaba la tipografía y se cortaba).

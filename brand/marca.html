@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Efesto Webs · Guía de marca</title>
+<link rel="icon" href="export/favicon-32.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --fondo: #1b2128; --sup: #222a33; --linea: #323c47; --texto: #eef1f4; --sec: #9aa6b2; --acento: #ff7a1a; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--fondo); color: var(--texto); font-family: 'Public Sans', system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+  header.portada { padding: 72px 0 56px; border-bottom: 1px solid var(--linea); }
+  .portada img { width: min(520px, 100%); height: auto; }
+  .portada p { margin-top: 28px; max-width: 62ch; color: var(--sec); font-size: 17px; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--linea); }
+  h2 { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; font-size: clamp(32px, 4.5vw, 48px); line-height: 1; margin-bottom: 8px; }
+  h2::after { content: ""; display: block; width: 44px; height: 6px; border-radius: 2px; background: var(--acento); margin-top: 14px; }
+  h3 { font-size: 15px; font-weight: 700; margin: 28px 0 10px; }
+  .lead { color: var(--sec); max-width: 64ch; margin-top: 18px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); margin-top: 24px; }
+  .sw { border-radius: 14px; overflow: hidden; background: var(--sup); box-shadow: 0 0 0 1px var(--linea); }
+  .sw i { display: block; height: 96px; }
+  .sw div { padding: 12px 14px; font-size: 13px; color: var(--sec); }
+  .sw b { display: block; color: var(--texto); font-size: 14px; }
+  .muestra { background: var(--sup); border-radius: 16px; padding: 26px; box-shadow: 0 0 0 1px var(--linea); margin-top: 20px; }
+  .muestra .t1 { font-size: clamp(40px, 6vw, 64px); line-height: .9; }
+  .muestra p { color: var(--sec); max-width: 60ch; }
+  table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { color: var(--sec); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
+  .logos { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin-top: 24px; }
+  .logos figure { border-radius: 14px; padding: 22px; display: grid; place-items: center; min-height: 150px; box-shadow: 0 0 0 1px var(--linea); font-size: 12.5px; color: var(--sec); gap: 12px; background: var(--sup); }
+  .logos figure.claro { background: #f3f4f6; color: #4b5563; }
+  .logos img { max-width: 100%; height: auto; }
+  .ok, .no { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin-top: 16px; }
+  .ok figure, .no figure { border-radius: 14px; padding: 18px; background: var(--sup); box-shadow: 0 0 0 1px var(--linea); font-size: 13px; color: var(--sec); }
+  .ok figure > div, .no figure > div { height: 120px; display: grid; place-items: center; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .no figure { box-shadow: 0 0 0 1px #6b2a12; }
+  .no figcaption::before { content: "✕ "; color: var(--acento); font-weight: 700; }
+  .ok figcaption::before { content: "✓ "; color: #7ee2a8; font-weight: 700; }
+  .voz { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); margin-top: 20px; }
+  .voz div { background: var(--sup); border-radius: 14px; padding: 18px 20px; box-shadow: 0 0 0 1px var(--linea); font-size: 14.5px; }
+  .voz .si b { color: #7ee2a8; } .voz .no b { color: var(--acento); }
+  footer { padding: 40px 0 64px; color: var(--sec); font-size: 13px; }
+  code { font-size: 12.5px; background: var(--sup); padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<header class="portada"><div class="wrap">
+  <img src="logo/logo.svg" alt="Efesto Webs, por Matias Lopez" width="520" height="120" />
+  <p>Guía de marca. El herrero que forja código: páginas y tiendas para negocios, hechas a medida y con oficio. Confiable, moderna y simple; nunca infantil, recargada ni improvisada. <em>Nombre provisorio (HU-02).</em></p>
+</div></header>
+
+<main class="wrap">
+  <section id="paleta">
+    <h2>Paleta</h2>
+    <p class="lead">Acero y brasa. Un fondo frío y oscuro, texto claro, y el naranja de la barra al rojo como <b>único acento</b>: solo en lo que tiene que llamar la atención (el botón de WhatsApp, una palabra clave, el detalle del logo). Nunca como fondo de textos largos.</p>
+    <div class="grid">
+      <div class="sw"><i style="background:#1b2128;box-shadow:inset 0 0 0 1px #323c47"></i><div><b>Acero · fondo</b>#1B2128</div></div>
+      <div class="sw"><i style="background:#222a33"></i><div><b>Acero claro · tarjetas</b>#222A33</div></div>
+      <div class="sw"><i style="background:#eef1f4"></i><div><b>Blanco frío · texto</b>#EEF1F4 · 15,5:1</div></div>
+      <div class="sw"><i style="background:#9aa6b2"></i><div><b>Gris · texto secundario</b>#9AA6B2 · 6,7:1</div></div>
+      <div class="sw"><i style="background:#ff7a1a"></i><div><b>Brasa · acento</b>#FF7A1A · 6,4:1</div></div>
+      <div class="sw"><i style="background:#c2410c"></i><div><b>Brasa oscura · acento sobre claro</b>#C2410C</div></div>
+    </div>
+    <p class="lead">Los números son el contraste sobre el fondo acero: todos pasan el nivel AA. Sobre un fondo claro se usa la brasa oscura. Los valores exactos están en <code>brand/tokens.json</code>.</p>
+  </section>
+
+  <section id="tipografias">
+    <h2>Tipografías</h2>
+    <p class="lead">Dos familias gratuitas de Google Fonts.</p>
+    <div class="muestra">
+      <p class="cond t1" style="color:var(--texto)">Archivo condensada</p>
+      <p style="margin-top:12px">Para títulos y el logo: <b>Archivo</b>, ancho 70, peso 800 y en MAYÚSCULAS. Fuerte y compacta, como una pieza de metal.</p>
+    </div>
+    <div class="muestra">
+      <p style="font-size:22px;color:var(--texto);font-weight:500">Public Sans para todo lo que se lee: textos, botones, listas y precios.</p>
+      <p style="margin-top:10px">Pesos 400 (texto), 500 (destacados) y 700 (botones). Clara y neutra, para que se lea sin esfuerzo en el celular.</p>
+    </div>
+  </section>
+
+  <section id="logo">
+    <h2>Logo</h2>
+    <p class="lead">Un yunque del herrero forjando código (<code>&lt;/&gt;</code>), dentro de un hexágono que es a la vez una tuerca de taller. La barra del medio va al rojo: es lo que se está forjando.</p>
+    <div class="logos">
+      <figure><img src="logo/logo.svg" alt="Logo horizontal" width="260" height="60" />Horizontal (principal)</figure>
+      <figure><img src="logo/simbolo.svg" alt="Símbolo" width="96" height="96" />Símbolo solo</figure>
+      <figure><img src="export/perfil-instagram.png" alt="Foto de perfil" width="96" height="96" style="border-radius:50%" />Foto de perfil (Instagram y WhatsApp)</figure>
+      <figure><img src="export/favicon-32.png" alt="Ícono de 32 px" width="32" height="32" />Ícono de pestaña (32 px, trazo grueso)</figure>
+      <figure class="claro"><img src="logo/logo-1color.svg" alt="Logo a un color" width="260" height="60" style="color:#1b2128" />A un color, sobre fondo claro</figure>
+    </div>
+    <h3>Archivos</h3>
+    <p class="lead" style="margin-top:0"><code>brand/logo/</code>: <code>logo.svg</code>, <code>logo-1color.svg</code>, <code>simbolo.svg</code>, <code>simbolo-chico.svg</code> (para 16 a 48 px). <code>brand/export/</code>: los PNG de cada plataforma. Para regenerarlos: <code>node brand/trazar-logo.mjs</code> (logo, si cambia el nombre) y <code>node brand/export.mjs</code> (PNG).</p>
+  </section>
+
+  <section id="usos">
+    <h2>Usos correctos</h2>
+    <div class="ok">
+      <figure><div style="background:#1b2128"><img src="logo/logo.svg" alt="" width="220" height="51" /></div><figcaption>Sobre el fondo acero, en colores originales.</figcaption></figure>
+      <figure><div style="background:#f3f4f6;color:#1b2128"><img src="logo/logo-1color.svg" alt="" width="220" height="51" /></div><figcaption>Sobre fondo claro, versión a un color.</figcaption></figure>
+      <figure><div style="background:#1b2128;padding:20px"><img src="logo/simbolo.svg" alt="" width="70" height="70" /></div><figcaption>El símbolo solo cuando el espacio es chico, con aire alrededor (al menos la mitad del hexágono).</figcaption></figure>
+    </div>
+    <h2 style="margin-top:56px">Usos incorrectos</h2>
+    <div class="no">
+      <figure><div style="background:#1b2128"><img src="logo/logo.svg" alt="" width="220" height="51" style="transform:scaleX(1.4)" /></div><figcaption>Estirarlo o deformarlo.</figcaption></figure>
+      <figure><div style="background:#1b2128"><img src="logo/logo.svg" alt="" width="220" height="51" style="filter:hue-rotate(160deg)" /></div><figcaption>Cambiarle los colores.</figcaption></figure>
+      <figure><div style="background:linear-gradient(135deg,#ff7a1a,#c2410c 40%,#4da3ff)"><img src="logo/logo.svg" alt="" width="220" height="51" /></div><figcaption>Ponerlo sobre fondos de colores o fotos sin una franja que lo separe.</figcaption></figure>
+      <figure><div style="background:#1b2128"><img src="logo/logo.svg" alt="" width="220" height="51" style="filter:drop-shadow(0 0 8px #ff7a1a) drop-shadow(0 0 16px #ff7a1a)" /></div><figcaption>Sumarle brillos, sombras o efectos.</figcaption></figure>
+      <figure><div style="background:#1b2128"><img src="logo/logo.svg" alt="" width="220" height="51" style="transform:rotate(-12deg)" /></div><figcaption>Rotarlo o inclinarlo.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="voz">
+    <h2>Tono de voz</h2>
+    <p class="lead">El de siempre: español rioplatense con voseo, cercano pero profesional. La marca habla como Matias hablaría con un cliente por WhatsApp.</p>
+    <div class="voz">
+      <div class="si"><b>Sí:</b> "Te hago la página de tu negocio a medida, desde $150.000. Escribime y lo vemos."</div>
+      <div class="no"><b>No:</b> "Soluciones digitales disruptivas que potencian tu presencia online."</div>
+      <div class="si"><b>Sí:</b> frases cortas, una idea por mensaje, el resultado para el negocio primero.</div>
+      <div class="no"><b>No:</b> jerga técnica con el cliente chico ("responsive", "SEO on-page", "stack").</div>
+      <div class="si"><b>Sí:</b> prometer solo lo que se cumple: plazos reales y precios "desde".</div>
+      <div class="no"><b>No:</b> opiniones inventadas, descuentos eternos ni "el mejor del país".</div>
+    </div>
+    <h3>La metáfora del herrero, con medida</h3>
+    <p class="lead" style="margin-top:0">"Forjada a medida", "hecha con oficio" y "nada de plantillas" funcionan. No hace falta explicar la mitología en cada pieza: el símbolo ya lo cuenta.</p>
+  </section>
+</main>
+
+<footer class="wrap">Efesto Webs · por Matias Lopez · San Rafael, Mendoza. Guía creada en la HU-03 (<code>docs/specs/HU-03-identidad-visual.md</code>).</footer>
+</body>
+</html>
