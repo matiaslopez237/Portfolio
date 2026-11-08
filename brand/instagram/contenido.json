@@ -1,0 +1,18 @@
+{
+  "_nota": "Fuente única del kit de Instagram (HU-04). Precios y @ salen de acá: si cambian, se editan acá y se corre node brand/instagram/generar.mjs.",
+  "usuario": "@efestowebs",
+  "precios": { "landing": "$150.000", "tiendaWhatsapp": "$350.000", "tiendaPagos": "$900.000" },
+  "posts": [
+    { "n": 1, "tipo": "frase", "titulo": "Páginas web forjadas a medida.", "texto": "Soy Matias Lopez, Ing. en Sistemas. Desde San Rafael diseño y programo páginas y tiendas para negocios de todo el país." },
+    { "n": 2, "tipo": "trabajo", "nombre": "Bacssa", "detalle": "Página institucional · Servicios Oil & Gas", "imagen": "bacssa-desktop.jpg", "marco": "compu" },
+    { "n": 3, "tipo": "plan", "nombre": "Landing Page", "precio": "landing", "items": ["Diseño a medida de tu marca", "Botón directo a WhatsApp", "Estadísticas de visitas"] },
+    { "n": 4, "tipo": "proceso", "titulo": "Cómo trabajo", "pasos": [["Consulta", "Hablamos por WhatsApp de tu negocio. Sin costo."], ["Diseño y desarrollo", "Armo la página con tu marca."], ["Revisión", "La ajustamos juntos."], ["Publicación", "Tu página online, lista para recibir clientes."]] },
+    { "n": 5, "tipo": "trabajo", "nombre": "Quiropraxia Cipolletti", "detalle": "Sitio con turnos online · Salud · Dominio propio", "imagen": "quiropraxia-mobile.jpg", "marco": "celular" },
+    { "n": 6, "tipo": "plan", "nombre": "Tienda WhatsApp", "precio": "tiendaWhatsapp", "items": ["Catálogo con fotos y precios", "Pedido directo por WhatsApp", "Sin comisiones por venta"] },
+    { "n": 7, "tipo": "consejo", "titulo": "3 cosas que tu página tiene que tener", "items": ["Un botón para escribirte por WhatsApp", "Que se vea bien en el celular", "Dónde estás y cuándo atendés"] },
+    { "n": 8, "tipo": "trabajo", "nombre": "Zenti", "detalle": "Tienda online de tecnología · Carrito y pagos", "imagen": "zenti-desktop.jpg", "marco": "compu" },
+    { "n": 9, "tipo": "plan", "nombre": "Tienda con pagos", "precio": "tiendaPagos", "items": ["Carrito y pago online", "Tarjeta, transferencia o Mercado Pago", "Panel para gestionar pedidos"] }
+  ],
+  "destacadas": ["trabajos", "planes", "proceso", "preguntas", "contacto"],
+  "historiaEjemplo": { "tipo": "pregunta", "titulo": "¿Tu negocio todavía no tiene página?", "texto": "Te la hago a medida, desde $150.000.", "boton": "Escribime" }
+}

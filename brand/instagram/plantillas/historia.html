@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Plantilla de historia 1080×1920 · Efesto Webs</title>
+<!--
+  Plantilla de historia y portada de destacada (HU-04). La usa node brand/instagram/generar.mjs con los datos en el hash:
+  historia.html#{"tipo":"destacada","icono":"trabajos"}  ·  historia.html#{"tipo":"pregunta","titulo":"...","texto":"...","boton":"..."}
+  Zona segura: nada importante en los 250 px de arriba ni de abajo. Colores: solo los de brand/tokens.json.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body { font-family: 'Public Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  .pieza { position: relative; width: 1080px; height: 1920px; background: #1b2128; color: #eef1f4; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+
+  /* Portada de destacada: ícono centrado, dentro del círculo que muestra Instagram */
+  .t-destacada { display: grid; place-items: center; }
+  .t-destacada svg { width: 520px; height: 520px; }
+
+  /* Historia con pregunta: todo el contenido entre y=250 y y=1670 (zona segura) */
+  .t-pregunta { padding: 330px 110px 0; }
+  .t-pregunta .simbolo { width: 120px; height: 120px; display: block; }
+  .t-pregunta h1 { margin-top: 260px; font-size: 156px; line-height: .9; }
+  .t-pregunta h1 em { font-style: normal; color: #ff7a1a; }
+  .t-pregunta p { margin-top: 70px; font-size: 52px; line-height: 1.35; color: #9aa6b2; }
+  .t-pregunta .boton { position: absolute; left: 110px; right: 110px; bottom: 330px; height: 150px; border-radius: 12px; background: #ff7a1a; color: #1b2128; display: grid; place-items: center; font-weight: 700; font-size: 54px; }
+</style>
+</head>
+<body>
+<div id="pieza" class="pieza"></div>
+<script>
+  const ejemplo = { tipo: 'pregunta', titulo: '¿Tu negocio todavía no tiene página?', texto: 'Plantilla de ejemplo.', boton: 'Escribime' };
+  const d = location.hash.length > 1 ? JSON.parse(decodeURIComponent(location.hash.slice(1))) : ejemplo;
+
+  // Íconos de las destacadas: trazo claro y un detalle en brasa, como el logo.
+  const T = 'fill="none" stroke="#eef1f4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"';
+  const iconos = {
+    trabajos: `<rect x="12" y="20" width="76" height="60" rx="7" ${T}/><path d="M12 34 H88" ${T}/><circle cx="22" cy="27" r="2.6" fill="#ff7a1a"/><circle cx="31" cy="27" r="2.6" fill="#eef1f4"/><circle cx="40" cy="27" r="2.6" fill="#eef1f4"/><path d="M42 47 L33 56 L42 65 M58 47 L67 56 L58 65" ${T}/><path d="M53 45 L47 67" stroke="#ff7a1a" stroke-width="6" stroke-linecap="round"/>`,
+    planes: `<path d="M18 46 L46 18 H82 V54 L54 82 Z" ${T}/><circle cx="68" cy="32" r="6" fill="#ff7a1a"/><path d="M36 58 L58 36" ${T}/>`,
+    proceso: `<path d="M14 82 H36 V62 H58 V42 H80" ${T}/><path d="M80 42 V22" stroke="#ff7a1a" stroke-width="6" stroke-linecap="round"/><path d="M72 30 L80 22 L88 30" fill="none" stroke="#ff7a1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`,
+    preguntas: `<path d="M34 34 C34 22 44 16 52 16 C62 16 70 23 70 33 C70 44 56 46 54 56 V62" ${T}/><circle cx="54" cy="78" r="5" fill="#ff7a1a"/>`,
+    contacto: `<path d="M16 26 C16 20 20 16 26 16 H74 C80 16 84 20 84 26 V60 C84 66 80 70 74 70 H42 L26 84 V70 C20 70 16 66 16 60 Z" ${T}/><circle cx="36" cy="43" r="5" fill="#eef1f4"/><circle cx="50" cy="43" r="5" fill="#eef1f4"/><circle cx="64" cy="43" r="5" fill="#ff7a1a"/>`,
+  };
+  const simbolo = `<svg class="simbolo" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg>`;
+  const resaltar = (t) => t.replace(/(página|Google)/i, '<em>$1</em>');
+
+  const tipos = {
+    destacada: () => `<svg viewBox="0 0 100 100" aria-hidden="true">${iconos[d.icono]}</svg>`,
+    pregunta: () => `${simbolo}<h1 class="cond">${resaltar(d.titulo)}</h1><p>${d.texto}</p><div class="boton">${d.boton}</div>`,
+  };
+  const el = document.getElementById('pieza');
+  el.classList.add('t-' + d.tipo);
+  el.innerHTML = tipos[d.tipo]();
+</script>
+</body>
+</html>
