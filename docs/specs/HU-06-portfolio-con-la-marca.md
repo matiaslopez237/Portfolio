@@ -1,7 +1,7 @@
 # HU-06: Portfolio con la marca
 
 **Historia:** Como dueño del estudio, quiero que el portfolio se vea y se presente como Efesto Webs, para que quien llegue desde Instagram o WhatsApp reconozca la misma marca y confíe.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Aplicar la identidad de `DESIGN.md` (colores "Barra al rojo", Archivo condensada + Public Sans, logo del hexágono, movimiento "hierro al rojo") al sitio actual (`index.html` + `style.css`), sin cambiar su contenido ni su estructura de secciones. También se suman el nombre en los metadatos (título, Open Graph, JSON-LD), el favicon y la imagen para compartir de la marca, y el link a Instagram.
@@ -37,7 +37,7 @@ Aplicar la identidad de `DESIGN.md` (colores "Barra al rojo", Archivo condensada
 | CA-06.8 | Dado el sitio con la marca, cuando Matias lo ve en la compu y en su celular, entonces se siente igual que el Instagram y la guía de marca | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-06.8: ¿El sitio se ve como Efesto Webs, en la compu y en el celular? — firmado:
+- [x] CA-06.8: ¿El sitio se ve como Efesto Webs, en la compu y en el celular? — firmado: Matias, 2026-11-08 (revisado en el panel lateral)
 
 ## Preguntas abiertas
 - Ninguna por ahora. El número y el dominio quedan fuera, como se explica en el Objetivo.
@@ -46,3 +46,4 @@ Aplicar la identidad de `DESIGN.md` (colores "Barra al rojo", Archivo condensada
 - 2026-11-08: creada.
 - 2026-11-08: aprobada por Matias.
 - 2026-11-08: implementada; escenarios en verde (7/7). Falta la firma de CA-06.8.
+- 2026-11-08: CA-06.8 firmado por Matias; publicada.

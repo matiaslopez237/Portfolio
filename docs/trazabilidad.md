@@ -43,10 +43,10 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-06 | CA-06.5 | Escenario BDD (link a Instagram) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
 | HU-06 | CA-06.6 | Escenario BDD (375 px sin scroll ni errores) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
 | HU-06 | CA-06.7 | Escenario BDD (un solo número de WhatsApp) | ✓ | `features/HU-06-portfolio-con-la-marca.feature` · `npm test` |
-| HU-06 | CA-06.8 | Checklist (firma Matias) | pendiente | Ver el sitio en la compu y en el celular |
+| HU-06 | CA-06.8 | Checklist (firma Matias) | ✓ firmado 2026-11-08 | `docs/specs/HU-06-portfolio-con-la-marca.md` |
 
 ## Huecos
-- HU-06: CA-06.8 sin firmar. Commits [RED] 90c99d7 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).
+- HU-06: ninguno. Commits [RED] 90c99d7 → [GREEN] ff3990f. Pendiente de mirar en un celular real ya publicado. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).
 - HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
 - HU-02: CA-02.7 pendiente (falta registrar el dominio efestowebs.com.ar; el @ ya está).
