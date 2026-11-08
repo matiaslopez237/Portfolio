@@ -34,11 +34,11 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-04 | CA-04.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/textos.md` |
 | HU-04 | CA-04.5 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/plantillas/{post,historia}.html` |
 | HU-04 | CA-04.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/calendario.md` (desde 2026-11-09) |
-| HU-04 | CA-04.7 | Checklist (firma Matias) | pendiente | `brand/instagram/vista-perfil.png` |
-| HU-04 | CA-04.8 | Checklist (firma Matias) | pendiente | `brand/instagram/textos.md` |
+| HU-04 | CA-04.7 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | `brand/instagram/vista-perfil.png` |
+| HU-04 | CA-04.8 | Checklist (firma Matias) | ✓ firmado 2026-11-07 | `brand/instagram/textos.md` |
 
 ## Huecos
-- HU-04: CA-04.7 y CA-04.8 sin firmar.
+- HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
 - HU-02: CA-02.6 y CA-02.7 sin firmar (nombre provisorio; falta registrar @ y dominio).
 - HU-07: ninguno. Commits [RED] c33a038 → [GREEN] (este). Las piezas viejas de WhatsApp (catalogo.html, flyer.html) tienen los precios anteriores: se rehacen en HU-05.
