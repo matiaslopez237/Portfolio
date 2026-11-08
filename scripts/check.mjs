@@ -199,6 +199,76 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-04: Kit de Instagram ──
+  {
+    ca: 'CA-04.1', desc: 'brand/instagram/perfil.md: nombre, @, categoría, link y bio ≤ 150 caracteres',
+    run: () => {
+      const p = leerOpcional('brand/instagram/perfil.md'); if (!p) throw new Error('no existe brand/instagram/perfil.md');
+      const faltan = ['Nombre', 'Usuario', 'Categoría', 'Link'].filter(k => !new RegExp(`^- \\*\\*${k}:\\*\\* \\S`, 'm').test(p));
+      if (faltan.length) throw new Error('faltan: ' + faltan.join(', '));
+      const bio = p.match(/```bio\n([\s\S]*?)\n```/); if (!bio) throw new Error('falta el bloque ```bio');
+      const largo = [...bio[1]].length; if (largo > 150) throw new Error(`la bio tiene ${largo} caracteres`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-04.2', desc: '5 portadas de destacadas PNG de 1080×1920',
+    run: () => {
+      const malos = ['trabajos', 'planes', 'proceso', 'preguntas', 'contacto'].map(n => `brand/instagram/destacadas/${n}.png`)
+        .filter(f => { const d = medidasPng(f); return !d || d[0] !== 1080 || d[1] !== 1920; });
+      if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-04.3', desc: '9 posts PNG de 1080×1350',
+    run: () => {
+      const malos = Array.from({ length: 9 }, (_, i) => `brand/instagram/posts/post-${i + 1}.png`)
+        .filter(f => { const d = medidasPng(f); return !d || d[0] !== 1080 || d[1] !== 1350; });
+      if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-04.4', desc: 'textos.md: 9 posts con texto ≤ 2.200 caracteres y 5 a 10 hashtags',
+    run: () => {
+      const t = leerOpcional('brand/instagram/textos.md'); if (!t) throw new Error('no existe brand/instagram/textos.md');
+      const bloques = [...t.matchAll(/^## Post (\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)];
+      if (bloques.length !== 9) throw new Error(`hay ${bloques.length} textos`);
+      const malos = bloques.filter(([, , txt]) => { const h = (txt.match(/#[\p{L}\p{N}_]+/gu) || []).length; return [...txt].length > 2200 || h < 5 || h > 10; }).map(b => 'post ' + b[1]);
+      if (malos.length) throw new Error('fuera de límites: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-04.5', desc: 'Plantillas HTML de post e historia que solo usan colores de brand/tokens.json',
+    run: () => {
+      const t = JSON.parse(leer('brand/tokens.json'));
+      const permitidos = new Set([...Object.values(t.color), ...Object.values(t.colorClaro)].filter(v => /^#/.test(v)).map(v => v.toLowerCase()));
+      const malos = [];
+      for (const f of ['brand/instagram/plantillas/post.html', 'brand/instagram/plantillas/historia.html']) {
+        const h = leerOpcional(f); if (!h) { malos.push(f + ' (falta)'); continue; }
+        const fuera = [...new Set((h.match(/#[0-9a-f]{6}\b/gi) || []).map(c => c.toLowerCase()))].filter(c => !permitidos.has(c));
+        if (fuera.length) malos.push(`${f}: ${fuera.join(' ')}`);
+        if (/rgba?\(/i.test(h)) malos.push(f + ': usa rgb()/rgba()');
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-04.6', desc: 'calendario.md cubre 4 semanas con fecha, formato y pieza',
+    run: () => {
+      const c = leerOpcional('brand/instagram/calendario.md'); if (!c) throw new Error('no existe brand/instagram/calendario.md');
+      const semanas = (c.match(/^## Semana [1-4]\b/gm) || []).length;
+      const filas = c.split('\n').filter(l => /^\| \d{4}-\d{2}-\d{2} \|/.test(l));
+      const malas = filas.filter(l => l.split('|').slice(1, -1).map(s => s.trim()).filter(Boolean).length < 3);
+      if (semanas !== 4) throw new Error(`hay ${semanas} semanas`);
+      if (filas.length < 12 || malas.length) throw new Error(`${filas.length} publicaciones, ${malas.length} incompletas`);
+      return true;
+    },
+  },
 ];
 
 function leerOpcional(ruta) { try { return leer(ruta); } catch { return null; } }

@@ -1,7 +1,7 @@
 # HU-04: Kit de Instagram
 
 **Historia:** Como dueño del estudio, quiero el perfil de Instagram y las primeras publicaciones listas para subir, para abrir la cuenta de Efesto Webs con una grilla prolija desde el día uno.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Dejar todo listo para crear la cuenta e ir publicando sin pensar cada vez: textos del perfil, portadas de destacadas, plantillas editables de posts e historias, los primeros 9 posts (imagen y texto) y un calendario del primer mes. Todo con la identidad de `DESIGN.md` (HU-03).
@@ -38,7 +38,8 @@ Dejar todo listo para crear la cuenta e ir publicando sin pensar cada vez: texto
 - [ ] CA-04.8: ¿Los textos dicen solo cosas reales que podés cumplir? — firmado:
 
 ## Preguntas abiertas
-- ¿Querés que el calendario arranque una fecha en particular? (Si no, arranca el lunes siguiente a terminar la historia.)
+- ~~¿Fecha de arranque?~~ Respondido: el lunes 2026-11-09.
 
 ## Historial
 - 2026-11-07: creada.
+- 2026-11-07: aprobada por Matias; el calendario arranca el lunes 2026-11-09.
