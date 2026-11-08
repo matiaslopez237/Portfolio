@@ -269,7 +269,89 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-05: WhatsApp Business ──
+  {
+    ca: 'CA-05.2', desc: 'brand/whatsapp/perfil.md: nombre, categoría, horario lun-sáb 9 a 21, email, sitio y descripción ≤ 512',
+    run: () => {
+      const p = leerOpcional('brand/whatsapp/perfil.md'); if (!p) throw new Error('no existe brand/whatsapp/perfil.md');
+      const faltan = ['Nombre', 'Categoría', 'Horario', 'Email', 'Sitio web'].filter(k => !new RegExp(`^- \\*\\*${k}:\\*\\* \\S`, 'm').test(p));
+      if (faltan.length) throw new Error('faltan: ' + faltan.join(', '));
+      if (!/^- \*\*Horario:\*\* Lunes a sábado de 9 a 21/m.test(p)) throw new Error('el horario no es lunes a sábado de 9 a 21');
+      const d = p.match(/```descripcion\n([\s\S]*?)\n```/); if (!d) throw new Error('falta el bloque ```descripcion');
+      const largo = [...d[1]].length; if (largo > 512) throw new Error(`la descripción tiene ${largo} caracteres`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-05.3', desc: 'Catálogo: 3 PNG de 800×800 y textos dentro de los límites (nombre ≤ 75, descripción ≤ 5.000)',
+    run: () => {
+      const c = contenidoWa();
+      if (c.catalogo?.length !== 3) throw new Error(`hay ${c.catalogo?.length ?? 0} productos`);
+      const malos = [];
+      for (const p of c.catalogo) {
+        const d = medidasPng(`brand/whatsapp/catalogo/${p.id}.png`);
+        if (!d || d[0] !== 800 || d[1] !== 800) malos.push(`${p.id}.png falta o mide mal`);
+        if ([...p.nombre].length > 75) malos.push(`${p.id}: nombre largo`);
+        if (!p.descripcion || [...p.descripcion].length > 5000) malos.push(`${p.id}: descripción vacía o larga`);
+        if (c.precios[p.precio] == null) malos.push(`${p.id}: precio sin definir`);
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-05.4', desc: 'mensajes.md: bienvenida y ausencia ≤ 1.024 y al menos 4 respuestas rápidas (atajo ≤ 25)',
+    run: () => {
+      const m = leerOpcional('brand/whatsapp/mensajes.md'); if (!m) throw new Error('no existe brand/whatsapp/mensajes.md');
+      const malos = [];
+      for (const b of ['bienvenida', 'ausencia']) {
+        const x = m.match(new RegExp('```' + b + '\\n([\\s\\S]*?)\\n```'));
+        if (!x) malos.push(`falta ${b}`); else if ([...x[1]].length > 1024) malos.push(`${b} larga`);
+      }
+      const rapidas = [...m.matchAll(/^### \/(\S+)\n+```respuesta\n([\s\S]*?)\n```/gm)];
+      if (rapidas.length < 4) malos.push(`hay ${rapidas.length} respuestas rápidas`);
+      for (const [, atajo, txt] of rapidas) if (atajo.length > 25 || [...txt].length > 1024) malos.push(`/${atajo} fuera de límite`);
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-05.5', desc: 'Flyer PNG de 1080×1920 con precios vigentes, número nuevo y QR del chat',
+    run: () => {
+      const d = medidasPng('brand/whatsapp/flyer.png');
+      if (!d || d[0] !== 1080 || d[1] !== 1920) throw new Error('flyer.png falta o mide mal');
+      const c = contenidoWa();
+      if (c.numero !== '5492604661138') throw new Error('el número de contenido.json no es el nuevo');
+      if (Object.values(c.precios).join() !== '$150.000,$350.000,$900.000') throw new Error('precios: ' + Object.values(c.precios).join(' '));
+      const q = medidasPng('brand/whatsapp/qr-whatsapp.png'); if (!q) throw new Error('falta el QR (qr-whatsapp.png)');
+      const h = leerOpcional('brand/whatsapp/plantillas/flyer.html') ?? '';
+      if (!/qr/i.test(h) || !/precios/.test(h)) throw new Error('la plantilla del flyer no usa el QR o los precios');
+      return true;
+    },
+  },
+  {
+    ca: 'CA-05.6', desc: 'Plantillas de WhatsApp (catálogo y flyer) solo con colores de brand/tokens.json',
+    run: () => {
+      const t = JSON.parse(leer('brand/tokens.json'));
+      const permitidos = new Set([...Object.values(t.color), ...Object.values(t.colorClaro)].filter(v => /^#/.test(v)).map(v => v.toLowerCase()));
+      const malos = [];
+      for (const f of ['brand/whatsapp/plantillas/catalogo.html', 'brand/whatsapp/plantillas/flyer.html']) {
+        const h = leerOpcional(f); if (!h) { malos.push(f + ' (falta)'); continue; }
+        const fuera = [...new Set((h.match(/#[0-9a-f]{6}\b/gi) || []).map(c => c.toLowerCase()))].filter(c => !permitidos.has(c));
+        if (fuera.length) malos.push(`${f}: ${fuera.join(' ')}`);
+        if (/rgba?\(/i.test(h)) malos.push(f + ': usa rgb()/rgba()');
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
 ];
+
+function contenidoWa() {
+  const j = leerOpcional('brand/whatsapp/contenido.json'); if (!j) throw new Error('no existe brand/whatsapp/contenido.json');
+  return JSON.parse(j);
+}
 
 function leerOpcional(ruta) { try { return leer(ruta); } catch { return null; } }
 
