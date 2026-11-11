@@ -1,7 +1,7 @@
 # HU-10: Publicación automática en Instagram
 
 **Historia:** Como dueño del estudio, quiero que los posts del calendario se publiquen solos en @efestowebs, para mantener el ritmo sin tener que subir cada imagen a mano.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Argentina), sin intervención de Matias:
@@ -51,3 +51,4 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 
 ## Historial
 - 2026-11-10: creada (opción A: posts 1 a 3 programados a mano, del 4 en adelante automático).
+- 2026-11-10: aprobada por Matias.
