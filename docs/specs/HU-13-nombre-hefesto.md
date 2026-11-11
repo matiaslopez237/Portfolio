@@ -1,7 +1,7 @@
 # HU-13: Cambio de nombre a Hefesto Webs
 
 **Historia:** Como dueño del estudio, quiero que la marca se escriba "Hefesto Webs", con H como el dios en español, para que el nombre sea correcto y la gente lo encuentre como lo conoce.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Pasar la marca de "Efesto Webs" a **"Hefesto Webs"** en todo lo que está vivo:
@@ -63,3 +63,4 @@ El símbolo (hexágono, `</>` y yunque) no cambia.
 
 ## Historial
 - 2026-11-11: creada a pedido de Matias ("pongámoslo con H"), con la disponibilidad verificada. La HU-12 (hero) sigue después con el nombre nuevo. Los carruseles pasan a la HU-14 y los reels a la HU-15.
+- 2026-11-11: aprobada por Matias.
