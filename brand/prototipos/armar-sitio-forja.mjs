@@ -175,10 +175,7 @@ const css = `
   /* Placas remachadas y hierro fundido */
   /* Fondo de hierro fundido */
   html { background: #13181d; }
-  body { background-color: #13181d;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .009' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6  0 0 0 0 .66  0 0 0 0 .72  0 0 0 .32 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"); }
+  body { background-color: #13181d; background-image: var(--hierro, none); background-size: 640px 640px; }
 
   /* Placas remachadas: cada sección es un cuadro de acero */
   .section { max-width: 1280px; margin: 28px auto; padding: clamp(96px, 10vw, 140px) clamp(28px, 5vw, 72px) clamp(72px, 8vw, 110px);
@@ -197,7 +194,7 @@ const css = `
     box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 -2px 0 rgba(0,0,0,.45), 0 0 0 1px #0c1014, 0 30px 60px -30px rgba(0,0,0,.95); }
   .ficha-franja .ficha { border-top: 0; }
   #trabajos { padding-top: clamp(96px, 10vw, 140px); }
-  #contacto::before { left: 0; width: 100%; }
+  #contacto::before { display: block; left: 0; width: 100%; }
   #contacto::after { left: 0; width: 100%; }
   .footer { border-top: 0; }
   @media (max-width: 860px) {
@@ -252,6 +249,24 @@ const jsResto = `
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 
+
+  // Fondo de hierro fundido sin cortes: cada mancha que toca un borde se dibuja también del lado opuesto.
+  (() => {
+    const T = 640, c = document.createElement('canvas'); c.width = c.height = T; const g = c.getContext('2d');
+    let s = 29; const azar = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    g.fillStyle = '#13181d'; g.fillRect(0, 0, T, T);
+    const mancha = (x, y, r, color) => { for (const dx of [-T, 0, T]) for (const dy of [-T, 0, T]) {
+      const cx = x + dx, cy = y + dy; if (cx + r < 0 || cx - r > T || cy + r < 0 || cy - r > T) continue;
+      const m = g.createRadialGradient(cx, cy, 0, cx, cy, r); m.addColorStop(0, color); m.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = m; g.fillRect(cx - r, cy - r, r * 2, r * 2); } };
+    for (let i = 0; i < 90; i++) mancha(azar() * T, azar() * T, 60 + azar() * 180, azar() < .5 ? 'rgba(120,135,150,' + (.025 + azar() * .045).toFixed(3) + ')' : 'rgba(0,0,0,' + (.08 + azar() * .14).toFixed(3) + ')');
+    for (let i = 0; i < 260; i++) mancha(azar() * T, azar() * T, 4 + azar() * 22, azar() < .5 ? 'rgba(150,160,175,.04)' : 'rgba(0,0,0,.12)');
+    // Grano: es ruido por píxel, así que empalma solo
+    const img = g.getImageData(0, 0, T, T), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const n = (azar() - .5) * 10; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+    g.putImageData(img, 0, 0);
+    document.documentElement.style.setProperty('--hierro', 'url(' + c.toDataURL('image/webp', .82) + ')');
+  })();
+
   // Textura de metal gastado para la barra: rayones, picaduras y manchas generados al azar (sin imágenes externas).
   (() => {
     const W = 1600, H = 160, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
@@ -260,10 +275,11 @@ const jsResto = `
     g.fillStyle = base; g.fillRect(0, 0, W, H);
     // Manchas y zonas gastadas (más claras y más oscuras)
     for (let i = 0; i < 70; i++) {
-      const x = azar() * W, y = azar() * H, r = 20 + azar() * 120, claro = azar() < .45;
-      const m = g.createRadialGradient(x, y, 0, x, y, r);
-      m.addColorStop(0, claro ? 'rgba(170,182,195,.07)' : 'rgba(5,8,11,.22)'); m.addColorStop(1, 'rgba(0,0,0,0)');
-      g.fillStyle = m; g.fillRect(x - r, y - r, r * 2, r * 2);
+      const x0 = azar() * W, y = azar() * H, r = 20 + azar() * 120, claro = azar() < .45;
+      for (const x of [x0 - W, x0, x0 + W]) { if (x + r < 0 || x - r > W) continue;
+        const m = g.createRadialGradient(x, y, 0, x, y, r);
+        m.addColorStop(0, claro ? 'rgba(170,182,195,.07)' : 'rgba(5,8,11,.22)'); m.addColorStop(1, 'rgba(0,0,0,0)');
+        g.fillStyle = m; g.fillRect(x - r, y - r, r * 2, r * 2); }
     }
     // Vetas verticales oscuras (como el óxido escurrido de la referencia)
     for (let i = 0; i < 9; i++) { const x = azar() * W, w = 4 + azar() * 18; const v = g.createLinearGradient(x - w, 0, x + w, 0);
