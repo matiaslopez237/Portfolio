@@ -346,7 +346,69 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-09: Posts de la semana 4 y calendario corrido ──
+  {
+    ca: 'CA-09.1', desc: 'Posts 10, 11 y 12 en PNG de 1080×1350',
+    run: () => {
+      const malos = [10, 11, 12].map(n => `brand/instagram/posts/post-${n}.png`)
+        .filter(f => { const d = medidasPng(f); return !d || d[0] !== 1080 || d[1] !== 1350; });
+      if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-09.2', desc: 'textos.md: posts 10 a 12 con texto ≤ 2.200 caracteres y 5 a 10 hashtags',
+    run: () => {
+      const b = textosPorPost();
+      const malos = [10, 11, 12].filter(n => {
+        const txt = b.get(n); if (!txt) return true;
+        const h = (txt.match(/#[\p{L}\p{N}_]+/gu) || []).length;
+        return [...txt].length > 2200 || h < 5 || h > 10;
+      });
+      if (malos.length) throw new Error('faltan o fuera de límites: ' + malos.map(n => 'post ' + n).join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-09.3', desc: 'El post 11 dice "proyecto de muestra" en la imagen y en el texto',
+    run: () => {
+      const c = JSON.parse(leer('brand/instagram/contenido.json'));
+      const p = c.posts.find(x => x.n === 11); if (!p) throw new Error('no está el post 11 en contenido.json');
+      const enImagen = /proyecto de muestra/i.test(JSON.stringify(p));
+      const enTexto = /proyecto de muestra/i.test(textosPorPost().get(11) ?? '');
+      if (!enImagen || !enTexto) throw new Error(`imagen: ${enImagen ? 'sí' : 'no'} · texto: ${enTexto ? 'sí' : 'no'}`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-09.4', desc: 'calendario.md: post 1 el 2026-11-11 y posts 1 a 12 en orden, lunes, miércoles y viernes',
+    run: () => {
+      const posts = postsDelCalendario();
+      const nums = posts.map(p => p.n);
+      if (nums.join() !== Array.from({ length: 12 }, (_, i) => i + 1).join()) throw new Error('orden de posts: ' + nums.join(', '));
+      if (posts[0].fecha !== '2026-11-11') throw new Error('el post 1 sale el ' + posts[0].fecha);
+      const mal = posts.filter(p => ![1, 3, 5].includes(new Date(p.fecha + 'T12:00:00Z').getUTCDay())).map(p => `post ${p.n} (${p.fecha})`);
+      if (mal.length) throw new Error('no caen lunes, miércoles o viernes: ' + mal.join(', '));
+      return true;
+    },
+  },
 ];
+
+// Texto de cada post de brand/instagram/textos.md, por número.
+function textosPorPost() {
+  const t = leerOpcional('brand/instagram/textos.md'); if (!t) throw new Error('no existe brand/instagram/textos.md');
+  return new Map([...t.matchAll(/^## Post (\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)].map(m => [+m[1], m[2]]));
+}
+
+// Filas "Post" de brand/instagram/calendario.md, ordenadas por fecha: [{ fecha, n }].
+function postsDelCalendario() {
+  const c = leerOpcional('brand/instagram/calendario.md'); if (!c) throw new Error('no existe brand/instagram/calendario.md');
+  return c.split('\n').map(l => l.split('|').map(s => s.trim()))
+    .filter(cols => /^\d{4}-\d{2}-\d{2}$/.test(cols[1] ?? '') && cols[3] === 'Post')
+    .map(cols => ({ fecha: cols[1], n: +((cols[4].match(/Post (\d+)/) || [])[1]) }))
+    .sort((a, b) => a.fecha.localeCompare(b.fecha));
+}
 
 function contenidoWa() {
   const j = leerOpcional('brand/whatsapp/contenido.json'); if (!j) throw new Error('no existe brand/whatsapp/contenido.json');
