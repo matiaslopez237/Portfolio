@@ -1,7 +1,7 @@
 # HU-09: Posts de la semana 4 y calendario corrido
 
 **Historia:** Como dueño del estudio, quiero los posts 10, 11 y 12 listos y el calendario ajustado a la fecha real de arranque, para seguir publicando sin cortar el ritmo después de completar la grilla.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 - **Posts 10 a 12:** imagen 1080×1350 y texto de cada uno, con las mismas plantillas, la misma fuente de datos y las mismas reglas de la HU-04:
@@ -40,3 +40,4 @@
 
 ## Historial
 - 2026-11-10: creada (el post 1 no se publicó el 9; se corre el calendario).
+- 2026-11-10: aprobada por Matias.
