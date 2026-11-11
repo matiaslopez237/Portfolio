@@ -139,6 +139,27 @@
   .nav-links .btn-sm { min-height: 52px; padding: 0 26px; font-size: 16px; }
   main { padding-top: 0; }
 
+  /* Barra de acero forjado: textura de hoja/lingote y metal que se calienta donde pasa el mouse */
+  .site-header { background: transparent; }
+  .site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; transition: opacity .35s;
+    background:
+      linear-gradient(100deg, transparent 0%, rgba(255,255,255,.045) 38%, rgba(255,255,255,.10) 47%, rgba(255,255,255,.035) 56%, transparent 75%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, rgba(0,0,0,.035) 1px 2px, transparent 2px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 7px),
+      linear-gradient(180deg, #2c353f 0%, #232b34 45%, #1d242c 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.6), inset 0 -3px 6px -3px rgba(0,0,0,.5), 0 14px 30px -18px rgba(0,0,0,.9);
+    opacity: .82; }
+  .site-header.is-scrolled::before { opacity: 1; }
+  .site-header.is-scrolled { background: transparent; border-bottom-color: transparent; }
+  .site-header .calor-nav { position: absolute; inset: 0; z-index: -1; pointer-events: none; mix-blend-mode: screen; opacity: var(--calor, 0);
+    background: radial-gradient(ellipse var(--cw, 220px) 120% at var(--cx, 50%) 55%, rgba(255,236,190,.55) 0%, rgba(255,140,40,.42) 22%, rgba(190,50,12,.32) 48%, rgba(90,20,8,.18) 66%, transparent 82%); }
+  .site-header .calor-nav::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background: radial-gradient(ellipse calc(var(--cw, 220px) * .8) 100% at var(--cx, 50%) 50%, rgba(255,190,110,.9), rgba(255,100,20,.5) 40%, transparent 75%); }
+  .nav-links a:not(.btn), .logo-texto { transition: color .5s, text-shadow .5s; }
+  .nav-links a.caliente:not(.btn) { color: #ffe9cc; text-shadow: 0 0 12px rgba(255,140,40,.65); }
+  .logo.caliente .logo-texto { text-shadow: 0 0 16px rgba(255,140,40,.55); }
+  .nav-links .btn-wa.caliente { box-shadow: 0 0 0 1px #ffb366, 0 0 26px -2px rgba(255,122,26,.8); background: #ff8a33; }
+
   /* Hero con el taller */
   .hero-forja { position: relative; height: 100svh; min-height: 680px; overflow: hidden; display: block; padding: 0; max-width: none; }
   .hero-forja .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% 50%; transform-origin: 70% 60%; will-change: transform, filter; }
@@ -874,6 +895,38 @@
 (() => {
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+  // Metal que se calienta en la barra: sube rápido al pasar el mouse y se enfría despacio.
+  (() => {
+    const header = document.querySelector('.site-header');
+    const capa = document.createElement('div'); capa.className = 'calor-nav'; capa.setAttribute('aria-hidden', 'true'); header.prepend(capa);
+    const objetivos = [...header.querySelectorAll('.nav-links a, .logo')];
+    let calor = 0, meta = 0, cx = 0, cw = 220, cxMeta = 0, cwMeta = 220, activo = null;
+    function apuntar(el) {
+      const r = el.getBoundingClientRect(), h = header.getBoundingClientRect();
+      cxMeta = r.left + r.width / 2 - h.left; cwMeta = Math.max(160, r.width * 2.2);
+      if (calor < 0.05) { cx = cxMeta; cw = cwMeta; }
+    }
+    objetivos.forEach(el => {
+      el.addEventListener('pointerenter', () => { activo = el; apuntar(el); meta = el.classList.contains('btn') ? 1 : 0.85; el.classList.add('caliente'); });
+      el.addEventListener('pointerleave', () => { if (activo === el) activo = null; meta = 0; setTimeout(() => { if (activo !== el) el.classList.remove('caliente'); }, 450); });
+      el.addEventListener('focus', () => { activo = el; apuntar(el); meta = 0.85; el.classList.add('caliente'); });
+      el.addEventListener('blur', () => { meta = 0; el.classList.remove('caliente'); });
+    });
+    (function paso() {
+      // Calentar es rápido (~0,25 s); enfriar es lento (~1,4 s), como el metal.
+      calor += (meta - calor) * (meta > calor ? 0.18 : 0.035);
+      if (meta === 0 && calor < 0.01) calor = 0;
+      cx += (cxMeta - cx) * 0.2; cw += (cwMeta - cw) * 0.2;
+      // Mientras se enfría, el resplandor se achica y se vuelve más rojo oscuro.
+      capa.style.setProperty('--calor', calor.toFixed(3));
+      capa.style.setProperty('--cx', cx.toFixed(1) + 'px');
+      capa.style.setProperty('--cw', (cw * (0.75 + 0.25 * calor)).toFixed(1) + 'px');
+      capa.style.filter = 'hue-rotate(' + ((1 - calor) * -12).toFixed(1) + 'deg) saturate(' + (1 + (1 - calor) * 0.3).toFixed(2) + ')';
+      requestAnimationFrame(paso);
+    })();
+  })();
+
   // El formulario del prototipo no envía nada.
   document.addEventListener('submit', (e) => { if (e.target.matches('[data-prototipo]')) { e.preventDefault(); e.stopImmediatePropagation(); alert('Prototipo: el formulario no envía.'); } }, true);
 
