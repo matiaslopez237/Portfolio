@@ -439,7 +439,7 @@ const chequeos = [
       for (const p of ps) {
         const faltan = CAMPOS_PERSONA.filter(k => !new RegExp(`^- \\*\\*${k}:\\*\\* \\S`, 'm').test(p.texto));
         if (faltan.length) malos.push(`${p.nombre}: faltan ${faltan.join(', ')}`);
-        for (const [sub, min] of [['Dolores', 3], ['Miedos y objeciones', 3], ['Qué la hace decidirse', 1], ['Contenido por etapa', 3]]) {
+        for (const [sub, min] of [['Dolores', 3], ['Miedos y objeciones', 3], ['Qué l[ao] hace decidirse', 1], ['Contenido por etapa', 3]]) {
           const n = itemsDe(p.texto, sub).length; if (n < min) malos.push(`${p.nombre}: ${sub} tiene ${n}`);
         }
         if (!/^- \*\*Estado:\*\* (proto-persona|validada)/m.test(p.texto)) malos.push(`${p.nombre}: estado debe ser proto-persona o validada`);
@@ -452,7 +452,7 @@ const chequeos = [
     ca: 'CA-11.3', desc: 'personas.md: cada dolor, objeción y disparador indica su fuente',
     run: () => {
       const sinFuente = [];
-      for (const p of personas()) for (const sub of ['Dolores', 'Miedos y objeciones', 'Qué la hace decidirse'])
+      for (const p of personas()) for (const sub of ['Dolores', 'Miedos y objeciones', 'Qué l[ao] hace decidirse'])
         for (const it of itemsDe(p.texto, sub)) if (!FUENTE.test(it)) sinFuente.push(`${p.nombre} › ${sub}: "${it.slice(0, 40)}…"`);
       if (sinFuente.length) throw new Error('sin fuente: ' + sinFuente.join('; '));
       return true;
@@ -513,7 +513,7 @@ const chequeos = [
       for (const a of [...ARCHIVOS_ESTRATEGIA.map(x => `estrategia/${x}`), 'estrategia.html']) {
         let t = leerOpcional(`brand/instagram/${a}`); if (t === null) continue;
         for (const p of propios) t = t.replace(new RegExp(p.source, 'g'), '');
-        if (/[\w.+-]+@[\w-]+\.[\w.]+/.test(t) || /\b(\+?54[\s-]?)?9?[\s-]?\d{2,4}[\s-]?\d{3,4}[\s-]\d{4}\b/.test(t)) malos.push(a);
+        if (/[\w.+-]+@[a-z][\w-]*\.[a-z]{2,}/i.test(t) || /\b(\+?54[\s-]?)?9?[\s-]?\d{2,4}[\s-]?\d{3,4}[\s-]\d{4}\b/.test(t)) malos.push(a);
       }
       if (malos.length) throw new Error('posibles datos de contacto en: ' + malos.join(', '));
       return true;

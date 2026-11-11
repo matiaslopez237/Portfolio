@@ -73,3 +73,4 @@ Consecuencia: las personas salen como **proto-personas** (RN-11.1), con fuentes 
 ## Historial
 - 2026-11-11: creada, a partir de la propuesta de estrategia de Instagram y de la materia de user personas de Matias.
 - 2026-11-11: aprobada por Matias, con las respuestas a las preguntas abiertas.
+- 2026-11-11: implementada; 8 chequeos en verde, 10 cuentas observadas. Falta la firma de CA-11.9.
