@@ -143,10 +143,10 @@
   .site-header { background: transparent; }
   .site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; transition: opacity .35s;
     background:
-      linear-gradient(100deg, transparent 0%, rgba(255,255,255,.045) 38%, rgba(255,255,255,.10) 47%, rgba(255,255,255,.035) 56%, transparent 75%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, rgba(0,0,0,.035) 1px 2px, transparent 2px 3px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 7px),
-      linear-gradient(180deg, #2c353f 0%, #232b34 45%, #1d242c 100%);
+      linear-gradient(100deg, transparent 0%, rgba(255,255,255,.03) 38%, rgba(255,255,255,.075) 47%, rgba(255,255,255,.025) 56%, transparent 75%),
+      linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.18)),
+      var(--metal, none) center / auto 100% repeat-x,
+      #232a32;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.6), inset 0 -3px 6px -3px rgba(0,0,0,.5), 0 14px 30px -18px rgba(0,0,0,.9);
     opacity: .82; }
   .site-header.is-scrolled::before { opacity: 1; }
@@ -242,6 +242,40 @@
   .panel-link .link-arrow .link-text { text-decoration: none; }
   .panel-link .link-arrow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px var(--accent), 0 0 22px -6px rgba(255,122,26,.55); }
   .panel-link .link-arrow:active { transform: scale(.97); }
+  /* Placas remachadas y hierro fundido */
+  /* Fondo de hierro fundido */
+  html { background: #13181d; }
+  body { background-color: #13181d;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .009' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6  0 0 0 0 .66  0 0 0 0 .72  0 0 0 .32 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23h)'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"); }
+
+  /* Placas remachadas: cada sección es un cuadro de acero */
+  .section { max-width: 1280px; margin: 28px auto; padding: clamp(96px, 10vw, 140px) clamp(28px, 5vw, 72px) clamp(72px, 8vw, 110px);
+    border-radius: 22px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 18%, rgba(0,0,0,0) 82%, rgba(0,0,0,.18)), var(--bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 0 1px rgba(255,255,255,.035), inset 0 -2px 0 rgba(0,0,0,.45),
+      0 0 0 1px #0c1014, 0 2px 0 1px rgba(255,255,255,.03), 0 30px 60px -30px rgba(0,0,0,.95); }
+  .section::before { display: none; }
+  .section::after { top: -10%; }
+  .remaches { position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
+    --r: radial-gradient(circle at 40% 36%, #c4cdd6 0 1.2px, #7a8590 2.6px, #3b444e 4.6px, #0b0f12 6px, transparent 6.8px);
+    background: var(--r) 16px 16px / 16px 16px no-repeat, var(--r) calc(100% - 16px) 14px / 16px 16px no-repeat,
+                var(--r) 14px calc(100% - 16px) / 16px 16px no-repeat, var(--r) calc(100% - 16px) calc(100% - 16px) / 16px 16px no-repeat; }
+  .ficha-franja { max-width: 1280px; margin: 28px auto 0; padding: clamp(36px, 5vw, 56px) clamp(28px, 5vw, 72px); border-radius: 22px; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 30%), var(--bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 -2px 0 rgba(0,0,0,.45), 0 0 0 1px #0c1014, 0 30px 60px -30px rgba(0,0,0,.95); }
+  .ficha-franja .ficha { border-top: 0; }
+  #trabajos { padding-top: clamp(96px, 10vw, 140px); }
+  #contacto::before { left: 0; width: 100%; }
+  #contacto::after { left: 0; width: 100%; }
+  .footer { border-top: 0; }
+  @media (max-width: 860px) {
+    .section, .ficha-franja { margin: 14px 10px; padding-left: 20px; padding-right: 20px; border-radius: 16px; }
+    .section { padding-top: 84px; padding-bottom: 60px; }
+    .remaches { background-size: 13px 13px; }
+  }
+
   .aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1); }
   .aparece.visto { opacity: 1; transform: none; }
 
@@ -896,6 +930,46 @@
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
+
+  // Textura de metal gastado para la barra: rayones, picaduras y manchas generados al azar (sin imágenes externas).
+  (() => {
+    const W = 1600, H = 160, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+    let semilla = 11; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
+    const base = g.createLinearGradient(0, 0, 0, H); base.addColorStop(0, '#323b45'); base.addColorStop(.5, '#272f38'); base.addColorStop(1, '#1e252d');
+    g.fillStyle = base; g.fillRect(0, 0, W, H);
+    // Manchas y zonas gastadas (más claras y más oscuras)
+    for (let i = 0; i < 70; i++) {
+      const x = azar() * W, y = azar() * H, r = 20 + azar() * 120, claro = azar() < .45;
+      const m = g.createRadialGradient(x, y, 0, x, y, r);
+      m.addColorStop(0, claro ? 'rgba(170,182,195,.07)' : 'rgba(5,8,11,.22)'); m.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = m; g.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    // Vetas verticales oscuras (como el óxido escurrido de la referencia)
+    for (let i = 0; i < 9; i++) { const x = azar() * W, w = 4 + azar() * 18; const v = g.createLinearGradient(x - w, 0, x + w, 0);
+      v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(.5, 'rgba(6,9,12,' + (.12 + azar() * .18).toFixed(2) + ')'); v.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = v; g.fillRect(x - w, 0, w * 2, H); }
+    // Rayones finos en varias direcciones (cepillado circular + rayones sueltos)
+    g.lineCap = 'round';
+    for (let i = 0; i < 3400; i++) {
+      const x = azar() * W, y = azar() * H, largo = 8 + azar() * (azar() < .1 ? 160 : 50);
+      const ang = (azar() < .6 ? -0.35 + azar() * .7 : azar() * Math.PI);
+      const claro = azar() < .7;
+      g.strokeStyle = claro ? 'rgba(215,225,235,' + (.045 + azar() * .1).toFixed(3) + ')' : 'rgba(0,0,0,' + (.05 + azar() * .1).toFixed(3) + ')';
+      g.lineWidth = azar() < .92 ? .6 : 1.2;
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(ang) * largo, y + Math.sin(ang) * largo); g.stroke();
+    }
+    // Picaduras: hueco oscuro con un borde de luz
+    for (let i = 0; i < 46; i++) {
+      const x = azar() * W, y = azar() * H, rx = .8 + azar() * 2.6, ry = rx * (.5 + azar() * .6);
+      g.fillStyle = 'rgba(0,0,0,.55)'; g.beginPath(); g.ellipse(x, y, rx, ry, azar() * 3, 0, Math.PI * 2); g.fill();
+      g.strokeStyle = 'rgba(200,210,220,.22)'; g.lineWidth = .6; g.beginPath(); g.ellipse(x + .4, y + .5, rx + .6, ry + .5, 0, .2, 2.4); g.stroke();
+    }
+    // Grano fino
+    const img = g.getImageData(0, 0, W, H), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const n = (azar() - .5) * 14; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+    g.putImageData(img, 0, 0);
+    document.documentElement.style.setProperty('--metal', 'url(' + c.toDataURL('image/webp', .8) + ')');
+  })();
+
   // Metal que se calienta en la barra: sube rápido al pasar el mouse y se enfría despacio.
   (() => {
     const header = document.querySelector('.site-header');
@@ -929,6 +1003,9 @@
 
   // El formulario del prototipo no envía nada.
   document.addEventListener('submit', (e) => { if (e.target.matches('[data-prototipo]')) { e.preventDefault(); e.stopImmediatePropagation(); alert('Prototipo: el formulario no envía.'); } }, true);
+
+  // Remaches en las esquinas de cada placa
+  document.querySelectorAll('.section, .ficha-franja').forEach(s => { const r = document.createElement('span'); r.className = 'remaches'; r.setAttribute('aria-hidden', 'true'); s.append(r); });
 
   // Números fantasma en cada título de sección
   document.querySelectorAll('.section-head').forEach((s, i) => { const f = document.createElement('span'); f.className = 'fantasma'; f.setAttribute('aria-hidden', 'true'); f.textContent = String(i + 1).padStart(2, '0'); s.prepend(f); });
