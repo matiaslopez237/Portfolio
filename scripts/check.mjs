@@ -235,7 +235,7 @@ const chequeos = [
     run: () => {
       const t = leerOpcional('brand/instagram/textos.md'); if (!t) throw new Error('no existe brand/instagram/textos.md');
       const bloques = [...t.matchAll(/^## Post (\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)];
-      if (bloques.length !== 9) throw new Error(`hay ${bloques.length} textos`);
+      if (bloques.length < 9) throw new Error(`hay ${bloques.length} textos`); // desde la HU-09 hay más de 9
       const malos = bloques.filter(([, , txt]) => { const h = (txt.match(/#[\p{L}\p{N}_]+/gu) || []).length; return [...txt].length > 2200 || h < 5 || h > 10; }).map(b => 'post ' + b[1]);
       if (malos.length) throw new Error('fuera de límites: ' + malos.join(', '));
       return true;

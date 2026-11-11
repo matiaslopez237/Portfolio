@@ -1,7 +1,7 @@
 // Genera las piezas de Instagram (HU-04) desde las plantillas y brand/instagram/contenido.json.
 // Correr:  node brand/instagram/generar.mjs
 import { chromium } from 'playwright';
-import { readFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const aqui = new URL('./', import.meta.url);
@@ -18,6 +18,14 @@ const piezas = [
   { plantilla: 'historia', w: 1080, h: 1920, salida: 'historias/historia-ejemplo.png', datos: datos.historiaEjemplo },
 ];
 
+// En Windows el antivirus a veces bloquea el archivo un instante: se reintenta antes de fallar.
+async function guardar(destino, png, intentos = 5) {
+  for (let i = 1; ; i++) {
+    try { writeFileSync(destino, png); return; }
+    catch (e) { if (i >= intentos) throw e; await new Promise(r => setTimeout(r, 400 * i)); }
+  }
+}
+
 const browser = await chromium.launch();
 for (const p of piezas) {
   const page = await browser.newPage({ viewport: { width: p.w, height: p.h }, deviceScaleFactor: 1 });
@@ -25,7 +33,7 @@ for (const p of piezas) {
   url.hash = encodeURIComponent(JSON.stringify(p.datos));
   await page.goto(url.href, { waitUntil: 'networkidle' });
   await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
-  await page.screenshot({ path: ruta(p.salida), type: 'png' });
+  await guardar(ruta(p.salida), await page.screenshot({ type: 'png' }));
   console.log('✓', p.salida);
   await page.close();
 }

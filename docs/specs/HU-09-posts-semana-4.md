@@ -41,3 +41,4 @@
 ## Historial
 - 2026-11-10: creada (el post 1 no se publicó el 9; se corre el calendario).
 - 2026-11-10: aprobada por Matias.
+- 2026-11-10: implementada; posts 10 a 12 y calendario desde el 11/11 (posts 1 a 3 ya programados en Meta Business Suite). Falta la firma de CA-09.5.

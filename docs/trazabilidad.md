@@ -58,8 +58,14 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-08 | CA-08.5 | Escenario BDD (separadores alineados) | ✓ | `features/HU-08-pulido-del-portfolio.feature` · `npm test` |
 | HU-08 | CA-08.6 | Escenario BDD (botón flotante no tapa el pie) | ✓ | `features/HU-08-pulido-del-portfolio.feature` · `npm test` |
 | HU-08 | CA-08.7 | Checklist (firma Matias) | pendiente | Ver el sitio pulido en la compu y en el celular |
+| HU-09 | CA-09.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/posts/post-10..12.png` |
+| HU-09 | CA-09.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/textos.md § Post 10 a 12` |
+| HU-09 | CA-09.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/contenido.json (post 11) · textos.md` |
+| HU-09 | CA-09.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/calendario.md (desde 2026-11-11)` |
+| HU-09 | CA-09.5 | Checklist (firma Matias) | pendiente | Ver los posts 10 a 12 en la grilla |
 
 ## Huecos
+- HU-09: CA-09.5 sin firmar. Commits [RED] 6eb79e6 → [GREEN] (este). CA-04.4 se ajustó a "9 o más textos" porque ahora hay 12.
 - HU-08: CA-08.7 sin firmar. Commits [RED] 6d39437 → [GREEN] (este). CA-08.6 ya pasaba antes del cambio (el botón se oculta al llegar al contacto); queda como protección. Sin publicar.
 - HU-05: CA-05.7 sin firmar. Commits [RED] a4be5b1 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Faltan definir plazos y formas de pago (quedan fuera de los mensajes).
 - HU-06: ninguno. Commits [RED] 90c99d7 → [GREEN] ff3990f. Pendiente de mirar en un celular real ya publicado. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).

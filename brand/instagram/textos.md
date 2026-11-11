@@ -142,3 +142,45 @@ El precio final depende del proyecto. Escribime y te paso un presupuesto sin cos
 
 #tiendaonline #ecommerce #mercadopago #emprendedores #diseñoweb #webamedida
 ```
+
+## Post 10 · Trabajo: Tienda con panel
+
+```texto
+Tienda online con panel de administración
+
+Una tienda completa: catálogo, carrito, cuentas de usuario y pagos con Mercado Pago.
+
+Lo mejor para el dueño: un panel propio para cargar productos y ver los pedidos sin depender de nadie.
+
+¿Querés vender online y manejar tu tienda vos mismo? Escribime y lo vemos. 👉 Link en la bio.
+
+#tiendaonline #ecommerce #mercadopago #diseñoweb #desarrolloweb #webamedida
+```
+
+## Post 11 · Proyecto de muestra: Café
+
+```texto
+Café · Proyecto de muestra
+
+Una página que armé como muestra para un café o restaurante: menú digital, galería de fotos, reservas y contacto directo por WhatsApp.
+
+No es de un cliente: es un ejemplo de lo que se puede hacer para tu local gastronómico.
+
+¿Tenés un café, bar o restaurante? Escribime y armamos la tuya. 👉 Link en la bio.
+
+#gastronomia #restaurantes #cafeterias #menudigital #diseñoweb #paginasweb
+```
+
+## Post 12 · Consejo: dominio propio
+
+```texto
+Por qué tu negocio necesita su propio dominio (www.tunegocio.com.ar):
+
+1. Una dirección fácil de recordar y de compartir: en una tarjeta, en el local o en un mensaje.
+2. Tu nombre, no el de una plataforma: la dirección es tuya aunque cambies de servicio.
+3. Mails con el nombre de tu negocio, en vez de una cuenta genérica.
+
+¿Ya tenés el tuyo? Si no, te ayudo a elegirlo cuando armamos tu página.
+
+#dominio #paginasweb #emprendedores #negocioslocales #marketingdigital #diseñoweb
+```
