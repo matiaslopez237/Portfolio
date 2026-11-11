@@ -393,6 +393,33 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-10: Publicación automática en Instagram ──
+  {
+    ca: 'CA-10.6', desc: 'Workflow diario a las 22:00 UTC, lanzable a mano, solo con los secrets IG_USER_ID e IG_ACCESS_TOKEN',
+    run: () => {
+      const w = leerOpcional('.github/workflows/publicar-instagram.yml'); if (!w) throw new Error('no existe .github/workflows/publicar-instagram.yml');
+      const malos = [];
+      if (!/cron:\s*['"]0 22 \* \* \*['"]/.test(w)) malos.push('falta el cron "0 22 * * *"');
+      if (!/workflow_dispatch/.test(w)) malos.push('no se puede lanzar a mano (workflow_dispatch)');
+      const secrets = [...new Set([...w.matchAll(/secrets\.([A-Z0-9_]+)/g)].map(m => m[1]))].sort();
+      if (secrets.join() !== 'IG_ACCESS_TOKEN,IG_USER_ID') malos.push('secrets usados: ' + (secrets.join(', ') || 'ninguno'));
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-10.7', desc: 'Ningún token o clave de Meta/Instagram escrito en los archivos del repositorio',
+    run: async () => {
+      const { execSync } = await import('node:child_process');
+      const archivos = execSync('git ls-files --cached --others --exclude-standard', { cwd: new URL('..', import.meta.url) }).toString().split('\n')
+        .filter(f => f && !/\.(png|jpe?g|ttf|woff2?|ico)$/i.test(f) && !f.startsWith('node_modules/'));
+      const patron = /\b(EAA[A-Za-z0-9]{30,}|IGAA[A-Za-z0-9_-]{30,}|IGQ[A-Za-z0-9_-]{30,})\b|access_token=(?!\$\{|['"]?\s*\+)[A-Za-z0-9]{20,}/;
+      const con = archivos.filter(f => { const t = leerOpcional(f); return t && patron.test(t); });
+      if (con.length) throw new Error('posible token en: ' + con.join(', '));
+      return true;
+    },
+  },
 ];
 
 // Texto de cada post de brand/instagram/textos.md, por número.
