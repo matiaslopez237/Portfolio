@@ -519,7 +519,74 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-13: Cambio de nombre a Hefesto Webs ──
+  {
+    ca: 'CA-13.1', desc: 'Ningún archivo vivo dice "Efesto" sin H (salvo el @efestowebs mientras no se cambie)',
+    run: async () => {
+      const malos = [];
+      for (const f of await archivosVivos()) {
+        const t = leerOpcional(f); if (!t) continue;
+        for (const m of t.matchAll(/(?<![hH])efesto/gi)) {
+          const antes = t.slice(Math.max(0, m.index - 14), m.index);
+          if (/(@|instagram\.com\/)$/i.test(antes)) continue; // RN-13.4: el @ viejo sigue hasta que Matias lo cambie
+          malos.push(f); break;
+        }
+      }
+      if (malos.length) throw new Error('quedan "Efesto" en: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-13.3', desc: 'Logo trazado como HEFESTO WEBS, con texto accesible "Hefesto Webs"',
+    run: () => {
+      const malos = [];
+      if (!/const NOMBRE = 'HEFESTO';/.test(leer('brand/trazar-logo.mjs'))) malos.push('trazar-logo.mjs no usa HEFESTO');
+      for (const f of ['brand/logo/logo.svg', 'brand/logo/logo-1color.svg'])
+        if (!/aria-label="Hefesto Webs, por Matias Lopez"/.test(leer(f))) malos.push(f + ' sin aria-label nuevo');
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-13.4', desc: 'Piezas regeneradas después del cambio de logo y con sus medidas',
+    run: async () => {
+      const { statSync, readdirSync } = await import('node:fs');
+      const raiz = new URL('..', import.meta.url);
+      const desde = statSync(new URL('brand/logo/logo.svg', raiz)).mtimeMs - 1000;
+      const piezas = [
+        ['assets/og-hefesto.png', 1200, 630], ['brand/export/og.png', 1200, 630], ['brand/export/perfil-instagram.png', 1080, 1080], ['brand/export/perfil-whatsapp.png', 640, 640],
+        ...readdirSync(new URL('brand/instagram/posts/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/instagram/posts/${f}`, 1080, 1350]),
+        ...readdirSync(new URL('brand/instagram/destacadas/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/instagram/destacadas/${f}`, 1080, 1920]),
+        ...readdirSync(new URL('brand/whatsapp/catalogo/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/whatsapp/catalogo/${f}`, 800, 800]),
+        ['brand/whatsapp/flyer.png', 1080, 1920],
+      ];
+      const malos = piezas.filter(([f, w, h]) => {
+        const d = medidasPng(f); if (!d || d[0] !== w || d[1] !== h) return true;
+        return statSync(new URL(f, raiz)).mtimeMs < desde;
+      }).map(([f]) => f);
+      if (malos.length) throw new Error('sin regenerar o con otra medida: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-13.6', desc: 'brand/nombres.md y la spec de la HU-02 registran el cambio a Hefesto Webs',
+    run: () => {
+      const n = leer('brand/nombres.md'), h = leer('docs/specs/HU-02-nombre-de-marca.md');
+      if (!/Hefesto Webs/.test(n) || !/2026-11-11/.test(n)) throw new Error('brand/nombres.md no registra el cambio');
+      if (!/2026-11-11[^\n]*Hefesto/.test(h)) throw new Error('el historial de la HU-02 no registra el cambio');
+      return true;
+    },
+  },
 ];
+
+// Archivos "vivos" de la marca (RN-13.2): todo lo que se usa hoy, sin registros históricos (RN-13.3).
+async function archivosVivos() {
+  const { execSync } = await import('node:child_process');
+  const todos = execSync('git ls-files --cached --others --exclude-standard', { cwd: new URL('..', import.meta.url) }).toString().split('\n').filter(Boolean);
+  const historicos = [/^docs\/specs\/HU-(0[1-9]|1[0-1])-/, /^docs\/specs\/HU-13-/, /^docs\/trazabilidad\.md$/, /^brand\/nombres/, /^brand\/direcciones/, /^brand\/logos-herrero/, /^scripts\/check\.mjs$/, /^estilos-portfolio\.html$/, /^circuit-svg\.html$/, /^precios-preview\.html$/];
+  return todos.filter(f => /\.(html|css|md|mjs|js|json|svg|yml|feature)$/.test(f) && !f.startsWith('node_modules/') && !/package(-lock)?\.json$/.test(f) && !historicos.some(r => r.test(f)));
+}
 
 const ARCHIVOS_ESTRATEGIA = ['objetivos.md', 'segmentos.md', 'personas.md', 'recorrido.md', 'competencia.md', 'voz-y-tono.md', 'implicancias-diseno.md', 'matriz-de-contenido.md', 'validacion.md'];
 const CAMPOS_PERSONA = ['Foto', 'Rubro', 'Segmento', 'Objetivo', 'Cómo usa Instagram', 'Palabras que usa', 'Plan que le sirve', 'Estado'];

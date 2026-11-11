@@ -43,11 +43,11 @@ Then('el texto usa la tipografía {string}', async function (fuente) {
 });
 
 // CA-06.2
-Then('el encabezado muestra el logo de Efesto Webs', async function () {
+Then('el encabezado muestra el logo de Hefesto Webs', async function () {
   const logo = this.page.locator('.site-header .logo');
   assert.ok(await logo.isVisible(), 'no hay logo visible en el encabezado');
   const nombre = await logo.getAttribute('aria-label') ?? await logo.textContent();
-  assert.match(nombre, /Efesto Webs/);
+  assert.match(nombre, /Hefesto Webs/);
   assert.ok(await logo.locator('svg').count() > 0, 'el logo no tiene el símbolo SVG');
 });
 
@@ -67,7 +67,7 @@ Then('la imagen {string} de la marca existe y mide {int}x{int}', async function 
   const ruta = new URL(url).pathname.replace(/^\/Portfolio/, '');
   const res = await this.page.request.get(this.baseUrl + ruta);
   assert.equal(res.status(), 200, `no existe ${ruta}`);
-  assert.match(ruta, /og-efesto/, 'la imagen og no es la de la marca');
+  assert.match(ruta, /og-hefesto/, 'la imagen og no es la de la marca');
   assert.deepEqual(medidasPng(await res.body()), { ancho, alto });
 });
 
@@ -122,4 +122,10 @@ Then('todos los links de WhatsApp usan el mismo número', async function () {
   const html = await this.page.content();
   const numeros = new Set([...html.matchAll(/wa\.me\/(\d+)/g)].map(m => m[1]));
   assert.equal(numeros.size, 1, `números distintos: ${[...numeros].join(', ')}`);
+});
+
+// HU-13
+Then('el logo de la navegación se llama {string}', async function (nombre) {
+  const label = await this.page.getAttribute('.site-header .logo', 'aria-label');
+  assert.ok(label?.includes(nombre), `aria-label del logo: ${label}`);
 });

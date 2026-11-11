@@ -1,8 +1,8 @@
 # language: es
 @HU-06
-Característica: Portfolio con la marca Efesto Webs
+Característica: Portfolio con la marca Hefesto Webs
   Como dueño del estudio
-  quiero que el portfolio se vea y se presente como Efesto Webs
+  quiero que el portfolio se vea y se presente como Hefesto Webs
   para que quien llegue desde Instagram o WhatsApp reconozca la misma marca y confíe.
 
   Antecedentes:
@@ -17,14 +17,14 @@ Característica: Portfolio con la marca Efesto Webs
 
   @CA-06.2 @normal
   Escenario: Logo y nombre en el encabezado
-    Entonces el encabezado muestra el logo de Efesto Webs
-    Y el título de la pestaña incluye "Efesto Webs"
+    Entonces el encabezado muestra el logo de Hefesto Webs
+    Y el título de la pestaña incluye "Hefesto Webs"
 
   @CA-06.3 @normal
   Escenario: Metadatos para compartir y buscadores
-    Entonces "og:site_name" incluye "Efesto Webs"
+    Entonces "og:site_name" incluye "Hefesto Webs"
     Y la imagen "og:image" de la marca existe y mide 1200x630
-    Y el JSON-LD nombra el servicio "Efesto Webs"
+    Y el JSON-LD nombra el servicio "Hefesto Webs"
     Y el favicon es el símbolo de la marca
 
   @CA-06.4 @normal
