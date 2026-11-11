@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>Prototipo · Hefesto Webs · Páginas web para negocios, por Matias Lopez</title>
+  <meta name="description" content="Diseño y programo páginas web, tiendas online y catálogos con pedidos por WhatsApp para comercios, profesionales y empresas. Consulta sin costo." />
+  <link rel="canonical" href="https://matiaslopez237.github.io/Portfolio/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Matias Emanuel Lopez" />
+  <meta name="theme-color" content="#1B2128" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/marca/simbolo.svg" type="image/svg+xml" />
+  <link rel="icon" href="../../assets/marca/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../../assets/marca/apple-touch-icon.png" />
+
+  <!-- Open Graph (vista previa al compartir por WhatsApp, redes, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Hefesto Webs · por Matias Lopez" />
+  <meta property="og:url" content="https://matiaslopez237.github.io/Portfolio/" />
+  <meta property="og:title" content="Páginas web que le traen clientes a tu negocio" />
+  <meta property="og:description" content="Páginas, tiendas online y catálogos con pedidos por WhatsApp. Escribime y te paso un presupuesto sin costo." />
+  <meta property="og:image" content="https://matiaslopez237.github.io/Portfolio/assets/og-hefesto.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hefesto Webs: páginas web forjadas a medida para negocios, por Matias Lopez." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://matiaslopez237.github.io/Portfolio/assets/og-hefesto.png" />
+
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://matiaslopez237.github.io/Portfolio/#matias",
+        "name": "Matias Emanuel Lopez",
+        "alternateName": "Matias Lopez",
+        "jobTitle": "Desarrollador web",
+        "url": "https://matiaslopez237.github.io/Portfolio/",
+        "email": "mailto:matias.e.lopez747@gmail.com",
+        "telephone": "+54 9 260 466-1138"
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://matiaslopez237.github.io/Portfolio/#servicio",
+        "name": "Hefesto Webs",
+        "alternateName": "Hefesto Webs · por Matias Lopez",
+        "sameAs": ["https://www.instagram.com/efestowebs/"],
+        "url": "https://matiaslopez237.github.io/Portfolio/",
+        "image": "https://matiaslopez237.github.io/Portfolio/assets/og-hefesto.png",
+        "description": "Diseño y programo páginas web, tiendas online y catálogos con pedidos por WhatsApp para comercios, profesionales y empresas. Consulta sin costo.",
+        "telephone": "+54 9 260 466-1138",
+        "email": "matias.e.lopez747@gmail.com",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Argentina"
+        },
+        "founder": {
+          "@id": "https://matiaslopez237.github.io/Portfolio/#matias"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Planes",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing Page",
+                "description": "Página de una sola pantalla para presentar tu negocio y recibir consultas."
+              },
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 150000,
+                "priceCurrency": "ARS"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Tienda WhatsApp",
+                "description": "Catálogo de productos con pedido directo por WhatsApp, sin comisiones por venta."
+              },
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 350000,
+                "priceCurrency": "ARS"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Tienda con pagos",
+                "description": "Tienda online con carrito, pagos con tarjeta, transferencia o Mercado Pago y panel de pedidos."
+              },
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 900000,
+                "priceCurrency": "ARS"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+  <!-- Prototipo: sin PostHog -->
+
+  <style>
+  /* ═══ Capa "Forja" del prototipo (se sumaría a style.css en la HU-12) ═══ */
+  :root { --header-h: 136px; --slot: 68px; }
+  html, body { overflow-x: clip; }
+  body::after { content: ''; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* Barra de navegación al doble */
+  .site-header { position: fixed; left: 0; right: 0; background: transparent; transition: background-color .3s, border-color .3s; }
+  .site-header.is-scrolled { background: var(--bg); }
+  .nav { height: var(--header-h); }
+  .logo { gap: 18px; }
+  .site-header .logo-simbolo { width: var(--slot); height: var(--slot); opacity: 0; }
+  .site-header .logo-simbolo.destello .brasa { animation: destello .9s ease-out; }
+  @keyframes destello { 0% { stroke: #fff3c4; filter: drop-shadow(0 0 6px #ff7a1a); } 100% { stroke: #ff7a1a; filter: none; } }
+  .site-header .logo-texto { font-size: 46px; white-space: nowrap; }
+  .nav-links { font-size: 16px; gap: 34px; }
+  .nav-links .btn-sm { min-height: 52px; padding: 0 26px; font-size: 16px; }
+  main { padding-top: 0; }
+
+  /* Hero con el taller */
+  .hero-forja { position: relative; height: 100svh; min-height: 680px; overflow: hidden; display: block; padding: 0; max-width: none; }
+  .hero-forja .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% 50%; transform-origin: 70% 60%; will-change: transform, filter; }
+  .hero-forja .velo { position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 34%, transparent 62%), linear-gradient(0deg, var(--bg) 0%, transparent 22%); }
+  .hero-forja .texto { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding-top: var(--header-h); }
+  .hero-forja .hero-main { max-width: 640px; }
+  .sombra { position: absolute; z-index: 1; width: 200px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.75), transparent); pointer-events: none; transform: translate(-50%, -50%); }
+  .calor { position: absolute; z-index: 1; width: 260px; height: 90px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,122,26,.35), transparent); mix-blend-mode: screen; pointer-events: none; transform: translate(-50%, -50%); }
+  .vuelo { position: fixed; left: 0; top: 0; z-index: 55; width: 300px; height: 300px; pointer-events: none; perspective: 900px; will-change: transform; }
+  .pieza { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform, opacity; }
+  .pieza img { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 18px 24px rgba(0,0,0,.55)); }
+  .brillo { position: absolute; left: 51.5%; top: 47%; width: 12%; height: 40%; border-radius: 50%; transform: translate(-50%, -50%) rotate(17deg); background: radial-gradient(closest-side, rgba(255,236,190,.95), rgba(255,140,40,.65) 45%, rgba(255,90,10,0) 100%); mix-blend-mode: screen; filter: blur(6px); opacity: 0; }
+  .halo { position: absolute; left: 51%; top: 48%; width: 46%; height: 62%; border-radius: 50%; transform: translate(-50%, -50%) rotate(17deg); background: radial-gradient(closest-side, rgba(255,122,26,.45), transparent); mix-blend-mode: screen; filter: blur(14px); opacity: 0; }
+  canvas.chispas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 56; pointer-events: none; }
+
+  /* La ficha pasa a una franja debajo del hero */
+  .ficha-franja { padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(24px, 4vw, 40px); }
+  .ficha-franja .ficha { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0 32px; border-top: 1px solid var(--line-strong); }
+  .ficha-franja .ficha div { display: block; padding: 22px 0; border-bottom: 0; }
+  .ficha-franja .ficha dt { margin-bottom: 8px; }
+  .ficha-franja .firma { margin-top: 8px; }
+
+  /* Luz ambiente por sección */
+  .section { isolation: isolate; }
+  .section::after { content: ''; position: absolute; z-index: -1; top: 8%; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(255,122,26,.10), rgba(255,122,26,.04) 45%, transparent 70%); filter: blur(10px); left: -32vw; }
+  .section:nth-of-type(even)::after { left: auto; right: -32vw; }
+
+  /* Títulos: número fantasma + barra que se calienta */
+  .section-head { position: relative; }
+  .section-head h2::after { background: #6b3a1c; }
+  .section-head.encendida h2::after { animation: barra-rojo 1.4s ease-out forwards; }
+  @keyframes barra-rojo { 0% { background: #6b3a1c; } 35% { background: #ffe1b0; box-shadow: 0 0 18px 4px rgba(255,140,40,.8); } 100% { background: #FF7A1A; box-shadow: none; } }
+  .fantasma { position: absolute; z-index: -1; left: -.05em; top: -.32em; font-family: 'Archivo', sans-serif; font-weight: 800; font-stretch: 70%; font-variation-settings: "wdth" 70; font-size: clamp(150px, 20vw, 280px); line-height: .8; color: transparent; -webkit-text-stroke: 1.5px rgba(154,166,178,.16); pointer-events: none; will-change: transform; }
+  .section { padding-top: clamp(130px, 14vw, 190px); }
+
+  /* Metal */
+  .metal, .showcase, .a-medida, .form, .plan { position: relative; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 30%), var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.09), inset 0 -1px 0 rgba(0,0,0,.4), 0 1px 0 rgba(0,0,0,.3), 0 24px 48px -28px rgba(0,0,0,.8); }
+  .showcase::after, .a-medida::after, .form::after, .plan::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.07), transparent 60%); }
+  .showcase:hover::after, .a-medida:hover::after, .form:hover::after, .plan:hover::after { opacity: 1; }
+
+  /* Trabajos: equipos en 3D */
+  .devices { perspective: 1400px; }
+  .devices > * { transition: transform .2s linear; }
+  .devices { transform-style: preserve-3d; }
+  .showcase .devices { transform: rotateX(var(--rx, 12deg)) rotateY(var(--ry, -9deg)); transition: transform .2s linear; }
+  .frame-phone { transform: translateZ(50px); }
+
+  /* Planes: piezas forjadas, la del medio al rojo */
+  .planes { gap: 20px; border-top: 0; align-items: stretch; }
+  .plan, .plan:first-child, .plan:last-child { padding: 32px 28px 28px; }
+  .plan + .plan { border-left: 0; }
+  .plan h3 { font-size: clamp(26px, 2.3vw, 32px); white-space: nowrap; }
+  .plan:nth-child(2) { box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 0 0 1px rgba(255,122,26,.55), 0 0 40px -6px rgba(255,122,26,.35), 0 30px 60px -30px rgba(0,0,0,.9); }
+  .plan:nth-child(2) .plan-list li::before { background: var(--accent); }
+  .plan.encendida .plan-desde b { animation: precio-rojo 1.6s ease-out; }
+  @keyframes precio-rojo { 0% { color: var(--text); } 30% { color: #ffd49a; text-shadow: 0 0 22px rgba(255,140,40,.7); } 100% { color: var(--text); text-shadow: none; } }
+
+  /* Cómo trabajo: la línea de forja sobre el borde de los pasos */
+  .pasos { position: relative; }
+  .pasos .linea { position: absolute; left: 0; right: 0; top: -2px; height: 3px; pointer-events: none; }
+  .pasos .linea i { position: absolute; inset: 0 auto 0 0; width: calc(var(--avance, 0) * 100%); border-radius: 2px; background: linear-gradient(90deg, #6b3a1c, #FF7A1A 80%, #ffe1b0); box-shadow: 0 0 14px rgba(255,122,26,.6); }
+  .pasos li::before { transition: color .6s, text-shadow .6s; }
+  .pasos li.caliente::before { color: var(--text); text-shadow: 0 0 18px rgba(255,140,40,.55); }
+
+  /* Contacto: el taller de fondo y brasas */
+  #contacto { isolation: isolate; }
+  #contacto::before { content: ''; position: absolute; z-index: -2; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw; height: auto; background: url('hero/fondo-1376.webp') 80% 70% / cover; filter: brightness(.33) saturate(.7); }
+  #contacto::after { z-index: -1; left: calc(50% - 50vw); width: 100vw; max-width: none; height: 100%; max-height: none; top: 0; border-radius: 0; filter: none; background: linear-gradient(90deg, var(--bg) 15%, color-mix(in srgb, var(--bg) 70%, transparent) 55%, color-mix(in srgb, var(--bg) 40%, transparent)); }
+  .cta-brasa { position: relative; display: inline-flex; }
+  .cta-brasa canvas { position: absolute; left: -40px; top: -70px; width: calc(100% + 80px); height: calc(100% + 90px); pointer-events: none; }
+  .btn-wa:hover { box-shadow: 0 0 0 1px var(--accent), 0 10px 34px -6px rgba(255,122,26,.65); }
+
+  .aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1); }
+  .aparece.visto { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) { .planes { grid-template-columns: minmax(0,1fr); } }
+  @media (max-width: 860px) {
+    :root { --header-h: 96px; --slot: 48px; }
+    .logo { gap: 12px; }
+    .site-header .logo-texto { font-size: 24px; }
+    .nav-links .btn-sm { min-height: 48px; }
+    .hero-forja .fondo { height: 58%; object-position: 76% 92%; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+    .hero-forja .velo { background: linear-gradient(0deg, var(--bg) 42%, transparent 60%); }
+    .hero-forja .texto { justify-content: flex-end; padding-bottom: 40px; }
+    .hero-forja h1 { font-size: clamp(42px, 12vw, 56px); }
+    .ficha-franja .ficha { grid-template-columns: minmax(0,1fr); }
+    .fantasma { font-size: 120px; top: -.25em; }
+    .pasos .linea { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header .logo-simbolo { opacity: 1; }
+    .aparece { opacity: 1; transform: none; transition: none; }
+    .showcase .devices { transform: rotateX(6deg) rotateY(-6deg); }
+    .section-head.encendida h2::after, .plan.encendida .plan-desde b { animation: none; }
+    .section-head h2::after { background: var(--accent); }
+  }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- NAV -->
+  <header class="site-header" id="nav">
+    <nav class="nav wrap" aria-label="Navegación principal">
+      <a href="#inicio" class="logo" aria-label="Hefesto Webs, ir al inicio"><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span class="logo-texto" aria-hidden="true">Hefesto <b>Webs</b></span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#proceso">Cómo trabajo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="nav-links-wa"><a class="btn btn-wa btn-sm" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-describedby="aviso-pestana">WhatsApp</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero hero-forja" id="inicio" aria-labelledby="hero-heading">
+      <picture>
+        <source media="(max-width: 860px)" srcset="hero/fondo-800.webp" />
+        <img class="fondo" id="fondo" src="hero/fondo-1376.webp" alt="" aria-hidden="true" />
+      </picture>
+      <div class="velo"></div>
+      <div class="calor" id="calor"></div>
+      <div class="sombra" id="sombra"></div>
+      <div class="texto wrap">
+      <div class="hero-main">
+        <h1 id="hero-heading" class="hero-in" style="--i:0">Páginas web que le traen <em>clientes</em> a tu negocio.</h1>
+        <p class="hero-sub hero-in" style="--i:1">Diseño y programo páginas, tiendas online y catálogos con pedidos por WhatsApp para comercios, profesionales y emprendimientos.</p>
+        <div class="hero-ctas hero-in" style="--i:2">
+          <a class="btn btn-wa" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-describedby="aviso-pestana">
+            <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+            Escribime por WhatsApp
+          </a>
+          <a class="btn btn-plain" href="#trabajos">Ver trabajos</a>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section class="ficha-franja wrap" aria-label="Qué hago, para quién y cómo trabajo">
+        <dl class="ficha">
+          <div><dt>Qué hago</dt><dd>Páginas, tiendas online con carrito y pagos, catálogos con pedidos por WhatsApp.</dd></div>
+          <div><dt>Para quién</dt><dd>Comercios, profesionales y emprendimientos. Y empresas que necesitan un <a href="#a-medida">sistema a medida</a>.</dd></div>
+          <div><dt>Cómo trabajo</dt><dd>Hablamos por WhatsApp, te paso un presupuesto y armamos tu página juntos. La consulta es sin costo.</dd></div>
+        </dl>
+        <p class="firma"><strong>Hefesto Webs</strong>, por Matias Lopez · Ing. en Sistemas, UTN San Rafael</p>
+    </section>
+
+    <!-- TRABAJOS -->
+    <section class="section wrap" id="trabajos" aria-labelledby="trabajos-heading">
+      <div class="section-head">
+        <h2 id="trabajos-heading">Trabajos</h2>
+        <p>Páginas reales que diseñé y programé. Tocá cada una para verla en compu y en celular.</p>
+      </div>
+
+      <div class="showcase" data-tabs>
+        <div class="tabs" role="tablist" aria-label="Proyectos">
+          <button class="tab" role="tab" id="tab-bacssa" aria-controls="panel-bacssa" aria-selected="true">Bacssa</button>
+          <button class="tab" role="tab" id="tab-zenti" aria-controls="panel-zenti" aria-selected="false" tabindex="-1">Zenti</button>
+          <button class="tab" role="tab" id="tab-quiro" aria-controls="panel-quiro" aria-selected="false" tabindex="-1">Quiropraxia</button>
+          <button class="tab" role="tab" id="tab-tienda" aria-controls="panel-tienda" aria-selected="false" tabindex="-1">Tienda con panel</button>
+          <button class="tab" role="tab" id="tab-cafe" aria-controls="panel-cafe" aria-selected="false" tabindex="-1">Café</button>
+        </div>
+
+        <article class="panel" role="tabpanel" id="panel-bacssa" aria-labelledby="tab-bacssa">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">matiaslopez237.github.io/Bacssa</span></div>
+              <div class="frame-shot"><img src="../../assets/proyectos/bacssa-desktop.jpg" width="1440" height="900" alt="Página de inicio de Bacssa en computadora: foto de un equipo de perforación y el menú de servicios." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="../../assets/proyectos/bacssa-mobile.jpg" width="780" height="1688" alt="La página de Bacssa en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Bacssa <span>· Servicios Oil &amp; Gas</span></h3>
+              <p>Página institucional para una empresa de campamentos, logística y mantenimiento para operaciones en el sur del país.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Empresa</li><li>Página institucional</li><li>Pensada para celular</li>
+              </ul>
+            </div>
+            <a class="link-arrow" href="https://matiaslopez237.github.io/Bacssa/" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de Bacssa</span></a>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-zenti" aria-labelledby="tab-zenti">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">app-zenti-front.onrender.com</span></div>
+              <div class="frame-shot" data-label="Zenti"><img src="../../assets/proyectos/zenti-desktop.jpg" width="1440" height="900" alt="Página de inicio de la tienda Zenti en computadora." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot" data-label="Zenti"><img src="../../assets/proyectos/zenti-mobile.jpg" width="780" height="1688" alt="La tienda Zenti en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Zenti <span>· Tienda de tecnología</span></h3>
+              <p>Tienda online de tecnología con catálogo, carrito y pagos, hecha a medida con un servidor propio.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Tienda online</li><li>Carrito y pagos</li><li>Hecha a medida</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://app-zenti-front.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de Zenti</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-quiro" aria-labelledby="tab-quiro">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">quiropraxiacipolletti.com</span></div>
+              <div class="frame-shot"><img src="../../assets/proyectos/quiropraxia-desktop.jpg" width="1440" height="900" alt="Página de inicio de Quiropraxia Cipolletti en computadora." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="../../assets/proyectos/quiropraxia-mobile.jpg" width="780" height="1688" alt="La página de Quiropraxia Cipolletti en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Quiropraxia Cipolletti <span>· Salud</span></h3>
+              <p>Landing page para el Lic. Juan Manuel Martinez, quiropráctor en Cipolletti. Servicios, beneficios, preguntas frecuentes y reserva de turnos online.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Dominio propio</li><li>Turnos online</li><li>Landing page</li>
+              </ul>
+            </div>
+            <a class="link-arrow" href="https://quiropraxiacipolletti.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de Quiropraxia Cipolletti</span></a>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-tienda" aria-labelledby="tab-tienda">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">ecommerce-5bt9.onrender.com</span></div>
+              <div class="frame-shot"><img src="../../assets/proyectos/tienda-desktop.jpg" width="1440" height="900" alt="Portada de la tienda en computadora: servicios de salud y estética con reserva de turnos." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="../../assets/proyectos/tienda-mobile.jpg" width="780" height="1688" alt="La portada de la tienda en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Sistema de tienda <span>· con panel de administración</span></h3>
+              <p>Tienda online completa: catálogo, carrito, cuentas de usuario, pagos con Mercado Pago y un panel para cargar productos y ver pedidos sin ayuda.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Carrito y pagos</li><li>Panel de administración</li><li>Cuentas de usuario</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de la tienda</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" role="tabpanel" id="panel-cafe" aria-labelledby="tab-cafe">
+          <div class="devices">
+            <div class="frame-browser">
+              <div class="frame-bar"><span class="frame-url">coffea-front.onrender.com</span></div>
+              <div class="frame-shot"><img src="../../assets/proyectos/cafe-desktop.jpg" width="1440" height="900" alt="Página de muestra de un café, con granos de café de fondo." loading="lazy" decoding="async"></div>
+            </div>
+            <div class="frame-phone">
+              <div class="frame-shot"><img src="../../assets/proyectos/cafe-mobile.jpg" width="780" height="1688" alt="La página de muestra del café en celular." loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="panel-info">
+            <div>
+              <h3>Café <span>· Proyecto de muestra</span></h3>
+              <p>Página de muestra para un café o restaurante: menú digital, galería, reservas y contacto directo por WhatsApp.</p>
+              <ul class="facts" aria-label="Características">
+                <li>Proyecto de muestra</li><li>Gastronomía</li><li>Menú digital</li>
+              </ul>
+            </div>
+            <div class="panel-link">
+              <a class="link-arrow" href="https://coffea-front.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> del café de muestra</span></a>
+              <small>Puede tardar unos segundos en cargar.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- RUBROS (antes Servicios) -->
+    <section class="section wrap" id="rubros" aria-labelledby="rubros-heading">
+      <div class="section-head">
+        <h2 id="rubros-heading">Páginas para cada tipo de negocio</h2>
+        <p>Cada página se arma según lo que tu negocio necesita mostrar y vender.</p>
+      </div>
+      <ul class="rubros" role="list">
+        <li><h3>Salud y consultorios</h3><p>Para centros médicos, consultorios, clínicas y profesionales de salud. Con información de servicios, contacto y turnos.</p></li>
+        <li><h3>Tiendas online</h3><p>Catálogo de productos, carrito de compras y pagos integrados. Ideal para negocios que quieren vender en internet.</p></li>
+        <li><h3>Restaurantes y cafés</h3><p>Menú digital, galería de fotos, reservas y contacto por WhatsApp. Para que tus clientes te encuentren fácil.</p></li>
+        <li><h3>Profesionales</h3><p>Para freelancers, artistas, fotógrafos y cualquier profesional que quiera mostrar su trabajo en internet.</p></li>
+        <li><h3>Inmobiliarias</h3><p>Listado de propiedades con filtros, fotos y formulario de contacto. Tu catálogo inmobiliario siempre actualizado.</p></li>
+        <li><h3>Campañas y lanzamientos</h3><p>Páginas enfocadas en convertir visitas en clientes. Para campañas, productos o servicios específicos.</p></li>
+      </ul>
+    </section>
+
+    <!-- PLANES -->
+    <section class="section wrap" id="planes" aria-labelledby="planes-heading">
+      <div class="section-head">
+        <h2 id="planes-heading">Planes y precios</h2>
+        <p>Precios de referencia en pesos. El valor final depende de lo que necesite tu proyecto.</p>
+      </div>
+
+      <div class="planes">
+        <article class="plan">
+          <h3>Landing Page</h3>
+          <p class="plan-desde"><small>Desde</small> <b>$150.000</b></p>
+          <p class="plan-ideal">Para negocios locales, profesionales y emprendedores que quieren presencia online.</p>
+          <p class="plan-desc">Una página de una sola pantalla para presentar tu negocio y convertir visitas en consultas. Rápida, adaptada al celular y pensada para que el cliente te contacte de inmediato.</p>
+          <ul class="plan-list">
+            <li>Diseño personalizado a tu marca</li>
+            <li>Adaptada a celular y computadora</li>
+            <li>Servicios, sobre vos y contacto</li>
+            <li>Formulario de contacto y botón de WhatsApp</li>
+            <li>Preparada para aparecer en Google</li>
+            <li>Estadísticas de visitas y comportamiento</li>
+          </ul>
+          <div class="plan-precio">
+            <a class="btn btn-wa btn-block" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Landing%20Page." target="_blank" rel="noopener" aria-describedby="aviso-pestana">Consultar por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="plan">
+          <h3>Tienda WhatsApp</h3>
+          <p class="plan-desde"><small>Desde</small> <b>$350.000</b></p>
+          <p class="plan-ideal">Para tiendas de ropa, accesorios, comida, productos artesanales o cualquier negocio que vende por chat.</p>
+          <p class="plan-desc">Un catálogo de productos donde cada artículo tiene un botón que abre WhatsApp con el pedido listo. Vendés sin intermediarios y sin pagar comisión por cada venta.</p>
+          <ul class="plan-list">
+            <li>Todo lo de Landing Page</li>
+            <li>Catálogo con fotos y precios</li>
+            <li>Botón "Pedir por WhatsApp" en cada producto</li>
+            <li>Sin comisiones por venta</li>
+            <li>Fácil de actualizar con nuevos productos</li>
+            <li>Estadísticas de visitas y comportamiento</li>
+          </ul>
+          <div class="plan-precio">
+            <a class="btn btn-wa btn-block" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Tienda%20WhatsApp." target="_blank" rel="noopener" aria-describedby="aviso-pestana">Consultar por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="plan">
+          <h3>Tienda con pagos</h3>
+          <p class="plan-desde"><small>Desde</small> <b>$900.000</b></p>
+          <p class="plan-ideal">Para negocios que quieren cobrar online con tarjeta, transferencia o Mercado Pago.</p>
+          <p class="plan-desc">Una tienda online completa: tus clientes agregan productos al carrito y pagan directo en tu web. Incluye un panel para ver y gestionar los pedidos.</p>
+          <ul class="plan-list">
+            <li>Todo lo de Tienda WhatsApp</li>
+            <li>Carrito y pago online</li>
+            <li>Tarjeta, transferencia o Mercado Pago</li>
+            <li>Panel de gestión de pedidos</li>
+            <li>Stock y notificaciones automáticas</li>
+            <li>Estadísticas de visitas y comportamiento</li>
+          </ul>
+          <div class="plan-precio">
+            <a class="btn btn-wa btn-block" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20me%20interesa%20el%20plan%20Tienda%20con%20pagos." target="_blank" rel="noopener" aria-describedby="aviso-pestana">Consultar por WhatsApp</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="planes-nota">Los precios corresponden al desarrollo del sitio. Según el proyecto (dominio, hosting, base de datos, volumen de visitas) puede sumarse un <strong>costo de mantenimiento mensual</strong>, que definimos juntos antes de arrancar.</p>
+
+      <div class="a-medida" id="a-medida">
+        <div>
+          <h3>¿Sos empresa o necesitás algo a medida?</h3>
+          <p>Sistemas, paneles de gestión, tiendas con pagos e integraciones. Contame qué necesitás y armamos un presupuesto.</p>
+        </div>
+        <a class="btn btn-plain" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20te%20escribo%20por%20un%20proyecto%20a%20medida." target="_blank" rel="noopener" aria-describedby="aviso-pestana">Pedir presupuesto</a>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="section wrap" id="proceso" aria-labelledby="proceso-heading">
+      <div class="section-head">
+        <h2 id="proceso-heading">Cómo trabajo</h2>
+        <p>Un proceso simple, desde la primera charla hasta que tu página está online.</p>
+      </div>
+      <ol class="pasos">
+        <li><h3>Consulta</h3><p>Hablamos por WhatsApp sobre tu negocio, tu público y qué tiene que lograr la página. Sin costo.</p></li>
+        <li><h3>Diseño y desarrollo</h3><p>Armo el diseño con tu marca y construyo la página: rápida y adaptada al celular.</p></li>
+        <li><h3>Revisión</h3><p>Ajustamos juntos hasta que quede exactamente como lo imaginaste.</p></li>
+        <li><h3>Publicación</h3><p>Publicamos la página y te entrego todo listo. Si querés, sigo con el mantenimiento mensual.</p></li>
+      </ol>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section wrap" id="contacto" aria-labelledby="contacto-heading">
+      <div class="contacto">
+        <div class="contacto-texto">
+          <h2 id="contacto-heading">Contame de tu negocio y te paso un presupuesto.</h2>
+          <p>La consulta es sin costo y te respondo en el día.</p>
+          <a class="btn btn-wa btn-lg" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-describedby="aviso-pestana">
+            <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+            Escribime por WhatsApp
+          </a>
+          <p class="contacto-alt">También podés escribirme a <a href="mailto:matias.e.lopez747@gmail.com">matias.e.lopez747@gmail.com</a> o ver los trabajos en Instagram, <a href="https://www.instagram.com/efestowebs/" target="_blank" rel="noopener" aria-describedby="aviso-pestana">@efestowebs</a>.</p>
+        </div>
+
+        <form class="form" id="contact-form" action="#" data-prototipo method="POST">
+          <p class="form-title">¿Preferís dejarme un mensaje?</p>
+          <div class="field">
+            <label for="nombre">¿Cómo te llamás?</label>
+            <input type="text" id="nombre" name="nombre" maxlength="100" placeholder="Tu nombre" autocomplete="name" autocapitalize="words" enterkeyhint="next" required />
+          </div>
+          <div class="field">
+            <label for="contacto-input">¿Cómo te contacto?</label>
+            <input type="text" id="contacto-input" name="contacto" maxlength="150" placeholder="Email o teléfono" autocomplete="on" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next" required />
+          </div>
+          <div class="field">
+            <label for="proyecto">¿Qué querés hacer?</label>
+            <textarea id="proyecto" name="proyecto" rows="4" maxlength="3000" placeholder="Contame sobre tu negocio y qué tipo de página necesitás" required></textarea>
+          </div>
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="Nueva consulta desde el portfolio" />
+          <button type="submit" class="btn btn-plain btn-block" id="form-submit">Enviar mensaje</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p class="footer-name"><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span>Hefesto <b>Webs</b></span></p>
+      <p>© 2026 Hefesto Webs · por Matias Emanuel Lopez</p>
+      <ul class="footer-links" role="list">
+        <li><a href="https://wa.me/5492604661138" target="_blank" rel="noopener" aria-describedby="aviso-pestana">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/efestowebs/" target="_blank" rel="noopener" aria-describedby="aviso-pestana">Instagram</a></li>
+        <li><a href="mailto:matias.e.lopez747@gmail.com">matias.e.lopez747@gmail.com</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <div class="vuelo" id="vuelo" aria-hidden="true">
+    <div class="pieza" id="pieza">
+      <div class="halo" id="halo"></div>
+      <img src="hero/logo-520.webp" srcset="hero/logo-260.webp 260w, hero/logo-520.webp 520w" sizes="300px" alt="" />
+      <div class="brillo" id="brillo"></div>
+    </div>
+  </div>
+  <canvas class="chispas" id="chispas" aria-hidden="true"></canvas>
+
+  <p id="aviso-pestana" hidden>Se abre en otra pestaña.</p>
+
+  <a class="fab" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-describedby="aviso-pestana" aria-label="Escribime por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+  </a>
+
+  <script>
+    /* ── Nav: borde al hacer scroll ── */
+    const header = document.getElementById('nav');
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Menú móvil ── */
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    function setMenu(open) {
+      navLinks.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    }
+    toggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); toggle.focus(); }
+    });
+    header.addEventListener('focusout', e => {
+      if (navLinks.classList.contains('open') && !header.contains(e.relatedTarget)) setMenu(false);
+    });
+    document.addEventListener('pointerdown', e => {
+      if (navLinks.classList.contains('open') && !header.contains(e.target)) setMenu(false);
+    });
+
+    /* ── Pestañas de trabajos (sin JS se ven todos los proyectos uno debajo del otro) ── */
+    document.querySelectorAll('[data-tabs]').forEach(root => {
+      const tabs = [...root.querySelectorAll('[role="tab"]')];
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+      root.classList.add('is-enhanced');
+      function select(i, focus, animate) {
+        tabs.forEach((t, j) => {
+          const on = i === j;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+          panels[j].classList.toggle('is-entering', on && animate);
+        });
+        if (focus) tabs[i].focus();
+        const strip = tabs[i].parentElement;
+        if (strip.scrollWidth > strip.clientWidth) {
+          strip.scrollTo({ left: tabs[i].offsetLeft - (strip.clientWidth - tabs[i].offsetWidth) / 2, behavior: animate ? 'smooth' : 'auto' });
+        }
+      }
+      panels.forEach(p => p.addEventListener('animationend', () => p.classList.remove('is-entering')));
+      tabs.forEach((t, i) => {
+        // Con el mouse o el dedo hay un fundido corto; con el teclado el cambio es instantáneo
+        t.addEventListener('click', e => { if (t.getAttribute('aria-selected') !== 'true') select(i, false, e.detail > 0); });
+        t.addEventListener('keydown', e => {
+          const k = e.key;
+          if (k === 'ArrowRight' || k === 'ArrowLeft' || k === 'Home' || k === 'End') {
+            e.preventDefault();
+            const n = k === 'Home' ? 0 : k === 'End' ? tabs.length - 1
+              : (i + (k === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            select(n, true, false);
+          }
+        });
+      });
+      select(0, false, false);
+    });
+
+    /* ── Captura faltante: muestra el nombre del proyecto en lugar de una imagen rota ── */
+    document.querySelectorAll('.frame-shot img').forEach(img => {
+      const fail = () => { img.parentElement.classList.add('is-missing'); img.remove(); };
+      if (img.complete) { if (img.naturalWidth === 0) fail(); return; }
+      img.classList.add('is-loading');
+      img.addEventListener('load', () => img.classList.remove('is-loading'), { once: true });
+      img.addEventListener('error', fail, { once: true });
+    });
+
+    /* ── Botón flotante: aparece solo cuando no hay otro botón de WhatsApp a la vista ── */
+    const fab = document.querySelector('.fab');
+    const waTargets = [document.querySelector('.hero-ctas'), document.querySelector('.contacto-texto .btn-wa')].filter(Boolean);
+    if (fab && 'IntersectionObserver' in window) {
+      const visible = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => en.isIntersecting ? visible.add(en.target) : visible.delete(en.target));
+        fab.classList.toggle('is-visible', visible.size === 0);
+      });
+      waTargets.forEach(el => io.observe(el));
+    } else if (fab) {
+      fab.classList.add('is-visible');
+    }
+
+    /* ── Formulario: envía sin salir de la página (Formspree), con aviso de éxito o error ── */
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const submit = document.getElementById('form-submit');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      submit.disabled = true;
+      submit.textContent = 'Enviando…';
+      status.className = 'form-status';
+      status.textContent = '';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        status.classList.add('is-ok');
+        status.textContent = 'Mensaje enviado. Te respondo en el día.';
+      } catch {
+        status.classList.add('is-error');
+        status.innerHTML = 'No se pudo enviar el mensaje. Probá de nuevo o <a href="https://wa.me/5492604661138" target="_blank" rel="noopener" aria-describedby="aviso-pestana">escribime por WhatsApp</a>.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Enviar mensaje';
+      }
+    });
+  </script>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const hero = $('inicio'), fondo = $('fondo'), vuelo = $('vuelo'), pieza = $('pieza'), brillo = $('brillo'), halo = $('halo');
+  const sombra = $('sombra'), calor = $('calor'), slot = document.querySelector('.site-header .logo-simbolo'), nav = $('nav');
+  const slotSvg = slot;
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const aj = { curva: 0.85, giro: 20, chispas: 1, flote: 10, tramo: 0.75 }; // valores elegidos en el prototipo
+  
+
+  // ── utilidades de easing ──
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const easeInOut = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const tramo = (t, a, b) => clamp((t - a) / (b - a));
+
+  // Dónde cae un punto de la foto (en proporción) con object-fit: cover y object-position.
+  const FOTO = { w: 1376, h: 768 }, YUNQUE = { x: 0.76, y: 0.585 }; // parte de arriba del yunque
+  function puntoFoto(px, py) {
+    const r = fondo.getBoundingClientRect(), cs = getComputedStyle(fondo);
+    const esc = Math.max(r.width / FOTO.w, r.height / FOTO.h);
+    const w = FOTO.w * esc, h = FOTO.h * esc;
+    const [ox, oy] = cs.objectPosition.split(' ').map(v => parseFloat(v) / 100);
+    const x0 = (r.width - w) * ox, y0 = (r.height - h) * oy;
+    return { x: r.left + x0 + px * w, y: r.top + y0 + py * h, esc: w };
+  }
+
+  // ── chispas ──
+  const cv = $('chispas'), cx = cv.getContext('2d');
+  let chispas = [];
+  function ajustarCanvas() { const dpr = Math.min(devicePixelRatio, 2); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  ajustarCanvas(); addEventListener('resize', ajustarCanvas);
+  function emitir(x, y, n, fuerza) {
+    for (let i = 0; i < n && chispas.length < 90; i++) {
+      const ang = -Math.PI / 2 + (Math.random() - .5) * 2.2;
+      const v = (1.2 + Math.random() * 2.6) * fuerza;
+      chispas.push({ x, y, vx: Math.cos(ang) * v, vy: Math.sin(ang) * v - 0.5, vida: 0, max: 40 + Math.random() * 45, r: .6 + Math.random() * 1.4 });
+    }
+  }
+  function dibujarChispas() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    cx.globalCompositeOperation = 'lighter';
+    chispas = chispas.filter(c => c.vida < c.max);
+    for (const c of chispas) {
+      c.vida++; c.vy += 0.09; c.vx *= 0.985; c.x += c.vx; c.y += c.vy;
+      const t = c.vida / c.max;
+      const col = t < .25 ? '255,240,200' : t < .6 ? '255,160,60' : '220,70,20';
+      cx.strokeStyle = `rgba(${col},${(1 - t).toFixed(2)})`;
+      cx.lineWidth = c.r; cx.beginPath(); cx.moveTo(c.x, c.y); cx.lineTo(c.x - c.vx * 1.6, c.y - c.vy * 1.6); cx.stroke();
+    }
+    cx.globalCompositeOperation = 'source-over';
+  }
+
+  // ── estado ──
+  let p = 0, inicio = performance.now(), llego = false, ruido = 0.8;
+
+  function cuadro(ahora) {
+    const t = (ahora - inicio) / 1000;
+    const alto = hero.offsetHeight * aj.tramo;
+    const objetivo = reducido ? 0 : clamp(scrollY / alto);
+    p += (objetivo - p) * 0.14;                       // inercia: el logo sigue al scroll con suavidad
+    if (Math.abs(objetivo - p) < 0.0005) p = objetivo;
+
+    // Origen: flotando sobre el yunque. Destino: el símbolo de la nav.
+    const y = puntoFoto(YUNQUE.x, YUNQUE.y);
+    const celular = innerWidth <= 860;
+    const h1 = document.querySelector('.hero-forja h1').getBoundingClientRect();
+    let tamIni = celular ? clamp(y.esc * 0.17, 120, 190) : clamp(y.esc * 0.17, 160, 300);
+    const s = slot.getBoundingClientRect();
+    const tamFin = s.width * 1.04;
+    const ini = { x: y.x, y: y.y - tamIni * 0.6 };
+    // Nunca encima del texto: en compu, a la derecha del título; en celular, arriba del título.
+    if (!celular) ini.x = Math.max(ini.x, h1.right + 32 + tamIni / 2);
+    else { const techo = h1.top - 16; if (ini.y + tamIni / 2 > techo) { const sobra = ini.y + tamIni / 2 - techo; tamIni = Math.max(100, tamIni - sobra); ini.y = techo - tamIni / 2; } }
+    const fin = { x: s.left + s.width / 2, y: s.top + s.height / 2 };
+
+    // Fases
+    const fLevanta = easeOut(tramo(p, 0, 0.18));
+    const fVuelo = easeInOut(tramo(p, 0.12, 0.88));
+    const fEncastre = tramo(p, 0.84, 1);
+
+    // Flote tipo ítem: sube y baja, y se balancea; se apaga al despegar.
+    const flote = reducido ? 0 : (1 - fLevanta);
+    const bob = Math.sin(t * 2.2) * aj.flote * flote;
+    const balanceo = Math.sin(t * 1.1) * 12 * flote;
+
+    // Trayectoria en arco (bezier cuadrática): primero sube, después planea hacia la nav.
+    // curva 0 = línea recta; curva 1 = sube primero y después planea por arriba, lejos del texto.
+    const ctrl = { x: lerp((ini.x + fin.x) / 2, ini.x, aj.curva), y: lerp((ini.y + fin.y) / 2, fin.y, aj.curva) };
+    const u = fVuelo, mu = 1 - u;
+    let x = mu * mu * ini.x + 2 * mu * u * ctrl.x + u * u * fin.x;
+    let yy = mu * mu * (ini.y - 34 * fLevanta) + 2 * mu * u * ctrl.y + u * u * fin.y;
+    yy += bob;
+
+    // Tamaño: se achica más rápido al principio; al encastrar se pasa apenas y se acomoda.
+    let tam = lerp(tamIni, tamFin, easeOut(fVuelo));
+    tam *= 1 + Math.sin(Math.PI * fEncastre) * 0.14 * (fEncastre < 1 ? 1 : 0);
+
+    // Giro 3D: se inclina hacia donde va y se endereza al llegar.
+    const giroY = balanceo + aj.giro * Math.sin(Math.PI * fVuelo);
+    const giroX = -aj.giro * 0.45 * Math.sin(Math.PI * fVuelo);
+    const giroZ = -9 * Math.sin(Math.PI * fVuelo);
+
+    vuelo.style.width = vuelo.style.height = tam + 'px';
+    vuelo.style.transform = `translate(${x - tam / 2}px, ${yy - tam / 2}px)`;
+    pieza.style.transform = `rotateX(${giroX}deg) rotateY(${giroY}deg) rotateZ(${giroZ}deg)`;
+
+    // Fundido final con el logo plano de la nav.
+    const fundido = reducido ? 1 : tramo(p, 0.93, 0.995);
+    pieza.style.opacity = 1 - fundido;
+    slotSvg.style.opacity = fundido;
+    if (fundido >= 0.99 && !llego) { llego = true; slot.classList.remove('destello'); void slot.getBoundingClientRect(); slot.classList.add('destello'); }
+    if (fundido < 0.5) llego = false;
+
+    // Hierro al rojo: se enciende al cargar, después respira con parpadeos; se aviva al despegar y se enfría en el viaje.
+    const encendido = clamp(t / 0.6) * (1 + 0.6 * Math.exp(-Math.pow((t - 0.9) / 0.35, 2)));
+    ruido += (Math.random() - 0.5) * 0.25; ruido = clamp(ruido, 0.55, 1.05);
+    const parpadeo = reducido ? 0.85 : ruido + (Math.random() < 0.015 ? 0.4 : 0);
+    const aviva = 1 + 0.6 * Math.sin(Math.PI * tramo(p, 0, 0.3));
+    const enfria = 1 - 0.7 * fVuelo;
+    const calorActual = encendido * parpadeo * aviva * enfria;
+    brillo.style.opacity = clamp(calorActual, 0, 1.2);
+    halo.style.opacity = clamp(calorActual * 0.9, 0, 1);
+
+    // Sombra de contacto y calor sobre el yunque: siguen el flote y se apagan al despegar.
+    const sombraOn = 1 - fLevanta;
+    sombra.style.left = calor.style.left = (y.x - hero.getBoundingClientRect().left) + 'px';
+    sombra.style.top = calor.style.top = (y.y - hero.getBoundingClientRect().top) + 'px';
+    const altura = (bob + aj.flote) / (2 * aj.flote || 1);
+    sombra.style.width = tamIni * (0.75 + 0.25 * (1 - altura)) * (1 + fLevanta) + 'px';
+    sombra.style.opacity = (0.55 + 0.3 * (1 - altura)) * sombraOn;
+    calor.style.width = tamIni * 1.1 + 'px';
+    calor.style.opacity = clamp(calorActual * 0.8 * sombraOn, 0, 1);
+
+    // Fondo: profundidad (se aleja y se oscurece).
+    fondo.style.transform = `translateY(${p * 60}px) scale(${1 + 0.06 * p})`;
+    fondo.style.filter = `brightness(${1 - 0.4 * p})`;
+
+    // Chispas desde la parte de abajo de la barra al rojo.
+    if (!reducido && aj.chispas > 0) {
+      const r = pieza.getBoundingClientRect();
+      const ex = r.left + r.width * 0.47, ey = r.top + r.height * 0.66;
+      const tasa = aj.chispas * (0.12 + (parpadeo > 1 ? 0.6 : 0) + 1.4 * Math.sin(Math.PI * tramo(p, 0, 0.3))) * (1 - fVuelo) * clamp(t / 0.6);
+      if (Math.random() < tasa) emitir(ex, ey, 1 + (Math.random() < 0.3 ? 2 : 0), 0.6 + tamIni / 400);
+    }
+    if (fVuelo >= 0.98) chispas = [];
+    dibujarChispas();
+    requestAnimationFrame(cuadro);
+  }
+  requestAnimationFrame(cuadro);
+})();
+</script>
+
+<script>
+(() => {
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  // El formulario del prototipo no envía nada.
+  document.addEventListener('submit', (e) => { if (e.target.matches('[data-prototipo]')) { e.preventDefault(); e.stopImmediatePropagation(); alert('Prototipo: el formulario no envía.'); } }, true);
+
+  // Números fantasma en cada título de sección
+  document.querySelectorAll('.section-head').forEach((s, i) => { const f = document.createElement('span'); f.className = 'fantasma'; f.setAttribute('aria-hidden', 'true'); f.textContent = String(i + 1).padStart(2, '0'); s.prepend(f); });
+  const fantasmas = [...document.querySelectorAll('.fantasma')];
+
+  // Aparición y encendido, una vez
+  const marcar = ['.section-head', '.showcase', '.rubros li', '.plan', '.a-medida', '.pasos li', '.contacto-texto', '.form', '.ficha-franja'];
+  const io = new IntersectionObserver((es) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visto');
+    if (e.target.classList.contains('section-head')) e.target.classList.add('encendida');
+    if (e.target.classList.contains('plan')) setTimeout(() => e.target.classList.add('encendida'), 250);
+    io.unobserve(e.target);
+  }), { threshold: 0.25 });
+  document.querySelectorAll(marcar.join(',')).forEach((el) => { el.classList.add('aparece'); io.observe(el); });
+  document.querySelectorAll('.plan').forEach((el, i) => { el.style.transitionDelay = (i * 90) + 'ms'; });
+
+  // Brillo del metal que sigue al mouse
+  document.querySelectorAll('.showcase, .a-medida, .form, .plan').forEach(el => el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect(); el.style.setProperty('--mx', (e.clientX - r.left) + 'px'); el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  // Línea de forja en "Cómo trabajo"
+  const pasos = document.querySelector('.pasos');
+  const linea = document.createElement('div'); linea.className = 'linea'; linea.setAttribute('aria-hidden', 'true'); linea.innerHTML = '<i></i>'; pasos.prepend(linea);
+
+  // Brasas alrededor del botón de contacto
+  const cta = document.querySelector('#contacto .btn-wa');
+  const envoltura = document.createElement('span'); envoltura.className = 'cta-brasa'; cta.replaceWith(envoltura); envoltura.append(cta);
+  const cv = document.createElement('canvas'); cv.setAttribute('aria-hidden', 'true'); envoltura.prepend(cv);
+  const cx = cv.getContext('2d'); let brasas = [], visible = false;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(cv);
+  function medir() { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio, 2); cv.width = r.width * d; cv.height = r.height * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+  medir(); addEventListener('resize', medir);
+
+  const showcase = document.querySelector('.showcase'), devicesSel = () => showcase.querySelector('.panel:not([hidden]) .devices');
+  let mouseEq = null;
+  showcase.addEventListener('pointermove', (e) => { const r = showcase.getBoundingClientRect(); mouseEq = { x: (e.clientX - r.left) / r.width - .5, y: (e.clientY - r.top) / r.height - .5 }; });
+  showcase.addEventListener('pointerleave', () => { mouseEq = null; });
+
+  function cuadro() {
+    if (!reducido) {
+      const d = devicesSel();
+      if (d) {
+        const r = d.getBoundingClientRect(); const k = clamp(1 - Math.abs((r.top + r.height / 2) - innerHeight / 2) / innerHeight);
+        let rx = 12 - 9 * k, ry = -9 + 6.5 * k; if (mouseEq) { rx = 3 - mouseEq.y * 7; ry = mouseEq.x * 9; }
+        d.style.setProperty('--rx', rx.toFixed(2) + 'deg'); d.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+      }
+      for (const f of fantasmas) { const s = f.parentElement.getBoundingClientRect(); f.style.transform = 'translateY(' + ((s.top - innerHeight / 2) * 0.07).toFixed(1) + 'px)'; }
+    }
+    const rp = pasos.getBoundingClientRect();
+    const avance = reducido ? 1 : clamp((innerHeight * 0.8 - rp.top) / (rp.height + innerHeight * 0.2));
+    pasos.style.setProperty('--avance', avance.toFixed(3));
+    const items = [...pasos.querySelectorAll('li')];
+    items.forEach((p, i) => p.classList.toggle('caliente', innerWidth <= 860 ? p.getBoundingClientRect().top < innerHeight * 0.7 : avance >= i / items.length + 0.02));
+
+    const w = cv.clientWidth, h2 = cv.clientHeight;
+    if (visible && !reducido) {
+      if (Math.random() < 0.18 && brasas.length < 26) brasas.push({ x: 40 + Math.random() * (w - 80), y: h2 - 22, vx: (Math.random() - .5) * .3, vy: -(.25 + Math.random() * .55), vida: 0, max: 90 + Math.random() * 90, r: .8 + Math.random() * 1.6 });
+      cx.clearRect(0, 0, w, h2); cx.globalCompositeOperation = 'lighter';
+      brasas = brasas.filter(b => b.vida < b.max);
+      for (const b of brasas) { b.vida++; b.x += b.vx + Math.sin(b.vida / 14) * .25; b.y += b.vy; const t = b.vida / b.max, a = Math.sin(Math.PI * t);
+        cx.fillStyle = 'rgba(255,' + (150 - 70 * t | 0) + ',40,' + (a * .9).toFixed(2) + ')'; cx.beginPath(); cx.arc(b.x, b.y, b.r, 0, Math.PI * 2); cx.fill(); }
+      cx.globalCompositeOperation = 'source-over';
+    }
+    requestAnimationFrame(cuadro);
+  }
+  requestAnimationFrame(cuadro);
+})();
+</script>
+</body>
+</html>
