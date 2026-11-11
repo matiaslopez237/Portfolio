@@ -63,8 +63,17 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-09 | CA-09.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/contenido.json (post 11) · textos.md` |
 | HU-09 | CA-09.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/calendario.md (desde 2026-11-11)` |
 | HU-09 | CA-09.5 | Checklist (firma Matias) | pendiente | Ver los posts 10 a 12 en la grilla |
+| HU-10 | CA-10.1 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-10 | CA-10.2 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-10 | CA-10.3 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-10 | CA-10.4 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-10 | CA-10.5 | Test (TDD, API simulada) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-10 | CA-10.6 | Chequeo `scripts/check.mjs` | ✓ | `.github/workflows/publicar-instagram.yml` |
+| HU-10 | CA-10.7 | Chequeo `scripts/check.mjs` | ✓ | todos los archivos del repo |
+| HU-10 | CA-10.8 | Checklist (firma Matias) | pendiente | Post 4 publicado solo el 2026-11-18 a las 19 |
 
 ## Huecos
+- HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).
 - HU-09: CA-09.5 sin firmar. Commits [RED] 6eb79e6 → [GREEN] (este). CA-04.4 se ajustó a "9 o más textos" porque ahora hay 12.
 - HU-08: CA-08.7 sin firmar. Commits [RED] 6d39437 → [GREEN] (este). CA-08.6 ya pasaba antes del cambio (el botón se oculta al llegar al contacto); queda como protección. Sin publicar.
 - HU-05: CA-05.7 sin firmar. Commits [RED] a4be5b1 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Faltan definir plazos y formas de pago (quedan fuera de los mensajes).

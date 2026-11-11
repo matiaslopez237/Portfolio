@@ -1,0 +1,56 @@
+# Publica en Instagram el post que toca hoy según brand/instagram/calendario.md (HU-10).
+# Corre todos los días a las 19:00 de Argentina (22:00 UTC). También se puede lanzar a mano desde
+# GitHub › Actions › "Publicar en Instagram" › Run workflow (por ejemplo, para reintentar un día).
+# Necesita dos secrets (GitHub › Settings › Secrets and variables › Actions): IG_USER_ID e IG_ACCESS_TOKEN.
+name: Publicar en Instagram
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: 'Fecha a publicar (AAAA-MM-DD). Vacío = hoy'
+        required: false
+      prueba:
+        description: 'Modo prueba: muestra qué publicaría, sin publicar'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-instagram
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Publicar el post del día
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          FECHA: ${{ inputs.fecha }}
+          PRUEBA: ${{ inputs.prueba }}
+        run: |
+          ARGS=""
+          if [ -n "$FECHA" ]; then ARGS="$ARGS --fecha=$FECHA"; fi
+          if [ "$PRUEBA" = "true" ]; then ARGS="$ARGS --prueba"; fi
+          node scripts/publicar-instagram.mjs $ARGS
+
+      - name: Guardar el registro de lo publicado
+        run: |
+          if git diff --quiet -- brand/instagram/publicados.json; then exit 0; fi
+          git config user.name "efesto-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand/instagram/publicados.json
+          git commit -m "chore: registro de publicación en Instagram"
+          git push

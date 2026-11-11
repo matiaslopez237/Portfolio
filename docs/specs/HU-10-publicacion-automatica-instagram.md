@@ -52,3 +52,4 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 ## Historial
 - 2026-11-10: creada (opción A: posts 1 a 3 programados a mano, del 4 en adelante automático).
 - 2026-11-10: aprobada por Matias.
+- 2026-11-10: implementada; 11 tests y 2 chequeos en verde, prueba en seco OK. Falta conectar la app de Meta, cargar los secrets y hacer push.
