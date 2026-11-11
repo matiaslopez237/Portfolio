@@ -12,6 +12,8 @@ rep('href="style.css"', 'href="../../style.css"');
 h = h.replace(/\s*<!-- PostHog Analytics -->\s*<script>[\s\S]*?<\/script>/, '\n  <!-- Prototipo: sin PostHog -->');
 rep('<title>', '<title>Prototipo · ');
 rep('action="https://formspree.io/f/xojbrbwd"', 'action="#" data-prototipo');
+// Sin la aclaración de "puede tardar en cargar" (pedido de Matias, 2026-11-11)
+h = h.replace(/\s*<small>Puede tardar unos segundos en cargar\.<\/small>/g, '');
 
 // ── Hero nuevo: foto del taller + logo 3D (el texto del hero es el del sitio) ──
 const main = h.match(/      <div class="hero-main">[\s\S]*?\n      <\/div>\n/)[0];
@@ -141,6 +143,14 @@ const css = `
   .cta-brasa canvas { position: absolute; left: -40px; top: -70px; width: calc(100% + 80px); height: calc(100% + 90px); pointer-events: none; }
   .btn-wa:hover { box-shadow: 0 0 0 1px var(--accent), 0 10px 34px -6px rgba(255,122,26,.65); }
 
+  /* Botón "Ver sitio": acero, con el borde que se enciende */
+  .panel-link .link-arrow { min-height: 48px; padding: 0 22px; gap: 10px; border-radius: 4px; font-weight: 700; color: var(--text);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0) 60%), var(--surface-2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px var(--line-strong), 0 10px 24px -14px rgba(0,0,0,.9);
+    transition: box-shadow .2s, transform .12s; }
+  .panel-link .link-arrow .link-text { text-decoration: none; }
+  .panel-link .link-arrow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px var(--accent), 0 0 22px -6px rgba(255,122,26,.55); }
+  .panel-link .link-arrow:active { transform: scale(.97); }
   .aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1); }
   .aparece.visto { opacity: 1; transform: none; }
 
