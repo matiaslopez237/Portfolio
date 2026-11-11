@@ -420,7 +420,118 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-11: Investigación de audiencia y estrategia de contenido ──
+  {
+    ca: 'CA-11.1', desc: 'brand/instagram/estrategia/ tiene los 9 archivos .md y existe estrategia.html',
+    run: () => {
+      const faltan = [...ARCHIVOS_ESTRATEGIA.map(a => `brand/instagram/estrategia/${a}`), 'brand/instagram/estrategia.html'].filter(f => leerOpcional(f) === null);
+      if (faltan.length) throw new Error('faltan: ' + faltan.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.2', desc: 'personas.md: 3 o 4 personas con todos los campos, ≥ 3 dolores y ≥ 3 objeciones',
+    run: () => {
+      const ps = personas();
+      if (ps.length < 3 || ps.length > 4) throw new Error(`hay ${ps.length} personas`);
+      const malos = [];
+      for (const p of ps) {
+        const faltan = CAMPOS_PERSONA.filter(k => !new RegExp(`^- \\*\\*${k}:\\*\\* \\S`, 'm').test(p.texto));
+        if (faltan.length) malos.push(`${p.nombre}: faltan ${faltan.join(', ')}`);
+        for (const [sub, min] of [['Dolores', 3], ['Miedos y objeciones', 3], ['Qué la hace decidirse', 1], ['Contenido por etapa', 3]]) {
+          const n = itemsDe(p.texto, sub).length; if (n < min) malos.push(`${p.nombre}: ${sub} tiene ${n}`);
+        }
+        if (!/^- \*\*Estado:\*\* (proto-persona|validada)/m.test(p.texto)) malos.push(`${p.nombre}: estado debe ser proto-persona o validada`);
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.3', desc: 'personas.md: cada dolor, objeción y disparador indica su fuente',
+    run: () => {
+      const sinFuente = [];
+      for (const p of personas()) for (const sub of ['Dolores', 'Miedos y objeciones', 'Qué la hace decidirse'])
+        for (const it of itemsDe(p.texto, sub)) if (!FUENTE.test(it)) sinFuente.push(`${p.nombre} › ${sub}: "${it.slice(0, 40)}…"`);
+      if (sinFuente.length) throw new Error('sin fuente: ' + sinFuente.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.4', desc: 'competencia.md: 8 a 10 cuentas con fecha, formatos, frecuencia, tono y temas, y sección de huecos',
+    run: () => {
+      const c = leerEstrategia('competencia.md');
+      const cuentas = c.split(/^## Cuenta /m).slice(1);
+      if (cuentas.length < 8 || cuentas.length > 10) throw new Error(`hay ${cuentas.length} cuentas`);
+      const malos = cuentas.map((t, i) => [i + 1, ['Observada', 'Formatos', 'Frecuencia', 'Tono', 'Temas'].filter(k => !new RegExp(`^- \\*\\*${k}:\\*\\* \\S`, 'm').test(t))])
+        .filter(([, f]) => f.length).map(([i, f]) => `cuenta ${i}: faltan ${f.join(', ')}`);
+      if (!/^- \*\*Observada:\*\* \d{4}-\d{2}-\d{2}/m.test(c)) malos.push('las fechas de observación no tienen formato AAAA-MM-DD');
+      if (seccion(c, 'Huecos') === null) malos.push('falta ## Huecos');
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.5', desc: 'voz-y-tono.md: ejes, ≥ 10 palabras sí y no, ≥ 10 ganchos, CTA fijos y ≥ 5 objeciones respondidas',
+    run: () => {
+      const v = leerEstrategia('voz-y-tono.md');
+      const lista = (t) => (seccion(v, t) ?? '').split('\n').filter(l => /^\s*[-*\d]+[.)]?\s+\S/.test(l)).length;
+      const malos = [];
+      if (seccion(v, 'Ejes de tono') === null) malos.push('falta ## Ejes de tono');
+      for (const [t, min] of [['Palabras que sí', 10], ['Palabras que no', 10], ['Ganchos', 10], ['CTA fijos', 1]]) { const n = lista(t); if (n < min) malos.push(`${t}: ${n}`); }
+      const obj = ((seccion(v, 'Objeciones') ?? '').match(/^### /gm) || []).length; if (obj < 5) malos.push(`Objeciones: ${obj}`);
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.6', desc: 'matriz-de-contenido.md: los 4 pilares aparecen con etapa, persona y formato',
+    run: () => {
+      const filas = leerEstrategia('matriz-de-contenido.md').split('\n').filter(l => /^\|/.test(l)).slice(2).map(l => l.split('|').slice(1, -1).map(c => c.trim()));
+      const completas = filas.filter(f => f.length >= 4 && f.slice(0, 4).every(Boolean));
+      const faltan = ['Trabajos', 'Consejos', 'Oferta', 'Detrás de escena'].filter(p => !completas.some(f => f[0].toLowerCase().startsWith(p.toLowerCase())));
+      if (faltan.length) throw new Error('pilares sin fila completa: ' + faltan.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.7', desc: 'validacion.md: guía de entrevista con ≥ 10 preguntas y ≥ 5 hipótesis con métrica',
+    run: () => {
+      const v = leerEstrategia('validacion.md');
+      const preguntas = (seccion(v, 'Guía de entrevista') ?? '').split('\n').filter(l => /^\s*\d+[.)]\s+\S.*\?/.test(l)).length;
+      const hip = (seccion(v, 'Hipótesis') ?? '').split('\n').filter(l => /^\|/.test(l)).slice(2).map(l => l.split('|').slice(1, -1).map(c => c.trim())).filter(f => f.length >= 2 && f.every(Boolean)).length;
+      if (preguntas < 10 || hip < 5) throw new Error(`${preguntas} preguntas y ${hip} hipótesis con métrica`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-11.8', desc: 'Los archivos de estrategia no tienen teléfonos ni emails de clientes',
+    run: () => {
+      const propios = [/2604661138/, /260 466-1138/, /matias\.e\.lopez747@gmail\.com/];
+      const malos = [];
+      for (const a of [...ARCHIVOS_ESTRATEGIA.map(x => `estrategia/${x}`), 'estrategia.html']) {
+        let t = leerOpcional(`brand/instagram/${a}`); if (t === null) continue;
+        for (const p of propios) t = t.replace(new RegExp(p.source, 'g'), '');
+        if (/[\w.+-]+@[\w-]+\.[\w.]+/.test(t) || /\b(\+?54[\s-]?)?9?[\s-]?\d{2,4}[\s-]?\d{3,4}[\s-]\d{4}\b/.test(t)) malos.push(a);
+      }
+      if (malos.length) throw new Error('posibles datos de contacto en: ' + malos.join(', '));
+      return true;
+    },
+  },
 ];
+
+const ARCHIVOS_ESTRATEGIA = ['objetivos.md', 'segmentos.md', 'personas.md', 'recorrido.md', 'competencia.md', 'voz-y-tono.md', 'implicancias-diseno.md', 'matriz-de-contenido.md', 'validacion.md'];
+const CAMPOS_PERSONA = ['Foto', 'Rubro', 'Segmento', 'Objetivo', 'Cómo usa Instagram', 'Palabras que usa', 'Plan que le sirve', 'Estado'];
+const FUENTE = /_\(fuente: (entrevista|mensaje|proyecto|competencia|hipótesis|Matias)[^)]*\)_/i;
+function leerEstrategia(a) { const t = leerOpcional(`brand/instagram/estrategia/${a}`); if (t === null) throw new Error(`no existe estrategia/${a}`); return t; }
+function personas() {
+  return leerEstrategia('personas.md').split(/^## Persona /m).slice(1).map(t => ({ nombre: t.split('\n')[0].trim(), texto: t }));
+}
+function itemsDe(texto, sub) {
+  const m = texto.match(new RegExp(`^### ${sub}\\s*$([\\s\\S]*?)(?=^##+ |$(?![\\s\\S]))`, 'm'));
+  return m ? m[1].split('\n').filter(l => /^\s*[-*]\s+\S/.test(l)) : [];
+}
 
 // Texto de cada post de brand/instagram/textos.md, por número.
 function textosPorPost() {
