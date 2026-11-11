@@ -135,6 +135,13 @@
   .site-header .logo-simbolo.destello .brasa { animation: destello .9s ease-out; }
   @keyframes destello { 0% { stroke: #fff3c4; filter: drop-shadow(0 0 6px #ff7a1a); } 100% { stroke: #ff7a1a; filter: none; } }
   .site-header .logo-texto { font-size: 46px; white-space: nowrap; }
+  .site-header .logo { position: relative; }
+  .site-header .logo-hueco { position: absolute; left: 0; top: 50%; width: var(--slot); height: var(--slot); transform: translateY(-50%); pointer-events: none;
+    color: #0b0f13; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 -1px 0 rgba(0,0,0,.7)); opacity: var(--hueco, 1); }
+  .site-header .logo-hueco .brasa { stroke: #0b0f13; }
+  .site-header .logo-hueco.tibio { color: #2a160c; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 0 8px rgba(255,122,26,.55)); }
+  .site-header .logo-hueco.tibio .brasa { stroke: #6b2a0c; }
+  .site-header .logo-hueco { transition: color .4s, filter .4s; }
   .nav-links { font-size: 16px; gap: 34px; }
   .nav-links .btn-sm { min-height: 52px; padding: 0 26px; font-size: 16px; }
   main { padding-top: 0; }
@@ -292,6 +299,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .site-header .logo-simbolo { opacity: 1; }
+    .site-header .logo-hueco { display: none; }
     .aparece { opacity: 1; transform: none; transition: none; }
     .showcase .devices { transform: rotateX(6deg) rotateY(-6deg); }
     .section-head.encendida h2::after, .plan.encendida .plan-desde b { animation: none; }
@@ -305,7 +313,7 @@
   <!-- NAV -->
   <header class="site-header" id="nav">
     <nav class="nav wrap" aria-label="Navegación principal">
-      <a href="#inicio" class="logo" aria-label="Hefesto Webs, ir al inicio"><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span class="logo-texto" aria-hidden="true">Hefesto <b>Webs</b></span></a>
+      <a href="#inicio" class="logo" aria-label="Hefesto Webs, ir al inicio"><svg class="logo-hueco" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span class="logo-texto" aria-hidden="true">Hefesto <b>Webs</b></span></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span>
       </button>
@@ -773,7 +781,7 @@
   const $ = (id) => document.getElementById(id);
   const hero = $('inicio'), fondo = $('fondo'), vuelo = $('vuelo'), pieza = $('pieza'), brillo = $('brillo'), halo = $('halo');
   const sombra = $('sombra'), calor = $('calor'), slot = document.querySelector('.site-header .logo-simbolo'), nav = $('nav');
-  const slotSvg = slot;
+  const slotSvg = slot; const hueco = document.querySelector('.site-header .logo-hueco');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const aj = { curva: 0.85, giro: 20, chispas: 1, flote: 10, tramo: 0.75 }; // valores elegidos en el prototipo
   
@@ -880,6 +888,8 @@
     const fundido = reducido ? 1 : tramo(p, 0.93, 0.995);
     pieza.style.opacity = 1 - fundido;
     slotSvg.style.opacity = fundido;
+    hueco.style.setProperty('--hueco', (1 - fundido).toFixed(3));
+    hueco.classList.toggle('tibio', p > 0.72 && fundido < 0.99);
     if (fundido >= 0.99 && !llego) { llego = true; slot.classList.remove('destello'); void slot.getBoundingClientRect(); slot.classList.add('destello'); }
     if (fundido < 0.5) llego = false;
 

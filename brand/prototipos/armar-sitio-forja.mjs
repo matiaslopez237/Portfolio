@@ -35,6 +35,10 @@ ${main}      </div>
     </section>
 `);
 
+// Molde grabado en la barra: el lugar donde encaja el logo cuando llega
+h = h.replace(/(<a href="#inicio" class="logo"[^>]*>)(<svg class="logo-simbolo"[\s\S]*?<\/svg>)/,(m, a, svg) => a + svg.replace('class="logo-simbolo"', 'class="logo-hueco"') + svg);
+if (!h.includes('logo-hueco')) throw new Error('no se agregó el molde');
+
 // Capa del logo que vuela + chispas
 rep('  <p id="aviso-pestana" hidden>', `  <div class="vuelo" id="vuelo" aria-hidden="true">
     <div class="pieza" id="pieza">
@@ -65,6 +69,13 @@ const css = `
   .site-header .logo-simbolo.destello .brasa { animation: destello .9s ease-out; }
   @keyframes destello { 0% { stroke: #fff3c4; filter: drop-shadow(0 0 6px #ff7a1a); } 100% { stroke: #ff7a1a; filter: none; } }
   .site-header .logo-texto { font-size: 46px; white-space: nowrap; }
+  .site-header .logo { position: relative; }
+  .site-header .logo-hueco { position: absolute; left: 0; top: 50%; width: var(--slot); height: var(--slot); transform: translateY(-50%); pointer-events: none;
+    color: #0b0f13; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 -1px 0 rgba(0,0,0,.7)); opacity: var(--hueco, 1); }
+  .site-header .logo-hueco .brasa { stroke: #0b0f13; }
+  .site-header .logo-hueco.tibio { color: #2a160c; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 0 8px rgba(255,122,26,.55)); }
+  .site-header .logo-hueco.tibio .brasa { stroke: #6b2a0c; }
+  .site-header .logo-hueco { transition: color .4s, filter .4s; }
   .nav-links { font-size: 16px; gap: 34px; }
   .nav-links .btn-sm { min-height: 52px; padding: 0 26px; font-size: 16px; }
   main { padding-top: 0; }
@@ -222,6 +233,7 @@ const css = `
   }
   @media (prefers-reduced-motion: reduce) {
     .site-header .logo-simbolo { opacity: 1; }
+    .site-header .logo-hueco { display: none; }
     .aparece { opacity: 1; transform: none; transition: none; }
     .showcase .devices { transform: rotateX(6deg) rotateY(-6deg); }
     .section-head.encendida h2::after, .plan.encendida .plan-desde b { animation: none; }
@@ -235,7 +247,8 @@ let jsHero = proto.match(/<script>\n\(\(\) => \{\n  const \$ = \(id\) => documen
 jsHero = jsHero
   .replace("const hero = $('hero'),", "const hero = $('inicio'),")
   .replace("const sombra = $('sombra'), calor = $('calor'), slot = $('slot'), nav = $('nav');", "const sombra = $('sombra'), calor = $('calor'), slot = document.querySelector('.site-header .logo-simbolo'), nav = $('nav');")
-  .replace("const slotSvg = slot.querySelector('svg');", "const slotSvg = slot;")
+  .replace("const slotSvg = slot.querySelector('svg');", "const slotSvg = slot; const hueco = document.querySelector('.site-header .logo-hueco');")
+  .replace("    slotSvg.style.opacity = fundido;", "    slotSvg.style.opacity = fundido;\n    hueco.style.setProperty('--hueco', (1 - fundido).toFixed(3));\n    hueco.classList.toggle('tibio', p > 0.72 && fundido < 0.99);")
   .replace("for (const k of Object.keys(aj)) $('a-' + k).addEventListener('input', (e) => { aj[k] = +e.target.value; });", '')
   .replace("const h1 = document.querySelector('.texto h1').getBoundingClientRect();", "const h1 = document.querySelector('.hero-forja h1').getBoundingClientRect();")
   .replace("if (fundido >= 0.99 && !llego) { llego = true; slot.classList.remove('destello'); void slot.offsetWidth; slot.classList.add('destello'); }", "if (fundido >= 0.99 && !llego) { llego = true; slot.classList.remove('destello'); void slot.getBoundingClientRect(); slot.classList.add('destello'); }")
