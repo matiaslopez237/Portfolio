@@ -1,7 +1,7 @@
 # HU-11: Investigación de audiencia y estrategia de contenido
 
 **Historia:** Como dueño del estudio, quiero entender a quién le hablo en Instagram (qué le duele, qué le da miedo y qué lo hace escribirme), para diseñar publicaciones y textos que generen consultas y no solo se vean lindos.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Armar la base de la estrategia de Instagram antes de rediseñar los posts (HU-12) y hacer reels (HU-13). Se entrega en `brand/instagram/estrategia/`:
@@ -62,10 +62,14 @@ Armar la base de la estrategia de Instagram antes de rediseñar los posts (HU-12
 - [ ] CA-11.9: ¿Las personas se parecen a tus clientes reales y te sirven para decidir qué publicar? — firmado:
 
 ## Preguntas abiertas
-1. ¿Podés hablar con 2 o 3 clientes (Bacssa, Quiropraxia, la tienda)? Si no, ¿te acordás cómo llegaron, qué te pidieron y qué dudas tenían?
-2. ¿Tenés conversaciones de consultas que puedas pegar sin nombres?
-3. ¿Hay algún rubro o tipo de negocio que quieras atacar primero?
-4. ¿La materia usa una plantilla de persona en particular? Si es así, ¿me la pasás?
+Respondidas por Matias el 2026-11-11:
+1. ~~¿Entrevistar clientes?~~ Los clientes fueron conocidos y están conformes; no hay entrevistas por ahora. Fuente válida: "Matias, 2026-11-11".
+2. ~~¿Conversaciones?~~ No hay conversaciones guardadas.
+3. ~~¿Rubro prioritario?~~ Ninguno en especial.
+4. ~~¿Plantilla de persona?~~ No hay plantilla de la materia: se usa la estructura de RN-11.2.
+
+Consecuencia: las personas salen como **proto-personas** (RN-11.1), con fuentes en los proyectos reales, lo que contó Matias y la competencia. La guía de entrevista queda lista para validarlas con los primeros clientes que lleguen por Instagram.
 
 ## Historial
 - 2026-11-11: creada, a partir de la propuesta de estrategia de Instagram y de la materia de user personas de Matias.
+- 2026-11-11: aprobada por Matias, con las respuestas a las preguntas abiertas.
