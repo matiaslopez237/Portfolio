@@ -97,10 +97,10 @@ Observación hecha el **2026-11-11** desde @efestowebs, mirando solo perfiles p�
 5. **Las promos de urgencia** ("solo por hoy") aparecen en cuentas chicas y no muestran más likes que el resto.
 
 ## Huecos
-Lo que **nadie** (o casi nadie) de esta muestra está haciendo, y Efesto Webs puede ocupar:
+Lo que **nadie** (o casi nadie) de esta muestra está haciendo, y Hefesto Webs puede ocupar:
 1. **Nadie de San Rafael ni del sur de Mendoza** aparece en la búsqueda. La identidad local ("un ingeniero de San Rafael") está libre.
 2. **Casi nadie muestra el resultado para el negocio**: muestran lo linda que quedó la web, no "ahora los turnos llegan por WhatsApp" o "ya no manda el catálogo a mano". Solo @siraoestudio cuenta un caso con la clienta.
-3. **Precios claros y constantes**: la mayoría no muestra precio o lo muestra como oferta del día. Efesto ya tiene precios "desde" estables: mostrarlos es diferencial de confianza.
+3. **Precios claros y constantes**: la mayoría no muestra precio o lo muestra como oferta del día. Hefesto ya tiene precios "desde" estables: mostrarlos es diferencial de confianza.
 4. **Contenido por rubro**: solo @paginasbymai hace tips específicos ("si vendés productos para mascotas…"). Hay lugar para "si tenés un consultorio…", "si tenés un café…".
 5. **Credencial técnica**: nadie usa "ingeniero" como argumento; varios trabajan con plantillas o IA. "Hecho a medida por un Ing. en Sistemas" se puede explicar en criollo.
-6. **Estética distinta**: casi todos usan violeta, azul o tonos pastel. El acero con brasa naranja de Efesto no se parece a ninguno.
+6. **Estética distinta**: casi todos usan violeta, azul o tonos pastel. El acero con brasa naranja de Hefesto no se parece a ninguno.

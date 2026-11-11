@@ -17,7 +17,7 @@ const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.grid img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
 </style></head><body>
 <div class="top"><div class="av"><img src="../export/perfil-instagram.png"></div><div class="st"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div></div>
-<div class="bio"><b>Efesto Webs</b>Páginas web forjadas a medida para negocios 🔨<br>Por Matias Lopez · Ing. en Sistemas<br>San Rafael, Mendoza → todo el país<br><span class="lnk">matiaslopez237.github.io/Portfolio</span></div>
+<div class="bio"><b>Hefesto Webs</b>Páginas web forjadas a medida para negocios 🔨<br>Por Matias Lopez · Ing. en Sistemas<br>San Rafael, Mendoza → todo el país<br><span class="lnk">matiaslopez237.github.io/Portfolio</span></div>
 <div class="dest">${dest.map(d => `<figure><div class="c"><img src="destacadas/${d}.png"></div>${nombres[d]}</figure>`).join('')}</div>
 <div class="grid">${orden.map(n => `<img src="posts/post-${n}.png">`).join('')}</div></body></html>`;
 const browser = await chromium.launch();

@@ -1,4 +1,4 @@
-# Mensajes de WhatsApp Business · Efesto Webs (HU-05)
+# Mensajes de WhatsApp Business · Hefesto Webs (HU-05)
 
 Se configuran en la app: **Configuración › Herramientas para la empresa**. Los textos se copian tal cual, desde la línea de abajo de cada bloque.
 
@@ -6,7 +6,7 @@ Se configuran en la app: **Configuración › Herramientas para la empresa**. Lo
 **Dónde:** Mensaje de bienvenida › Enviar a "Todos". Se manda la primera vez que alguien escribe o después de 14 días sin hablar.
 
 ```bienvenida
-¡Hola! 👋 Gracias por escribir a Efesto Webs. Soy Matias Lopez.
+¡Hola! 👋 Gracias por escribir a Hefesto Webs. Soy Matias Lopez.
 Contame un poco de tu negocio y qué te gustaría tener: una página para presentarte, una tienda con pedidos por WhatsApp o una tienda con pagos online.
 Te respondo en breve. La consulta es sin costo.
 ```
@@ -15,7 +15,7 @@ Te respondo en breve. La consulta es sin costo.
 **Dónde:** Mensaje de ausencia › Programar › "Fuera del horario comercial" (usa el horario del perfil: lunes a sábado de 9 a 21).
 
 ```ausencia
-¡Hola! Gracias por escribir a Efesto Webs. 🔨
+¡Hola! Gracias por escribir a Hefesto Webs. 🔨
 Ahora estoy fuera de horario: respondo de lunes a sábado, de 9 a 21.
 Dejame tu consulta y te escribo apenas vuelva.
 ```

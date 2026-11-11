@@ -1,11 +1,11 @@
-# Perfil de Instagram · Efesto Webs (HU-04)
+# Perfil de Instagram · Hefesto Webs (HU-04)
 
 Para cargar al crear la cuenta. La foto de perfil es `brand/export/perfil-instagram.png`.
 
-- **Nombre:** Efesto Webs
+- **Nombre:** Hefesto Webs
 - **Usuario:** @efestowebs *(a confirmar: si no está libre, probá `@efesto.webs` o `@efestowebs.ar` y avisame para cambiarlo en los textos)*
 - **Categoría:** Diseñador de sitios web
-- **Link:** matiaslopez237.github.io/Portfolio *(cuando esté el dominio, pasa a efestowebs.com.ar, en la HU-06)*
+- **Link:** matiaslopez237.github.io/Portfolio *(cuando esté el dominio, pasa a hefestowebs.com.ar, en la HU-06)*
 - **Botón de contacto:** WhatsApp, +54 9 260 466-1138 (HU-05)
 - **Tipo de cuenta:** Profesional › Empresa (da acceso a estadísticas y al botón de WhatsApp)
 

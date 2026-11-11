@@ -3,7 +3,7 @@
 Característica: Pulido del portfolio
   Como dueño del estudio
   quiero que el portfolio muestre el precio rápido, tenga más personalidad de marca y se vea prolijo
-  para que quien entra entienda la oferta enseguida y recuerde a Efesto Webs.
+  para que quien entra entienda la oferta enseguida y recuerde a Hefesto Webs.
 
   @CA-08.1 @normal
   Escenario: El precio va debajo del nombre del plan

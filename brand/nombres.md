@@ -36,6 +36,7 @@ Tercera tanda, en la dirección que eligió Matias: **mitología griega en la l�
 | **Ergane** | libre | ocupado | a confirmar | a confirmar | No se encontraron estudios ni agencias con ese nombre | RDAP NIC.ar y Verisign + búsqueda web, 2026-11-07 |
 | **Demiurgo** | libre | ocupado | a confirmar | a confirmar | Empresa de medios interactivos "Demiurgo" en México | RDAP NIC.ar y Verisign + búsqueda web, 2026-11-07 |
 | **Prometeo Webs** | libre | libre (`prometeowebs.com`) | a confirmar | a confirmar | Productora audiovisual "Prometeo" en Rosario (otro rubro) | RDAP NIC.ar y Verisign + búsqueda web, 2026-11-07 |
+| **Hefesto Webs** | libre (`hefestowebs` y `hefestoweb`; `hefesto` ocupado) | libre (`hefestowebs.com`; `hefesto.com` ocupado) | a confirmar (sin perfil `@hefestowebs` ni `@hefesto.webs`; se confirma al cambiarlo) | a confirmar | No se encontraron estudios ni agencias con ese nombre en la búsqueda de Instagram | RDAP NIC.ar y Verisign + Instagram, 2026-11-11 (variante con H elegida, HU-13) |
 
 **Elegido (provisorio): Efesto Webs**, el 2026-11-07. Matias lo deja como propuesta hasta estar seguro. La HU-02 sigue abierta hasta que firme CA-02.6 y CA-02.7.
 
@@ -62,3 +63,6 @@ Punto, Lumitra, Tramio, Pulio, Puli, Rectia, Tarmo, Dalo, Torno, Pento, Tilma, T
   - [Formo Digital](https://webflow.com/@formo-digital)
   - [Claro Creative Studio](https://www.g2.com/es/sellers/claro-creative-studio)
   - [Pauta Creativa](https://www.informabtl.com/?p=348510)
+
+## Cambio a "Hefesto Webs" (2026-11-11)
+Matias decidió escribir la marca **con H, como el dios en español** ("Efesto" es la forma italiana). Disponibilidad verificada el 2026-11-11: `hefestowebs.com.ar`, `hefestowebs.com` y `hefestoweb.com.ar` libres (RDAP); `hefesto.com.ar` y `hefesto.com` ocupados; `@hefestowebs` y `@hefesto.webs` sin perfil en Instagram. Detalle en `docs/specs/HU-13-nombre-hefesto.md`.

@@ -5,7 +5,7 @@
 import opentype from 'opentype.js';
 import { writeFileSync } from 'node:fs';
 
-const NOMBRE = 'EFESTO';
+const NOMBRE = 'HEFESTO';
 const DESCRIPTOR = 'WEBS';
 const FIRMA = 'POR MATIAS LOPEZ';
 const COLOR = { texto: '#eef1f4', acento: '#ff7a1a', secundario: '#9aa6b2' };
@@ -20,6 +20,19 @@ async function ttf(familia, eje) {
 const archivo = await ttf('Archivo', 'wdth,wght@70,800');
 const publica = await ttf('Public+Sans', 'wght@500');
 
+// opentype.js a veces devuelve un punto de control NaN en algunas curvas (pasó con la "B" de WEBS).
+// Se arma el path a mano y, si un punto de control es inválido, se usa el punto final de la curva.
+const n = (v) => (Math.round(v * 100) / 100).toString();
+function pathSeguro(path) {
+  return path.commands.map(c => {
+    const ok = (v) => Number.isFinite(v);
+    if (c.type === 'M' || c.type === 'L') return `${c.type}${n(c.x)} ${n(c.y)}`;
+    if (c.type === 'Q') return ok(c.x1) && ok(c.y1) ? `Q${n(c.x1)} ${n(c.y1)} ${n(c.x)} ${n(c.y)}` : `L${n(c.x)} ${n(c.y)}`;
+    if (c.type === 'C') return [c.x1, c.y1, c.x2, c.y2].every(ok) ? `C${n(c.x1)} ${n(c.y1)} ${n(c.x2)} ${n(c.y2)} ${n(c.x)} ${n(c.y)}` : `L${n(c.x)} ${n(c.y)}`;
+    return 'Z';
+  }).join('');
+}
+
 // Arma el texto letra por letra (con su kerning y el espaciado pedido). Se hace a mano porque
 // opentype.js falla con algunas funciones tipográficas avanzadas de Archivo.
 const trazo = (font, texto, x, y, size, trackPx) => {
@@ -27,8 +40,10 @@ const trazo = (font, texto, x, y, size, trackPx) => {
   let cursor = x, d = '', anterior = null;
   for (const ch of texto) {
     const glifo = font.charToGlyph(ch);
-    if (anterior) cursor += font.getKerningValue(anterior, glifo) * escala;
-    d += glifo.getPath(cursor, y, size).toPathData(2);
+    // Algunas versiones de la tipografía devuelven un kerning inválido (NaN) para ciertos pares: se ignora.
+    const kern = anterior ? font.getKerningValue(anterior, glifo) : 0;
+    if (Number.isFinite(kern)) cursor += kern * escala;
+    d += pathSeguro(glifo.getPath(cursor, y, size));
     cursor += glifo.advanceWidth * escala + trackPx;
     anterior = glifo;
   }

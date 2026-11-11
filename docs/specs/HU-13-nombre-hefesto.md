@@ -64,3 +64,4 @@ El símbolo (hexágono, `</>` y yunque) no cambia.
 ## Historial
 - 2026-11-11: creada a pedido de Matias ("pongámoslo con H"), con la disponibilidad verificada. La HU-12 (hero) sigue después con el nombre nuevo. Los carruseles pasan a la HU-14 y los reels a la HU-15.
 - 2026-11-11: aprobada por Matias.
+- 2026-11-11: implementada; suite completa en verde. Falta cambiar las cuentas (CA-13.7) y publicar.

@@ -49,7 +49,7 @@ jobs:
       - name: Guardar el registro de lo publicado
         run: |
           if git diff --quiet -- brand/instagram/publicados.json; then exit 0; fi
-          git config user.name "efesto-bot"
+          git config user.name "hefesto-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add brand/instagram/publicados.json
           git commit -m "chore: registro de publicación en Instagram"

@@ -25,7 +25,7 @@ Una persona (no una agencia) que diseña **y** programa: desde una landing simpl
 
 - El visitante suele entrar desde el celular, con un link de WhatsApp o de un anuncio de WhatsApp Business.
 - Decide comparando los proyectos que ve y los precios "desde".
-- La venta se cierra en una conversación de WhatsApp (+54 9 260 466-1138, `https://wa.me/5492604661138`, número de Efesto Webs desde el 2026-11-08).
+- La venta se cierra en una conversación de WhatsApp (+54 9 260 466-1138, `https://wa.me/5492604661138`, número de Hefesto Webs desde el 2026-11-08).
 - Publicado en GitHub Pages (`matiaslopez237.github.io/Portfolio`).
 
 ## Capabilities and Constraints
@@ -56,7 +56,7 @@ Brief de la marca del estudio (HU-01, `docs/specs/HU-01-brief-de-marca.md`). Bas
 
 ### Tipo
 - Estudio con **nombre propio**: nombre principal corto + descriptor opcional ("Webs").
-- Nombre elegido: **Efesto Webs** (confirmado por Matias el 2026-11-08). Hefesto, el dios herrero de la mitología griega: el artesano que forja a medida. Dominios libres: `efestowebs.com.ar`, `efesto.com.ar`, `efestowebs.com`. Detalle en `brand/nombres.md` (HU-02).
+- Nombre elegido: **Hefesto Webs** (confirmado por Matias el 2026-11-08, sin H; con H desde el 2026-11-11, HU-13). Hefesto, el dios herrero de la mitología griega: el artesano que forja a medida. Dominios libres: `hefestowebs.com.ar`, `hefesto.com.ar`, `hefestowebs.com`. Detalle en `brand/nombres.md` (HU-02).
 - Firma personal: **"por Matias Lopez"**. La persona sigue presente (trato directo, Ing. en Sistemas), pero la marca suena a negocio y puede crecer.
 - Estilo visual **nuevo**, distinto del portfolio actual. Se define en HU-03.
 

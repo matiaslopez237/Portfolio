@@ -2,7 +2,7 @@
 @HU-05
 Característica: Número nuevo de WhatsApp Business en el portfolio
   Como dueño del estudio
-  quiero que el portfolio use el número de WhatsApp de Efesto Webs
+  quiero que el portfolio use el número de WhatsApp de Hefesto Webs
   para que todas las consultas lleguen al número del estudio.
 
   @CA-05.1 @normal

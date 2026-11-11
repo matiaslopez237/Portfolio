@@ -47,3 +47,4 @@ Proponer candidatos de nombre que cumplan el brief (`PRODUCT.md` › `## Marca`)
 - 2026-11-07: el `.com` deja de ser requisito (pedido de Matias): se informa en la tabla pero no descarta nombres; alcanza con `.com.ar` libre.
 - 2026-11-07: dirección elegida por Matias: mitología (griega) y herrería; no le gustan las palabras comunes en español. RN-02.1 permite un descriptor tipo "Webs" (pedido de Matias: "Efesto Webs").
 - 2026-11-08: Matias firma CA-02.6 ("Efesto Webs" deja de ser provisorio). CA-02.7 parcial: @efestowebs creado; dominio pendiente.
+- 2026-11-11: la marca pasa a escribirse **Hefesto Webs** (con H), por decisión de Matias. Dominios `hefestowebs.com.ar` y `hefestowebs.com` libres. Ver HU-13.

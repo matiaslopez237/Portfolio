@@ -1,10 +1,10 @@
-# Design System — Efesto Webs
+# Design System — Hefesto Webs
 
 > Marca definida en la HU-03 (`docs/specs/HU-03-identidad-visual.md`). Guía visual: `brand/marca.html`. Valores exactos: `brand/tokens.json`.
 > **Estado:** aplicado al portfolio en la HU-06 (2026-11-08).
 
 ## Product Context
-- **What this is:** Efesto Webs (nombre provisorio, HU-02): estudio de páginas web de Matias Lopez. Páginas, tiendas con WhatsApp y tiendas con pagos, a medida.
+- **What this is:** Hefesto Webs (nombre provisorio, HU-02): estudio de páginas web de Matias Lopez. Páginas, tiendas con WhatsApp y tiendas con pagos, a medida.
 - **Who it's for:** dueños de negocios chicos y profesionales de toda Argentina (base en San Rafael, Mendoza); también empresas que necesitan algo a medida.
 - **Space/industry:** estudios web y freelancers. La categoría converge en oscuro + neón, sans genéricas y tarjetas de a tres.
 - **Project type:** sitio de venta (portfolio) + piezas de Instagram y WhatsApp Business.

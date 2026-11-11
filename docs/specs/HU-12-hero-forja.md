@@ -14,7 +14,7 @@ El logo 3D aparece apoyado sobre el yunque. Al hacer scroll se achica, gira leve
 - **RN-12.1 (imágenes optimizadas):** el fondo se exporta a WebP en 2 tamaños (1376 y 800 px de ancho). El logo, recortado con fondo transparente (WebP con alfa) en 2 tamaños (520 y 260 px). Peso del hero: hasta 250 KB en compu y 150 KB en celular. Los originales quedan en `assets/hero/originales/` y no los carga la página.
 - **RN-12.2 (legibilidad):** el texto va a la izquierda, sobre la parte oscura. Un degradado del color de fondo (#1B2128) asegura el contraste AA del título, el subtítulo y la ficha.
 - **RN-12.3 (no tapar):** el título, el subtítulo y los botones de WhatsApp se ven y se pueden tocar durante toda la animación.
-- **RN-12.4 (logo de la nav):** el texto "EFESTO WEBS" de la nav se ve siempre. Solo el símbolo de la nav aparece cuando llega el logo 3D. El link de la nav no pierde su nombre accesible.
+- **RN-12.4 (logo de la nav):** el texto "HEFESTO WEBS" de la nav se ve siempre. Solo el símbolo de la nav aparece cuando llega el logo 3D. El link de la nav no pierde su nombre accesible.
 - **RN-12.5 (movimiento):** la entrada del logo usa el "hierro al rojo" (la "/" brilla y se enfría, una sola vez) y el viaje depende solo del scroll. Sin loops. Con `prefers-reduced-motion`: el logo 3D queda quieto en el inicio, sin viaje, y el símbolo de la nav se ve desde el principio.
 - **RN-12.6 (celular):** el fondo se recorta mostrando el yunque, con un degradado más fuerte. El logo 3D es más chico y queda arriba a la derecha, sin tapar el título. Mismo viaje a la nav.
 - **RN-12.7 (decorativo):** las dos imágenes son decorativas (`alt=""`, `aria-hidden`). El nombre de la marca lo da el logo de la nav.

@@ -4,7 +4,7 @@ Parte de `brand/marca.html` › Tono de voz (voseo, cercano y profesional, frase
 
 ## Ejes de tono
 
-| Eje | Lado de Efesto | Ejemplo sí | Ejemplo no |
+| Eje | Lado de Hefesto | Ejemplo sí | Ejemplo no |
 | --- | --- | --- | --- |
 | Cercano ↔ formal | **Cercano**, pero sin chistes internos | "Te la armo a medida" | "Brindamos soluciones integrales" |
 | Directo ↔ vendedor | **Directo**: se dice qué es y cuánto sale | "Landing Page desde $150.000" | "¡¡SOLO POR HOY!! 🔥🔥" |

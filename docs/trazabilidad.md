@@ -80,8 +80,16 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-11 | CA-11.7 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/validacion.md` |
 | HU-11 | CA-11.8 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/*` |
 | HU-11 | CA-11.9 | Checklist (firma Matias) | pendiente | Leer las personas y la página `estrategia.html` |
+| HU-13 | CA-13.1 | Chequeo `scripts/check.mjs` | ✓ | archivos vivos (RN-13.2) |
+| HU-13 | CA-13.2 | Escenario BDD | ✓ | `features/HU-13-nombre-hefesto.feature` |
+| HU-13 | CA-13.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/logo/*.svg` · `brand/trazar-logo.mjs` |
+| HU-13 | CA-13.4 | Chequeo `scripts/check.mjs` | ✓ | piezas en `brand/export`, `brand/instagram`, `brand/whatsapp`, `assets/og-hefesto.png` |
+| HU-13 | CA-13.5 | Suite completa | ✓ | `npm test` (16) · `npm run test:unit` (11) · `npm run check` (47) |
+| HU-13 | CA-13.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/nombres.md` · HU-02 historial |
+| HU-13 | CA-13.7 | Checklist (firma Matias) | pendiente | Cambiar @ y nombre en Instagram, WhatsApp Business y Meta |
 
 ## Huecos
+- HU-13: CA-13.7 pendiente (cuentas). El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.
 - HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).
 - HU-09: CA-09.5 sin firmar. Commits [RED] 6eb79e6 → [GREEN] (este). CA-04.4 se ajustó a "9 o más textos" porque ahora hay 12.

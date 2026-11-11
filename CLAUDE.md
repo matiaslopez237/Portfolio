@@ -67,5 +67,5 @@ npm run check                 # chequeos automáticos de criterios
 - Resultado revisado por Matias.
 
 ## Design System
-Leé `DESIGN.md` antes de cualquier decisión visual o de interfaz: tipografías, colores, espaciado y estilo de la marca **Efesto Webs** están definidos ahí (valores exactos en `brand/tokens.json`, guía en `brand/marca.html`).
+Leé `DESIGN.md` antes de cualquier decisión visual o de interfaz: tipografías, colores, espaciado y estilo de la marca **Hefesto Webs** están definidos ahí (valores exactos en `brand/tokens.json`, guía en `brand/marca.html`).
 No te apartes sin aprobación explícita de Matias. El portfolio publicado todavía usa el estilo anterior hasta la HU-06; en QA, marcá lo que no coincida con `DESIGN.md` una vez aplicada.

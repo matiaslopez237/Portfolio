@@ -1,13 +1,13 @@
-# Perfil de WhatsApp Business · Efesto Webs (HU-05)
+# Perfil de WhatsApp Business · Hefesto Webs (HU-05)
 
 Se carga desde la app: **Configuración › Herramientas para la empresa › Perfil de la empresa**. La foto de perfil es `brand/export/perfil-whatsapp.png` (640×640).
 
-- **Nombre:** Efesto Webs
+- **Nombre:** Hefesto Webs
 - **Número:** +54 9 260 466-1138
 - **Categoría:** Diseño web *(buscá "web" en la lista; si no aparece, elegí "Servicios profesionales")*
 - **Horario:** Lunes a sábado de 9 a 21 *(en la app: "Horario personalizado"; domingo cerrado)*
 - **Email:** matias.e.lopez747@gmail.com
-- **Sitio web:** https://matiaslopez237.github.io/Portfolio/ *(cuando esté el dominio, pasa a efestowebs.com.ar)*
+- **Sitio web:** https://matiaslopez237.github.io/Portfolio/ *(cuando esté el dominio, pasa a hefestowebs.com.ar)*
 - **Sitio web 2:** https://www.instagram.com/efestowebs/
 - **Dirección:** no se carga (trabajo a distancia para todo el país).
 
