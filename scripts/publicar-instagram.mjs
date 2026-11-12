@@ -1,6 +1,6 @@
 // Publicación automática en Instagram (HU-10).
 // Busca en brand/instagram/calendario.md qué post toca hoy (hora de Argentina), toma su imagen publicada en
-// GitHub Pages y su texto de textos.md, y lo publica en @efestowebs con la API oficial de Instagram.
+// GitHub Pages y su texto de textos.md, y lo publica en @hefestowebs con la API oficial de Instagram.
 //
 // Uso:
 //   node scripts/publicar-instagram.mjs --prueba                 muestra qué publicaría hoy, sin llamar a Instagram

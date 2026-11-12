@@ -34,8 +34,8 @@ Característica: Portfolio con la marca Hefesto Webs
 
   @CA-06.5 @normal
   Escenario: Link a Instagram
-    Entonces el pie tiene un link a "https://www.instagram.com/efestowebs/" que abre en otra pestaña
-    Y la sección de contacto tiene un link a "https://www.instagram.com/efestowebs/"
+    Entonces el pie tiene un link a "https://www.instagram.com/hefestowebs/" que abre en otra pestaña
+    Y la sección de contacto tiene un link a "https://www.instagram.com/hefestowebs/"
 
   @CA-06.6 @limite
   Escenario: Celular de 375 px

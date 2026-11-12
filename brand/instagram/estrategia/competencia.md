@@ -1,6 +1,6 @@
 # Competencia en Instagram (HU-11)
 
-Observación hecha el **2026-11-11** desde @efestowebs, mirando solo perfiles públicos (RN-11.4). Las cuentas salieron de la búsqueda de Instagram "diseño web mendoza" (los resultados son de todo el país y de otros países, no solo de Mendoza). Se registró lo visible: bio, seguidores, formato de las últimas 12 publicaciones, fecha de la más reciente y de la número 12, y los likes y comentarios que muestra Instagram en algunos posts. No se copian textos ni imágenes: los temas están resumidos.
+Observación hecha el **2026-11-11** desde la cuenta del estudio, mirando solo perfiles públicos (RN-11.4). Las cuentas salieron de la búsqueda de Instagram "diseño web mendoza" (los resultados son de todo el país y de otros países, no solo de Mendoza). Se registró lo visible: bio, seguidores, formato de las últimas 12 publicaciones, fecha de la más reciente y de la número 12, y los likes y comentarios que muestra Instagram en algunos posts. No se copian textos ni imágenes: los temas están resumidos.
 
 > **Ojo con los likes:** varias de las cuentas con más interacción le hablan a otros diseñadores o a gente que quiere aprender, no a dueños de negocios. Muchos likes no significa muchos clientes.
 

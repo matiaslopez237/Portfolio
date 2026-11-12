@@ -522,16 +522,12 @@ const chequeos = [
 
   // ── HU-13: Cambio de nombre a Hefesto Webs ──
   {
-    ca: 'CA-13.1', desc: 'Ningún archivo vivo dice "Efesto" sin H (salvo el @efestowebs mientras no se cambie)',
+    ca: 'CA-13.1', desc: 'Ningún archivo vivo dice "Efesto" sin H, tampoco el @ viejo (cambiado a @hefestowebs el 2026-11-11)',
     run: async () => {
       const malos = [];
       for (const f of await archivosVivos()) {
         const t = leerOpcional(f); if (!t) continue;
-        for (const m of t.matchAll(/(?<![hH])efesto/gi)) {
-          const antes = t.slice(Math.max(0, m.index - 14), m.index);
-          if (/(@|instagram\.com\/)$/i.test(antes)) continue; // RN-13.4: el @ viejo sigue hasta que Matias lo cambie
-          malos.push(f); break;
-        }
+        if (/(?<![hH])efesto/i.test(t)) malos.push(f);
       }
       if (malos.length) throw new Error('quedan "Efesto" en: ' + malos.join(', '));
       return true;

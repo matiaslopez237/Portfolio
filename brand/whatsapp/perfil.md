@@ -8,7 +8,7 @@ Se carga desde la app: **Configuración › Herramientas para la empresa › Per
 - **Horario:** Lunes a sábado de 9 a 21 *(en la app: "Horario personalizado"; domingo cerrado)*
 - **Email:** matias.e.lopez747@gmail.com
 - **Sitio web:** https://matiaslopez237.github.io/Portfolio/ *(cuando esté el dominio, pasa a hefestowebs.com.ar)*
-- **Sitio web 2:** https://www.instagram.com/efestowebs/
+- **Sitio web 2:** https://www.instagram.com/hefestowebs/
 - **Dirección:** no se carga (trabajo a distancia para todo el país).
 
 ## Descripción (copiar tal cual)
