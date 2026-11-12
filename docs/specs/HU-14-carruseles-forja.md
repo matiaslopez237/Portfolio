@@ -1,7 +1,7 @@
 # HU-14: Carruseles con el estilo Forja
 
 **Historia:** Como dueño del estudio, quiero relanzar Instagram con carruseles llamativos y coherentes con el sitio nuevo, pensados para las personas de la HU-11, para que la cuenta genere consultas por WhatsApp desde el primer mes.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el estilo del prototipo del sitio (`brand/prototipos/sitio-forja.html`): acero gastado, placas remachadas, barra al rojo, logo 3D, foto del taller y luz de fragua. El trabajo tiene dos etapas:
@@ -56,3 +56,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 
 ## Historial
 - 2026-11-12: creada, con la estrategia de la HU-11 y el estilo del prototipo del sitio. Los reels quedan para la HU-15.
+- 2026-11-12: aprobada por Matias.
