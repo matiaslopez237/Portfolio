@@ -184,3 +184,41 @@ Por qué tu negocio necesita su propio dominio (www.tunegocio.com.ar):
 
 #dominio #paginasweb #emprendedores #negocioslocales #marketingdigital #diseñoweb
 ```
+
+## Carrusel C1 · Caso Quiropraxia Cipolletti
+
+```texto
+Pedir turno en un toque. 🔨
+
+Quiropraxia Cipolletti tiene su página con dominio propio: servicios, beneficios, preguntas frecuentes y un botón para pedir turno por WhatsApp, pensada para el celular.
+
+¿Tenés un consultorio o atendés con turnos? Deslizá y mirá cómo quedó. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
+
+#paginasweb #diseñoweb #consultorios #salud #turnosonline #profesionales #webamedida
+```
+
+## Carrusel C2 · 3 cosas que tu página tiene que tener
+
+```texto
+3 cosas que tu página tiene que tener (sí o sí). Guardalo para revisar la tuya.
+
+1. Un botón para escribirte por WhatsApp.
+2. Que se vea bien en el celular.
+3. Dónde estás y cuándo atendés.
+
+¿La tuya tiene las 3? Si no tenés página o le falta alguna, escribime y lo vemos. 👉 Link en la bio.
+
+#paginasweb #consejos #emprendedores #negocioslocales #diseñoweb #marketingdigital
+```
+
+## Carrusel C3 · Plan Tienda WhatsApp
+
+```texto
+Tienda WhatsApp · desde $350.000
+
+Tu catálogo online, con un botón en cada producto que abre WhatsApp con el pedido listo. Sin comisiones por venta y fácil de actualizar.
+
+El precio final depende de lo que necesites. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
+
+#tiendaonline #catalogodigital #ventasporwhatsapp #emprendedores #diseñoweb #negocioslocales
+```

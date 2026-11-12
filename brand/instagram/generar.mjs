@@ -16,7 +16,15 @@ const piezas = [
   })),
   ...datos.destacadas.map(icono => ({ plantilla: 'historia', w: 1080, h: 1920, salida: `destacadas/${icono}.png`, datos: { tipo: 'destacada', icono } })),
   { plantilla: 'historia', w: 1080, h: 1920, salida: 'historias/historia-ejemplo.png', datos: datos.historiaEjemplo },
+  // Carruseles con el estilo Forja (HU-14): una imagen por slide en carruseles/<id>/slide-N.png
+  ...(datos.carruseles ?? []).flatMap(c => {
+    mkdirSync(new URL(`carruseles/${c.id}/`, aqui), { recursive: true });
+    return c.slides.map((slide, i) => ({ plantilla: 'carrusel', w: 1080, h: 1350, salida: `carruseles/${c.id}/slide-${i + 1}.png`, datos: { id: c.id, n: i + 1, total: c.slides.length, slide } }));
+  }),
 ];
+// Para regenerar solo una parte:  node brand/instagram/generar.mjs --solo=carruseles
+const solo = (process.argv.find(a => a.startsWith('--solo=')) ?? '').slice(7);
+const elegidas = solo ? piezas.filter(p => p.salida.startsWith(solo)) : piezas;
 
 // En Windows el antivirus a veces bloquea el archivo un instante: se reintenta antes de fallar.
 async function guardar(destino, png, intentos = 5) {
@@ -27,7 +35,7 @@ async function guardar(destino, png, intentos = 5) {
 }
 
 const browser = await chromium.launch();
-for (const p of piezas) {
+for (const p of elegidas) {
   const page = await browser.newPage({ viewport: { width: p.w, height: p.h }, deviceScaleFactor: 1 });
   const url = new URL(`plantillas/${p.plantilla}.html`, aqui);
   url.hash = encodeURIComponent(JSON.stringify(p.datos));

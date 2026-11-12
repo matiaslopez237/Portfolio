@@ -57,3 +57,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 ## Historial
 - 2026-11-12: creada, con la estrategia de la HU-11 y el estilo del prototipo del sitio. Los reels quedan para la HU-15.
 - 2026-11-12: aprobada por Matias.
+- 2026-11-12: etapa 1 lista: 3 muestras (C1 caso Quiropraxia, C2 consejo, C3 plan Tienda WhatsApp) y publicación de carruseles (16/16 tests). Espera la firma de CA-14.8.

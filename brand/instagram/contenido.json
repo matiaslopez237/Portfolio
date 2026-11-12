@@ -142,5 +142,151 @@
     "titulo": "¿Tu negocio todavía no tiene página?",
     "texto": "Te la hago a medida, desde $150.000.",
     "boton": "Escribime"
-  }
+  },
+  "carruseles": [
+    {
+      "id": "C1",
+      "muestra": true,
+      "tipo": "caso",
+      "titulo": "Caso Quiropraxia Cipolletti",
+      "pilar": "Trabajos",
+      "persona": "Laura",
+      "etapa": "Compara",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Caso real · Salud",
+          "titulo": "Pedir *turno* en un toque",
+          "subtitulo": "Quiropraxia Cipolletti: página con turnos por WhatsApp.",
+          "imagenCel": "quiropraxia-mobile.jpg"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué tiene la *página*",
+          "items": [
+            "Servicios y beneficios",
+            "Preguntas frecuentes",
+            "Botón para pedir turno por WhatsApp",
+            "Dominio propio"
+          ]
+        },
+        {
+          "tipo": "equipo",
+          "titulo": "En la compu y en el *celular*",
+          "texto": "Pensada para que el paciente la use desde el teléfono.",
+          "imagen": "quiropraxia-desktop.jpg",
+          "imagenCel": "quiropraxia-mobile.jpg"
+        },
+        {
+          "tipo": "idea",
+          "numero": "01",
+          "titulo": "Turno en un *toque*",
+          "texto": "Un botón abre WhatsApp directo desde la página, sin buscar el número."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Tenés un *consultorio*?",
+          "texto": "Tu página puede tener lo mismo: servicios, preguntas frecuentes y turnos por WhatsApp. Desde $150.000."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "muestra": true,
+      "tipo": "consejo",
+      "titulo": "3 cosas que tu página tiene que tener",
+      "pilar": "Consejos",
+      "persona": "Todas",
+      "etapa": "Descubre",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Consejo",
+          "titulo": "3 cosas que tu página tiene que *tener*",
+          "subtitulo": "Guardalo para revisar la tuya."
+        },
+        {
+          "tipo": "idea",
+          "numero": "1",
+          "titulo": "Un botón de *WhatsApp*",
+          "texto": "Si el cliente tiene que buscar tu número, se va."
+        },
+        {
+          "tipo": "idea",
+          "numero": "2",
+          "titulo": "Que se vea bien en el *celular*",
+          "texto": "La mayoría de tus clientes te va a encontrar desde el teléfono."
+        },
+        {
+          "tipo": "idea",
+          "numero": "3",
+          "titulo": "Dónde estás y *cuándo* atendés",
+          "texto": "Parece obvio, pero es lo primero que buscan."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿La tuya tiene las *3*?",
+          "texto": "Si no tenés página o le falta alguna, escribime y lo vemos."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "muestra": true,
+      "tipo": "plan",
+      "titulo": "Plan Tienda WhatsApp",
+      "pilar": "Oferta",
+      "persona": "Martín",
+      "etapa": "Escribe",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Plan",
+          "titulo": "Tienda *WhatsApp*",
+          "subtitulo": "Tu catálogo online, con el pedido listo en WhatsApp.",
+          "precio": "$350.000"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Seguís mandando el *catálogo* uno por uno?",
+          "texto": "Con una tienda, cada producto tiene su botón para pedir por WhatsApp."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cómo *funciona*",
+          "pasos": [
+            "Tu cliente elige el producto",
+            "Toca \"Pedir por WhatsApp\"",
+            "Te llega el pedido listo"
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué *incluye*",
+          "items": [
+            "Todo lo de Landing Page",
+            "Catálogo con fotos y precios",
+            "Botón en cada producto",
+            "Sin comisiones por venta",
+            "Estadísticas de visitas"
+          ]
+        },
+        {
+          "tipo": "precio",
+          "titulo": "Tienda WhatsApp",
+          "precio": "$350.000",
+          "texto": "El precio final depende de lo que necesites. Te paso un presupuesto sin costo."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    }
+  ]
 }

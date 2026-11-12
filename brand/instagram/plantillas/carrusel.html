@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Plantilla de carrusel 1080×1350 · Hefesto Webs</title>
+<!--
+  Slide de carrusel con el estilo Forja (HU-14). La usa node brand/instagram/generar.mjs con los datos en el hash:
+  carrusel.html#{"slide":{"tipo":"portada",...},"n":1,"total":6,"id":"C1"}
+  Tipos: portada · idea · lista · equipo · pasos · precio · cta.
+  Colores: solo los de brand/tokens.json (las transparencias usan esos mismos colores). Texturas generadas con código.
+  En el texto, *palabra* va en naranja.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #1b2128; }
+  body { font-family: 'Public Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #eef1f4; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+  em { font-style: normal; color: #ff7a1a; }
+
+  /* La placa de acero */
+  .pieza { position: absolute; inset: 0; overflow: hidden; }
+  #textura { position: absolute; inset: 0; width: 1080px; height: 1350px; }
+  .luz { position: absolute; left: 50%; bottom: -420px; width: 1500px; height: 900px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255,122,26,.20), rgba(255,122,26,.07) 50%, rgba(255,122,26,0) 75%); }
+  .vineta { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(27,33,40,0) 45%, rgba(27,33,40,.75) 100%); }
+  .bisel { position: absolute; inset: 22px; border-radius: 26px; box-shadow: inset 0 2px 0 rgba(238,241,244,.10), inset 0 -3px 0 rgba(27,33,40,.8), 0 0 0 2px rgba(27,33,40,.9); }
+  .remache { position: absolute; width: 26px; height: 26px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #eef1f4 0 2px, #9aa6b2 4px, #323c47 9px, #1b2128 12px, rgba(27,33,40,0) 13px); }
+  .r1 { left: 48px; top: 48px; } .r2 { right: 48px; top: 48px; } .r3 { left: 48px; bottom: 48px; } .r4 { right: 48px; bottom: 48px; }
+
+  /* Cabecera y pie fijos */
+  .cab { position: absolute; left: 96px; right: 96px; top: 96px; display: flex; align-items: center; justify-content: space-between; }
+  .marca { display: flex; align-items: center; gap: 16px; font-size: 34px; }
+  .marca svg { width: 52px; height: 52px; }
+  .marca b { color: #9aa6b2; font-weight: 800; }
+  .contador { font-size: 26px; letter-spacing: .14em; color: #9aa6b2; font-weight: 700; }
+  .pie { position: absolute; left: 96px; right: 96px; bottom: 100px; display: flex; align-items: center; justify-content: space-between; }
+  .barra { width: 88px; height: 10px; border-radius: 2px; background: #ff7a1a; box-shadow: 0 0 22px rgba(255,122,26,.55); }
+  .desliza { font-size: 30px; font-weight: 700; color: #eef1f4; letter-spacing: .04em; display: flex; gap: 12px; align-items: center; }
+  .desliza i { font-style: normal; color: #ff7a1a; font-size: 40px; }
+
+  /* Contenido: entre y=230 y y=1180 */
+  .cuerpo { position: absolute; left: 96px; right: 96px; top: 230px; bottom: 190px; display: flex; flex-direction: column; justify-content: center; }
+  .etiqueta { display: inline-block; align-self: flex-start; padding: 10px 20px; border-radius: 4px; font-size: 26px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: #ff7a1a; box-shadow: inset 0 0 0 2px rgba(255,122,26,.55); background: rgba(255,122,26,.08); }
+  h1 { font-size: 150px; line-height: .88; margin-top: 36px; }
+  h2 { font-size: 112px; line-height: .9; }
+  .sub { margin-top: 40px; font-size: 44px; line-height: 1.32; color: #9aa6b2; max-width: 860px; }
+  .txt { margin-top: 44px; font-size: 48px; line-height: 1.35; color: #eef1f4; max-width: 880px; }
+  .fantasma { position: absolute; right: 70px; top: 150px; font-size: 520px; line-height: .8; color: rgba(27,33,40,0); -webkit-text-stroke: 3px rgba(154,166,178,.18); }
+
+  /* portada con imagen */
+  .t-portada.con-imagen h1 { font-size: 132px; max-width: 600px; }
+  .t-portada.con-imagen .sub { max-width: 560px; font-size: 40px; }
+  .cel { position: absolute; right: 96px; bottom: 200px; width: 330px; padding: 10px; border-radius: 44px; background: #323c47;
+    box-shadow: 0 0 0 2px #1b2128, 0 50px 80px -30px rgba(27,33,40,1), 0 0 60px -10px rgba(255,122,26,.25); transform: rotate(4deg); }
+  .cel img { display: block; width: 100%; aspect-ratio: 390/844; object-fit: cover; object-position: top; border-radius: 34px; }
+
+  /* lista */
+  .lista { list-style: none; margin-top: 56px; display: grid; gap: 30px; }
+  .lista li { display: grid; grid-template-columns: 70px 1fr; align-items: baseline; font-size: 50px; line-height: 1.2; font-weight: 500; }
+  .lista li::before { content: ''; width: 40px; height: 8px; border-radius: 2px; background: #ff7a1a; transform: translateY(-14px); box-shadow: 0 0 14px rgba(255,122,26,.6); }
+
+  /* equipo: compu + celular en 3D */
+  .escena { position: relative; margin-top: 50px; height: 520px; perspective: 1600px; }
+  .compu { position: absolute; left: 0; top: 10px; width: 700px; border-radius: 18px; overflow: hidden; background: #323c47;
+    box-shadow: 0 0 0 2px #1b2128, 0 60px 90px -40px rgba(27,33,40,1); transform: rotateY(-14deg) rotateX(6deg); transform-origin: left center; }
+  .compu .barra-compu { height: 40px; display: flex; gap: 10px; align-items: center; padding: 0 18px; background: #222a33; }
+  .compu .barra-compu i { width: 14px; height: 14px; border-radius: 50%; background: #323c47; }
+  .compu .barra-compu i:first-child { background: #ff7a1a; }
+  .compu img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; }
+  .escena .cel { right: 0; bottom: 0; width: 230px; transform: rotate(0deg) translateZ(80px); }
+
+  /* pasos */
+  .pasos { margin-top: 70px; position: relative; display: grid; gap: 54px; }
+  .pasos::before { content: ''; position: absolute; left: 49px; top: 50px; bottom: 50px; width: 6px; border-radius: 3px; background: linear-gradient(180deg, #c2410c, #ff7a1a 70%, #f3f4f6); box-shadow: 0 0 18px rgba(255,122,26,.6); }
+  .paso { position: relative; display: grid; grid-template-columns: 104px 1fr; gap: 36px; align-items: center; }
+  .paso .num { width: 104px; height: 104px; border-radius: 50%; display: grid; place-items: center; font-size: 48px; background: #1b2128;
+    box-shadow: inset 0 0 0 4px #ff7a1a, 0 0 30px -4px rgba(255,122,26,.7); }
+  .paso p { font-size: 52px; line-height: 1.2; font-weight: 500; }
+
+  /* precio */
+  .desde { margin-top: 48px; font-size: 36px; font-weight: 700; letter-spacing: .14em; color: #9aa6b2; }
+  .precio { font-size: 220px; line-height: .9; margin-top: 8px; color: #eef1f4;
+    text-shadow: 0 0 40px rgba(255,122,26,.55), 0 0 4px rgba(243,244,246,.5); }
+
+  /* cta */
+  .t-cta .taller { position: absolute; inset: 0; background-size: cover; background-position: 75% 60%; opacity: .55; }
+  .t-cta .taller::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,33,40,.55), rgba(27,33,40,.2) 40%, rgba(27,33,40,.9) 75%); }
+  .t-cta .logo3d { position: absolute; left: 50%; top: 210px; width: 480px; transform: translateX(-50%); filter: drop-shadow(0 30px 40px rgba(27,33,40,.9)); }
+  .t-cta .logo3d-halo { position: absolute; left: 50%; top: 330px; width: 300px; height: 300px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255,122,26,.45), rgba(255,122,26,0)); filter: blur(10px); }
+  .t-cta .bloque { position: absolute; left: 96px; right: 96px; bottom: 200px; text-align: center; }
+  .t-cta h2 { font-size: 104px; }
+  .t-cta .numero { margin-top: 28px; font-size: 92px; color: #ff7a1a; text-shadow: 0 0 30px rgba(255,122,26,.5); }
+  .t-cta .usuario { margin-top: 18px; font-size: 42px; font-weight: 700; color: #eef1f4; }
+  .t-cta .nota { margin-top: 18px; font-size: 34px; color: #9aa6b2; }
+</style>
+</head>
+<body>
+<div class="pieza" id="pieza">
+  <canvas id="textura" width="1080" height="1350"></canvas>
+  <div class="luz"></div>
+  <div class="vineta"></div>
+  <div class="bisel"></div>
+  <span class="remache r1"></span><span class="remache r2"></span><span class="remache r3"></span><span class="remache r4"></span>
+  <div id="contenido"></div>
+</div>
+<script>
+  const ejemplo = { id: 'C0', n: 1, total: 6, slide: { tipo: 'portada', etiqueta: 'Plantilla', titulo: 'Título de *ejemplo*', subtitulo: 'Subtítulo de ejemplo.' } };
+  const d = location.hash.length > 1 ? JSON.parse(decodeURIComponent(location.hash.slice(1))) : ejemplo;
+  const s = d.slide;
+  const rec = '../recursos/', proy = '../../../assets/proyectos/';
+  const marcar = (t = '') => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  const pad = (n) => String(n).padStart(2, '0');
+
+  // ── Textura de acero gastado, distinta en cada carrusel (semilla = id) ──
+  (() => {
+    const c = document.getElementById('textura'), g = c.getContext('2d'), W = 1080, H = 1350;
+    let semilla = [...d.id].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7) % 2147483647 || 7;
+    const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
+    const base = g.createLinearGradient(0, 0, W, H); base.addColorStop(0, '#323c47'); base.addColorStop(.5, '#222a33'); base.addColorStop(1, '#1b2128');
+    g.fillStyle = base; g.fillRect(0, 0, W, H);
+    for (let i = 0; i < 70; i++) { const x = azar() * W, y = azar() * H, r = 60 + azar() * 260, claro = azar() < .4;
+      const m = g.createRadialGradient(x, y, 0, x, y, r); m.addColorStop(0, claro ? 'rgba(154,166,178,.07)' : 'rgba(27,33,40,.45)'); m.addColorStop(1, 'rgba(27,33,40,0)'); g.fillStyle = m; g.fillRect(x - r, y - r, r * 2, r * 2); }
+    for (let i = 0; i < 7; i++) { const x = azar() * W, w = 10 + azar() * 40; const v = g.createLinearGradient(x - w, 0, x + w, 0);
+      v.addColorStop(0, 'rgba(27,33,40,0)'); v.addColorStop(.5, 'rgba(27,33,40,' + (.25 + azar() * .3).toFixed(2) + ')'); v.addColorStop(1, 'rgba(27,33,40,0)'); g.fillStyle = v; g.fillRect(x - w, 0, w * 2, H); }
+    g.lineCap = 'round';
+    for (let i = 0; i < 4200; i++) { const x = azar() * W, y = azar() * H, largo = 10 + azar() * (azar() < .1 ? 260 : 70), ang = azar() < .6 ? -0.4 + azar() * .8 : azar() * Math.PI;
+      g.strokeStyle = azar() < .7 ? 'rgba(238,241,244,' + (.03 + azar() * .07).toFixed(3) + ')' : 'rgba(27,33,40,' + (.15 + azar() * .25).toFixed(3) + ')';
+      g.lineWidth = azar() < .9 ? .8 : 1.6; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(ang) * largo, y + Math.sin(ang) * largo); g.stroke(); }
+    for (let i = 0; i < 60; i++) { const x = azar() * W, y = azar() * H, rx = 1.2 + azar() * 4, ry = rx * (.5 + azar() * .6);
+      g.fillStyle = 'rgba(27,33,40,.95)'; g.beginPath(); g.ellipse(x, y, rx, ry, azar() * 3, 0, Math.PI * 2); g.fill();
+      g.strokeStyle = 'rgba(238,241,244,.25)'; g.lineWidth = 1; g.beginPath(); g.ellipse(x + .6, y + .8, rx + 1, ry + .8, 0, .2, 2.4); g.stroke(); }
+    const img = g.getImageData(0, 0, W, H), px = img.data;
+    for (let i = 0; i < px.length; i += 4) { const n = (azar() - .5) * 12; px[i] += n; px[i + 1] += n; px[i + 2] += n; }
+    g.putImageData(img, 0, 0);
+  })();
+
+  const simbolo = `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg>`;
+  const cab = `<div class="cab"><div class="marca cond">${simbolo}<span>Hefesto <b>Webs</b></span></div><span class="contador">${pad(d.n)} / ${pad(d.total)}</span></div>`;
+  const pie = (ultimo) => `<div class="pie"><span class="barra"></span>${ultimo ? '' : '<span class="desliza">Deslizá <i>→</i></span>'}</div>`;
+
+  const tipos = {
+    portada: () => `${cab}<div class="cuerpo">${s.etiqueta ? `<span class="etiqueta">${s.etiqueta}</span>` : ''}<h1 class="cond">${marcar(s.titulo)}</h1>${s.subtitulo ? `<p class="sub">${marcar(s.subtitulo)}</p>` : ''}${s.precio ? `<p class="desde">DESDE</p><p class="precio cond" style="font-size:150px">${s.precio}</p>` : ''}</div>${s.imagenCel ? `<div class="cel"><img src="${proy + s.imagenCel}" alt=""></div>` : ''}${pie(false)}`,
+    idea: () => `${s.numero ? `<span class="fantasma cond">${s.numero}</span>` : ''}${cab}<div class="cuerpo"><h2 class="cond">${marcar(s.titulo)}</h2>${s.texto ? `<p class="txt">${marcar(s.texto)}</p>` : ''}</div>${pie(d.n === d.total)}`,
+    lista: () => `${cab}<div class="cuerpo"><h2 class="cond">${marcar(s.titulo)}</h2><ul class="lista">${s.items.map(i => `<li>${marcar(i)}</li>`).join('')}</ul></div>${pie(false)}`,
+    equipo: () => `${cab}<div class="cuerpo" style="justify-content:flex-start;padding-top:40px"><h2 class="cond">${marcar(s.titulo)}</h2>${s.texto ? `<p class="txt" style="margin-top:24px;font-size:40px;color:#9aa6b2">${marcar(s.texto)}</p>` : ''}<div class="escena"><div class="compu"><div class="barra-compu"><i></i><i></i><i></i></div><img src="${proy + s.imagen}" alt=""></div>${s.imagenCel ? `<div class="cel"><img src="${proy + s.imagenCel}" alt=""></div>` : ''}</div></div>${pie(false)}`,
+    pasos: () => `${cab}<div class="cuerpo"><h2 class="cond">${marcar(s.titulo)}</h2><div class="pasos">${s.pasos.map((p, i) => `<div class="paso"><span class="num cond">${i + 1}</span><p>${marcar(p)}</p></div>`).join('')}</div></div>${pie(false)}`,
+    precio: () => `${cab}<div class="cuerpo"><h2 class="cond">${marcar(s.titulo)}</h2><p class="desde">DESDE</p><p class="precio cond">${s.precio}</p>${s.texto ? `<p class="txt" style="color:#9aa6b2">${marcar(s.texto)}</p>` : ''}</div>${pie(false)}`,
+    cta: () => `<div class="taller" style="background-image:url('${rec}taller.webp')"></div><div class="logo3d-halo"></div><img class="logo3d" src="${rec}logo-3d.webp" alt="">
+      <div class="bloque"><h2 class="cond">Escribime por <em>WhatsApp</em></h2><p class="numero cond">260 466-1138</p><p class="usuario">@hefestowebs</p><p class="nota">La consulta es sin costo.</p></div>${pie(true)}`,
+  };
+  const el = document.getElementById('contenido');
+  el.className = 't-' + s.tipo + (s.imagenCel && s.tipo === 'portada' ? ' con-imagen' : '');
+  el.innerHTML = tipos[s.tipo]();
+  // La portada con celular agrega la clase al contenedor de la pieza para el layout
+  if (s.tipo === 'portada' && s.imagenCel) document.getElementById('pieza').classList.add('t-portada', 'con-imagen');
+  if (s.tipo === 'cta') document.getElementById('pieza').classList.add('t-cta');
+</script>
+</body>
+</html>
