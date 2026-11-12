@@ -574,7 +574,103 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-14: Carruseles con el estilo Forja ──
+  {
+    ca: 'CA-14.1', desc: 'Muestras: 3 carruseles (caso, consejo, plan) de 5 a 7 PNG de 1080×1350',
+    run: () => {
+      const muestras = carruseles().filter(c => c.muestra);
+      const tipos = muestras.map(c => c.tipo).sort().join();
+      if (tipos !== 'caso,consejo,plan') throw new Error('tipos de las muestras: ' + (tipos || 'ninguna'));
+      const malos = [];
+      for (const c of muestras) {
+        if (c.slides.length < 5 || c.slides.length > 7) malos.push(`${c.id}: ${c.slides.length} slides`);
+        c.slides.forEach((_, i) => { const d = medidasPng(`brand/instagram/carruseles/${c.id}/slide-${i + 1}.png`); if (!d || d[0] !== 1080 || d[1] !== 1350) malos.push(`${c.id}/slide-${i + 1}.png`); });
+      }
+      if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-14.2', desc: 'Cada slide tiene 25 palabras o menos y cada carrusel tiene pilar, persona y etapa',
+    run: () => {
+      const malos = [];
+      for (const c of carruseles()) {
+        if (!PILARES.includes(c.pilar)) malos.push(`${c.id}: pilar "${c.pilar}"`);
+        if (!PERSONAS.includes(c.persona)) malos.push(`${c.id}: persona "${c.persona}"`);
+        if (!ETAPAS.includes(c.etapa)) malos.push(`${c.id}: etapa "${c.etapa}"`);
+        c.slides.forEach((s, i) => { const n = palabrasSlide(s); if (n > 25) malos.push(`${c.id} slide ${i + 1}: ${n} palabras`); });
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-14.3', desc: 'Todos los carruseles terminan con el CTA fijo (WhatsApp 260 466-1138 y @hefestowebs)',
+    run: () => {
+      const h = leerOpcional('brand/instagram/plantillas/carrusel.html'); if (!h) throw new Error('falta plantillas/carrusel.html');
+      if (!h.includes('260 466-1138') || !h.includes('@hefestowebs')) throw new Error('el slide CTA de la plantilla no tiene el número o el @');
+      const sinCta = carruseles().filter(c => c.slides.at(-1)?.tipo !== 'cta').map(c => c.id);
+      if (sinCta.length) throw new Error('no terminan en CTA: ' + sinCta.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-14.4', desc: 'textos.md: cada carrusel con texto ≤ 2.200 caracteres y 5 a 10 hashtags',
+    run: () => {
+      const t = leer('brand/instagram/textos.md');
+      const bloques = new Map([...t.matchAll(/^## Carrusel (C\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)].map(m => [m[1], m[2]]));
+      const malos = carruseles().filter(c => { const x = bloques.get(c.id); if (!x) return true; const h = (x.match(/#[\p{L}\p{N}_]+/gu) || []).length; return [...x].length > 2200 || h < 5 || h > 10; }).map(c => c.id);
+      if (malos.length) throw new Error('faltan o fuera de límites: ' + malos.join(', '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-14.5', desc: 'La plantilla de carrusel solo usa colores de brand/tokens.json (también en las transparencias)',
+    run: () => {
+      const h = leerOpcional('brand/instagram/plantillas/carrusel.html'); if (!h) throw new Error('falta plantillas/carrusel.html');
+      const tk = JSON.parse(leer('brand/tokens.json'));
+      const hex = [...Object.values(tk.color), ...Object.values(tk.colorClaro)].filter(v => /^#[0-9a-f]{6}$/i.test(v)).map(v => v.toLowerCase());
+      const rgb = new Set(hex.map(v => [1, 3, 5].map(i => parseInt(v.slice(i, i + 2), 16)).join(',')));
+      const fueraHex = [...new Set((h.match(/#[0-9a-f]{6}\b/gi) || []).map(c => c.toLowerCase()))].filter(c => !hex.includes(c));
+      const fueraRgba = [...new Set([...h.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g)].map(m => `${m[1]},${m[2]},${m[3]}`))].filter(c => !rgb.has(c));
+      if (fueraHex.length || fueraRgba.length) throw new Error(`fuera de la paleta: ${[...fueraHex, ...fueraRgba.map(c => 'rgb(' + c + ')')].join(' ')}`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-14.6', desc: 'Calendario: 4 semanas de carruseles desde el 2026-11-16 (lun, mié, vie) con la mezcla de la matriz',
+    run: () => {
+      const c = leer('brand/instagram/calendario.md');
+      const filas = c.split('\n').map(l => l.split('|').map(s => s.trim())).filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x[1] ?? '') && x[3] === 'Carrusel');
+      if (filas.length !== 12) throw new Error(`hay ${filas.length} carruseles en el calendario`);
+      const porId = new Map(carruseles().map(k => [k.id, k]));
+      const malos = []; const cuenta = {};
+      for (const f of filas) {
+        const id = (f[4].match(/Carrusel (C\d+)/) || [])[1], k = porId.get(id);
+        if (!k) { malos.push(`${f[1]}: no existe ${id}`); continue; }
+        if (f[1] < '2026-11-16' || f[1] > '2026-12-11') malos.push(`${f[1]} fuera de las 4 semanas`);
+        if (![1, 3, 5].includes(new Date(f[1] + 'T12:00:00Z').getUTCDay())) malos.push(`${f[1]} no es lun/mié/vie`);
+        cuenta[k.pilar] = (cuenta[k.pilar] ?? 0) + 1;
+      }
+      const meta = { Consejos: .4, Trabajos: .3, Oferta: .2, 'Detrás de escena': .1 };
+      for (const [p, m] of Object.entries(meta)) { const r = (cuenta[p] ?? 0) / filas.length; if (Math.abs(r - m) > .1) malos.push(`${p}: ${Math.round(r * 100)}% (meta ${m * 100}%)`); }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
 ];
+
+const PILARES = ['Consejos', 'Trabajos', 'Oferta', 'Detrás de escena'];
+const PERSONAS = ['Laura', 'Martín', 'Diego', 'Gabriela', 'Todas'];
+const ETAPAS = ['Descubre', 'Busca', 'Compara', 'Escribe', 'Compra y recomienda'];
+function carruseles() { return JSON.parse(leer('brand/instagram/contenido.json')).carruseles ?? []; }
+// Palabras visibles de un slide: todos los textos salvo los campos técnicos.
+function palabrasSlide(s) {
+  const tecnicos = new Set(['tipo', 'imagen', 'imagenCel', 'marco', 'fondo']);
+  const textos = Object.entries(s).filter(([k]) => !tecnicos.has(k)).flatMap(([, v]) => Array.isArray(v) ? v.flat() : [v]).filter(v => typeof v === 'string');
+  return textos.join(' ').split(/\s+/).filter(w => /[\p{L}\p{N}$]/u.test(w)).length;
+}
 
 // Archivos "vivos" de la marca (RN-13.2): todo lo que se usa hoy, sin registros históricos (RN-13.3).
 async function archivosVivos() {

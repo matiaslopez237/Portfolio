@@ -133,3 +133,63 @@ test('CA-10.5 si el contenedor da error, no se publica', async () => {
   );
   assert.equal(fetch.llamadas.some(l => /media_publish/.test(l.url)), false);
 });
+
+// ── HU-14: carruseles ──
+import { publicarCarrusel } from '../scripts/publicar-instagram.mjs';
+
+const calendarioCarr = `
+| Fecha | Día | Formato | Pieza | Idea |
+| --- | --- | --- | --- | --- |
+| 2026-11-16 | Lunes | Carrusel | Carrusel C2 · 3 cosas que tu página tiene que tener | Consejos |
+`;
+const textosCarr = `
+## Carrusel C2 · Consejo
+
+\`\`\`texto
+Tres cosas.
+#a #b #c #d #e
+\`\`\`
+`;
+const baseCarr = 'https://ejemplo.github.io/Portfolio/brand/instagram/carruseles/';
+
+test('CA-14.7 elige el carrusel del día con todas sus imágenes en orden', () => {
+  const r = elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-16', carruseles: { C2: 3 }, baseCarruseles: baseCarr });
+  assert.deepEqual(r, [{ id: 'C2', tipo: 'carrusel', imagenes: [1, 2, 3].map(n => `${baseCarr}C2/slide-${n}.png`), texto: 'Tres cosas.\n#a #b #c #d #e' }]);
+});
+
+test('CA-14.7 un carrusel ya publicado no se repite', () => {
+  const r = elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-16', carruseles: { C2: 3 }, baseCarruseles: baseCarr, publicados: { C2: { estado: 'publicado' } } });
+  assert.deepEqual(r, []);
+});
+
+test('CA-14.7 un carrusel sin slides en contenido.json es un error', () => {
+  assert.throws(() => elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-16', carruseles: {}, baseCarruseles: baseCarr }), /C2.*slides/i);
+});
+
+test('CA-14.7 publica un carrusel: un contenedor por slide, el carrusel con sus hijos y la publicación', async () => {
+  const fetch = fetchFalso([
+    { json: { id: 'h1' } }, { json: { id: 'h2' } },
+    { json: { id: 'carr' } }, { json: { status_code: 'FINISHED' } },
+    { json: { id: 'media-7' } },
+  ]);
+  const imgs = [baseCarr + 'C2/slide-1.png', baseCarr + 'C2/slide-2.png'];
+  const id = await publicarCarrusel({ igUserId: '123', token: 't', imagenes: imgs, texto: 'Hola #uno', fetch, esperaMs: 0 });
+  assert.equal(id, 'media-7');
+  const [h1, h2, carr, estado, pub] = fetch.llamadas;
+  for (const [l, img] of [[h1, imgs[0]], [h2, imgs[1]]]) {
+    const p = new URLSearchParams(l.cuerpo);
+    assert.match(l.url, /\/123\/media$/);
+    assert.equal(p.get('image_url'), img);
+    assert.equal(p.get('is_carousel_item'), 'true');
+  }
+  const pc = new URLSearchParams(carr.cuerpo);
+  assert.equal(pc.get('media_type'), 'CAROUSEL');
+  assert.equal(pc.get('children'), 'h1,h2');
+  assert.equal(pc.get('caption'), 'Hola #uno');
+  assert.match(estado.url, /carr/);
+  assert.equal(new URLSearchParams(pub.cuerpo).get('creation_id'), 'carr');
+});
+
+test('CA-14.7 rechaza carruseles de menos de 2 o más de 10 imágenes', async () => {
+  await assert.rejects(publicarCarrusel({ igUserId: '1', token: 't', imagenes: ['a'], texto: 'x', fetch: fetchFalso([]), esperaMs: 0 }), /2 y 10/);
+});
