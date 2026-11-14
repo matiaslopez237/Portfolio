@@ -659,9 +659,29 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-12: Sitio Forja ──
+  {
+    ca: 'CA-12.1', desc: 'Imágenes del hero en WebP (fondo 1376/800, logo 520/260 con transparencia) dentro del presupuesto de peso',
+    run: async () => {
+      const { statSync } = await import('node:fs');
+      const kb = (f) => statSync(new URL('../' + f, import.meta.url)).size / 1024;
+      const archivos = ['assets/hero/fondo-1376.webp', 'assets/hero/fondo-800.webp', 'assets/hero/logo-520.webp', 'assets/hero/logo-260.webp'];
+      const faltan = archivos.filter(f => leerOpcional(f) === null); if (faltan.length) throw new Error('faltan: ' + faltan.join(', '));
+      const logo = readFileSync(new URL('../assets/hero/logo-520.webp', import.meta.url));
+      if (!(logo.toString('ascii', 12, 16) === 'VP8X' && (logo[20] & 0x10))) throw new Error('logo-520.webp sin transparencia');
+      const compu = kb('assets/hero/fondo-1376.webp') + kb('assets/hero/logo-520.webp'), cel = kb('assets/hero/fondo-800.webp') + kb('assets/hero/logo-260.webp');
+      if (compu > 250 || cel > 150) throw new Error(`peso del hero: compu ${compu.toFixed(0)} KB, celular ${cel.toFixed(0)} KB`);
+      return true;
+    },
+  },
+  {
+    ca: 'CA-12.10', desc: 'DESIGN.md registra el diseño Forja del sitio como decisión aprobada, con fecha',
+    run: () => /\| 2026-11-1\d \| [^|]*Forja[^|]*\|/.test(leer('DESIGN.md')),
+  },
 ];
 
-const PILARES = ['Consejos', 'Trabajos', 'Oferta', 'Detrás de escena'];
+const PILARES =['Consejos', 'Trabajos', 'Oferta', 'Detrás de escena'];
 const PERSONAS = ['Laura', 'Martín', 'Diego', 'Gabriela', 'Todas'];
 const ETAPAS = ['Descubre', 'Busca', 'Compara', 'Escribe', 'Compra y recomienda'];
 function carruseles() { return JSON.parse(leer('brand/instagram/contenido.json')).carruseles ?? []; }
