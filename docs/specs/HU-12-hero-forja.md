@@ -1,7 +1,7 @@
 # HU-12: Sitio "Forja": hero animado, barra de metal y placas
 
 **Historia:** Como dueño del estudio, quiero que el portfolio tenga el diseño Forja que aprobé en el prototipo, para que quien llegue desde Instagram reconozca la marca y vea un sitio que no se parece a ningún otro.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand/prototipos/sitio-forja.html`, aprobado por Matias entre el 2026-11-11 y el 2026-11-14:
@@ -65,7 +65,7 @@ Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand
 | CA-12.11 | Dado el sitio local, cuando Matias lo ve en la compu y en el celular, entonces se ve igual que el prototipo aprobado y la animación no molesta | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-12.11: ¿El sitio se ve como el prototipo y la animación no molesta, en compu y celular? — firmado:
+- [x] CA-12.11: ¿El sitio se ve como el prototipo y la animación no molesta, en compu y celular? — firmado: Matias, 2026-11-14
 
 ## Preguntas abiertas
 - Ninguna. Todo lo visual quedó definido en el prototipo.
@@ -76,3 +76,4 @@ Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand
 - 2026-11-14: reescrita para cubrir el sitio completo según el prototipo.
 - 2026-11-14: aprobada por Matias.
 - 2026-11-14: implementada; 23 escenarios, 16 tests y 55 chequeos en verde. Falta la firma de CA-12.11 y publicar.
+- 2026-11-14: CA-12.11 firmado por Matias; publicada.
