@@ -44,7 +44,7 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 | CA-10.8 | Dado el post 4 (miércoles 18/11), cuando llega la hora, entonces aparece publicado en @efestowebs sin que Matias haga nada | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-10.8: ¿El post 4 salió solo el miércoles 18 a las 19? — firmado:
+- [ ] CA-10.8: ¿El post 4 salió solo el miércoles 18 a las 19? — firmado: (pendiente; conexión verificada el 2026-11-14: "Conexión OK con Instagram: @hefestowebs". Primer carrusel automático: C2, lunes 2026-11-16 19:00)
 
 ## Preguntas abiertas
 - Ninguna. Si la cuenta de Meta pide una página de Facebook para usar la API, se frena y se consulta antes de crearla.
@@ -53,3 +53,4 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 - 2026-11-10: creada (opción A: posts 1 a 3 programados a mano, del 4 en adelante automático).
 - 2026-11-10: aprobada por Matias.
 - 2026-11-10: implementada; 11 tests y 2 chequeos en verde, prueba en seco OK. Falta conectar la app de Meta, cargar los secrets y hacer push.
+- 2026-11-14: app de Meta conectada al portfolio, token de usuario del sistema (no vence) y secrets cargados por Matias. Verificación OK y prueba del lunes 16 OK (C2, 6 slides).
