@@ -287,6 +287,409 @@
           "tipo": "cta"
         }
       ]
+    },
+    {
+      "id": "C4",
+      "tipo": "consejo",
+      "titulo": "Instagram vs. página web",
+      "pilar": "Consejos",
+      "persona": "Martín",
+      "etapa": "Busca",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Consejo",
+          "titulo": "Instagram vs. página *web*",
+          "subtitulo": "¿Si ya tenés Instagram, necesitás una página?"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Instagram *muestra*",
+          "texto": "Es tu vidriera: fotos, novedades y cercanía con tus clientes."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "La página *ordena*",
+          "texto": "Productos, precios, servicios y contacto, todo en un solo lugar."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Te encuentran en *Google*",
+          "texto": "Quien busca lo que vendés puede llegar a tu página aunque no te siga."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Se usan *juntos*",
+          "texto": "La página no reemplaza a tu Instagram: lo completa. El link de la bio lleva a la página."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "tipo": "caso",
+      "titulo": "Caso Bacssa",
+      "pilar": "Trabajos",
+      "persona": "Gabriela",
+      "etapa": "Compara",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Caso real · Empresa",
+          "titulo": "Una empresa que se vea *seria*",
+          "subtitulo": "Bacssa: servicios Oil & Gas.",
+          "imagenCel": "bacssa-mobile.jpg"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Lo que *necesitaba*",
+          "texto": "Mostrar sus servicios con seriedad, en la compu de la oficina y en el celular."
+        },
+        {
+          "tipo": "equipo",
+          "titulo": "En la compu y en el *celular*",
+          "texto": "Página institucional, adaptada a cada pantalla.",
+          "imagen": "bacssa-desktop.jpg",
+          "imagenCel": "bacssa-mobile.jpg"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué *muestra*",
+          "items": [
+            "Campamentos",
+            "Logística",
+            "Mantenimiento",
+            "Contacto directo"
+          ]
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Tu empresa necesita *una así*?",
+          "texto": "Contame qué hace tu empresa y te paso un presupuesto sin costo."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C6",
+      "tipo": "plan",
+      "titulo": "Plan Landing Page",
+      "pilar": "Oferta",
+      "persona": "Laura",
+      "etapa": "Escribe",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Plan",
+          "titulo": "Landing *Page*",
+          "subtitulo": "Una página de una sola pantalla para presentar tu negocio.",
+          "precio": "$150.000"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Para *quién* es",
+          "texto": "Profesionales, comercios y emprendimientos que quieren estar en internet y que les escriban."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué *incluye*",
+          "items": [
+            "Diseño a medida de tu marca",
+            "Celular y computadora",
+            "Botón de WhatsApp",
+            "Preparada para Google",
+            "Estadísticas de visitas"
+          ]
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cómo *trabajo*",
+          "pasos": [
+            "Consulta sin costo",
+            "Diseño y desarrollo",
+            "Revisión juntos",
+            "Publicación"
+          ]
+        },
+        {
+          "tipo": "precio",
+          "titulo": "Landing Page",
+          "precio": "$150.000",
+          "texto": "El precio final depende de lo que necesites. Te paso un presupuesto sin costo."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C7",
+      "tipo": "consejo",
+      "titulo": "¿Una página web es cara?",
+      "pilar": "Consejos",
+      "persona": "Todas",
+      "etapa": "Busca",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Mito o verdad",
+          "titulo": "¿Una página web es *cara*?",
+          "subtitulo": "Depende de lo que necesites. Veamos."
+        },
+        {
+          "tipo": "idea",
+          "numero": "1",
+          "titulo": "No todos necesitan una *tienda*",
+          "texto": "Si te alcanza con una página de una sola pantalla, no hace falta pagar más."
+        },
+        {
+          "tipo": "idea",
+          "numero": "2",
+          "titulo": "Precio *claro*",
+          "texto": "Los planes arrancan desde $150.000. Sabés cuánto sale antes de empezar."
+        },
+        {
+          "tipo": "idea",
+          "numero": "3",
+          "titulo": "Sin *sorpresas*",
+          "texto": "Si hace falta mantenimiento mensual, lo definimos juntos antes de arrancar."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "La consulta es *sin costo*",
+          "texto": "Contame qué necesitás y te digo qué plan te conviene."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C8",
+      "tipo": "detras",
+      "titulo": "Quién está detrás",
+      "pilar": "Detrás de escena",
+      "persona": "Todas",
+      "etapa": "Compara",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Detrás de escena",
+          "titulo": "¿Quién está *detrás*?",
+          "subtitulo": "Hefesto Webs es una persona, no una agencia."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Soy *Matias Lopez*",
+          "texto": "Ingeniero en Sistemas, UTN San Rafael. Diseño y programo cada página."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Desde San Rafael, para *todo el país*",
+          "texto": "Trabajo a distancia con negocios de cualquier lugar."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Trato *directo*",
+          "texto": "Hablás conmigo de principio a fin, por WhatsApp. Sin intermediarios."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Lo que *hice*",
+          "items": [
+            "Páginas para empresas",
+            "Sitios para profesionales",
+            "Tiendas con pagos",
+            "Paneles de administración"
+          ]
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C9",
+      "tipo": "caso",
+      "titulo": "Caso Zenti",
+      "pilar": "Trabajos",
+      "persona": "Diego",
+      "etapa": "Compara",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Caso real · Tienda",
+          "titulo": "Una tienda con *pagos* online",
+          "subtitulo": "Zenti: tienda de tecnología hecha a medida.",
+          "imagenCel": "zenti-mobile.jpg"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué *tiene*",
+          "items": [
+            "Catálogo por categorías",
+            "Carrito de compras",
+            "Pagos online",
+            "Servidor propio"
+          ]
+        },
+        {
+          "tipo": "equipo",
+          "titulo": "En la compu y en el *celular*",
+          "texto": "El cliente elige, paga y el pedido llega.",
+          "imagen": "zenti-desktop.jpg",
+          "imagenCel": "zenti-mobile.jpg"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Es el plan *Tienda con pagos*",
+          "texto": "Tus clientes compran y pagan sin coordinar por chat. Desde $900.000."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Querés vender *online*?",
+          "texto": "Escribime y te cuento cómo sería para tu negocio."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "tipo": "consejo",
+      "titulo": "Tu propio dominio",
+      "pilar": "Consejos",
+      "persona": "Todas",
+      "etapa": "Busca",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Consejo",
+          "titulo": "Tu propio *dominio*",
+          "subtitulo": "Por qué conviene tener www.tunegocio.com.ar"
+        },
+        {
+          "tipo": "idea",
+          "numero": "1",
+          "titulo": "Fácil de *recordar*",
+          "texto": "Una dirección simple para poner en una tarjeta, en el local o en un mensaje."
+        },
+        {
+          "tipo": "idea",
+          "numero": "2",
+          "titulo": "Es *tuyo*",
+          "texto": "Tu nombre, no el de una plataforma. Lo mantenés aunque cambies de servicio."
+        },
+        {
+          "tipo": "idea",
+          "numero": "3",
+          "titulo": "Mails con tu *nombre*",
+          "texto": "Escribís desde la dirección de tu negocio, no desde una cuenta genérica."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Ya tenés el *tuyo*?",
+          "texto": "Si no, te ayudo a elegirlo cuando armamos tu página."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "tipo": "caso",
+      "titulo": "Caso tienda con panel",
+      "pilar": "Trabajos",
+      "persona": "Diego",
+      "etapa": "Compara",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Caso real · Tienda",
+          "titulo": "Manejada *por vos*",
+          "subtitulo": "Tienda online con panel de administración.",
+          "imagenCel": "tienda-mobile.jpg"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué *tiene*",
+          "items": [
+            "Catálogo y carrito",
+            "Cuentas de usuario",
+            "Pagos con Mercado Pago",
+            "Panel de administración"
+          ]
+        },
+        {
+          "tipo": "equipo",
+          "titulo": "El panel del *dueño*",
+          "texto": "Carga productos y ve los pedidos sin depender de nadie.",
+          "imagen": "tienda-desktop.jpg",
+          "imagenCel": "tienda-mobile.jpg"
+        },
+        {
+          "tipo": "idea",
+          "titulo": "Sin *depender* de nadie",
+          "texto": "Cambiás precios y sumás productos vos mismo, cuando quieras."
+        },
+        {
+          "tipo": "idea",
+          "titulo": "¿Querés tu *tienda*?",
+          "texto": "Escribime y te paso un presupuesto sin costo."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "tipo": "consejo",
+      "titulo": "La página de tu consultorio",
+      "pilar": "Consejos",
+      "persona": "Laura",
+      "etapa": "Descubre",
+      "slides": [
+        {
+          "tipo": "portada",
+          "etiqueta": "Consejo · Salud",
+          "titulo": "La página de tu *consultorio*",
+          "subtitulo": "4 cosas que tus pacientes buscan."
+        },
+        {
+          "tipo": "idea",
+          "numero": "1",
+          "titulo": "Qué *tratás*",
+          "texto": "Tus servicios explicados simple, para que el paciente sepa si sos para él."
+        },
+        {
+          "tipo": "idea",
+          "numero": "2",
+          "titulo": "Turno en un *toque*",
+          "texto": "Un botón que abre WhatsApp directo, sin buscar tu número."
+        },
+        {
+          "tipo": "idea",
+          "numero": "3",
+          "titulo": "Preguntas *frecuentes*",
+          "texto": "Respondé una vez lo que te preguntan siempre."
+        },
+        {
+          "tipo": "idea",
+          "numero": "4",
+          "titulo": "Dónde y *cuándo*",
+          "texto": "Dirección y horarios a la vista. Es lo primero que buscan."
+        },
+        {
+          "tipo": "cta"
+        }
+      ]
     }
   ]
 }

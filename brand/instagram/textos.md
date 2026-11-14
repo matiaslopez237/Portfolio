@@ -222,3 +222,116 @@ El precio final depende de lo que necesites. Escribime y te paso un presupuesto 
 
 #tiendaonline #catalogodigital #ventasporwhatsapp #emprendedores #diseñoweb #negocioslocales
 ```
+
+## Carrusel C4 · Instagram vs. página web
+
+```texto
+¿Si ya tenés Instagram, necesitás una página web?
+
+Instagram es tu vidriera. La página ordena todo lo que vendés, te hace aparecer en Google y le da a tus clientes un lugar fijo para escribirte. No se reemplazan: se usan juntos.
+
+¿Vendés solo por Instagram? Escribime y vemos qué te conviene. 👉 Link en la bio.
+
+#paginasweb #emprendedores #instagram #negocioslocales #diseñoweb #ventasonline
+```
+
+## Carrusel C5 · Caso Bacssa
+
+```texto
+Una empresa que se vea seria en internet. 🔨
+
+Bacssa, servicios Oil & Gas: página institucional para mostrar campamentos, logística y mantenimiento, pensada para la compu de la oficina y para el celular.
+
+¿Tu empresa necesita una página así? Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
+
+#paginasweb #paginainstitucional #empresas #oilandgas #diseñoweb #webamedida
+```
+
+## Carrusel C6 · Plan Landing Page
+
+```texto
+Landing Page · desde $150.000
+
+Una página de una sola pantalla para presentar tu negocio y que te escriban: diseño a tu marca, adaptada al celular, botón de WhatsApp, preparada para Google y con estadísticas de visitas.
+
+El precio final depende de lo que necesites. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
+
+#paginasweb #landingpage #profesionales #emprendedores #diseñoweb #negocioslocales
+```
+
+## Carrusel C7 · ¿Una página web es cara?
+
+```texto
+¿Una página web es cara? Depende de lo que necesites.
+
+No todos necesitan una tienda: si te alcanza con una página simple, no pagás de más. Los planes arrancan desde $150.000 y, si hace falta mantenimiento, lo definimos antes de arrancar.
+
+La consulta es sin costo. Escribime y te digo qué plan te conviene. 👉 Link en la bio.
+
+#paginasweb #emprendedores #negocioslocales #diseñoweb #presupuesto #webamedida
+```
+
+## Carrusel C8 · Quién está detrás
+
+```texto
+¿Quién está detrás de Hefesto Webs? 🔨
+
+Soy Matias Lopez, Ingeniero en Sistemas (UTN San Rafael). Diseño y programo cada página yo mismo, desde San Rafael para negocios de todo el país, y la manejamos por WhatsApp de principio a fin.
+
+Si querés tu página, escribime. 👉 Link en la bio.
+
+#sanrafael #mendoza #paginasweb #desarrolloweb #emprendedores #webamedida
+```
+
+## Carrusel C9 · Caso Zenti
+
+```texto
+Una tienda con pagos online, hecha a medida.
+
+Zenti, tienda de tecnología: catálogo por categorías, carrito, pagos online y servidor propio. Es el tipo de proyecto del plan Tienda con pagos (desde $900.000).
+
+¿Querés vender online con pagos? Escribime y te cuento cómo sería para tu negocio. 👉 Link en la bio.
+
+#tiendaonline #ecommerce #pagosonline #desarrolloweb #diseñoweb #webamedida
+```
+
+## Carrusel C10 · Tu propio dominio
+
+```texto
+Por qué tu negocio necesita su propio dominio (www.tunegocio.com.ar):
+
+1. Fácil de recordar y de compartir.
+2. Es tuyo: lo mantenés aunque cambies de servicio.
+3. Mails con el nombre de tu negocio.
+
+¿Ya tenés el tuyo? Si no, te ayudo a elegirlo cuando armamos tu página. 👉 Link en la bio.
+
+#dominio #paginasweb #emprendedores #negocioslocales #marketingdigital #diseñoweb
+```
+
+## Carrusel C11 · Caso tienda con panel
+
+```texto
+Tu tienda, manejada por vos.
+
+Tienda online con catálogo, carrito, cuentas de usuario, pagos con Mercado Pago y un panel para cargar productos y ver pedidos sin depender de nadie.
+
+¿Querés vender online y manejar tu tienda vos mismo? Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
+
+#tiendaonline #ecommerce #mercadopago #emprendedores #diseñoweb #webamedida
+```
+
+## Carrusel C12 · La página de tu consultorio
+
+```texto
+La página de tu consultorio: 4 cosas que tus pacientes buscan.
+
+1. Qué tratás, explicado simple.
+2. Un botón para pedir turno por WhatsApp.
+3. Preguntas frecuentes.
+4. Dirección y horarios a la vista.
+
+¿Tenés un consultorio y todavía no tenés página? Escribime. 👉 Link en la bio.
+
+#consultorios #salud #profesionales #turnosonline #paginasweb #diseñoweb
+```

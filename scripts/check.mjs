@@ -224,7 +224,7 @@ const chequeos = [
   {
     ca: 'CA-04.3', desc: '9 posts PNG de 1080×1350',
     run: () => {
-      const malos = Array.from({ length: 9 }, (_, i) => `brand/instagram/posts/post-${i + 1}.png`)
+      const malos = Array.from({ length: 9 }, (_, i) => `brand/instagram/archivo/posts/post-${i + 1}.png`)
         .filter(f => { const d = medidasPng(f); return !d || d[0] !== 1080 || d[1] !== 1350; });
       if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
       return true;
@@ -260,7 +260,7 @@ const chequeos = [
   {
     ca: 'CA-04.6', desc: 'calendario.md cubre 4 semanas con fecha, formato y pieza',
     run: () => {
-      const c = leerOpcional('brand/instagram/calendario.md'); if (!c) throw new Error('no existe brand/instagram/calendario.md');
+      const c = leerOpcional('brand/instagram/archivo/calendario-posts.md'); if (!c) throw new Error('no existe brand/instagram/archivo/calendario-posts.md');
       const semanas = (c.match(/^## Semana [1-4]\b/gm) || []).length;
       const filas = c.split('\n').filter(l => /^\| \d{4}-\d{2}-\d{2} \|/.test(l));
       const malas = filas.filter(l => l.split('|').slice(1, -1).map(s => s.trim()).filter(Boolean).length < 3);
@@ -351,7 +351,7 @@ const chequeos = [
   {
     ca: 'CA-09.1', desc: 'Posts 10, 11 y 12 en PNG de 1080×1350',
     run: () => {
-      const malos = [10, 11, 12].map(n => `brand/instagram/posts/post-${n}.png`)
+      const malos = [10, 11, 12].map(n => `brand/instagram/archivo/posts/post-${n}.png`)
         .filter(f => { const d = medidasPng(f); return !d || d[0] !== 1080 || d[1] !== 1350; });
       if (malos.length) throw new Error('faltan o miden mal: ' + malos.join(', '));
       return true;
@@ -552,7 +552,7 @@ const chequeos = [
       const desde = statSync(new URL('brand/logo/logo.svg', raiz)).mtimeMs - 1000;
       const piezas = [
         ['assets/og-hefesto.png', 1200, 630], ['brand/export/og.png', 1200, 630], ['brand/export/perfil-instagram.png', 1080, 1080], ['brand/export/perfil-whatsapp.png', 640, 640],
-        ...readdirSync(new URL('brand/instagram/posts/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/instagram/posts/${f}`, 1080, 1350]),
+        ...readdirSync(new URL('brand/instagram/archivo/posts/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/instagram/archivo/posts/${f}`, 1080, 1350]),
         ...readdirSync(new URL('brand/instagram/destacadas/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/instagram/destacadas/${f}`, 1080, 1920]),
         ...readdirSync(new URL('brand/whatsapp/catalogo/', raiz)).filter(f => f.endsWith('.png')).map(f => [`brand/whatsapp/catalogo/${f}`, 800, 800]),
         ['brand/whatsapp/flyer.png', 1080, 1920],
@@ -700,7 +700,7 @@ function textosPorPost() {
 
 // Filas "Post" de brand/instagram/calendario.md, ordenadas por fecha: [{ fecha, n }].
 function postsDelCalendario() {
-  const c = leerOpcional('brand/instagram/calendario.md'); if (!c) throw new Error('no existe brand/instagram/calendario.md');
+  const c = leerOpcional('brand/instagram/archivo/calendario-posts.md'); if (!c) throw new Error('no existe brand/instagram/archivo/calendario-posts.md');
   return c.split('\n').map(l => l.split('|').map(s => s.trim()))
     .filter(cols => /^\d{4}-\d{2}-\d{2}$/.test(cols[1] ?? '') && cols[3] === 'Post')
     .map(cols => ({ fecha: cols[1], n: +((cols[4].match(/Post (\d+)/) || [])[1]) }))

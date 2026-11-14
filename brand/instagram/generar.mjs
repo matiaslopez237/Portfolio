@@ -7,11 +7,11 @@ import { fileURLToPath } from 'node:url';
 const aqui = new URL('./', import.meta.url);
 const ruta = (rel) => fileURLToPath(new URL(rel, aqui));
 const datos = JSON.parse(readFileSync(new URL('contenido.json', aqui), 'utf8'));
-for (const d of ['posts', 'destacadas', 'historias']) mkdirSync(new URL(d + '/', aqui), { recursive: true });
+for (const d of ['archivo/posts', 'destacadas', 'historias']) mkdirSync(new URL(d + '/', aqui), { recursive: true });
 
 const piezas = [
   ...datos.posts.map(p => ({
-    plantilla: 'post', w: 1080, h: 1350, salida: `posts/post-${p.n}.png`,
+    plantilla: 'post', w: 1080, h: 1350, salida: `archivo/posts/post-${p.n}.png`,
     datos: p.precio ? { ...p, precioTexto: datos.precios[p.precio] } : p,
   })),
   ...datos.destacadas.map(icono => ({ plantilla: 'historia', w: 1080, h: 1920, salida: `destacadas/${icono}.png`, datos: { tipo: 'destacada', icono } })),

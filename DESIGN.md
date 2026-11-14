@@ -52,6 +52,9 @@
 - **Easing:** salida `cubic-bezier(0.23, 1, 0.32, 1)` · **Duración UI:** 160–250 ms.
 - **Reduced motion:** sin desplazamientos ni brillos; solo fundidos breves.
 
+## Excepción: Instagram y hero (2026-11-12, aprobada por Matias)
+En las piezas de Instagram (HU-14) y en el inicio del sitio (HU-12) se permiten texturas de metal generadas con código, brillo de brasa y la foto del taller. El resto del sitio sigue minimalista.
+
 ## Decisions Log
 | Date | Decision | Rationale |
 |------|----------|-----------|

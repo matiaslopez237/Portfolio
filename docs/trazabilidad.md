@@ -88,7 +88,18 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-13 | CA-13.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/nombres.md` · HU-02 historial |
 | HU-13 | CA-13.7 | Checklist (firma Matias) | pendiente | Cambiar @ y nombre en Instagram, WhatsApp Business y Meta |
 
+| HU-14 | CA-14.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/carruseles/C1..C3` |
+| HU-14 | CA-14.2 | Chequeo `scripts/check.mjs` | ✓ | `contenido.json` › carruseles |
+| HU-14 | CA-14.3 | Chequeo `scripts/check.mjs` | ✓ | `plantillas/carrusel.html` (slide CTA) |
+| HU-14 | CA-14.4 | Chequeo `scripts/check.mjs` | ✓ | `textos.md` § Carrusel C1..C12 |
+| HU-14 | CA-14.5 | Chequeo `scripts/check.mjs` | ✓ | `plantillas/carrusel.html` |
+| HU-14 | CA-14.6 | Chequeo `scripts/check.mjs` | ✓ | `calendario.md` (2026-11-16 a 2026-12-11) |
+| HU-14 | CA-14.7 | Test (TDD, API simulada) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
+| HU-14 | CA-14.8 | Checklist (firma Matias) | ✓ firmado 2026-11-13 | 3 muestras aprobadas |
+| HU-14 | CA-14.9 | Checklist (firma Matias) | pendiente | Ver la grilla de los 12 carruseles |
+
 ## Huecos
+- HU-14: CA-14.9 sin firmar. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
 - HU-13: CA-13.7 pendiente (cuentas). El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.
 - HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).

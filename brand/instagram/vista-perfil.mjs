@@ -19,7 +19,7 @@ const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 <div class="top"><div class="av"><img src="../export/perfil-instagram.png"></div><div class="st"><span><b>9</b>posts</span><span><b>—</b>seguidores</span><span><b>—</b>seguidos</span></div></div>
 <div class="bio"><b>Hefesto Webs</b>Páginas web forjadas a medida para negocios 🔨<br>Por Matias Lopez · Ing. en Sistemas<br>San Rafael, Mendoza → todo el país<br><span class="lnk">matiaslopez237.github.io/Portfolio</span></div>
 <div class="dest">${dest.map(d => `<figure><div class="c"><img src="destacadas/${d}.png"></div>${nombres[d]}</figure>`).join('')}</div>
-<div class="grid">${orden.map(n => `<img src="posts/post-${n}.png">`).join('')}</div></body></html>`;
+<div class="grid">${orden.map(n => `<img src="archivo/posts/post-${n}.png">`).join('')}</div></body></html>`;
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 540, height: 900 }, deviceScaleFactor: 2 });
 // Se escribe como archivo temporal junto a las imágenes, así el navegador puede leerlas.

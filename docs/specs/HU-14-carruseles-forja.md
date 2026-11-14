@@ -48,7 +48,7 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 | CA-14.9 | Dados los carruseles del mes, cuando Matias los ve en la grilla, entonces se ven llamativos, coherentes con el sitio y dicen solo cosas reales | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-14.8: ¿Las 3 muestras tienen el estilo que querés? — firmado:
+- [x] CA-14.8: ¿Las 3 muestras tienen el estilo que querés? — firmado: Matias, 2026-11-13 ("me re gustan")
 - [ ] CA-14.9: ¿Los carruseles del mes se ven bien en la grilla y dicen solo cosas reales? — firmado:
 
 ## Preguntas abiertas
@@ -58,3 +58,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 - 2026-11-12: creada, con la estrategia de la HU-11 y el estilo del prototipo del sitio. Los reels quedan para la HU-15.
 - 2026-11-12: aprobada por Matias.
 - 2026-11-12: etapa 1 lista: 3 muestras (C1 caso Quiropraxia, C2 consejo, C3 plan Tienda WhatsApp) y publicación de carruseles (16/16 tests). Espera la firma de CA-14.8.
+- 2026-11-14: etapa 2 lista: 12 carruseles (C1 a C12), textos y calendario desde el 2026-11-16; posts viejos archivados; excepción de Instagram y hero agregada a DESIGN.md. Falta la firma de CA-14.9.
