@@ -1,7 +1,7 @@
 # HU-12: Sitio "Forja": hero animado, barra de metal y placas
 
 **Historia:** Como dueño del estudio, quiero que el portfolio tenga el diseño Forja que aprobé en el prototipo, para que quien llegue desde Instagram reconozca la marca y vea un sitio que no se parece a ningún otro.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand/prototipos/sitio-forja.html`, aprobado por Matias entre el 2026-11-11 y el 2026-11-14:
@@ -74,3 +74,4 @@ Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand
 - 2026-11-11: creada (solo hero, con las imágenes de Gemini).
 - 2026-11-11 a 2026-11-14: prototipo del sitio completo aprobado por partes (hero, barra el doble de grande, metal gastado, calor al pasar el mouse, molde del logo, placas remachadas, hierro sin cortes, botón "Ver sitio").
 - 2026-11-14: reescrita para cubrir el sitio completo según el prototipo.
+- 2026-11-14: aprobada por Matias.
