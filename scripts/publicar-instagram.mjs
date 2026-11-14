@@ -125,6 +125,11 @@ export async function publicarCarrusel({ igUserId, token, imagenes, texto, fetch
   return id;
 }
 
+/** Comprueba la conexión sin publicar: lee el usuario de la cuenta con el token. */
+export async function verificarCuenta({ igUserId, token, fetch = globalThis.fetch }) {
+  return llamar(fetch, `${hostApi(token)}/${igUserId}?fields=username&access_token=${encodeURIComponent(token)}`, { method: 'GET' }, token);
+}
+
 // ── Línea de comandos ──
 
 function hoyEnArgentina() {
@@ -134,6 +139,13 @@ function hoyEnArgentina() {
 async function principal() {
   const args = process.argv.slice(2);
   const prueba = args.includes('--prueba');
+  if (args.includes('--verificar')) {
+    const { IG_USER_ID: id, IG_ACCESS_TOKEN: tk } = process.env;
+    if (!id || !tk) throw new Error('Faltan IG_USER_ID o IG_ACCESS_TOKEN (se cargan en GitHub › Settings › Secrets)');
+    const cuenta = await verificarCuenta({ igUserId: id, token: tk });
+    console.log(`✓ Conexión OK con Instagram: @${cuenta.username} (no se publicó nada)`);
+    return;
+  }
   const fecha = (args.find(a => a.startsWith('--fecha=')) ?? '').slice(8) || hoyEnArgentina();
   const raiz = (rel) => fileURLToPath(new URL('../' + rel, import.meta.url));
   const rutaPublicados = raiz('brand/instagram/publicados.json');

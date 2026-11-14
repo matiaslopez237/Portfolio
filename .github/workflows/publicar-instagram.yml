@@ -12,6 +12,10 @@ on:
       fecha:
         description: 'Fecha a publicar (AAAA-MM-DD). Vacío = hoy'
         required: false
+      verificar:
+        description: 'Solo verificar la conexión con Instagram (no publica)'
+        type: boolean
+        default: false
       prueba:
         description: 'Modo prueba: muestra qué publicaría, sin publicar'
         type: boolean
@@ -40,10 +44,12 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           FECHA: ${{ inputs.fecha }}
           PRUEBA: ${{ inputs.prueba }}
+          VERIFICAR: ${{ inputs.verificar }}
         run: |
           ARGS=""
           if [ -n "$FECHA" ]; then ARGS="$ARGS --fecha=$FECHA"; fi
           if [ "$PRUEBA" = "true" ]; then ARGS="$ARGS --prueba"; fi
+          if [ "$VERIFICAR" = "true" ]; then ARGS="--verificar"; fi
           node scripts/publicar-instagram.mjs $ARGS
 
       - name: Guardar el registro de lo publicado

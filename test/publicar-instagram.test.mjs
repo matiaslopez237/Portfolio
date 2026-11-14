@@ -193,3 +193,20 @@ test('CA-14.7 publica un carrusel: un contenedor por slide, el carrusel con sus 
 test('CA-14.7 rechaza carruseles de menos de 2 o más de 10 imágenes', async () => {
   await assert.rejects(publicarCarrusel({ igUserId: '1', token: 't', imagenes: ['a'], texto: 'x', fetch: fetchFalso([]), esperaMs: 0 }), /2 y 10/);
 });
+
+// ── HU-10: verificar la conexión sin publicar ──
+import { verificarCuenta } from '../scripts/publicar-instagram.mjs';
+
+test('CA-10.5 verificar: lee el usuario de la cuenta con el token, sin publicar', async () => {
+  const fetch = fetchFalso([{ json: { id: '178', username: 'hefestowebs' } }]);
+  const r = await verificarCuenta({ igUserId: '178', token: 'EAAsecreto', fetch });
+  assert.equal(r.username, 'hefestowebs');
+  assert.equal(fetch.llamadas.length, 1);
+  assert.equal(fetch.llamadas[0].metodo, 'GET');
+  assert.match(fetch.llamadas[0].url, /\/178\?fields=username/);
+});
+
+test('CA-10.5 verificar: si el token es inválido, falla sin mostrarlo', async () => {
+  const fetch = fetchFalso([{ ok: false, status: 400, json: { error: { message: 'Invalid OAuth access token EAAsecreto' } } }]);
+  await assert.rejects(verificarCuenta({ igUserId: '178', token: 'EAAsecreto', fetch }), (e) => /Invalid OAuth/.test(e.message) && !e.message.includes('EAAsecreto'));
+});
