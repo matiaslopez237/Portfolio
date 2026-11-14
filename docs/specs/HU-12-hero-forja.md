@@ -75,3 +75,4 @@ Pasar al sitio real (`index.html` + `style.css`) el diseño del prototipo `brand
 - 2026-11-11 a 2026-11-14: prototipo del sitio completo aprobado por partes (hero, barra el doble de grande, metal gastado, calor al pasar el mouse, molde del logo, placas remachadas, hierro sin cortes, botón "Ver sitio").
 - 2026-11-14: reescrita para cubrir el sitio completo según el prototipo.
 - 2026-11-14: aprobada por Matias.
+- 2026-11-14: implementada; 23 escenarios, 16 tests y 55 chequeos en verde. Falta la firma de CA-12.11 y publicar.

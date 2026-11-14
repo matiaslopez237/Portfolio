@@ -130,6 +130,8 @@
       enable_heatmaps: true
     });
   </script>
+
+  <link rel="stylesheet" href="forja.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -137,7 +139,7 @@
   <!-- NAV -->
   <header class="site-header" id="nav">
     <nav class="nav wrap" aria-label="Navegación principal">
-      <a href="#inicio" class="logo" aria-label="Hefesto Webs, ir al inicio"><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span class="logo-texto" aria-hidden="true">Hefesto <b>Webs</b></span></a>
+      <a href="#inicio" class="logo" aria-label="Hefesto Webs, ir al inicio"><svg class="logo-hueco" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><svg class="logo-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="currentColor"/></svg><span class="logo-texto" aria-hidden="true">Hefesto <b>Webs</b></span></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span>
       </button>
@@ -154,7 +156,15 @@
   <main id="main">
 
     <!-- HERO -->
-    <section class="hero wrap" id="inicio" aria-labelledby="hero-heading">
+    <section class="hero hero-forja" id="inicio" aria-labelledby="hero-heading">
+      <picture>
+        <source media="(max-width: 860px)" srcset="assets/hero/fondo-800.webp" />
+        <img class="fondo" id="fondo" src="assets/hero/fondo-1376.webp" alt="" aria-hidden="true" />
+      </picture>
+      <div class="velo"></div>
+      <div class="calor" id="calor"></div>
+      <div class="sombra" id="sombra"></div>
+      <div class="texto wrap">
       <div class="hero-main">
         <h1 id="hero-heading" class="hero-in" style="--i:0">Páginas web que le traen <em>clientes</em> a tu negocio.</h1>
         <p class="hero-sub hero-in" style="--i:1">Diseño y programo páginas, tiendas online y catálogos con pedidos por WhatsApp para comercios, profesionales y emprendimientos.</p>
@@ -166,15 +176,16 @@
           <a class="btn btn-plain" href="#trabajos">Ver trabajos</a>
         </div>
       </div>
-      <div class="hero-side hero-in" style="--i:2">
+      </div>
+    </section>
+
+    <section class="ficha-franja wrap" aria-label="Qué hago, para quién y cómo trabajo">
         <dl class="ficha">
           <div><dt>Qué hago</dt><dd>Páginas, tiendas online con carrito y pagos, catálogos con pedidos por WhatsApp.</dd></div>
           <div><dt>Para quién</dt><dd>Comercios, profesionales y emprendimientos. Y empresas que necesitan un <a href="#a-medida">sistema a medida</a>.</dd></div>
           <div><dt>Cómo trabajo</dt><dd>Hablamos por WhatsApp, te paso un presupuesto y armamos tu página juntos. La consulta es sin costo.</dd></div>
         </dl>
         <p class="firma"><strong>Hefesto Webs</strong>, por Matias Lopez · Ing. en Sistemas, UTN San Rafael</p>
-        <svg class="hero-simbolo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path class="brasa" d="M55.5 26 L44.5 53" stroke-width="2.4" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
-      </div>
     </section>
 
     <!-- TRABAJOS -->
@@ -235,7 +246,6 @@
             </div>
             <div class="panel-link">
               <a class="link-arrow" href="https://app-zenti-front.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de Zenti</span></a>
-              <small>Puede tardar unos segundos en cargar.</small>
             </div>
           </div>
         </article>
@@ -282,7 +292,6 @@
             </div>
             <div class="panel-link">
               <a class="link-arrow" href="https://ecommerce-5bt9.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> de la tienda</span></a>
-              <small>Puede tardar unos segundos en cargar.</small>
             </div>
           </div>
         </article>
@@ -307,7 +316,6 @@
             </div>
             <div class="panel-link">
               <a class="link-arrow" href="https://coffea-front.onrender.com" target="_blank" rel="noopener" aria-describedby="aviso-pestana"><span class="link-text">Ver sitio</span><span class="sr-only"> del café de muestra</span></a>
-              <small>Puede tardar unos segundos en cargar.</small>
             </div>
           </div>
         </article>
@@ -468,6 +476,15 @@
     </div>
   </footer>
 
+  <div class="vuelo" id="vuelo" aria-hidden="true">
+    <div class="pieza" id="pieza">
+      <div class="halo" id="halo"></div>
+      <img src="assets/hero/logo-520.webp" srcset="assets/hero/logo-260.webp 260w, assets/hero/logo-520.webp 520w" sizes="300px" alt="" />
+      <div class="brillo" id="brillo"></div>
+    </div>
+  </div>
+  <canvas class="chispas" id="chispas" aria-hidden="true"></canvas>
+
   <p id="aviso-pestana" hidden>Se abre en otra pestaña.</p>
 
   <a class="fab" href="https://wa.me/5492604661138?text=Hola%20Matias%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20consultarte%20por%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener" aria-describedby="aviso-pestana" aria-label="Escribime por WhatsApp">
@@ -585,5 +602,7 @@
       }
     });
   </script>
+
+<script src="forja.js" defer></script>
 </body>
 </html>

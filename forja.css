@@ -1,0 +1,185 @@
+/* ═══ Capa "Forja" (HU-12): hero animado, barra de metal, placas y texturas. Se carga después de style.css ═══ */
+:root { --header-h: 136px; --slot: 68px; }
+html, body { overflow-x: clip; }
+body::after { content: ''; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Barra de navegación al doble */
+.site-header { position: fixed; left: 0; right: 0; background: transparent; transition: background-color .3s, border-color .3s; }
+.site-header.is-scrolled { background: var(--bg); }
+.nav { height: var(--header-h); }
+.logo { gap: 18px; }
+.site-header .logo-simbolo { width: var(--slot); height: var(--slot); opacity: 0; }
+.site-header .logo-simbolo.destello .brasa { animation: destello .9s ease-out; }
+@keyframes destello { 0% { stroke: #fff3c4; filter: drop-shadow(0 0 6px #ff7a1a); } 100% { stroke: #ff7a1a; filter: none; } }
+.site-header .logo-texto { font-size: 46px; white-space: nowrap; }
+.site-header .logo { position: relative; }
+.site-header .logo-hueco { position: absolute; left: 0; top: 50%; width: var(--slot); height: var(--slot); transform: translateY(-50%); pointer-events: none;
+  color: #0b0f13; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 -1px 0 rgba(0,0,0,.7)); opacity: var(--hueco, 1); }
+.site-header .logo-hueco .brasa { stroke: #0b0f13; }
+.site-header .logo-hueco.tibio { color: #2a160c; filter: drop-shadow(0 1.5px 0 rgba(255,255,255,.16)) drop-shadow(0 0 8px rgba(255,122,26,.55)); }
+.site-header .logo-hueco.tibio .brasa { stroke: #6b2a0c; }
+.site-header .logo-hueco { transition: color .4s, filter .4s; }
+.nav-links { font-size: 16px; gap: 34px; }
+.nav-links .btn-sm { min-height: 52px; padding: 0 26px; font-size: 16px; }
+main { padding-top: 0; }
+
+/* Barra de acero forjado: textura de hoja/lingote y metal que se calienta donde pasa el mouse */
+.site-header { background: transparent; }
+.site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; transition: opacity .35s;
+  background:
+    linear-gradient(100deg, transparent 0%, rgba(255,255,255,.03) 38%, rgba(255,255,255,.075) 47%, rgba(255,255,255,.025) 56%, transparent 75%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.18)),
+    var(--metal, none) center / auto 100% repeat-x,
+    #232a32;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.6), inset 0 -3px 6px -3px rgba(0,0,0,.5), 0 14px 30px -18px rgba(0,0,0,.9);
+  opacity: .82; }
+.site-header.is-scrolled::before { opacity: 1; }
+.site-header.is-scrolled { background: transparent; border-bottom-color: transparent; }
+.site-header .calor-nav { position: absolute; inset: 0; z-index: -1; pointer-events: none; mix-blend-mode: screen; opacity: var(--calor, 0);
+  background: radial-gradient(ellipse var(--cw, 220px) 120% at var(--cx, 50%) 55%, rgba(255,236,190,.55) 0%, rgba(255,140,40,.42) 22%, rgba(190,50,12,.32) 48%, rgba(90,20,8,.18) 66%, transparent 82%); }
+.site-header .calor-nav::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: radial-gradient(ellipse calc(var(--cw, 220px) * .8) 100% at var(--cx, 50%) 50%, rgba(255,190,110,.9), rgba(255,100,20,.5) 40%, transparent 75%); }
+.nav-links a:not(.btn), .logo-texto { transition: color .5s, text-shadow .5s; }
+.nav-links a.caliente:not(.btn) { color: #ffe9cc; text-shadow: 0 0 12px rgba(255,140,40,.65); }
+.logo.caliente .logo-texto { text-shadow: 0 0 16px rgba(255,140,40,.55); }
+.nav-links .btn-wa.caliente { box-shadow: 0 0 0 1px #ffb366, 0 0 26px -2px rgba(255,122,26,.8); background: #ff8a33; }
+
+/* Hero con el taller */
+.hero-forja { position: relative; height: 100svh; min-height: 680px; overflow: hidden; display: block; padding: 0; max-width: none; }
+.hero-forja .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% 50%; transform-origin: 70% 60%; will-change: transform, filter; }
+.hero-forja .velo { position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 82%, transparent) 34%, transparent 62%), linear-gradient(0deg, var(--bg) 0%, transparent 22%); }
+.hero-forja .texto { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding-top: var(--header-h); }
+.hero-forja .hero-main { max-width: 640px; }
+.sombra { position: absolute; z-index: 1; width: 200px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.75), transparent); pointer-events: none; transform: translate(-50%, -50%); }
+.calor { position: absolute; z-index: 1; width: 260px; height: 90px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,122,26,.35), transparent); mix-blend-mode: screen; pointer-events: none; transform: translate(-50%, -50%); }
+.vuelo { position: fixed; left: 0; top: 0; z-index: 55; width: 300px; height: 300px; pointer-events: none; perspective: 900px; will-change: transform; }
+.pieza { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform, opacity; }
+.pieza img { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 18px 24px rgba(0,0,0,.55)); }
+.brillo { position: absolute; left: 51.5%; top: 47%; width: 12%; height: 40%; border-radius: 50%; transform: translate(-50%, -50%) rotate(17deg); background: radial-gradient(closest-side, rgba(255,236,190,.95), rgba(255,140,40,.65) 45%, rgba(255,90,10,0) 100%); mix-blend-mode: screen; filter: blur(6px); opacity: 0; }
+.halo { position: absolute; left: 51%; top: 48%; width: 46%; height: 62%; border-radius: 50%; transform: translate(-50%, -50%) rotate(17deg); background: radial-gradient(closest-side, rgba(255,122,26,.45), transparent); mix-blend-mode: screen; filter: blur(14px); opacity: 0; }
+canvas.chispas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 56; pointer-events: none; }
+
+/* La ficha pasa a una franja debajo del hero */
+.ficha-franja { padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(24px, 4vw, 40px); }
+.ficha-franja .ficha { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0 32px; border-top: 1px solid var(--line-strong); }
+.ficha-franja .ficha div { display: block; padding: 22px 0; border-bottom: 0; }
+.ficha-franja .ficha dt { margin-bottom: 8px; }
+.ficha-franja .firma { margin-top: 8px; }
+
+/* Luz ambiente por sección */
+.section { isolation: isolate; }
+.section::after { content: ''; position: absolute; z-index: -1; top: 8%; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255,122,26,.10), rgba(255,122,26,.04) 45%, transparent 70%); filter: blur(10px); left: -32vw; }
+.section:nth-of-type(even)::after { left: auto; right: -32vw; }
+
+/* Títulos: número fantasma + barra que se calienta */
+.section-head { position: relative; }
+.section-head h2::after { background: #6b3a1c; }
+.section-head.encendida h2::after { animation: barra-rojo 1.4s ease-out forwards; }
+@keyframes barra-rojo { 0% { background: #6b3a1c; } 35% { background: #ffe1b0; box-shadow: 0 0 18px 4px rgba(255,140,40,.8); } 100% { background: #FF7A1A; box-shadow: none; } }
+.fantasma { position: absolute; z-index: -1; left: -.05em; top: -.32em; font-family: 'Archivo', sans-serif; font-weight: 800; font-stretch: 70%; font-variation-settings: "wdth" 70; font-size: clamp(150px, 20vw, 280px); line-height: .8; color: transparent; -webkit-text-stroke: 1.5px rgba(154,166,178,.16); pointer-events: none; will-change: transform; }
+.section { padding-top: clamp(130px, 14vw, 190px); }
+
+/* Metal */
+.metal, .showcase, .a-medida, .form, .plan { position: relative; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 30%), var(--surface);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.09), inset 0 -1px 0 rgba(0,0,0,.4), 0 1px 0 rgba(0,0,0,.3), 0 24px 48px -28px rgba(0,0,0,.8); }
+.showcase::after, .a-medida::after, .form::after, .plan::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.07), transparent 60%); }
+.showcase:hover::after, .a-medida:hover::after, .form:hover::after, .plan:hover::after { opacity: 1; }
+
+/* Trabajos: equipos en 3D */
+.devices { perspective: 1400px; }
+.devices > * { transition: transform .2s linear; }
+.devices { transform-style: preserve-3d; }
+.showcase .devices { transform: rotateX(var(--rx, 12deg)) rotateY(var(--ry, -9deg)); transition: transform .2s linear; }
+.frame-phone { transform: translateZ(50px); }
+
+/* Planes: piezas forjadas, la del medio al rojo */
+.planes { gap: 20px; border-top: 0; align-items: stretch; }
+.plan, .plan:first-child, .plan:last-child { padding: 32px 28px 28px; }
+.plan + .plan { border-left: 0; }
+.plan h3 { font-size: clamp(26px, 2.3vw, 32px); white-space: nowrap; }
+.plan:nth-child(2) { box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 0 0 1px rgba(255,122,26,.55), 0 0 40px -6px rgba(255,122,26,.35), 0 30px 60px -30px rgba(0,0,0,.9); }
+.plan:nth-child(2) .plan-list li::before { background: var(--accent); }
+.plan.encendida .plan-desde b { animation: precio-rojo 1.6s ease-out; }
+@keyframes precio-rojo { 0% { color: var(--text); } 30% { color: #ffd49a; text-shadow: 0 0 22px rgba(255,140,40,.7); } 100% { color: var(--text); text-shadow: none; } }
+
+/* Cómo trabajo: la línea de forja sobre el borde de los pasos */
+.pasos { position: relative; }
+.pasos .linea { position: absolute; left: 0; right: 0; top: -2px; height: 3px; pointer-events: none; }
+.pasos .linea i { position: absolute; inset: 0 auto 0 0; width: calc(var(--avance, 0) * 100%); border-radius: 2px; background: linear-gradient(90deg, #6b3a1c, #FF7A1A 80%, #ffe1b0); box-shadow: 0 0 14px rgba(255,122,26,.6); }
+.pasos li::before { transition: color .6s, text-shadow .6s; }
+.pasos li.caliente::before { color: var(--text); text-shadow: 0 0 18px rgba(255,140,40,.55); }
+
+/* Contacto: el taller de fondo y brasas */
+#contacto { isolation: isolate; }
+#contacto::before { content: ''; position: absolute; z-index: -2; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw; height: auto; background: url('assets/hero/fondo-1376.webp') 80% 70% / cover; filter: brightness(.33) saturate(.7); }
+#contacto::after { z-index: -1; left: calc(50% - 50vw); width: 100vw; max-width: none; height: 100%; max-height: none; top: 0; border-radius: 0; filter: none; background: linear-gradient(90deg, var(--bg) 15%, color-mix(in srgb, var(--bg) 70%, transparent) 55%, color-mix(in srgb, var(--bg) 40%, transparent)); }
+.cta-brasa { position: relative; display: inline-flex; }
+.cta-brasa canvas { position: absolute; left: -40px; top: -70px; width: calc(100% + 80px); height: calc(100% + 90px); pointer-events: none; }
+.btn-wa:hover { box-shadow: 0 0 0 1px var(--accent), 0 10px 34px -6px rgba(255,122,26,.65); }
+
+/* Botón "Ver sitio": acero, con el borde que se enciende */
+.panel-link .link-arrow { min-height: 48px; padding: 0 22px; gap: 10px; border-radius: 4px; font-weight: 700; color: var(--text);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0) 60%), var(--surface-2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px var(--line-strong), 0 10px 24px -14px rgba(0,0,0,.9);
+  transition: box-shadow .2s, transform .12s; }
+.panel-link .link-arrow .link-text { text-decoration: none; }
+.panel-link .link-arrow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px var(--accent), 0 0 22px -6px rgba(255,122,26,.55); }
+.panel-link .link-arrow:active { transform: scale(.97); }
+/* Placas remachadas y hierro fundido */
+/* Fondo de hierro fundido */
+html { background: #13181d; }
+body { background-color: #13181d; background-image: var(--hierro, none); background-size: 640px 640px; }
+
+/* Placas remachadas: cada sección es un cuadro de acero */
+.section { max-width: 1280px; margin: 28px auto; padding: clamp(96px, 10vw, 140px) clamp(28px, 5vw, 72px) clamp(72px, 8vw, 110px);
+  border-radius: 22px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 18%, rgba(0,0,0,0) 82%, rgba(0,0,0,.18)), var(--bg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 0 1px rgba(255,255,255,.035), inset 0 -2px 0 rgba(0,0,0,.45),
+    0 0 0 1px #0c1014, 0 2px 0 1px rgba(255,255,255,.03), 0 30px 60px -30px rgba(0,0,0,.95); }
+.section::before { display: none; }
+.section::after { top: -10%; }
+.remaches { position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
+  --r: radial-gradient(circle at 40% 36%, #c4cdd6 0 1.2px, #7a8590 2.6px, #3b444e 4.6px, #0b0f12 6px, transparent 6.8px);
+  background: var(--r) 16px 16px / 16px 16px no-repeat, var(--r) calc(100% - 16px) 14px / 16px 16px no-repeat,
+              var(--r) 14px calc(100% - 16px) / 16px 16px no-repeat, var(--r) calc(100% - 16px) calc(100% - 16px) / 16px 16px no-repeat; }
+.ficha-franja { max-width: 1280px; margin: 28px auto 0; padding: clamp(36px, 5vw, 56px) clamp(28px, 5vw, 72px); border-radius: 22px; position: relative; overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 30%), var(--bg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), inset 0 -2px 0 rgba(0,0,0,.45), 0 0 0 1px #0c1014, 0 30px 60px -30px rgba(0,0,0,.95); }
+.ficha-franja .ficha { border-top: 0; }
+#trabajos { padding-top: clamp(96px, 10vw, 140px); }
+#contacto::before { display: block; left: 0; width: 100%; }
+#contacto::after { left: 0; width: 100%; }
+.footer { border-top: 0; }
+@media (max-width: 860px) {
+  .section, .ficha-franja { margin: 14px 10px; padding-left: 20px; padding-right: 20px; border-radius: 16px; }
+  .section { padding-top: 84px; padding-bottom: 60px; }
+  .remaches { background-size: 13px 13px; }
+}
+
+.aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1); }
+.aparece.visto { opacity: 1; transform: none; }
+
+@media (max-width: 1000px) { .planes { grid-template-columns: minmax(0,1fr); } }
+@media (max-width: 860px) {
+  :root { --header-h: 96px; --slot: 48px; }
+  .logo { gap: 12px; }
+  .site-header .logo-texto { font-size: 24px; }
+  .nav-links .btn-sm { min-height: 48px; }
+  .hero-forja .fondo { height: 58%; object-position: 76% 92%; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+  .hero-forja .velo { background: linear-gradient(0deg, var(--bg) 42%, transparent 60%); }
+  .hero-forja .texto { justify-content: flex-end; padding-bottom: 40px; }
+  .hero-forja h1 { font-size: clamp(42px, 12vw, 56px); }
+  .ficha-franja .ficha { grid-template-columns: minmax(0,1fr); }
+  .fantasma { font-size: 120px; top: -.25em; }
+  .pasos .linea { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .logo-simbolo { opacity: 1; }
+  .site-header .logo-hueco { display: none; }
+  .aparece { opacity: 1; transform: none; transition: none; }
+  .showcase .devices { transform: rotateX(6deg) rotateY(-6deg); }
+  .section-head.encendida h2::after, .plan.encendida .plan-desde b { animation: none; }
+  .section-head h2::after { background: var(--accent); }
+}

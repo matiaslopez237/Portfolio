@@ -1,4 +1,5 @@
 // Arma brand/prototipos/sitio-forja.html: el index.html real + style.css real + la capa "Forja" (hero animado y profundidad).
+// OBSOLETO desde la HU-12: el diseño ya está en index.html + forja.css + forja.js. Correrlo de nuevo duplicaría la capa Forja.
 // Correr: node brand/prototipos/armar-sitio-forja.mjs  (toma index.html y pagina-forja.html actuales)
 import { readFileSync, writeFileSync } from 'node:fs';
 const P = 'C:/Matias/proyecto/Portfolio/';

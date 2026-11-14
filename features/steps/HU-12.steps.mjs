@@ -64,6 +64,8 @@ Then('el logo 3D terminó sobre el símbolo de la barra', async function () {
 });
 
 Then('el símbolo plano de la barra se ve', async function () {
+  // El fundido termina cuando el logo llega (la animación sigue al scroll con inercia): se espera hasta 4 s.
+  await this.page.waitForFunction(() => +getComputedStyle(document.querySelector('.site-header .logo-simbolo')).opacity > 0.9, null, { timeout: 4000 }).catch(() => {});
   const o = await this.page.$eval('.site-header .logo-simbolo', el => +getComputedStyle(el).opacity);
   assert.ok(o > 0.9, `opacidad del símbolo: ${o}`);
 });

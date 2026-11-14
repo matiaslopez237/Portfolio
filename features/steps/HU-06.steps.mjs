@@ -23,7 +23,8 @@ Given('que abro el portfolio en un celular de {int} px', async function (ancho) 
 
 // CA-06.1
 Then('el fondo de la página es {string}', async function (hex) {
-  assert.equal(await estilo(this.page, 'body', 'backgroundColor'), rgb(hex));
+  // Desde la HU-12 el cuerpo es hierro fundido y el acero (#1B2128) vive en las placas de las secciones.
+  assert.equal(await estilo(this.page, 'main .section', 'backgroundColor'), rgb(hex));
 });
 
 Then('el botón principal de WhatsApp usa el acento {string}', async function (hex) {

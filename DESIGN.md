@@ -61,3 +61,4 @@ En las piezas de Instagram (HU-14) y en el inicio del sitio (HU-12) se permiten 
 | 2026-11-07 | Sistema inicial creado (HU-03) | /design-consultation + 2 rondas de direcciones y 2 de logos. Matias eligió la paleta "Barra al rojo", las letras de la ronda 1 (Archivo + Public Sans) y el logo "Hexágono con </>". |
 | 2026-11-07 | Descartado el yunque solo | Se parece al logo de CurseForge. |
 | 2026-11-07 | Logo en trazos | Como `<img>`, el SVG no cargaba la tipografía y se cortaba; ahora no depende de fuentes. |
+| 2026-11-14 | Sitio "Forja" (HU-12) | Prototipo aprobado por Matias: hero con taller y logo 3D que encastra en la barra, barra de metal gastado que se calienta, placas remachadas sobre hierro fundido, luz de fragua y efectos de forja. Amplía la excepción "Instagram y hero" a todo el sitio. Con movimiento reducido no hay animaciones. |

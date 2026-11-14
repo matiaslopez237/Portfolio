@@ -98,7 +98,20 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-14 | CA-14.8 | Checklist (firma Matias) | ✓ firmado 2026-11-13 | 3 muestras aprobadas |
 | HU-14 | CA-14.9 | Checklist (firma Matias) | pendiente | Ver la grilla de los 12 carruseles |
 
+| HU-12 | CA-12.1 | Chequeo `scripts/check.mjs` | ✓ | `assets/hero/*.webp` |
+| HU-12 | CA-12.2 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.3 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.4 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.5 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.6 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.7 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.8 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
+| HU-12 | CA-12.9 | Suite completa | ✓ | `npm test` (23) · `npm run test:unit` (16) · `npm run check` (55) |
+| HU-12 | CA-12.10 | Chequeo `scripts/check.mjs` | ✓ | `DESIGN.md` › Decisions Log |
+| HU-12 | CA-12.11 | Checklist (firma Matias) | pendiente | Ver el sitio local en compu y celular |
+
 ## Huecos
+- HU-12: CA-12.11 sin firmar. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Sin publicar.
 - HU-14: CA-14.9 sin firmar. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
 - HU-13: CA-13.7 pendiente (cuentas). El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.

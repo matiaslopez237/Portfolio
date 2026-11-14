@@ -40,16 +40,17 @@ Then('en cada plan el precio está a menos de {int} px del nombre', async functi
 
 // CA-08.3
 Then('el inicio tiene el símbolo de la marca como decoración', async function () {
-  const s = await this.page.$eval('.hero', h => {
-    const el = h.querySelector('.hero-simbolo');
+  // Desde la HU-12 el símbolo del inicio es el logo 3D que flota sobre el yunque (#vuelo).
+  const s = await this.page.evaluate(() => {
+    const el = document.getElementById('vuelo');
     if (!el) return null;
-    const r = el.getBoundingClientRect(), cs = getComputedStyle(el);
-    return { oculto: el.getAttribute('aria-hidden'), ancho: r.width, opacidad: +cs.opacity, svg: !!el.querySelector('svg') || el.tagName === 'svg' };
+    const r = el.getBoundingClientRect(), img = el.querySelector('img');
+    return { oculto: el.getAttribute('aria-hidden'), ancho: r.width, opacidad: +getComputedStyle(el.querySelector('.pieza')).opacity, imagen: !!img && img.naturalWidth > 0 };
   });
-  assert.ok(s, 'no hay .hero-simbolo en el inicio');
-  assert.equal(s.oculto, 'true', 'el símbolo no tiene aria-hidden="true"');
-  assert.ok(s.svg, 'el símbolo no es un SVG');
-  assert.ok(s.ancho >= 200 && s.opacidad > 0, `símbolo de ${Math.round(s.ancho)} px con opacidad ${s.opacidad}`);
+  assert.ok(s, 'no está el logo 3D (#vuelo) en el inicio');
+  assert.equal(s.oculto, 'true', 'el logo 3D no tiene aria-hidden="true"');
+  assert.ok(s.imagen, 'la imagen del logo 3D no cargó');
+  assert.ok(s.ancho >= 120 && s.opacidad > 0, `logo de ${Math.round(s.ancho)} px con opacidad ${s.opacidad}`);
 });
 
 Then('el símbolo no tapa el título', async function () {
@@ -80,6 +81,8 @@ Then('las líneas entre secciones están alineadas con el contenido', async func
   const malas = await this.page.$$eval('.section', ss => ss.map(s => {
     const cs = getComputedStyle(s), b = getComputedStyle(s, '::before'), r = s.getBoundingClientRect();
     const contenido = [r.left + parseFloat(cs.paddingLeft), r.right - parseFloat(cs.paddingRight)];
+    // Desde la HU-12 cada sección es una placa: el separador es el borde de la placa, que no tiene línea interna.
+    if (parseFloat(cs.borderTopLeftRadius) >= 12 && s.querySelector('.remaches')) return null;
     if (parseFloat(cs.borderTopWidth) > 0) return `${s.id}: la línea es el borde de la sección (incluye el margen)`;
     if (b.content === 'none' || b.content === 'normal') return null; // sección sin línea (Trabajos)
     const linea = [r.left + parseFloat(b.left), r.right - parseFloat(b.right)];
