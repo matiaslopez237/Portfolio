@@ -1,7 +1,7 @@
 # HU-14: Carruseles con el estilo Forja
 
 **Historia:** Como dueño del estudio, quiero relanzar Instagram con carruseles llamativos y coherentes con el sitio nuevo, pensados para las personas de la HU-11, para que la cuenta genere consultas por WhatsApp desde el primer mes.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el estilo del prototipo del sitio (`brand/prototipos/sitio-forja.html`): acero gastado, placas remachadas, barra al rojo, logo 3D, foto del taller y luz de fragua. El trabajo tiene dos etapas:
@@ -49,7 +49,7 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 
 ## Checklist (lo firma Matias)
 - [x] CA-14.8: ¿Las 3 muestras tienen el estilo que querés? — firmado: Matias, 2026-11-13 ("me re gustan")
-- [ ] CA-14.9: ¿Los carruseles del mes se ven bien en la grilla y dicen solo cosas reales? — firmado:
+- [x] CA-14.9: ¿Los carruseles del mes se ven bien en la grilla y dicen solo cosas reales? — firmado: Matias, 2026-11-14 ("me gustaron")
 
 ## Preguntas abiertas
 - Ninguna. Si en las muestras Matias quiere otro nivel de intensidad, se ajusta ahí, antes de producir el mes.
@@ -59,3 +59,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 - 2026-11-12: aprobada por Matias.
 - 2026-11-12: etapa 1 lista: 3 muestras (C1 caso Quiropraxia, C2 consejo, C3 plan Tienda WhatsApp) y publicación de carruseles (16/16 tests). Espera la firma de CA-14.8.
 - 2026-11-14: etapa 2 lista: 12 carruseles (C1 a C12), textos y calendario desde el 2026-11-16; posts viejos archivados; excepción de Instagram y hero agregada a DESIGN.md. Falta la firma de CA-14.9.
+- 2026-11-14: CA-14.9 firmado por Matias; historia cerrada. Publicación automática desde el 2026-11-16.

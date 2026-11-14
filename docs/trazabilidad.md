@@ -96,7 +96,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-14 | CA-14.6 | Chequeo `scripts/check.mjs` | ✓ | `calendario.md` (2026-11-16 a 2026-12-11) |
 | HU-14 | CA-14.7 | Test (TDD, API simulada) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
 | HU-14 | CA-14.8 | Checklist (firma Matias) | ✓ firmado 2026-11-13 | 3 muestras aprobadas |
-| HU-14 | CA-14.9 | Checklist (firma Matias) | pendiente | Ver la grilla de los 12 carruseles |
+| HU-14 | CA-14.9 | Checklist (firma Matias) | ✓ firmado 2026-11-14 | 12 carruseles revisados |
 
 | HU-12 | CA-12.1 | Chequeo `scripts/check.mjs` | ✓ | `assets/hero/*.webp` |
 | HU-12 | CA-12.2 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
@@ -112,7 +112,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 
 ## Huecos
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
-- HU-14: CA-14.9 sin firmar. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
+- HU-14: ninguno. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
 - HU-13: CA-13.7 pendiente (cuentas). El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.
 - HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).
