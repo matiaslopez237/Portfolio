@@ -1,7 +1,7 @@
 # HU-15: Reels con la mascota Hefesto
 
 **Historia:** Como dueño del estudio, quiero reels cortos con una mascota propia que explique cosas de las páginas web, para llegar a gente que todavía no me sigue sin tener que salir yo en cámara ni pagar herramientas.
-**Estado de la spec:** Borrador
+**Estado de la spec:** Aprobada
 
 ## Objetivo
 1. **Muñeco animado:** armar a **Hefesto** (la mascota que Matias generó con Gemini el 2026-11-16) como un muñeco 2D que se anima con código, con las partes de `brand/instagram/reels/mascota/hoja-partes.jpg`. Tiene que poder:
@@ -16,7 +16,7 @@
 - **RN-15.1 (gratis y sin cámara):** sin herramientas pagas ni video de Matias. Gemini (cuenta gratis) solo para las imágenes del personaje; la animación, el montaje y el render los hace el código del proyecto (Playwright + ffmpeg, que es gratis). Si hace falta instalar ffmpeg, se pregunta antes.
 - **RN-15.2 (personaje):** Hefesto es una mascota estilizada y no se presenta como una persona real. Los textos hablan en nombre del estudio ("en Hefesto Webs…"), no como si fuera Matias.
 - **RN-15.3 (contenido real):** igual que en la HU-14: solo datos reales de `PRODUCT.md` e `index.html`, la voz de `voz-y-tono.md` y el CTA fijo (WhatsApp 260 466-1138 · @hefestowebs).
-- **RN-15.4 (sin voz ni música):** el reel sale sin audio y con subtítulos que se leen sin sonido. La música la agrega Matias al publicar desde la biblioteca de Instagram, o el reel se publica sin música.
+- **RN-15.4 (voz y música):** la voz de Hefesto se genera con una herramienta de voz por IA **gratuita** (sin cuenta paga), en español rioplatense; la boca y los subtítulos siguen los tiempos de esa voz. Los subtítulos se leen igual sin sonido. Sin música en el video: la agrega Matias al publicar desde la biblioteca de Instagram (o se publica sin música).
 - **RN-15.5 (formato):** MP4 H.264, 1080×1920, 30 fps, de 15 a 25 s, menos de 20 MB. Los subtítulos y el contenido importante quedan dentro de la zona segura (fuera de los 250 px de arriba y de abajo).
 - **RN-15.6 (identidad):** colores de `brand/tokens.json`, tipografías Archivo y Public Sans, y el estilo Forja.
 - **RN-15.7 (publicación):** los reels entran al calendario como filas "Reel" y se publican con la API (`media_type=REELS`). Programar o publicar solo con el OK de Matias.
@@ -40,7 +40,8 @@
 - [ ] CA-15.6: ¿El reel se ve bien en el celular, la mascota no da "cosa" y se entiende sin sonido? — firmado:
 
 ## Preguntas abiertas
-- ¿Cada cuánto van los reels? Propuesta: 1 por semana, el miércoles, en lugar del carrusel de ese día, desde que el primero esté aprobado.
+- ~~¿Frecuencia?~~ Pendiente de confirmar por Matias: propuesta de 1 reel por semana (miércoles) cuando el primero esté aprobado.
 
 ## Historial
 - 2026-11-16: creada con la mascota y la hoja de partes generadas por Matias en Gemini.
+- 2026-11-16: aprobada por Matias. Cambio pedido: el reel lleva voz generada con IA gratis (RN-15.4). Hoja de partes v2 ().
