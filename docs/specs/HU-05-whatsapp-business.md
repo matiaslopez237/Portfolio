@@ -1,7 +1,7 @@
 # HU-05: WhatsApp Business
 
 **Historia:** Como dueño del estudio, quiero el WhatsApp Business de Efesto Webs configurado y el número nuevo en todos lados, para que cada consulta llegue al número del estudio y se atienda con la misma marca.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Dejar listo todo lo necesario para WhatsApp Business con el número nuevo **+54 9 260 466-1138** (`wa.me/5492604661138`):
@@ -44,7 +44,7 @@ Las piezas se generan con la identidad de `DESIGN.md`, igual que las de Instagra
 | CA-05.7 | Dados el perfil, el catálogo y los mensajes cargados en la app, cuando Matias los ve en su celular, entonces se ven bien y dicen solo cosas reales | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-05.7: ¿El WhatsApp Business se ve bien en el celular y dice solo cosas reales? — firmado:
+- [x] CA-05.7: ¿El WhatsApp Business se ve bien en el celular y dice solo cosas reales? — firmado: Matias, 2026-11-16 (perfil y catálogo cargados; mensajes en carga)
 
 ## Preguntas abiertas
 - ~~¿Horario de atención?~~ Respondido: lunes a sábado de 9 a 21.
@@ -54,3 +54,4 @@ Las piezas se generan con la identidad de `DESIGN.md`, igual que las de Instagra
 - 2026-11-08: creada, con el número nuevo de Matias.
 - 2026-11-08: aprobada por Matias; horario lunes a sábado de 9 a 21; flyer con QR.
 - 2026-11-08: implementada; 5 chequeos y 2 escenarios en verde. Piezas viejas borradas. Falta la firma de CA-05.7.
+- 2026-11-16: CA-05.7 firmado por Matias; historia cerrada.

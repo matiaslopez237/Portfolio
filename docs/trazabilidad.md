@@ -50,7 +50,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-05 | CA-05.4 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/mensajes.md` |
 | HU-05 | CA-05.5 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/flyer.png` · `qr-whatsapp.png` |
 | HU-05 | CA-05.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/whatsapp/plantillas/*.html` |
-| HU-05 | CA-05.7 | Checklist (firma Matias) | pendiente | Cargar perfil, catálogo y mensajes en la app y verlos en el celular |
+| HU-05 | CA-05.7 | Checklist (firma Matias) | ✓ firmado 2026-11-16 | Perfil y catálogo cargados en la app |
 | HU-08 | CA-08.1 | Escenario BDD (precio debajo del nombre) | ✓ | `features/HU-08-pulido-del-portfolio.feature` · `npm test` |
 | HU-08 | CA-08.2 | Escenario BDD (precio cerca en 375 px) | ✓ | `features/HU-08-pulido-del-portfolio.feature` · `npm test` |
 | HU-08 | CA-08.3 | Escenario BDD (símbolo decorativo en el inicio) | ✓ | `features/HU-08-pulido-del-portfolio.feature` · `npm test` |
@@ -118,7 +118,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 - HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).
 - HU-09: CA-09.5 sin firmar. Commits [RED] 6eb79e6 → [GREEN] (este). CA-04.4 se ajustó a "9 o más textos" porque ahora hay 12.
 - HU-08: CA-08.7 sin firmar. Commits [RED] 6d39437 → [GREEN] (este). CA-08.6 ya pasaba antes del cambio (el botón se oculta al llegar al contacto); queda como protección. Sin publicar.
-- HU-05: CA-05.7 sin firmar. Commits [RED] a4be5b1 → [GREEN] (este). Sin publicar: el push espera el OK de Matias. Faltan definir plazos y formas de pago (quedan fuera de los mensajes).
+- HU-05: ninguno. Los mensajes automáticos los carga Matias (textos en `brand/whatsapp/mensajes.md`).
 - HU-06: ninguno. Commits [RED] 90c99d7 → [GREEN] ff3990f. Pendiente de mirar en un celular real ya publicado. Fuera de la historia: número nuevo (HU-05) y dominio (HU-02).
 - HU-04: ninguno.
 - HU-03: ninguno. Pendiente de verificar en un celular real (firmado viendo en la notebook).
