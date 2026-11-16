@@ -86,7 +86,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-13 | CA-13.4 | Chequeo `scripts/check.mjs` | ✓ | piezas en `brand/export`, `brand/instagram`, `brand/whatsapp`, `assets/og-hefesto.png` |
 | HU-13 | CA-13.5 | Suite completa | ✓ | `npm test` (16) · `npm run test:unit` (11) · `npm run check` (47) |
 | HU-13 | CA-13.6 | Chequeo `scripts/check.mjs` | ✓ | `brand/nombres.md` · HU-02 historial |
-| HU-13 | CA-13.7 | Checklist (firma Matias) | pendiente | Cambiar @ y nombre en Instagram, WhatsApp Business y Meta |
+| HU-13 | CA-13.7 | Checklist (firma Matias) | ✓ firmado 2026-11-16 | Instagram, WhatsApp Business y Meta |
 
 | HU-14 | CA-14.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/carruseles/C1..C3` |
 | HU-14 | CA-14.2 | Chequeo `scripts/check.mjs` | ✓ | `contenido.json` › carruseles |
@@ -113,7 +113,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 ## Huecos
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
 - HU-14: ninguno. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
-- HU-13: CA-13.7 pendiente (cuentas). El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
+- HU-13: ninguno. El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.
 - HU-10: CA-10.8 pendiente (requiere la app de Meta, los secrets en GitHub y el push). Commits [RED] b790cbe → [GREEN] (este). No hay aviso de vencimiento del token: la API básica no lo informa sin una clave de app; si vence, el workflow falla en rojo y GitHub avisa por mail (RN-10.5).
 - HU-09: CA-09.5 sin firmar. Commits [RED] 6eb79e6 → [GREEN] (este). CA-04.4 se ajustó a "9 o más textos" porque ahora hay 12.

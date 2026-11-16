@@ -1,7 +1,7 @@
 # HU-13: Cambio de nombre a Hefesto Webs
 
 **Historia:** Como dueño del estudio, quiero que la marca se escriba "Hefesto Webs", con H como el dios en español, para que el nombre sea correcto y la gente lo encuentre como lo conoce.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada
 
 ## Objetivo
 Pasar la marca de "Efesto Webs" a **"Hefesto Webs"** en todo lo que está vivo:
@@ -56,7 +56,7 @@ El símbolo (hexágono, `</>` y yunque) no cambia.
 | CA-13.7 | Dadas las cuentas, cuando Matias las cambia, entonces Instagram (@ y nombre), WhatsApp Business y el portfolio de Meta dicen "Hefesto Webs" | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-13.7: ¿Instagram, WhatsApp Business y Meta ya dicen Hefesto Webs? — firmado: (parcial: Instagram ya es @hefestowebs y "Hefesto Webs", 2026-11-12; faltan WhatsApp Business y Meta)
+- [x] CA-13.7: ¿Instagram, WhatsApp Business y Meta ya dicen Hefesto Webs? — firmado: Matias, 2026-11-16 (Instagram, WhatsApp Business y Meta ya dicen Hefesto Webs)
 
 ## Preguntas abiertas
 - Ninguna.
@@ -66,3 +66,4 @@ El símbolo (hexágono, `</>` y yunque) no cambia.
 - 2026-11-11: aprobada por Matias.
 - 2026-11-11: implementada; suite completa en verde. Falta cambiar las cuentas (CA-13.7) y publicar.
 - 2026-11-12: Matias cambió Instagram a @hefestowebs / "Hefesto Webs". Se actualizaron el link del sitio y todas las menciones del @ (RN-13.4 cumplida).
+- 2026-11-16: CA-13.7 firmado; historia cerrada.
