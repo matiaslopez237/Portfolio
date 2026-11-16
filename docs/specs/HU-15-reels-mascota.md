@@ -44,4 +44,4 @@
 
 ## Historial
 - 2026-11-16: creada con la mascota y la hoja de partes generadas por Matias en Gemini.
-- 2026-11-16: aprobada por Matias. Cambio pedido: el reel lleva voz generada con IA gratis (RN-15.4). Hoja de partes v2 ().
+- 2026-11-16: aprobada por Matias. Cambio pedido: el reel lleva voz generada con IA gratis (RN-15.4). Hoja de partes v2: brand/instagram/reels/mascota/hoja-partes-v2.jpg.
