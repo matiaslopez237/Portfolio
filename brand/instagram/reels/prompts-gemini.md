@@ -1,5 +1,35 @@
 # Reel con personaje: prompts para Gemini (HU-15, borrador)
 
+> **Decisión 2026-11-16:** se descarta el herrero humano realista (podría confundirse con Matias o con una persona real y resta confianza). El personaje es **el autómata de Hefesto**: ver la sección siguiente. Lo de abajo queda como registro.
+
+## El autómata de Hefesto (personaje elegido)
+En el mito, Hefesto construía autómatas de metal que lo ayudaban en la fragua. Este es su ayudante: claramente una máquina, sobrio y cinematográfico, no infantil. **Sin texto ni logos, formato 9:16.**
+
+### Paso 1: referencia → `automata-referencia.png`
+```text
+Cinematic, photorealistic 3D render of an original character: the "automaton of Hefesto", a mechanical helper built by the blacksmith god. A humanoid robot made of dark forged steel plates (#323C47, #1B2128) with visible hammer marks, rivets and brass-free joints, slightly worn and scratched like an old tool. In the center of its chest, a hexagonal opening shows a glowing red-hot core (#FF7A1A) with tiny sparks; its eyes are two thin horizontal slits glowing the same warm orange. Sleek but sturdy proportions, elegant and serious, not cute, not childish, not a toy, no cartoon style. It stands in a dark blacksmith workshop with an anvil and blurred tools behind, cold blue-grey tones and a single warm forge glow. Waist-up shot, centered, facing the camera, vertical 9:16. High detail, cinematic lighting, shallow depth of field. No text, no letters, no logos, no watermark.
+```
+
+### Paso 2: poses o clips (adjuntando `automata-referencia.png`)
+Si tu cuenta permite video, pedí clips de ~6–8 s **sin voz** (los subtítulos los pongo yo). Si no, pedí las imágenes y yo las animo.
+
+**Pose / clip 1 (gancho) → `automata-1`**
+```text
+Use the attached image as the exact reference for the automaton and the workshop. Vertical 9:16. The automaton looks at the camera and raises three steel fingers; its chest core pulses brighter. Slow camera push-in. Cinematic, realistic. No text, no logos, no voice, no music.
+```
+
+**Pose / clip 2 (explica) → `automata-2`**
+```text
+Use the attached image as the exact reference for the automaton and the workshop. Vertical 9:16. The automaton gestures with one open hand as if explaining something to the viewer, slight head tilt, eyes glowing. Subtle camera movement. Cinematic, realistic. No text, no logos, no voice, no music.
+```
+
+**Pose / clip 3 (cierre) → `automata-3`**
+```text
+Use the attached image as the exact reference for the automaton and the workshop. Vertical 9:16. The automaton strikes a glowing red-hot piece of metal on the anvil with a hammer, sparks burst in slow motion, then it looks back at the camera. Cinematic, realistic. No text, no logos, no voice, no music.
+```
+
+---
+
 Personaje: **Hefesto**, el herrero de la marca. Sobrio y creíble, no infantil (personalidad de marca: confiable, moderna, simple).
 Primer reel: **"3 cosas que tu página tiene que tener"** (mismo tema que el carrusel C2), en 3 clips de unos 8 segundos.
 
