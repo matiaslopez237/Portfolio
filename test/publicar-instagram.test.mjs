@@ -229,3 +229,60 @@ test('CA-10.9 DEF-01: lo pendiente de hasta 2 días antes sale primero, después
 test('CA-10.9 DEF-01: lo pendiente de más de 2 días atrás no se publica solo', () => {
   assert.deepEqual(elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-19', carruseles: { C2: 3 }, baseCarruseles: baseCarr }), []);
 });
+
+// ── HU-15: reels (CA-15.5) ──
+import { publicarReel } from '../scripts/publicar-instagram.mjs';
+
+const calendarioReel = `
+| Fecha | Día | Formato | Pieza | Idea |
+| --- | --- | --- | --- | --- |
+| 2026-11-25 | Miércoles | Reel | Reel R1 · 3 cosas que tu página tiene que tener | Hefesto explica |
+`;
+const textosReel = `
+## Reel R1 · 3 cosas
+
+\`\`\`texto
+Tres cosas que tu página tiene que tener.
+#a #b #c #d #e
+\`\`\`
+`;
+const baseReels = 'https://ejemplo.github.io/Portfolio/brand/instagram/reels/';
+
+test('CA-15.5 elige el reel del día con la URL pública del video y su texto', () => {
+  const r = elegirPublicaciones({ calendario: calendarioReel, textos: textosReel, fecha: '2026-11-25', baseReels });
+  assert.deepEqual(r, [{ id: 'R1', tipo: 'reel', videoUrl: baseReels + 'R1/R1.mp4', texto: 'Tres cosas que tu página tiene que tener.\n#a #b #c #d #e' }]);
+});
+
+test('CA-15.5 un reel ya publicado no se repite', () => {
+  const r = elegirPublicaciones({ calendario: calendarioReel, textos: textosReel, fecha: '2026-11-25', baseReels, publicados: { R1: { estado: 'publicado' } } });
+  assert.deepEqual(r, []);
+});
+
+test('CA-15.5 un reel sin texto en textos.md es un error', () => {
+  assert.throws(() => elegirPublicaciones({ calendario: calendarioReel, textos: '', fecha: '2026-11-25', baseReels }), /R1.*texto/i);
+});
+
+test('CA-15.5 publica un reel: contenedor REELS con el video y el texto, espera a que Instagram lo procese y lo publica', async () => {
+  const fetch = fetchFalso([
+    { json: { id: 'cont-r' } },
+    { json: { status_code: 'IN_PROGRESS' } }, { json: { status_code: 'IN_PROGRESS' } }, { json: { status_code: 'FINISHED' } },
+    { json: { id: 'media-r1' } },
+  ]);
+  const id = await publicarReel({ igUserId: '123', token: 't', videoUrl: baseReels + 'R1/R1.mp4', texto: 'Hola #uno', fetch, esperaMs: 0 });
+  assert.equal(id, 'media-r1');
+  const [cont, , , listo, pub] = fetch.llamadas;
+  const p = new URLSearchParams(cont.cuerpo);
+  assert.match(cont.url, /\/123\/media$/);
+  assert.equal(p.get('media_type'), 'REELS');
+  assert.equal(p.get('video_url'), baseReels + 'R1/R1.mp4');
+  assert.equal(p.get('caption'), 'Hola #uno');
+  assert.match(listo.url, /cont-r\?fields=status_code/);
+  assert.match(pub.url, /\/123\/media_publish$/);
+  assert.equal(new URLSearchParams(pub.cuerpo).get('creation_id'), 'cont-r');
+});
+
+test('CA-15.5 si Instagram no puede procesar el video, falla sin publicar', async () => {
+  const fetch = fetchFalso([{ json: { id: 'cont-r' } }, { json: { status_code: 'ERROR' } }]);
+  await assert.rejects(publicarReel({ igUserId: '123', token: 't', videoUrl: baseReels + 'R1/R1.mp4', texto: 'x', fetch, esperaMs: 0 }), /ERROR/);
+  assert.equal(fetch.llamadas.some(l => /media_publish/.test(l.url)), false);
+});

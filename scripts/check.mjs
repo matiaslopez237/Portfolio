@@ -1,7 +1,10 @@
 // Chequeos automáticos de criterios de aceptación (modo liviano).
 // Cada chequeo lleva el ID del criterio que verifica: así lo encuentra la trazabilidad.
 // Correr: npm run check
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
+import { inflateSync } from 'node:zlib';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const leer = (ruta) => readFileSync(new URL('../' + ruta, import.meta.url), 'utf8');
 
@@ -679,7 +682,98 @@ const chequeos = [
     ca: 'CA-12.10', desc: 'DESIGN.md registra el diseño Forja del sitio como decisión aprobada, con fecha',
     run: () => /\| 2026-11-1\d \| [^|]*Forja[^|]*\|/.test(leer('DESIGN.md')),
   },
+
+  // ── HU-15: Reels con la mascota Hefesto ──
+  {
+    ca: 'CA-15.1', desc: 'Partes de la mascota (hoja v4) recortadas: PNG con transparencia, esquinas vacías y sin fondo verde',
+    run: () => {
+      const usadas = [0, 2, 3, 4, 5, 6, 8, 9, 11, 12, 14, 15];   // las que usa render.mjs (cuerpo, cabeza, brazo, antebrazo, ojos, bocas)
+      const malos = [];
+      for (const n of usadas) {
+        const ruta = `brand/instagram/reels/mascota/partes-v4/pieza-${n}.png`, png = leerPngRgba(ruta);
+        if (!png) { malos.push(`${ruta}: no es PNG con transparencia (RGBA)`); continue; }
+        const { w, h, px } = png, a = (x, y) => px[(y * w + x) * 4 + 3];
+        if (a(0, 0) || a(w - 1, 0) || a(0, h - 1) || a(w - 1, h - 1)) malos.push(`${ruta}: esquinas no transparentes`);
+        let verdes = 0;
+        for (let i = 0; i < w * h; i++) { const r = px[i * 4], g = px[i * 4 + 1], b = px[i * 4 + 2]; if (px[i * 4 + 3] > 200 && g > r + 60 && g > b + 60) verdes++; }
+        if (verdes > w * h * 0.002) malos.push(`${ruta}: ${verdes} píxeles verdes`);
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-15.2', desc: 'Reel R1: MP4 H.264 de 1080×1920, entre 15 y 25 s, menos de 20 MB',
+    run: async () => {
+      const ruta = 'brand/instagram/reels/R1/R1.mp4', v = await infoVideo(ruta);
+      if (!v) throw new Error('falta ' + ruta);
+      const malos = [];
+      if (v.codec !== 'h264') malos.push('códec ' + v.codec);
+      if (v.w !== 1080 || v.h !== 1920) malos.push(`medidas ${v.w}×${v.h}`);
+      if (v.dur < 15 || v.dur > 25) malos.push(`dura ${v.dur.toFixed(1)} s`);
+      if (v.mb >= 20) malos.push(`pesa ${v.mb.toFixed(1)} MB`);
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-15.3', desc: 'Subtítulos del R1: cada uno ≥ 1,5 s, ≤ 12 palabras y dentro de la zona segura (250 px arriba y abajo)',
+    run: () => {
+      const s = JSON.parse(leer('brand/instagram/reels/R1/subtitulos.json')), malos = [];
+      for (const c of s.chunks) {
+        if (c.fin - c.ini < 1.5) malos.push(`"${c.texto}" dura ${(c.fin - c.ini).toFixed(2)} s`);
+        if (c.palabras > 12) malos.push(`"${c.texto}" tiene ${c.palabras} palabras`);
+      }
+      const css = leer('brand/instagram/reels/reel.html'), top = Number((/#sub \{[^}]*top: (\d+)px/.exec(css) ?? [])[1]);
+      if (!(top >= 250 && top <= 1920 - 250 - 4 * 80)) malos.push(`#sub empieza en y=${top}`);   // hasta 4 líneas de 76 px
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-15.4', desc: 'El cierre del reel muestra el CTA fijo (WhatsApp 260 466-1138 y @hefestowebs) en el último tramo',
+    run: () => {
+      const html = leer('brand/instagram/reels/reel.html'), malos = [];
+      const cta = (/<div id="cta">[\s\S]*?<\/div><\/div>/.exec(html) ?? [''])[0];
+      if (!cta.includes('260 466-1138')) malos.push('falta el número');
+      if (!cta.includes('@hefestowebs')) malos.push('falta @hefestowebs');
+      if (!/const CTA = [3-9](\.\d+)?;/.test(html)) malos.push('el cierre no dura al menos 3 s (const CTA)');
+      if (!/total = [^;]*\+ CTA;/.test(html)) malos.push('el cierre no va al final (total = … + CTA)');
+      if (!/fin = total - CTA/.test(html)) malos.push('el CTA no aparece en el último tramo');
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
 ];
+
+// PNG → píxeles RGBA (solo PNG de 8 bits RGBA sin entrelazar, que es lo que escribe el recorte del navegador)
+function leerPngRgba(ruta) {
+  let buf; try { buf = readFileSync(new URL('../' + ruta, import.meta.url)); } catch { return null; }
+  if (buf.toString('ascii', 1, 4) !== 'PNG') return null;
+  const w = buf.readUInt32BE(16), h = buf.readUInt32BE(20), prof = buf[24], tipo = buf[25];
+  if (prof !== 8 || tipo !== 6 || buf[28] !== 0) return null;
+  const datos = []; for (let o = 8; o < buf.length;) { const n = buf.readUInt32BE(o), t = buf.toString('ascii', o + 4, o + 8); if (t === 'IDAT') datos.push(buf.subarray(o + 8, o + 8 + n)); o += 12 + n; }
+  const raw = inflateSync(Buffer.concat(datos)), px = Buffer.alloc(w * h * 4), fila = w * 4;
+  for (let y = 0; y < h; y++) {
+    const f = raw[y * (fila + 1)], ori = y * (fila + 1) + 1;
+    for (let x = 0; x < fila; x++) {
+      const v = raw[ori + x], a = x >= 4 ? px[y * fila + x - 4] : 0, b = y ? px[(y - 1) * fila + x] : 0, c = x >= 4 && y ? px[(y - 1) * fila + x - 4] : 0;
+      const pa = Math.abs(b - c), pb = Math.abs(a - c), pc = Math.abs(a + b - 2 * c);
+      px[y * fila + x] = (v + [0, a, b, (a + b) >> 1, pa <= pb && pa <= pc ? a : pb <= pc ? b : c][f]) & 255;
+    }
+  }
+  return { w, h, px };
+}
+
+// MP4 → códec, medidas, duración y peso (con el ffmpeg del proyecto)
+async function infoVideo(ruta) {
+  const archivo = new URL('../' + ruta, import.meta.url);
+  let mb; try { mb = statSync(archivo).size / 1048576; } catch { return null; }
+  const { default: ffmpeg } = await import('ffmpeg-static');
+  const err = spawnSync(ffmpeg, ['-hide_banner', '-i', fileURLToPath(archivo)], { encoding: 'utf8' }).stderr;
+  const d = /Duration: (\d+):(\d+):([\d.]+)/.exec(err), v = /Video: (\w+)[^\n]*?, (\d+)x(\d+)/.exec(err);
+  return { mb, dur: d ? +d[1] * 3600 + +d[2] * 60 + +d[3] : 0, codec: v?.[1], w: +v?.[2], h: +v?.[3] };
+}
 
 const PILARES =['Consejos', 'Trabajos', 'Oferta', 'Detrás de escena'];
 const PERSONAS = ['Laura', 'Martín', 'Diego', 'Gabriela', 'Todas'];
