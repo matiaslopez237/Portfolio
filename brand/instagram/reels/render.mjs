@@ -68,7 +68,7 @@ if (muestras) {
 }
 
 const total = Math.ceil(info.total * FPS);
-const ff = spawn(ffmpeg, ['-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-itsoffset', '1.0', '-i', dir + 'voz.mp3',
+const ff = spawn(ffmpeg, ['-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-itsoffset', String(info.voz), '-i', dir + 'voz.mp3',
   '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '21', '-c:a', 'aac', '-b:a', '160k',
   '-t', (total / FPS).toFixed(2), '-movflags', '+faststart', dir + `${id}.mp4`], { stdio: ['pipe', 'ignore', 'inherit'] });
 for (let f = 0; f < total; f++) {

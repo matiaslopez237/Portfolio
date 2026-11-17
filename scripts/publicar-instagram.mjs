@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 export const BASE_IMAGENES = 'https://matiaslopez237.github.io/Portfolio/brand/instagram/posts/';
 export const BASE_CARRUSELES = 'https://matiaslopez237.github.io/Portfolio/brand/instagram/carruseles/';
+export const BASE_REELS = 'https://matiaslopez237.github.io/Portfolio/brand/instagram/reels/';
 const LIMITE_TEXTO = 2200;
 const LIMITE_HASHTAGS = 30;
 
@@ -40,7 +41,7 @@ export function elegirPublicaciones({ fecha, diasAtraso = DIAS_ATRASO, ...resto 
   return dias.flatMap(dia => delDia({ ...resto, fecha: dia }));
 }
 
-function delDia({ calendario, textos, publicados = {}, fecha, baseImagenes = BASE_IMAGENES, carruseles = {}, baseCarruseles = BASE_CARRUSELES }) {
+function delDia({ calendario, textos, publicados = {}, fecha, baseImagenes = BASE_IMAGENES, carruseles = {}, baseCarruseles = BASE_CARRUSELES, baseReels = BASE_REELS }) {
   const filas = calendario.split('\n').map(l => l.split('|').map(s => s.trim())).filter(c => c[1] === fecha);
   const numeros = filas
     .filter(c => c[3] === 'Post')
@@ -65,7 +66,18 @@ function delDia({ calendario, textos, publicados = {}, fecha, baseImagenes = BAS
       if (!texto) throw new Error(`El carrusel ${id} está en el calendario pero no tiene texto en textos.md`);
       return { id, tipo: 'carrusel', imagenes: Array.from({ length: n }, (_, i) => `${baseCarruseles}${id}/slide-${i + 1}.png`), texto };
     });
-  return [...posts, ...carr];
+  // Reels (HU-15): el video está en Pages, en reels/<id>/<id>.mp4
+  const porReel = textosPorReel(textos);
+  const reels = filas
+    .filter(c => c[3] === 'Reel')
+    .map(c => (c[4].match(/Reel (R\d+)/) || [])[1])
+    .filter(id => id && !publicados[id])
+    .map(id => {
+      const texto = porReel.get(id);
+      if (!texto) throw new Error(`El reel ${id} está en el calendario pero no tiene texto en textos.md`);
+      return { id, tipo: 'reel', videoUrl: `${baseReels}${id}/${id}.mp4`, texto };
+    });
+  return [...posts, ...carr, ...reels];
 }
 
 /** Falla si el texto supera los límites de Instagram. */
@@ -76,6 +88,9 @@ export function validarTexto(texto) {
   if (hashtags > LIMITE_HASHTAGS) throw new Error(`El texto tiene ${hashtags} hashtags (máximo 30)`);
 }
 
+function textosPorReel(md) {
+  return new Map([...md.matchAll(/^## Reel (R\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)].map(m => [m[1], m[2]]));
+}
 function textosPorCarrusel(md) {
   return new Map([...md.matchAll(/^## Carrusel (C\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)].map(m => [m[1], m[2]]));
 }
@@ -142,6 +157,25 @@ export async function publicarCarrusel({ igUserId, token, imagenes, texto, fetch
 }
 
 /** Comprueba la conexión sin publicar: lee el usuario de la cuenta con el token. */
+/**
+ * Publica un reel (HU-15): crea el contenedor REELS con la URL pública del video y el texto, espera a que
+ * Instagram termine de procesar el video (puede tardar minutos) y lo publica. Si el proceso falla, no publica.
+ */
+export async function publicarReel({ igUserId, token, videoUrl, texto, fetch = globalThis.fetch, esperaMs = 10000, intentos = 60 }) {
+  const api = hostApi(token);
+  const form = (datos) => ({ method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ ...datos, access_token: token }).toString() });
+  const { id: contenedor } = await llamar(fetch, `${api}/${igUserId}/media`, form({ media_type: 'REELS', video_url: videoUrl, caption: texto }), token);
+  for (let i = 0; ; i++) {
+    const { status_code: estado } = await llamar(fetch, `${api}/${contenedor}?fields=status_code&access_token=${encodeURIComponent(token)}`, {}, token);
+    if (estado === 'FINISHED') break;
+    if (estado === 'ERROR' || estado === 'EXPIRED') throw new Error(`Instagram no pudo procesar el video del reel (estado ${estado}): no se publicó`);
+    if (i >= intentos) throw new Error('Instagram no terminó de procesar el video del reel a tiempo: no se publicó');
+    await new Promise(r => setTimeout(r, esperaMs));
+  }
+  const { id } = await llamar(fetch, `${api}/${igUserId}/media_publish`, form({ creation_id: contenedor }), token);
+  return id;
+}
+
 export async function verificarCuenta({ igUserId, token, fetch = globalThis.fetch }) {
   return llamar(fetch, `${hostApi(token)}/${igUserId}?fields=username&access_token=${encodeURIComponent(token)}`, { method: 'GET' }, token);
 }
@@ -181,6 +215,19 @@ async function principal() {
 
   for (const p of posts) {
     validarTexto(p.texto);
+    if (p.tipo === 'reel') {
+      const video = await fetch(p.videoUrl, { method: 'HEAD' }).catch(() => null), videoOk = video?.ok === true;
+      if (prueba) {
+        console.log(`[prueba] ${fecha} · reel ${p.id}\n  video: ${p.videoUrl} (${videoOk ? 'responde' : 'NO responde'})\n  texto (${[...p.texto].length} caracteres):\n${p.texto.replace(/^/gm, '    ')}`);
+        continue;
+      }
+      if (!videoOk) throw new Error(`El video del reel ${p.id} no está publicado en ${p.videoUrl}: hacé push antes de que le toque`);
+      const id = await publicarReel({ igUserId, token, videoUrl: p.videoUrl, texto: p.texto });
+      publicados[p.id] = { estado: 'publicado', fecha, id };
+      writeFileSync(rutaPublicados, JSON.stringify(publicados, null, 2) + '\n');
+      console.log(`✓ ${fecha} · reel ${p.id} publicado en Instagram (id ${id})`);
+      continue;
+    }
     if (p.tipo === 'carrusel') {
       const faltan = [];
       for (const url of p.imagenes) { const r = await fetch(url, { method: 'HEAD' }).catch(() => null); if (!r?.ok) faltan.push(url); }

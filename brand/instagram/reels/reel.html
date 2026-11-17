@@ -71,7 +71,7 @@
 // ── Estado y armado (se llama una vez con los datos) ──
 const $ = (id) => document.getElementById(id);
 let D, L, chunks, palabras, items, accion, total;
-const VOZ = 1.0;          // la voz arranca al segundo 1
+const VOZ = 1.5;          // la voz arranca al segundo 1,5: antes, el gancho solo (1 s entero a la vista)
 const CTA = 3.2;          // duración del cierre
 const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9ñ]/g, '');
@@ -100,13 +100,18 @@ window.armar = async (datos) => {
     }
   }
   if (k !== palabras.length) throw new Error(`el guion tiene ${k} palabras y la voz ${palabras.length}`);
-  chunks.forEach((c, i) => { c.ini = c.palabras[0].ini - 0.05; c.fin = (chunks[i + 1]?.palabras[0].ini ?? c.palabras.at(-1).fin + 0.4) - 0.05; });
+  // Cada subtítulo aparece un poco antes de que se diga (hasta 0,35 s, y nunca antes de que termine de decirse el anterior):
+  // así las frases cortas, como "¿Tenés un negocio?", quedan al menos 1,5 s en pantalla (CA-15.3). Las palabras igual se
+  // iluminan cuando suenan. El primero puede empezar 0,5 s antes de la voz (el gancho se va antes, ver cuadro()).
+  // y ninguno reemplaza al anterior antes de que este lleve 1,5 s en pantalla (a lo sumo, el texto nuevo entra unas décimas tarde).
+  chunks.forEach((c, i) => { c.ini = i ? Math.max(c.palabras[0].ini - 0.35, chunks[i - 1].palabras.at(-1).fin + 0.08, chunks[i - 1].ini + 1.5) : Math.max(c.palabras[0].ini - 0.35, VOZ - 0.5); });
+  chunks.forEach((c, i) => { c.fin = chunks[i + 1]?.ini ?? c.palabras.at(-1).fin + 0.4; });
   $('items').innerHTML = items.map((it, i) => `<div class="item" id="item-${i}">${it.txt}</div>`).join('');
   $('gancho').innerHTML = datos.reel.gancho.map(marcar).join('<br>');
   total = palabras.at(-1).fin + VOZ + 0.5 + CTA;
   await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
   await document.fonts.ready;
-  return { total, golpe: accion ? accion.t : null, chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+  return { total, voz: VOZ, golpe: accion ? accion.t : null, chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
 };
 
 // ── Utilidades de tiempo ──
@@ -158,8 +163,8 @@ window.cuadro = (t) => {
   $('fragua').style.opacity = 0.75 + 0.25 * Math.sin(t * 7.3) * Math.sin(t * 3.1);
   // Gancho: aparece al rojo y se enfría, se va cuando empieza la voz
   const gg = $('gancho');
-  if (t < VOZ + 0.25) {
-    const enc = tramo(t, 0, 0.8), sale = tramo(t, VOZ - 0.1, VOZ + 0.25);
+  if (t < chunks[0].ini) {   // el gancho se va justo cuando entra el primer subtítulo
+    const enc = tramo(t, 0, 0.8), sale = tramo(t, chunks[0].ini - 0.3, chunks[0].ini);
     gg.style.opacity = (enc > 0 ? 1 : 0) * (1 - sale);
     gg.style.color = `rgb(255,${(200 + 38 * enc) | 0},${(120 + 124 * enc) | 0})`;
     gg.style.textShadow = `0 0 ${(40 * (1 - enc)) | 0}px rgba(255,122,26,${(0.9 * (1 - enc)).toFixed(2)})`;

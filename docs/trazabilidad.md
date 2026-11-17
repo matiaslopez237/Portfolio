@@ -98,6 +98,12 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-14 | CA-14.7 | Test (TDD, API simulada) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` |
 | HU-14 | CA-14.8 | Checklist (firma Matias) | ✓ firmado 2026-11-13 | 3 muestras aprobadas |
 | HU-14 | CA-14.9 | Checklist (firma Matias) | ✓ firmado 2026-11-14 | 12 carruseles revisados |
+| HU-15 | CA-15.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/reels/mascota/partes-v4/` · `recortar-partes.mjs` |
+| HU-15 | CA-15.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/reels/R1/R1.mp4` · `render.mjs` |
+| HU-15 | CA-15.3 | Chequeo `scripts/check.mjs` | ✓ | `reel.html` (subtítulos) · `R1/subtitulos.json` |
+| HU-15 | CA-15.4 | Chequeo `scripts/check.mjs` | ✓ | `reel.html` (cierre con CTA) |
+| HU-15 | CA-15.5 | Test (TDD, API simulada) | ✓ | `test/publicar-instagram.test.mjs` · `publicarReel` en `scripts/publicar-instagram.mjs` |
+| HU-15 | CA-15.6 | Checklist (firma Matias) | pendiente | Ver el R1 en el celular |
 
 | HU-12 | CA-12.1 | Chequeo `scripts/check.mjs` | ✓ | `assets/hero/*.webp` |
 | HU-12 | CA-12.2 | Escenario BDD | ✓ | `features/HU-12-sitio-forja.feature` · `npm test` |
@@ -113,6 +119,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 
 ## Huecos
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
+- HU-15: CA-15.6 pendiente (firma de Matias). Commits b5f4009 (armado) → [RED] 8cff7df → [GREEN] (este). El R1 no está en el calendario: falta confirmar la frecuencia (propuesta: 1 reel por semana, los miércoles) y el OK para programarlo. Sonido (efectos/música) fuera de alcance: RN-15.4 dice sin música; cambiarlo es una historia nueva.
 - HU-14: ninguno. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.
 - HU-13: ninguno. El link a Instagram del sitio sigue en `efestowebs` hasta que se cambie el @ (RN-13.4). Se arregló un error de opentype.js (punto NaN en la "B") en `trazar-logo.mjs`. Commits [RED] a0e3007 → [GREEN] (este). Sin publicar.
 - HU-11: CA-11.9 sin firmar. Commits [RED] ef8ef89 → [GREEN] (este). Las 4 personas son proto-personas (sin entrevistas): se validan con `validacion.md`.
