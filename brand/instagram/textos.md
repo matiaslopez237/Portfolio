@@ -194,7 +194,7 @@ Quiropraxia Cipolletti tiene su página con dominio propio: servicios, beneficio
 
 ¿Tenés un consultorio o atendés con turnos? Deslizá y mirá cómo quedó. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
 
-#paginasweb #diseñoweb #consultorios #salud #turnosonline #profesionales #webamedida
+#paginasweb #consultorios #salud #turnosonline #webamedida
 ```
 
 ## Carrusel C2 · 3 cosas que tu página tiene que tener
@@ -208,7 +208,7 @@ Quiropraxia Cipolletti tiene su página con dominio propio: servicios, beneficio
 
 ¿La tuya tiene las 3? Si no tenés página o le falta alguna, escribime y lo vemos. 👉 Link en la bio.
 
-#paginasweb #consejos #emprendedores #negocioslocales #diseñoweb #marketingdigital
+#paginasweb #consejos #emprendedores #negocioslocales #marketingdigital
 ```
 
 ## Carrusel C3 · Plan Tienda WhatsApp
@@ -220,7 +220,7 @@ Tu catálogo online, con un botón en cada producto que abre WhatsApp con el ped
 
 El precio final depende de lo que necesites. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
 
-#tiendaonline #catalogodigital #ventasporwhatsapp #emprendedores #diseñoweb #negocioslocales
+#tiendaonline #catalogodigital #ventasporwhatsapp #emprendedores #negocioslocales
 ```
 
 ## Carrusel C4 · Instagram vs. página web
@@ -232,7 +232,7 @@ Instagram es tu vidriera. La página ordena todo lo que vendés, te hace aparece
 
 ¿Vendés solo por Instagram? Escribime y vemos qué te conviene. 👉 Link en la bio.
 
-#paginasweb #emprendedores #instagram #negocioslocales #diseñoweb #ventasonline
+#paginasweb #emprendedores #instagram #negocioslocales #ventasonline
 ```
 
 ## Carrusel C5 · Caso Bacssa
@@ -244,7 +244,7 @@ Bacssa, servicios Oil & Gas: página institucional para mostrar campamentos, log
 
 ¿Tu empresa necesita una página así? Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
 
-#paginasweb #paginainstitucional #empresas #oilandgas #diseñoweb #webamedida
+#paginasweb #paginainstitucional #empresas #oilandgas #webamedida
 ```
 
 ## Carrusel C6 · Plan Landing Page
@@ -256,7 +256,7 @@ Una página de una sola pantalla para presentar tu negocio y que te escriban: di
 
 El precio final depende de lo que necesites. Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
 
-#paginasweb #landingpage #profesionales #emprendedores #diseñoweb #negocioslocales
+#paginasweb #landingpage #profesionales #emprendedores #negocioslocales
 ```
 
 ## Carrusel C7 · ¿Una página web es cara?
@@ -268,7 +268,7 @@ No todos necesitan una tienda: si te alcanza con una página simple, no pagás d
 
 La consulta es sin costo. Escribime y te digo qué plan te conviene. 👉 Link en la bio.
 
-#paginasweb #emprendedores #negocioslocales #diseñoweb #presupuesto #webamedida
+#paginasweb #emprendedores #negocioslocales #presupuesto #webamedida
 ```
 
 ## Carrusel C8 · Quién está detrás
@@ -280,7 +280,7 @@ Soy Matias Lopez, Ingeniero en Sistemas (UTN San Rafael). Diseño y programo cad
 
 Si querés tu página, escribime. 👉 Link en la bio.
 
-#sanrafael #mendoza #paginasweb #desarrolloweb #emprendedores #webamedida
+#sanrafael #mendoza #paginasweb #emprendedores #webamedida
 ```
 
 ## Carrusel C9 · Caso Zenti
@@ -292,7 +292,7 @@ Zenti, tienda de tecnología: catálogo por categorías, carrito, pagos online y
 
 ¿Querés vender online con pagos? Escribime y te cuento cómo sería para tu negocio. 👉 Link en la bio.
 
-#tiendaonline #ecommerce #pagosonline #desarrolloweb #diseñoweb #webamedida
+#tiendaonline #ecommerce #pagosonline #desarrolloweb #webamedida
 ```
 
 ## Carrusel C10 · Tu propio dominio
@@ -306,7 +306,7 @@ Por qué tu negocio necesita su propio dominio (www.tunegocio.com.ar):
 
 ¿Ya tenés el tuyo? Si no, te ayudo a elegirlo cuando armamos tu página. 👉 Link en la bio.
 
-#dominio #paginasweb #emprendedores #negocioslocales #marketingdigital #diseñoweb
+#dominio #paginasweb #emprendedores #negocioslocales #marketingdigital
 ```
 
 ## Carrusel C11 · Caso tienda con panel
@@ -318,7 +318,7 @@ Tienda online con catálogo, carrito, cuentas de usuario, pagos con Mercado Pago
 
 ¿Querés vender online y manejar tu tienda vos mismo? Escribime y te paso un presupuesto sin costo. 👉 Link en la bio.
 
-#tiendaonline #ecommerce #mercadopago #emprendedores #diseñoweb #webamedida
+#tiendaonline #ecommerce #mercadopago #emprendedores #webamedida
 ```
 
 ## Carrusel C12 · La página de tu consultorio
@@ -333,7 +333,7 @@ La página de tu consultorio: 4 cosas que tus pacientes buscan.
 
 ¿Tenés un consultorio y todavía no tenés página? Escribime. 👉 Link en la bio.
 
-#consultorios #salud #profesionales #turnosonline #paginasweb #diseñoweb
+#consultorios #salud #profesionales #turnosonline #paginasweb
 ```
 
 ## Reels (HU-15)

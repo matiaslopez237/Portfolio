@@ -16,7 +16,7 @@ export const BASE_IMAGENES = 'https://matiaslopez237.github.io/Portfolio/brand/i
 export const BASE_CARRUSELES = 'https://matiaslopez237.github.io/Portfolio/brand/instagram/carruseles/';
 export const BASE_REELS = 'https://matiaslopez237.github.io/Portfolio/brand/instagram/reels/';
 const LIMITE_TEXTO = 2200;
-const LIMITE_HASHTAGS = 30;
+const LIMITE_HASHTAGS = 5;   // Instagram lo bajó de 30 a 5 por publicación desde el 18-19/12/2025 (DEF-02)
 
 // ── Lógica pura (la cubren los tests) ──
 
@@ -85,7 +85,7 @@ export function validarTexto(texto) {
   const largo = [...texto].length;
   if (largo > LIMITE_TEXTO) throw new Error(`El texto tiene ${largo} caracteres (máximo 2.200)`);
   const hashtags = (texto.match(/#[\p{L}\p{N}_]+/gu) || []).length;
-  if (hashtags > LIMITE_HASHTAGS) throw new Error(`El texto tiene ${hashtags} hashtags (máximo 30)`);
+  if (hashtags > LIMITE_HASHTAGS) throw new Error(`El texto tiene ${hashtags} hashtags (máximo ${LIMITE_HASHTAGS}, límite de Instagram)`);
 }
 
 function textosPorReel(md) {

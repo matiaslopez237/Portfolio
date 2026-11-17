@@ -72,6 +72,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-10 | CA-10.7 | Chequeo `scripts/check.mjs` | ✓ | todos los archivos del repo |
 | HU-10 | CA-10.8 | Checklist (firma Matias) | pendiente | Post 4 publicado solo el 2026-11-18 a las 19 |
 | HU-10 · DEF-01 | CA-10.9 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` · commits [RED] 500ec3c → [GREEN] `fix(DEF-01)` |
+| HU-10 · DEF-02 | CA-10.4 | Test (TDD) + chequeo CA-14.4 | ✓ | `validarTexto` (máx. 5 hashtags) · carruseles recortados a 5 · commits [RED] e89e032 → [GREEN] `fix(DEF-02)` |
 | HU-11 | CA-11.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/ (9 .md) + estrategia.html` |
 | HU-11 | CA-11.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/personas.md` |
 | HU-11 | CA-11.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/personas.md (fuentes)` |
