@@ -219,6 +219,24 @@
     return { pts, cx: sx / n, cy: sy / n };
   }
 
+  // Borra el muñón del hombro: la mancha de piel (y gris) que empieza en el círculo, más su contorno oscuro,
+  // sin tocar la musculosa (gris verdoso oscuro)
+  function borrarMunonV5(L, c) {
+    const { w, h } = L, im = L.g.getImageData(0, 0, w, h), q = im.data;
+    const piel = (k) => q[k * 4 + 3] > 40 && q[k * 4] > 120 && q[k * 4] - q[k * 4 + 2] > 35;
+    const grisC = (k) => q[k * 4 + 3] > 40 && Math.abs(q[k * 4] - q[k * 4 + 1]) < 16 && Math.abs(q[k * 4 + 1] - q[k * 4 + 2]) < 16 && q[k * 4] > 95;
+    const contorno = (k) => q[k * 4 + 3] > 0 && Math.max(q[k * 4], q[k * 4 + 1], q[k * 4 + 2]) < 50;
+    const en = new Uint8Array(w * h), pila = [Math.round(c.y) * w + Math.round(c.x)]; en[pila[0]] = 1;
+    while (pila.length) { const k = pila.pop(), x = k % w;
+      for (const v of [k - 1, k + 1, k - w, k + w]) if (v >= 0 && v < w * h && !en[v] && Math.abs((v % w) - x) <= 1 && (piel(v) || grisC(v))) { en[v] = 1; pila.push(v); } }
+    // el contorno (y el antialias) que rodea a la mancha, hasta 4 px
+    for (let paso = 0; paso < 4; paso++) { const nuevo = en.slice();
+      for (let k = w; k < w * h - w; k++) if (!en[k] && q[k * 4 + 3] > 0 && (contorno(k) || q[k * 4 + 3] < 200 || piel(k)) && (en[k - 1] || en[k + 1] || en[k - w] || en[k + w])) nuevo[k] = 1;
+      en.set(nuevo); }
+    for (let k = 0; k < w * h; k++) if (en[k]) q[k * 4 + 3] = 0;
+    L.g.putImageData(im, 0, 0);
+  }
+
   window.prepararMunecoV5 = async (cfg) => {
     const ruta = (c, n) => c + 'pieza-' + n + '.png', P = cfg.piezas, I = { ojos: {}, boca: {}, manos: {} };
     I.cuerpo = deImagen(await cargar(ruta(cfg.carpeta, P.cuerpo)));
@@ -234,7 +252,9 @@
     if (cc.length < 3) throw new Error(`v5: el cuerpo tiene ${cc.length} círculos grises (se esperan 3: cuello y hombros). Manchas grises: ${JSON.stringify(manchas(I.cuerpo, gris, 150).map(m => [Math.round(m.x), Math.round(m.y), m.w, m.h, m.n]))}`);
     const cuello = cc[0], [hIzq, hDer] = cc.slice(1, 3).sort((a, b) => a.x - b.x);
     const T5 = { borde: 4, mediana: true };
-    tapar(I.cuerpo, hIzq, T5); tapar(I.cuerpo, hDer, T5);
+    // Los muñones de los hombros del cuerpo (piel, círculo gris y su contorno) se borran: el hombro lo pone la punta
+    // redonda del brazo de arriba. Si quedan, al girar el brazo asoman detrás como un segundo hombro.
+    borrarMunonV5(I.cuerpo, hIzq); borrarMunonV5(I.cuerpo, hDer);
     // Brazo de arriba: hombro (arriba) y codo (abajo)
     const cb = circulos(I.brazo).sort((a, b) => a.y - b.y);
     if (cb.length < 2) throw new Error('v5: el brazo de arriba necesita 2 círculos grises (hombro y codo)');
