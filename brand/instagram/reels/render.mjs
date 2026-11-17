@@ -53,7 +53,7 @@ function munecoV5() {
     recortarEnCodo: ['reposo'],
     cara: { carpeta: 'mascota/partes-v4/', cabeza: 0, ojos: { abiertos: 3, medio: 5, cerrados: 6 }, boca: { cerrada: 8, a: 9, o: 12, e: 14, neutra: 15 } },
     escala: 1.28, escalaCabeza: 1.35, piso: 2000, bocaSobreCuello: 14,
-    desplX: -50 };   // corrido a la izquierda como la v4: el martillo, al volver del golpe, pasa en horizontal hacia afuera
+    desplX: -28 };   // un poco a la izquierda: deja lugar al martillo de la derecha sin que el brazo izquierdo de "explica" se salga
 }
 
 // Servidor local mínimo (con file:// el navegador no deja leer los píxeles de las imágenes)
