@@ -642,7 +642,7 @@ const chequeos = [
     },
   },
   {
-    ca: 'CA-14.6', desc: 'Calendario: 4 semanas de carruseles desde el 2026-11-16 (lun, mié, vie) con la mezcla de la matriz',
+    ca: 'CA-14.6', desc: 'Calendario: 12 carruseles del 2026-11-16 al 2026-12-21 (lun/mié/vie la 1.ª semana, lun/vie desde el 23/11) con la mezcla de la matriz',
     run: () => {
       const c = leer('brand/instagram/calendario.md');
       const filas = c.split('\n').map(l => l.split('|').map(s => s.trim())).filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x[1] ?? '') && x[3] === 'Carrusel');
@@ -652,8 +652,9 @@ const chequeos = [
       for (const f of filas) {
         const id = (f[4].match(/Carrusel (C\d+)/) || [])[1], k = porId.get(id);
         if (!k) { malos.push(`${f[1]}: no existe ${id}`); continue; }
-        if (f[1] < '2026-11-16' || f[1] > '2026-12-11') malos.push(`${f[1]} fuera de las 4 semanas`);
-        if (![1, 3, 5].includes(new Date(f[1] + 'T12:00:00Z').getUTCDay())) malos.push(`${f[1]} no es lun/mié/vie`);
+        if (f[1] < '2026-11-16' || f[1] > '2026-12-21') malos.push(`${f[1]} fuera del período`);
+        const dia = new Date(f[1] + 'T12:00:00Z').getUTCDay(), dias = f[1] < '2026-11-23' ? [1, 3, 5] : [1, 5];   // desde el 23/11 los miércoles son de reels
+        if (!dias.includes(dia)) malos.push(`${f[1]} no es ${f[1] < '2026-11-23' ? 'lun/mié/vie' : 'lun/vie'}`);
         cuenta[k.pilar] = (cuenta[k.pilar] ?? 0) + 1;
       }
       const meta = { Consejos: .4, Trabajos: .3, Oferta: .2, 'Detrás de escena': .1 };

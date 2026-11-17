@@ -335,3 +335,23 @@ La página de tu consultorio: 4 cosas que tus pacientes buscan.
 
 #consultorios #salud #profesionales #turnosonline #paginasweb #diseñoweb
 ```
+
+## Reels (HU-15)
+
+Texto de cada reel, con el mismo formato. La palabra clave para buscadores va en la primera línea (skill instagram-seo-caption-generator).
+
+## Reel R1 · 3 cosas que tu página tiene que tener
+
+```texto
+Página web para tu negocio: las 3 cosas que tiene que tener, sí o sí.
+
+1. Un botón de WhatsApp. Si tienen que buscar tu número, se van.
+2. Que se vea bien en el celular.
+3. Dónde estás y cuándo atendés.
+
+¿La tuya no las tiene? En Hefesto Webs te forjamos tu página web a medida, con botón de WhatsApp y pensada para el celular.
+
+Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
+
+#paginaweb #paginasweb #negocioslocales #emprendedores
+```

@@ -24,7 +24,7 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
   - Se agrega a `DESIGN.md` la excepción "Instagram y hero: texturas y brillo permitidos" (aprobada por Matias para el prototipo).
 - **RN-14.6 (fuente única):** los textos de los slides y de los posts salen de `brand/instagram/contenido.json` y `textos.md`. Las imágenes se generan con `node brand/instagram/generar.mjs`.
 - **RN-14.7 (publicación automática):** `scripts/publicar-instagram.mjs` publica carruseles con la API oficial: un contenedor por slide, el contenedor del carrusel y la publicación. Se prueba con la API simulada (TDD), igual que en la HU-10.
-- **RN-14.8 (calendario):** arranca el **lunes 16 de noviembre de 2026** y sigue lunes, miércoles y viernes a las 19:00. Los reels (HU-15) todavía no existen, así que el miércoles va un carrusel de trabajo o de detrás de escena hasta que estén.
+- **RN-14.8 (calendario):** arranca el **lunes 16 de noviembre de 2026** y sigue lunes, miércoles y viernes a las 19:00 la primera semana. **Desde el lunes 23/11** (decisión de Matias del 2026-11-17, ya con los reels de la HU-15): carruseles **lunes y viernes** y reels **miércoles y sábado**, a las 19:00. Los 12 carruseles alcanzan hasta el 21/12.
 - **RN-14.9 (posts viejos):** los 12 posts de la HU-04 y la HU-09 quedan archivados en `brand/instagram/archivo/`. Los 3 borradores de Meta Business Suite los elimina Matias, o la IA con su OK. `publicados.json` se vacía, porque nada se publicó todavía.
 - **RN-14.10 (publicar):** programar o publicar en Instagram se hace solo con el OK de Matias.
 
@@ -42,7 +42,7 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 | CA-14.3 | Dado cada carrusel, entonces el último slide es el CTA fijo con el número y `@hefestowebs` | Chequeo automático |
 | CA-14.4 | Dado `textos.md`, entonces cada carrusel tiene su texto (2.200 caracteres o menos) con 5 a 10 hashtags | Chequeo automático |
 | CA-14.5 | Dadas las plantillas, entonces solo usan colores hex de `brand/tokens.json` (las transparencias se arman con esos mismos colores) | Chequeo automático |
-| CA-14.6 | Dado `calendario.md`, entonces cubre 4 semanas desde el 2026-11-16, lunes, miércoles y viernes, con pilar y persona en cada carrusel, y la mezcla de la matriz (consejos 40%, trabajos 30%, oferta 20%, detrás de escena 10%, ±10%) | Chequeo automático |
+| CA-14.6 | Dado `calendario.md`, entonces tiene los 12 carruseles entre el 2026-11-16 y el 2026-12-21 (lunes, miércoles y viernes la primera semana; lunes y viernes desde el 23/11), con pilar y persona en cada carrusel, y la mezcla de la matriz (consejos 40%, trabajos 30%, oferta 20%, detrás de escena 10%, ±10%) | Chequeo automático |
 | CA-14.7 | Dado un carrusel en el calendario, cuando corre la publicación con la API simulada, entonces crea un contenedor por slide, el del carrusel con sus hijos y lo publica | Test (TDD) |
 | CA-14.8 | Dadas las 3 muestras, cuando Matias las ve, entonces elige el estilo (o pide cambios) antes de producir el mes | Checklist |
 | CA-14.9 | Dados los carruseles del mes, cuando Matias los ve en la grilla, entonces se ven llamativos, coherentes con el sitio y dicen solo cosas reales | Checklist |
@@ -60,3 +60,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 - 2026-11-12: etapa 1 lista: 3 muestras (C1 caso Quiropraxia, C2 consejo, C3 plan Tienda WhatsApp) y publicación de carruseles (16/16 tests). Espera la firma de CA-14.8.
 - 2026-11-14: etapa 2 lista: 12 carruseles (C1 a C12), textos y calendario desde el 2026-11-16; posts viejos archivados; excepción de Instagram y hero agregada a DESIGN.md. Falta la firma de CA-14.9.
 - 2026-11-14: CA-14.9 firmado por Matias; historia cerrada. Publicación automática desde el 2026-11-16.
+- 2026-11-17: cambio de calendario pedido por Matias: desde el 23/11, 2 carruseles (lunes y viernes) y 2 reels (miércoles y sábado) por semana. RN-14.8 y CA-14.6 actualizados.
