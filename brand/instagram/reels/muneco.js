@@ -79,21 +79,35 @@
     // Boca. Antes se agrandaba hasta tapar el hueco y se recortaba con su forma: los labios quedaban 1,6 veces más
     // anchos que el hueco y casi no se veía abrir. Ahora: el hueco gris de la barba se rellena con la piel de la cara
     // (y su contorno oscuro también) y la boca va encima en su tamaño real: labios del ancho del hueco.
+    const mascaraBoca = lienzo(I.cabeza.w, I.cabeza.h);
     { const W = I.cabeza.w, im = I.cabeza.g.getImageData(0, 0, W, I.cabeza.h), q = im.data;
       const esPiel = (i) => q[i + 3] > 200 && q[i] > 180 && q[i + 1] > 120 && q[i + 1] < 190 && q[i + 2] > 75 && q[i + 2] < 150 && q[i] - q[i + 2] > 55;
       let sr = 0, sg = 0, sb = 0, n = 0;
       for (let y = 0; y < I.cabeza.h; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; if (Math.hypot(x - hueco.x, y - hueco.y) < 70 && esPiel(i)) { sr += q[i]; sg += q[i + 1]; sb += q[i + 2]; n++; } }
       const piel = n ? [sr / n, sg / n, sb / n] : [222, 158, 110];
       const en = new Uint8Array(W * I.cabeza.h); for (const k of hueco.px) en[k] = 1;
-      // también el contorno del hueco (marrón oscuro con antialias): se crece 5 px sobre todo lo que no sea barba naranja
-      const barba = (k) => q[k * 4] > 185 && q[k * 4 + 1] < 145 && q[k * 4 + 2] < 90;
-      for (let paso = 0; paso < 5; paso++) {
+      // También el contorno del hueco (4 px), pero creciendo solo hacia los costados y hacia abajo:
+      // el borde de arriba del hueco es la línea del bigote y no se toca (antes se borraba y la boca "tapaba" el bigote).
+      // (el contorno es marrón con antialias: entra todo lo que no sea barba naranja ni piel)
+      const naranja = (k) => q[k * 4] > 185 && q[k * 4 + 1] < 145 && q[k * 4 + 2] < 90;
+      for (let paso = 0; paso < 4; paso++) {
         const nuevo = en.slice();
-        for (let k = 0; k < en.length; k++) if (!en[k] && q[k * 4 + 3] > 0 && !barba(k) && !esPiel(k * 4) && (en[k - 1] || en[k + 1] || en[k - W] || en[k + W])) nuevo[k] = 1;
+        for (let k = W; k < en.length; k++) if (!en[k] && q[k * 4 + 3] > 0 && !naranja(k) && !esPiel(k * 4) && (en[k - 1] || en[k + 1] || en[k - W])) nuevo[k] = 1;
         en.set(nuevo);
       }
-      for (let k = 0; k < en.length; k++) if (en[k]) { q[k * 4] = piel[0]; q[k * 4 + 1] = piel[1]; q[k * 4 + 2] = piel[2]; }
-      I.cabeza.g.putImageData(im, 0, 0); }
+      // El hueco se rellena con el naranja de la barba (no con piel): con la boca cerrada quedaba un "mentón pelado"
+      // de piel lisa debajo de los labios. Así se ve la boca con su margen chico de piel y alrededor, barba.
+      const esBarba = (i) => q[i + 3] > 200 && q[i] > 185 && q[i + 1] < 145 && q[i + 2] < 90;
+      let br = 0, bg = 0, bb = 0, nb = 0;
+      for (let y = 0; y < I.cabeza.h; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4, d = Math.hypot(x - hueco.x, y - hueco.y); if (d > hueco.w * 0.6 && d < hueco.w * 1.1 && y > hueco.y && esBarba(i)) { br += q[i]; bg += q[i + 1]; bb += q[i + 2]; nb++; } }
+      const relleno = cfg.huecoConPiel ? piel : nb ? [br / nb, bg / nb, bb / nb] : piel;
+      for (let k = 0; k < en.length; k++) if (en[k]) { q[k * 4] = relleno[0]; q[k * 4 + 1] = relleno[1]; q[k * 4 + 2] = relleno[2]; }
+      I.cabeza.g.putImageData(im, 0, 0);
+      // Máscara de la boca = esa misma zona: la boca se dibuja solo ahí y su margen de piel no pisa el bigote
+      const mi = mascaraBoca.g.createImageData(W, I.cabeza.h);
+      for (let k = 0; k < en.length; k++) if (en[k]) mi.data[k * 4 + 3] = 255;
+      const tmp = lienzo(W, I.cabeza.h); tmp.g.putImageData(mi, 0, 0);
+      mascaraBoca.g.filter = 'blur(0.8px)'; mascaraBoca.g.drawImage(tmp.c, 0, 0); mascaraBoca.g.filter = 'none'; }
     // Labios de cada boca: la caja de lo que no es piel (sirve para centrar y para medir el ancho)
     for (const B of Object.values(I.boca)) {
       const q = B.g.getImageData(0, 0, B.w, B.h).data; let x0 = B.w, x1 = 0, y0 = B.h, y1 = 0;
@@ -117,7 +131,7 @@
     }
     const mo = lienzo(oa.w, oa.h); mo.g.filter = 'blur(5px)'; mo.g.fillStyle = '#fff'; mo.g.beginPath(); mo.g.ellipse(oa.w / 2, oa.h / 2, oa.w / 2 - 8, oa.h / 2 - 7, 0, 0, Math.PI * 2); mo.g.fill();
 
-    return { cfg, I, cuello, hombroC, hombroB, codoB, codoA, hueco, ojosPos, escalaBoca, mascaraOjos: mo, capa: lienzo(I.cabeza.w, I.cabeza.h) };
+    return { cfg, I, cuello, hombroC, hombroB, codoB, codoA, hueco, ojosPos, escalaBoca, mascaraBoca, mascaraOjos: mo, capa: lienzo(I.cabeza.w, I.cabeza.h) };
   };
 
   // Ángulos del brazo en el tiempo t (grados, + = horario). Reposo: codo afuera y martillo en alto.
@@ -168,7 +182,10 @@
     // El labio de arriba queda fijo justo debajo del bigote y la boca abre hacia abajo (como la mandíbula):
     // centrada, las bocas altas (a, o) crecían hacia arriba y pisaban la nariz.
     const techo = hueco.y - hueco.h / 2 + (cfg.labioBajoBigote ?? 3);
-    g.drawImage(B.c, hueco.x - B.labios.cx * e, techo - B.labios.arriba * e, B.w * e, B.h * e);
+    capa.g.clearRect(0, 0, capa.w, capa.h);
+    capa.g.drawImage(B.c, hueco.x - B.labios.cx * e, techo - B.labios.arriba * e, B.w * e, B.h * e);
+    capa.g.globalCompositeOperation = 'destination-in'; capa.g.drawImage(M.mascaraBoca.c, 0, 0); capa.g.globalCompositeOperation = 'source-over';
+    g.drawImage(capa.c, 0, 0);
     g.restore();
     // Dónde está la cabeza del martillo ahora y en el instante de cada golpe (para las chispas)
     const golpe = {}; for (const t0 of golpes) golpe[t0] = cabezaMartillo(M, pose(M, t0 + 0.06, golpes));
