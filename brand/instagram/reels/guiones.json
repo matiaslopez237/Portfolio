@@ -1,0 +1,40 @@
+{
+  "_nota": "Guiones de los reels con Hefesto (HU-15). Cada línea es un subtítulo; 'marca' resalta una palabra en naranja; 'accion' dispara un gesto (martillo). Voz: \"gemini:<voz>\" usa Gemini TTS (voz-gemini.mjs); otra cosa, edge-tts (voz.py). Se generan con node brand/instagram/reels/render.mjs <id>.",
+  "reels": [
+    {
+      "id": "R1",
+      "titulo": "3 cosas que tu página tiene que tener",
+      "voz": "gemini:Algenib",
+      "gancho": [
+        "3 cosas que tu página",
+        "tiene que *tener*"
+      ],
+      "lineas": [
+        {
+          "texto": "¿Tenés un negocio? Tu página tiene que tener tres cosas, sí o sí.",
+          "marca": "tres cosas"
+        },
+        {
+          "texto": "Uno: un botón de WhatsApp. Si tienen que buscar tu número, se van.",
+          "marca": "WhatsApp",
+          "item": "1 · Botón de WhatsApp"
+        },
+        {
+          "texto": "Dos: que se vea bien en el celular.",
+          "marca": "celular",
+          "item": "2 · Se ve bien en el celular"
+        },
+        {
+          "texto": "Tres: dónde estás y cuándo atendés.",
+          "marca": "cuándo atendés",
+          "item": "3 · Dónde y cuándo"
+        },
+        {
+          "texto": "¿La tuya no las tiene? En Hefesto Webs te la forjamos a medida.",
+          "marca": "a medida",
+          "accion": "martillo"
+        }
+      ]
+    }
+  ]
+}

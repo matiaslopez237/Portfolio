@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Reel · Hefesto Webs</title>
+<!--
+  Plantilla de reel con la mascota (HU-15). La maneja node brand/instagram/reels/render.mjs:
+  inyecta window.__DATOS (guion + tiempos de palabras + partes) y llama a window.cuadro(t) para cada fotograma.
+  1080×1920. Texto importante dentro de la zona segura (entre y=250 y y=1670). Colores: brand/tokens.json.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #1b2128; }
+  body { font-family: 'Public Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #eef1f4; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+  em { font-style: normal; color: #ff7a1a; }
+  #escena { position: absolute; inset: 0; overflow: hidden; }
+  .taller { position: absolute; inset: -40px; background: url('../recursos/taller.webp') 70% 60% / cover; filter: brightness(.42) saturate(.75); }
+  .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,33,40,.92) 0%, rgba(27,33,40,.55) 34%, rgba(27,33,40,.15) 60%, rgba(27,33,40,.75) 100%); }
+  .fragua { position: absolute; left: 50%; bottom: -260px; width: 1400px; height: 900px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(255,122,26,.28), rgba(255,122,26,0)); }
+  canvas#muneco, canvas#chispas { position: absolute; inset: 0; }
+
+  /* Gancho "hierro al rojo" */
+  #gancho { position: absolute; left: 80px; right: 80px; top: 330px; text-align: center; font-size: 118px; line-height: .9; }
+  /* Subtítulos */
+  #sub { position: absolute; left: 70px; right: 70px; top: 300px; text-align: center; font-size: 76px; line-height: 1.02; }
+  #sub .w { color: rgba(238,241,244,.38); transition: none; }
+  #sub .w.dicha { color: #eef1f4; }
+  #sub .w.dicha.m { color: #ff7a1a; text-shadow: 0 0 26px rgba(255,122,26,.55); }
+  #sub .w.m { color: rgba(255,122,26,.45); }
+  /* Ítems */
+  #items { position: absolute; left: 70px; top: 520px; display: grid; gap: 14px; }
+  .item { display: inline-block; justify-self: start; padding: 14px 26px; border-radius: 6px; font-size: 40px; font-weight: 700; color: #eef1f4;
+    background: rgba(34,42,51,.92); box-shadow: inset 0 0 0 3px rgba(255,122,26,.75), 0 0 30px -6px rgba(255,122,26,.6); }
+  /* Cierre */
+  #cta { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
+  #cta .fondo { position: absolute; inset: 0; background: rgba(19,24,29,.94); }
+  #cta .bloque { position: relative; text-align: center; }
+  #cta img { width: 460px; display: block; margin: 0 auto 30px; filter: drop-shadow(0 30px 40px rgba(27,33,40,.9)); }
+  #cta h2 { font-size: 100px; line-height: .95; }
+  #cta .num { margin-top: 26px; font-size: 96px; color: #ff7a1a; text-shadow: 0 0 30px rgba(255,122,26,.5); }
+  #cta .usr { margin-top: 16px; font-size: 44px; font-weight: 700; }
+  #cta .nota { margin-top: 14px; font-size: 34px; color: #9aa6b2; }
+  .marca { position: absolute; left: 70px; top: 120px; display: flex; gap: 14px; align-items: center; font-size: 38px; opacity: .9; }
+  .marca svg { width: 56px; height: 56px; }
+  .marca b { color: #9aa6b2; font-weight: 800; }
+</style>
+</head>
+<body>
+<div id="escena">
+  <div class="taller" id="taller"></div>
+  <div class="velo"></div>
+  <div class="fragua" id="fragua"></div>
+  <canvas id="muneco" width="1080" height="1920"></canvas>
+  <canvas id="chispas" width="1080" height="1920"></canvas>
+  <div class="marca cond"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg><span>Hefesto <b>Webs</b></span></div>
+  <div id="gancho" class="cond"></div>
+  <div id="sub" class="cond"></div>
+  <div id="items"></div>
+  <div id="cta"><div class="fondo"></div><div class="bloque">
+    <img src="../recursos/logo-3d.webp" alt="" />
+    <h2 class="cond">Escribime por <em>WhatsApp</em></h2>
+    <p class="num cond">260 466-1138</p><p class="usr">@hefestowebs</p><p class="nota">La consulta es sin costo.</p>
+  </div></div>
+</div>
+<script src="muneco.js"></script>
+<script>
+// ── Estado y armado (se llama una vez con los datos) ──
+const $ = (id) => document.getElementById(id);
+let D, L, chunks, palabras, items, accion, total;
+const VOZ = 1.0;          // la voz arranca al segundo 1
+const CTA = 3.2;          // duración del cierre
+const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9ñ]/g, '');
+
+window.armar = async (datos) => {
+  D = datos; palabras = datos.palabras;
+  // Muñeco con codo (hoja v4): se recorta y se prepara en muneco.js
+  L = await window.prepararMuneco(datos.muneco);
+  // Subtítulos: líneas del guion partidas en bloques de 12 palabras o menos, con sus tiempos
+  let k = 0; chunks = []; items = []; accion = null;
+  for (const linea of datos.reel.lineas) {
+    const frases = linea.texto.match(/[^.?!:]+[.?!:]?/g).map(x => x.trim()).filter(Boolean);
+    let bloque = [];
+    const cerrar = () => { if (bloque.length) { chunks.push({ palabras: bloque, marca: linea.marca }); bloque = []; } };
+    for (const fr of frases) {
+      const toks = fr.split(/\s+/);
+      if (bloque.length + toks.length > 12) cerrar();
+      for (const tok of toks) { const p = palabras[k++]; bloque.push({ txt: tok, ini: p.inicio + VOZ, fin: p.fin + VOZ }); }
+    }
+    cerrar();
+    const inicioLinea = chunks.find(c => c.palabras.some(w => w.txt === linea.texto.split(/\s+/)[0]))?.palabras[0].ini;
+    if (linea.item) items.push({ txt: linea.item, t: chunks.at(-1).palabras[0].ini });
+    if (linea.accion === 'martillo') {
+      const w = chunks.flatMap(c => c.palabras).find(w => norm(w.txt).startsWith('forj'));
+      accion = { t: (w ?? chunks.at(-1).palabras.at(-1)).ini };
+    }
+  }
+  if (k !== palabras.length) throw new Error(`el guion tiene ${k} palabras y la voz ${palabras.length}`);
+  chunks.forEach((c, i) => { c.ini = c.palabras[0].ini - 0.05; c.fin = (chunks[i + 1]?.palabras[0].ini ?? c.palabras.at(-1).fin + 0.4) - 0.05; });
+  $('items').innerHTML = items.map((it, i) => `<div class="item" id="item-${i}">${it.txt}</div>`).join('');
+  $('gancho').innerHTML = datos.reel.gancho.map(marcar).join('<br>');
+  total = palabras.at(-1).fin + VOZ + 0.5 + CTA;
+  await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+  await document.fonts.ready;
+  return { total, golpe: accion ? accion.t : null, chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+};
+
+// ── Utilidades de tiempo ──
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const tramo = (t, a, b) => clamp((t - a) / (b - a));
+const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+// Chispas deterministas (dependen solo de t)
+function chispas(g, t, x0, y0, t0, n, fuerza) {
+  const dt = t - t0; if (dt < 0 || dt > 1.4) return;
+  for (let i = 0; i < n; i++) {
+    const r1 = Math.sin(i * 12.9898 + t0 * 78.233) * 43758.5453 % 1, r2 = Math.sin(i * 4.1414 + t0 * 3.7) * 9631.17 % 1;
+    const ang = -Math.PI / 2 + (Math.abs(r1) - .5) * 2.6, v = (6 + Math.abs(r2) * 16) * fuerza;
+    const x = x0 + Math.cos(ang) * v * dt * 60, y = y0 + Math.sin(ang) * v * dt * 60 + 0.5 * 900 * dt * dt;
+    const vida = 1 - dt / (0.6 + Math.abs(r2) * 0.8); if (vida <= 0) continue;
+    g.strokeStyle = `rgba(255,${(150 + 100 * vida) | 0},${(60 * vida) | 0},${vida.toFixed(2)})`; g.lineWidth = 2 + Math.abs(r1) * 3;
+    g.beginPath(); g.moveTo(x, y); g.lineTo(x - Math.cos(ang) * 14, y - Math.sin(ang) * 14 + 6); g.stroke();
+  }
+}
+
+// ── Un fotograma ──
+window.cuadro = (t) => {
+  $('taller').style.transform = `scale(${1.04 + t * 0.0025})`;
+  // Habla: palabra actual y cuánto suena la voz (si hay energía, la boca se abre solo cuando suena)
+  const w = chunks.flatMap(c => c.palabras).find(w => t >= w.ini && t <= w.fin);
+  const en = D.energia ? (D.energia[Math.round((t - VOZ) * 30)] ?? 0) : (w ? 1 : 0);
+  let boca = 'cerrada';
+  if (D.boca) {
+    // Rhubarb: 9 formas de boca (A a H, X) llevadas a las 5 de la hoja.
+    // A labios cerrados (m, b, p) · B apenas abierta · C abierta (e) · D muy abierta (a) · E redondeada (o) · F fruncida (u)
+    // G dientes sobre el labio (f, v) · H lengua (l) · X reposo
+    const c = D.boca.find(c => t - VOZ >= c.start && t - VOZ < c.end);
+    boca = c ? { A: 'cerrada', B: 'neutra', C: 'e', D: 'a', E: 'o', F: 'o', G: 'e', H: 'e', X: 'cerrada' }[c.value] : 'cerrada';
+  } else if (w && en > 0.08) {
+    const letras = norm(w.txt), avance = (t - w.ini) / Math.max(0.01, w.fin - w.ini);
+    const vocales = letras.replace(/[^aeiou]/g, '') || 'a';
+    const v = vocales[Math.min(vocales.length - 1, Math.floor(avance * vocales.length))];
+    boca = en < 0.22 ? 'neutra' : v === 'a' ? 'a' : (v === 'o' || v === 'u') ? 'o' : 'e';
+  }
+  // Parpadeo cada ~3,1 s
+  const fase = (t + 0.7) % 3.1, ojos = fase < 0.06 ? 'medio' : fase < 0.14 ? 'cerrados' : fase < 0.2 ? 'medio' : 'abiertos';
+  // Martillazos: el inicial y el del guion ("forjamos")
+  const golpes = [0.45, ...(accion ? [accion.t] : [])];
+  const pos = window.dibujarMuneco($('muneco').getContext('2d'), L, t, { boca, ojos, habla: !!w, golpes });
+  // Chispas: salen de la cabeza del martillo en cada golpe
+  const g = $('chispas').getContext('2d'); g.clearRect(0, 0, 1080, 1920); g.globalCompositeOperation = 'lighter';
+  for (const t0 of golpes) chispas(g, t, pos.golpe[t0]?.x ?? pos.martillo.x, pos.golpe[t0]?.y ?? pos.martillo.y, t0, 46, 1.2);
+  g.globalCompositeOperation = 'source-over';
+  $('fragua').style.opacity = 0.75 + 0.25 * Math.sin(t * 7.3) * Math.sin(t * 3.1);
+  // Gancho: aparece al rojo y se enfría, se va cuando empieza la voz
+  const gg = $('gancho');
+  if (t < VOZ + 0.25) {
+    const enc = tramo(t, 0, 0.8), sale = tramo(t, VOZ - 0.1, VOZ + 0.25);
+    gg.style.opacity = (enc > 0 ? 1 : 0) * (1 - sale);
+    gg.style.color = `rgb(255,${(200 + 38 * enc) | 0},${(120 + 124 * enc) | 0})`;
+    gg.style.textShadow = `0 0 ${(40 * (1 - enc)) | 0}px rgba(255,122,26,${(0.9 * (1 - enc)).toFixed(2)})`;
+    gg.style.transform = `translateY(${(1 - ease(tramo(t, 0, 0.4))) * 30}px)`;
+  } else gg.style.opacity = 0;
+  // Subtítulos
+  const c = chunks.find(c => t >= c.ini && t < c.fin);
+  const sub = $('sub');
+  if (c) {
+    const marca = (c.marca || '').split(' ').map(norm);
+    sub.innerHTML = c.palabras.map(w => `<span class="w${t >= w.ini ? ' dicha' : ''}${marca.includes(norm(w.txt)) ? ' m' : ''}">${w.txt}</span>`).join(' ');
+    sub.style.opacity = 1;
+  } else sub.style.opacity = 0;
+  // Ítems
+  items.forEach((it, i) => { const e = $('item-' + i), a = tramo(t, it.t, it.t + 0.25); e.style.opacity = a; e.style.transform = `translateX(${(1 - ease(a)) * -60}px)`; });
+  // Cierre
+  const fin = total - CTA, cta = tramo(t, fin, fin + 0.35);
+  $('cta').style.opacity = cta; $('cta').querySelector('.bloque').style.transform = `scale(${0.92 + 0.08 * ease(cta)})`;
+};
+</script>
+</body>
+</html>

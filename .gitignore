@@ -1,2 +1,18 @@
 node_modules/
 .gstack/
+
+# Claves y secretos: nunca al repo
+claves/
+.claves/
+*.key
+.env
+
+# Reels (HU-15): muestras de revisión, comparaciones de voces y pruebas descartadas (se regeneran)
+brand/instagram/reels/*/muestra-*.png
+brand/instagram/reels/*/prueba-*
+brand/instagram/reels/*/voces/
+brand/instagram/reels/*/voz.wav
+brand/instagram/reels/prueba-codo.mjs
+brand/instagram/reels/mascota/hoja-partes-v3.png
+brand/instagram/reels/mascota/partes-v3/
+brand/instagram/reels/mascota/partes/

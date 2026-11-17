@@ -89,3 +89,47 @@ Monto el reel en 1080×1920 con:
 - **Apertura:** el gancho "hierro al rojo" ("3 cosas que tu página tiene que tener").
 - **Cierre:** el logo 3D y "Escribime por WhatsApp · 260 466-1138 · @hefestowebs".
 - **Sin música** en el video. La música la agregás vos al publicar, desde la biblioteca de Instagram, que es gratis y legal para usar en Instagram.
+
+---
+
+## Hoja de partes v3: brazo con codo (HU-15)
+
+Adjuntá `mascota/hefesto-mascota.jpg` (la referencia que te gustó) y pegá esto en un chat nuevo:
+
+> Using the attached character as the exact reference (same face, red hair and beard, tan skin, dark tank top, brown leather apron, dark pants, brown boots, same 2D cartoon style with thick dark outlines and flat shading), create a **cut-out puppet parts sheet** for 2D animation, on a **solid pure green background (#00FF00)**, every part separated by plenty of green space, nothing overlapping, nothing cropped at the edges. Flat front view, no shadows on the background, no text or labels.
+>
+> Parts:
+> 1. **Body** without head and **without the hammer arm** (the arm on the viewer's RIGHT side). The left arm (hanging relaxed, with leather wristband) stays attached to the body. Put a **flat gray circle (#999999)** on the neck stump and another one on the empty right shoulder socket.
+> 2. **Head** with hair and beard, mouth area filled with a **dark gray oval** (where the mouths go), eyes open.
+> 3. **Eyes** in 3 states as separate patches of skin: open, half closed, closed.
+> 4. **Mouths** in 5 shapes as separate patches: closed smile, open "A", round "O", "E" showing teeth, relaxed neutral.
+> 5. **Upper arm** (shoulder to elbow), muscular, pointing straight DOWN, with a **gray circle at the shoulder end (top)** and a **gray circle at the elbow end (bottom)**.
+> 6. **Forearm + hand holding the hammer** (elbow to fist, with leather wristband), forearm pointing straight UP from the elbow, hammer held upright, with a **gray circle at the elbow end (bottom)**.
+> 7. The same forearm + hand + hammer a second time, but the forearm **pointing horizontally to the right**, hammer head up.
+>
+> The gray circles must be the same size where two parts connect (shoulder ↔ upper arm, upper arm ↔ forearm) so they overlap cleanly. Keep proportions identical to the reference.
+
+**Si lo hace mal:** no le pidas que lo edite; generalo de nuevo desde cero con el prompt entero y cambiá una sola cosa por vez.
+
+---
+
+## Hoja de partes v4: brazo con codo, corregida (HU-15)
+
+Reemplaza a la v3: sus brazos salieron muy largos, la mano del martillo estaba girada (con la palma hacia atrás), faltaba el brazo superior solo y los puntos grises estaban en el medio de los brazos.
+Adjuntá `mascota/hefesto-mascota.jpg`, pegá esto en un chat nuevo y **descargá la imagen en tamaño original** (no una captura).
+
+> Using the attached character as the exact reference (same face, red hair and beard, tan skin, dark tank top, brown leather apron, dark pants, brown boots, same 2D cartoon style with thick dark outlines and flat colors), create a **cut-out puppet parts sheet** for 2D animation. **Landscape, high resolution.** Solid pure green background (#00FF00). Every part separated by wide green gaps, nothing touching, nothing overlapping, nothing cut off at the edges. Front view, no background shadows, no text, no labels.
+>
+> Draw **exactly these 13 parts and nothing else**:
+>
+> 1. **Body** without head and **without the arm on the viewer's right side**. The other arm (viewer's left) stays attached, hanging relaxed, with its leather wristband. A flat gray circle (#999999) on the neck stump and a flat gray circle covering the empty shoulder socket on the viewer's right.
+> 2. **Head** with hair and beard, eyes open, the mouth area filled with one dark gray oval.
+> 3. to 5. **Eyes**, exactly 3 patches of skin: open, half closed, closed.
+> 6. to 10. **Mouths**, exactly 5 patches of skin: closed smile, open "A", round "O", "E" showing teeth, relaxed neutral.
+> 11. **Upper arm alone**: from the shoulder down to the elbow ONLY (no forearm, no hand), pointing straight down. One gray circle at the very top end (shoulder) and one gray circle at the very bottom end (elbow). The circles sit AT THE ENDS of the piece, not in the middle.
+> 12. **Forearm + fist holding the hammer**: from the elbow to the fist, with leather wristband, forearm pointing straight up, hammer upright. **The fist is seen from the front: the fingers wrapped around the handle face the camera** (we see the fingers and knuckles from the front, not the back of the hand). One gray circle at the very bottom end (elbow).
+> 13. The same forearm + fist + hammer as part 12, but with the forearm **pointing horizontally to the right** (hammer head up), fingers still facing the camera, gray circle at the elbow end (left end).
+>
+> **Proportions:** the upper arm plus the forearm together must be exactly as long as the arm that stays attached to the body (shoulder to wrist), same thickness and same muscle size. The arms must NOT be longer or bigger than that arm. All gray circles are the same size, so the joints line up (shoulder socket ↔ top of upper arm, bottom of upper arm ↔ elbow of forearm).
+
+**Si lo hace mal:** no le pidas que lo edite; generalo de nuevo desde cero con el prompt entero. Si una sola parte sale mal (por ejemplo la mano), avisame: a veces la puedo usar igual.
