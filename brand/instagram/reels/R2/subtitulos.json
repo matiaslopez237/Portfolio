@@ -1,0 +1,55 @@
+{
+ "total": 25.137,
+ "voz": 1.5,
+ "golpe": 20.492,
+ "chunks": [
+  {
+   "ini": 1.15,
+   "fin": 3.186,
+   "palabras": 5,
+   "texto": "Tu Instagram no es tuyo."
+  },
+  {
+   "ini": 3.186,
+   "fin": 5.7170000000000005,
+   "palabras": 7,
+   "texto": "Tu página web para tu negocio, sí."
+  },
+  {
+   "ini": 5.7170000000000005,
+   "fin": 8.083,
+   "palabras": 6,
+   "texto": "Si te bloquean la cuenta, desaparecés."
+  },
+  {
+   "ini": 8.083,
+   "fin": 11.450000000000001,
+   "palabras": 5,
+   "texto": "Dominio propio, como Quiropraxia Cipolletti."
+  },
+  {
+   "ini": 11.450000000000001,
+   "fin": 13.75,
+   "palabras": 7,
+   "texto": "Tus servicios y precios, siempre a mano."
+  },
+  {
+   "ini": 13.75,
+   "fin": 16.183,
+   "palabras": 9,
+   "texto": "Y un botón de WhatsApp para que te escriban."
+  },
+  {
+   "ini": 16.183,
+   "fin": 18.916999999999998,
+   "palabras": 6,
+   "texto": "Instagram suma. Tu página es tuya."
+  },
+  {
+   "ini": 18.916999999999998,
+   "fin": 21.837,
+   "palabras": 8,
+   "texto": "En Hefesto Webs te la forjamos a medida."
+  }
+ ]
+}
