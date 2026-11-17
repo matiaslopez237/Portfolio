@@ -3,19 +3,20 @@
 // y calcula los puntos de anclaje (hombro, hueco de la boca, ojos). Escribe mascota/partes/*.png y partes.json.
 // Correr: node brand/instagram/reels/recortar-partes.mjs
 // Otra hoja: HOJA=hoja-partes-v3.png SALIDA=partes-v3 CRUDO=1 node ... (CRUDO: guarda pieza-N.png sin clasificar)
+// PURO=1 (HU-16, hoja v5): solo saca el verde; no borra muñones ni pinta articulaciones (el muñeco v5 las busca solo).
 import { chromium } from 'playwright';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const aqui = new URL('./mascota/', import.meta.url);
-const HOJA = process.env.HOJA ?? 'hoja-partes-v2.jpg', CRUDO = !!process.env.CRUDO;
+const HOJA = process.env.HOJA ?? 'hoja-partes-v2.jpg', CRUDO = !!process.env.CRUDO, PURO = !!process.env.PURO;
 const salida = fileURLToPath(new URL((process.env.SALIDA ?? 'partes') + '/', aqui));
 mkdirSync(salida, { recursive: true });
 const hoja = `data:image/${HOJA.endsWith('.png') ? 'png' : 'jpeg'};base64,` + readFileSync(new URL(HOJA, aqui)).toString('base64');
 
 const b = await chromium.launch();
 const p = await b.newPage();
-const res = await p.evaluate(async (src) => {
+const res = await p.evaluate(async ({ src, PURO }) => {
   const img = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.src = src; });
   const W = img.width, H = img.height, c = document.createElement('canvas'); c.width = W; c.height = H;
   const g = c.getContext('2d'); g.drawImage(img, 0, 0);
@@ -116,12 +117,13 @@ const res = await p.evaluate(async (src) => {
     const rec = recorte(r);
     // En el cuerpo hay dos articulaciones grises (cuello y hombro derecho): el hombro es la que está más a la derecha
     const info = { gris: centroDe(r, rec.data, gris, r.h > 500 ? (a, b) => b.x > a.x : undefined), oscuro: centroDe(r, rec.data, oscuro) };
+    if (PURO) return { ...r, url: rec.url, ...info };
     if (r.h > 500) { info.cuello = centroDe(r, rec.data, gris, (a, b) => b.x < a.x); borrarMunon(r, rec, info.gris); }
     if (r.w > 200 && r.h <= 500) pintarGris(r, rec, info.gris);   // cuerpo y brazos: la articulación del hombro pasa a piel
     else if (r.w < 140 && r.h < 110) fundirBorde(r, rec);   // solo ojos y bocas: borde suave (los brazos sueltos no)
     return { ...r, url: rec.url, ...info };
   }) };
-}, hoja);
+}, { src: hoja, PURO });
 await b.close();
 
 // 4) Clasificación por posición en la hoja

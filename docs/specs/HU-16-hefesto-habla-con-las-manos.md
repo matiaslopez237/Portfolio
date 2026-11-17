@@ -1,7 +1,7 @@
 # HU-16: Hefesto habla con las manos
 
 **Historia:** Como dueño del estudio, quiero que Hefesto hable moviendo las dos manos, sin tener el martillo todo el tiempo, para que los reels se vean más vivos y menos repetidos.
-**Estado de la spec:** Aprobada
+**Estado de la spec:** Implementada (falta firmar CA-16.8 con el R3)
 
 ## Objetivo
 Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sostiene el martillo todo el tiempo. El otro brazo viene pegado al cuerpo. Con una hoja de partes nueva (v5) que traiga **los dos brazos sueltos y manos vacías con gestos**, el código mueve los dos brazos y cada línea del guion puede llevar un gesto. Se estrena en el R3. El R1 y el R2 no cambian.
@@ -14,6 +14,7 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
   - el antebrazo con la mano de cada lado en cada gesto de RN-16.3.
 
   La cabeza, los ojos y las bocas se siguen tomando de la v4.
+  **Espejo:** si la hoja trae una pieza de un solo lado (por ejemplo, un único brazo de arriba), la del otro lado se saca espejándola en el código. No hace falta pedirla de nuevo.
 - **RN-16.3 (gestos):** cada línea de `guiones.json` puede llevar `"gesto"` con uno de estos valores:
 
   | Gesto | Qué hace |
@@ -21,7 +22,7 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
   | `reposo` | Brazos relajados al costado. Es el gesto por defecto. |
   | `palma` | Una mano abierta hacia la cámara. |
   | `señala` | El índice señala hacia arriba, a los subtítulos o a las cajitas. |
-  | `explica` | Las dos manos a media altura, con las palmas de costado. |
+  | `explica` | Los dos brazos abiertos hacia afuera y un poco abajo, con las palmas para arriba. |
   | `uno`, `dos`, `tres` | Una mano levantada mostrando 1, 2 o 3 dedos. Va con las líneas que hacen aparecer las cajitas numeradas. |
 
   Cuando una línea no lleva gesto, se mantiene el de la línea anterior.
@@ -41,15 +42,18 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
 ## Criterios de aceptación
 | CA | Dado / cuando / entonces | Se verifica con |
 | --- | --- | --- |
-| CA-16.1 | Dada la hoja v5 recortada, entonces hay una pieza PNG transparente por parte (cuerpo, 2 brazos de arriba, 2 manos por cada gesto de RN-16.3 salvo los de contar, 3 manos de contar y el antebrazo con martillo) y el cuerpo tiene 2 círculos grises en los hombros | Chequeo automático |
-| CA-16.2 | Dado un guion v5 con `"gesto": "señala"` en una línea, cuando se calcula la pose en la mitad de esa línea, entonces los brazos están en la pose de "señala" y no en la de reposo | Escenario BDD + test (TDD) |
-| CA-16.3 | Dado un cambio de gesto entre dos líneas, cuando se calculan las poses cuadro a cuadro, entonces ningún ángulo salta más de lo que permite una transición de 0,3 s | Test (TDD) |
-| CA-16.4 | Dado un tramo con voz y sin cambio de gesto, cuando se calculan las poses, entonces las manos se mueven (el ángulo varía) pero no más de unos pocos grados | Test (TDD) |
-| CA-16.5 | Dado un guion con un gesto que no existe, cuando se corre el render, entonces se corta antes de generar la voz con un mensaje que lista los gestos válidos | Escenario BDD |
-| CA-16.9 | Dado un reel v5 con `"accion": "martillo"` en una línea, cuando se calculan las poses, entonces el brazo derecho usa la pieza con martillo solo durante esa línea, el golpe cae dentro de ella, y en las demás líneas no hay martillo | Test (TDD) |
+| CA-16.1 | Dada la hoja v5 recortada, entonces hay una pieza PNG transparente por parte (cuerpo, brazo de arriba, una mano por cada gesto de RN-16.3 y el antebrazo con martillo; el otro lado sale espejado), cada brazo y antebrazo tiene sus círculos grises en las puntas, y el cuerpo tiene 2 círculos grises en los hombros | Chequeo automático |
+| CA-16.2 | Dado un guion v5 con `"gesto": "señala"` en una línea, cuando se calcula la pose en la mitad de esa línea, entonces los brazos están en la pose de "señala" y no en la de reposo | Test (node) |
+| CA-16.3 | Dado un cambio de gesto entre dos líneas, cuando se calculan las poses cuadro a cuadro, entonces ningún ángulo salta más de lo que permite una transición de 0,3 s | Test (node) |
+| CA-16.4 | Dado un tramo con voz y sin cambio de gesto, cuando se calculan las poses, entonces las manos se mueven (el ángulo varía) pero no más de unos pocos grados | Test (node) |
+| CA-16.5 | Dado un guion con un gesto que no existe, cuando se corre el render, entonces se corta antes de generar la voz con un mensaje que lista los gestos válidos | Test (node) |
+| CA-16.9 | Dado un reel v5 con `"accion": "martillo"` en una línea, cuando se calculan las poses, entonces el brazo derecho usa la pieza con martillo solo durante esa línea, el golpe cae dentro de ella, y en las demás líneas no hay martillo | Test (node) |
 | CA-16.6 | Dado un reel sin `"muneco"` (R1, R2), cuando se renderiza, entonces usa el muñeco v4 y sus muestras quedan iguales a las de antes del cambio | Chequeo automático |
 | CA-16.7 | Dado un reel v5, en todos los cuadros las manos quedan dentro del video y por debajo de los subtítulos y las cajitas | Chequeo automático |
 | CA-16.8 | Dado el R3 con el muñeco v5, cuando Matias lo ve en el celular, entonces los gestos acompañan lo que dice, se ven naturales y no dan "cosa" | Checklist |
+
+## Forma de verificar (decisión de Matias, 2026-11-17)
+Historia liviana: tests de node (`test/gestos.test.mjs`, `npm run test:unit`) para la lógica de gestos, martillo y validación, y chequeos en `scripts/check.mjs` para las piezas, la compatibilidad y la zona de las manos. Sin escenarios `.feature` ni commits [RED] → [GREEN]: un solo commit `feat(HU-16)`. Lo visual se juzga con muestras y el checklist.
 
 ## Checklist (lo firma Matias)
 - [ ] CA-16.8: ¿En el R3, los gestos acompañan lo que dice, se ven naturales y no dan "cosa"? — firmado:
@@ -82,3 +86,7 @@ Copia de lo que está en `brand/instagram/reels/prompts-gemini.md` (sección "Ho
 - 2026-11-17: Matias suma los gestos de contar 1-2-3 (RN-16.3, CA-16.1, partes 12 a 14 del prompt).
 - 2026-11-17: Matias cambia RN-16.5: el martillo vuelve, pero solo en las líneas con `"accion": "martillo"` (CA-16.9, parte 15 del prompt).
 - 2026-11-17: aprobada por Matias. El prompt de la hoja v5 pasa a `brand/instagram/reels/prompts-gemini.md`.
+- 2026-11-17: hoja v5 generada por Matias (`mascota/hoja-partes-v5.jpg`, 14 piezas). Trae un solo brazo de arriba y un solo brazo explicando: el otro lado se espeja (RN-16.2, CA-16.1).
+- 2026-11-17: Matias completa la hoja (`mascota/hoja-partes-v5b.jpg`, 16 piezas): suma un antebrazo suelto explicando y el brazo explicando del otro lado. Es la que se usa.
+- 2026-11-17: Matias decide verificar en forma liviana (tests de node y chequeos, sin BDD ni RED/GREEN).
+- 2026-11-17: implementada. Muñeco v5 en `muneco.js` (prepararMunecoV5 / dibujarMunecoV5) con la cara de la v4; lógica de gestos en `gestos.js`. Piezas: `partes-v5b` recortadas con PURO=1 (sin el procesado de la v4); "reposo" sale del brazo entero cortado en el codo; el lado izquierdo es espejo del derecho; en "explica" la mano va espejada para abrirse hacia afuera (antes los brazos se cruzaban sobre la panza). El muñeco v5 va corrido 50 px a la izquierda, como el v4, para que el martillo no se salga del cuadro al volver del golpe. Un gesto dura hasta que empieza la línea siguiente (la última, hasta 0,5 s después de la voz): así la línea del cierre, que se dice en 1,1 s, alcanza para el martillo. Reel de prueba P16 (voz del R2, no se publica). 8/8 tests de gestos, 36/36 tests y 62/62 chequeos en verde. Muestras de R1 y R2 iguales byte a byte a las de antes.

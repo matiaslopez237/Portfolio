@@ -117,8 +117,18 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-12 | CA-12.9 | Suite completa | ✓ | `npm test` (23) · `npm run test:unit` (16) · `npm run check` (55) |
 | HU-12 | CA-12.10 | Chequeo `scripts/check.mjs` | ✓ | `DESIGN.md` › Decisions Log |
 | HU-12 | CA-12.11 | Checklist (firma Matias) | ✓ firmado 2026-11-14 | `docs/specs/HU-12-hero-forja.md` |
+| HU-16 | CA-16.1 | Chequeo `scripts/check.mjs` | ✓ | `mascota/hoja-partes-v5b.jpg` → `mascota/partes-v5b/` (`recortar-partes.mjs` con PURO=1) |
+| HU-16 | CA-16.2 | Test (node) | ✓ | `test/gestos.test.mjs` · `brand/instagram/reels/gestos.js` |
+| HU-16 | CA-16.3 | Test (node) | ✓ | `test/gestos.test.mjs` (transición de 0,35 s) |
+| HU-16 | CA-16.4 | Test (node) | ✓ | `test/gestos.test.mjs` (movimiento al hablar) |
+| HU-16 | CA-16.5 | Test (node) | ✓ | `test/gestos.test.mjs` · `validarGuion` en `render.mjs` (antes de la voz) |
+| HU-16 | CA-16.6 | Chequeo `scripts/check.mjs` | ✓ | `guiones.json` (R1, R2 sin "muneco") · muestras de R1 y R2 iguales byte a byte a las de antes del cambio (comparadas el 2026-11-17) |
+| HU-16 | CA-16.7 | Chequeo `scripts/check.mjs` | ✓ | `P16/manos.json` (lo escribe `render.mjs` recorriendo todos los cuadros) |
+| HU-16 | CA-16.8 | Checklist (firma Matias) | pendiente | se firma con el R3 |
+| HU-16 | CA-16.9 | Test (node) | ✓ | `test/gestos.test.mjs` (martillo solo en su línea; línea corta avisa) |
 
 ## Huecos
+- HU-16: falta CA-16.8 (checklist, se firma al ver el R3 con el muñeco v5). Verificación liviana por decisión de Matias (tests de node y chequeos, sin BDD ni RED/GREEN). P16 es un reel de prueba con la voz del R2: no se publica.
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
 - HU-15: ninguno (CA-15.6 firmado 2026-11-17). Commits b5f4009 (armado) → [RED] 8cff7df → [GREEN] (este). El R1 no está en el calendario: falta confirmar la frecuencia (propuesta: 1 reel por semana, los miércoles) y el OK para programarlo. Sonido (efectos/música) fuera de alcance: RN-15.4 dice sin música; cambiarlo es una historia nueva.
 - HU-14: ninguno. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.

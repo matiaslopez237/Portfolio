@@ -66,11 +66,12 @@
     <p class="num cond">260 466-1138</p><p class="usr">@hefestowebs</p><p class="nota">La consulta es sin costo.</p>
   </div></div>
 </div>
+<script src="gestos.js"></script>
 <script src="muneco.js"></script>
 <script>
 // ── Estado y armado (se llama una vez con los datos) ──
 const $ = (id) => document.getElementById(id);
-let D, L, chunks, palabras, items, accion, total;
+let D, L, chunks, palabras, items, accion, total, plan = null;
 const VOZ = 1.5;          // la voz arranca al segundo 1,5: antes, el gancho solo (1 s entero a la vista)
 const CTA = 3.2;          // duración del cierre
 const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -78,11 +79,13 @@ const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().rep
 
 window.armar = async (datos) => {
   D = datos; palabras = datos.palabras;
-  // Muñeco con codo (hoja v4): se recorta y se prepara en muneco.js
-  L = await window.prepararMuneco(datos.muneco);
+  // Muñeco: v4 (un brazo con martillo, HU-15) o v5 (dos brazos con gestos, HU-16). Se prepara en muneco.js
+  L = datos.muneco.v5 ? await window.prepararMunecoV5(datos.muneco) : await window.prepararMuneco(datos.muneco);
+  const tiemposLineas = [];
   // Subtítulos: líneas del guion partidas en bloques de 12 palabras o menos, con sus tiempos
   let k = 0; chunks = []; items = []; accion = null;
   for (const linea of datos.reel.lineas) {
+    const k0 = k;   // primera palabra de la línea (para los tiempos de los gestos)
     const frases = linea.texto.match(/[^.?!:]+[.?!:]?/g).map(x => x.trim()).filter(Boolean);
     let bloque = [];
     const cerrar = () => { if (bloque.length) { chunks.push({ palabras: bloque, marca: linea.marca }); bloque = []; } };
@@ -92,6 +95,9 @@ window.armar = async (datos) => {
       for (const tok of toks) { const p = palabras[k++]; bloque.push({ txt: tok, ini: p.inicio + VOZ, fin: p.fin + VOZ }); }
     }
     cerrar();
+    const dichas = palabras.slice(k0, k);
+    const forj = dichas.find(p => norm(p.texto).startsWith("forj"));
+    tiemposLineas.push({ ini: dichas[0].inicio + VOZ, fin: dichas.at(-1).fin + VOZ, gesto: linea.gesto, martillo: linea.accion === "martillo", golpe: forj ? forj.inicio + VOZ : undefined });
     const inicioLinea = chunks.find(c => c.palabras.some(w => w.txt === linea.texto.split(/\s+/)[0]))?.palabras[0].ini;
     if (linea.item) items.push({ txt: linea.item, t: chunks.at(-1).palabras[0].ini });
     if (linea.accion === 'martillo') {
@@ -100,6 +106,9 @@ window.armar = async (datos) => {
     }
   }
   if (k !== palabras.length) throw new Error(`el guion tiene ${k} palabras y la voz ${palabras.length}`);
+  // Cada gesto dura hasta que arranca la línea siguiente (la última, hasta 0,5 s después de la voz, cuando entra el cierre)
+  tiemposLineas.forEach((l, i) => { l.fin = tiemposLineas[i + 1]?.ini ?? l.fin + 0.5; });
+  if (L.v5) { plan = window.Gestos.planGestos(tiemposLineas); accion = null; }
   // Cada subtítulo aparece un poco antes de que se diga (hasta 0,35 s, y nunca antes de que termine de decirse el anterior):
   // así las frases cortas, como "¿Tenés un negocio?", quedan al menos 1,5 s en pantalla (CA-15.3). Las palabras igual se
   // iluminan cuando suenan. El primero puede empezar 0,5 s antes de la voz (el gancho se va antes, ver cuadro()).
@@ -111,7 +120,8 @@ window.armar = async (datos) => {
   total = palabras.at(-1).fin + VOZ + 0.5 + CTA;
   await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
   await document.fonts.ready;
-  return { total, voz: VOZ, golpe: accion ? accion.t : null, chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+  const golpeV5 = plan?.find(l => l.gesto === "martillo")?.golpe ?? null;
+  return { total, voz: VOZ, golpe: accion ? accion.t : golpeV5, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
 };
 
 // ── Utilidades de tiempo ──
@@ -133,6 +143,22 @@ function chispas(g, t, x0, y0, t0, n, fuerza) {
 }
 
 // ── Un fotograma ──
+let ultimoCuadro = null;
+// Muñeco v5: recorre todo el reel y devuelve hasta dónde llegaron las manos (CA-16.7)
+window.medirManos = (paso = 1 / 30) => {
+  // margen = cuánto queda la punta más alta de una mano por debajo del texto visible (subtítulo o cajitas). Negativo: lo tapa.
+  const r = { margen: Infinity, tMargen: 0, izquierda: Infinity, derecha: -Infinity };
+  for (let t = 0; t < total - CTA; t += paso) {
+    window.cuadro(t);
+    const visibles = [$("sub"), ...document.querySelectorAll(".item")].filter(e => +getComputedStyle(e).opacity > 0.05);
+    const limite = Math.max(0, ...visibles.map(e => e.getBoundingClientRect().bottom));
+    for (const m of Object.values(ultimoCuadro.manos)) {
+      if (m.y0 - limite < r.margen) { r.margen = m.y0 - limite; r.tMargen = t; }
+      r.izquierda = Math.min(r.izquierda, m.x0); if (m.x1 > r.derecha) { r.derecha = m.x1; r.tDerecha = t; }
+    }
+  }
+  return r;
+};
 window.cuadro = (t) => {
   $('taller').style.transform = `scale(${1.04 + t * 0.0025})`;
   // Habla: palabra actual y cuánto suena la voz (si hay energía, la boca se abre solo cuando suena)
@@ -153,12 +179,22 @@ window.cuadro = (t) => {
   }
   // Parpadeo cada ~3,1 s
   const fase = (t + 0.7) % 3.1, ojos = fase < 0.06 ? 'medio' : fase < 0.14 ? 'cerrados' : fase < 0.2 ? 'medio' : 'abiertos';
-  // Martillazos: el inicial y el del guion ("forjamos")
-  const golpes = [0.45, ...(accion ? [accion.t] : [])];
-  const pos = window.dibujarMuneco($('muneco').getContext('2d'), L, t, { boca, ojos, habla: !!w, golpes });
-  // Chispas: salen de la cabeza del martillo en cada golpe
   const g = $('chispas').getContext('2d'); g.clearRect(0, 0, 1080, 1920); g.globalCompositeOperation = 'lighter';
-  for (const t0 of golpes) chispas(g, t, pos.golpe[t0]?.x ?? pos.martillo.x, pos.golpe[t0]?.y ?? pos.martillo.y, t0, 46, 1.2);
+  if (L.v5) {
+    // Muñeco v5 (HU-16): gestos del guion; el martillo solo en su línea, con chispas en el golpe
+    const poses = window.Gestos.poseBrazos(plan, t, { habla: !!w });
+    ultimoCuadro = window.dibujarMunecoV5($('muneco').getContext('2d'), L, t, { boca, ojos, habla: !!w, poses });
+    for (const l of plan) if (l.gesto === 'martillo') {
+      const t0 = l.golpe + 0.06, p0 = window.martilloV5(L, t0, window.Gestos.poseBrazos(plan, t0, { habla: true }));
+      if (p0) chispas(g, t, p0.x, p0.y, l.golpe, 46, 1.2);
+    }
+  } else {
+    // Martillazos: el inicial y el del guion ("forjamos")
+    const golpes = [0.45, ...(accion ? [accion.t] : [])];
+    const pos = window.dibujarMuneco($('muneco').getContext('2d'), L, t, { boca, ojos, habla: !!w, golpes });
+    // Chispas: salen de la cabeza del martillo en cada golpe
+    for (const t0 of golpes) chispas(g, t, pos.golpe[t0]?.x ?? pos.martillo.x, pos.golpe[t0]?.y ?? pos.martillo.y, t0, 46, 1.2);
+  }
   g.globalCompositeOperation = 'source-over';
   $('fragua').style.opacity = 0.75 + 0.25 * Math.sin(t * 7.3) * Math.sin(t * 3.1);
   // Gancho: aparece al rojo y se enfría, se va cuando empieza la voz

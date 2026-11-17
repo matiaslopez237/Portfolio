@@ -745,6 +745,81 @@ const chequeos = [
       return true;
     },
   },
+
+  // ── HU-16: Hefesto habla con las manos (muñeco v5) ──
+  {
+    ca: 'CA-16.1', desc: 'Piezas de la hoja v5b: PNG con transparencia sin verde, una por parte; el cuerpo trae 3 círculos grises (cuello y hombros) y cada brazo o mano su círculo de articulación',
+    run: () => {
+      const render = leer('brand/instagram/reels/render.mjs');
+      const piezas = /piezas: \{ cuerpo: (\d+), brazo: (\d+), manos: \{([^}]*)\} \}/.exec(render);
+      if (!piezas) throw new Error('render.mjs no define las piezas del muñeco v5');
+      const manos = Object.fromEntries([...piezas[3].matchAll(/'?([a-zñ]+)'?: (\d+)/g)].map(m => [m[1], +m[2]]));
+      const faltan = ['reposo', 'palma', 'señala', 'explica', 'uno', 'dos', 'tres', 'martillo'].filter(k => !(k in manos));
+      if (faltan.length) throw new Error('faltan las manos: ' + faltan.join(', '));
+      const malos = [];
+      // círculos grises de articulación: manchas grises claras y parejas, más o menos redondas
+      const circulos = (png) => {
+        const { w, h, px } = png, vis = new Uint8Array(w * h), res = [];
+        const gris = (i) => px[i * 4 + 3] > 200 && Math.abs(px[i * 4] - px[i * 4 + 1]) < 14 && Math.abs(px[i * 4 + 1] - px[i * 4 + 2]) < 14 && px[i * 4] > 95 && px[i * 4] < 200;
+        for (let s = 0; s < w * h; s++) {
+          if (vis[s] || !gris(s)) continue;
+          const pila = [s]; vis[s] = 1; let n = 0, x0 = w, x1 = 0, y0 = h, y1 = 0;
+          while (pila.length) { const k = pila.pop(), x = k % w, y = (k / w) | 0; n++; x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+            for (const v of [k - 1, k + 1, k - w, k + w]) if (v >= 0 && v < w * h && !vis[v] && gris(v) && Math.abs((v % w) - x) <= 1) { vis[v] = 1; pila.push(v); } }
+          const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
+          if (n >= 150 && Math.abs(bw - bh) <= Math.max(bw, bh) * 0.3 && n / (bw * bh) > 0.65 && n / (bw * bh) < 0.9) res.push(n);
+        }
+        return res.length;
+      };
+      const esperado = { [piezas[1]]: 3, [piezas[2]]: 2 };
+      for (const n of [+piezas[1], +piezas[2], ...Object.values(manos)]) {
+        const ruta = `brand/instagram/reels/mascota/partes-v5b/pieza-${n}.png`, png = leerPngRgba(ruta);
+        if (!png) { malos.push(`${ruta}: no es PNG con transparencia`); continue; }
+        const { w, h, px } = png, a = (x, y) => px[(y * w + x) * 4 + 3];
+        if (a(0, 0) || a(w - 1, 0) || a(0, h - 1) || a(w - 1, h - 1)) malos.push(`pieza-${n}: esquinas no transparentes`);
+        let verdes = 0; for (let i = 0; i < w * h; i++) if (px[i * 4 + 3] > 200 && px[i * 4 + 1] > px[i * 4] + 60 && px[i * 4 + 1] > px[i * 4 + 2] + 60) verdes++;
+        if (verdes > w * h * 0.002) malos.push(`pieza-${n}: ${verdes} píxeles verdes`);
+        const c = circulos(png), min = esperado[n] ?? 1;
+        if (c < min) malos.push(`pieza-${n}: ${c} círculos grises (se esperan ${min})`);
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-16.6', desc: 'R1 y R2 no piden muñeco y se siguen armando con el v4 (con su martillo y sin gestos)',
+    run: async () => {
+      const { createRequire } = await import('node:module');
+      const { validarGuion } = createRequire(import.meta.url)('../brand/instagram/reels/gestos.js');
+      const g = JSON.parse(leer('brand/instagram/reels/guiones.json')), malos = [];
+      for (const id of ['R1', 'R2']) {
+        const r = g.reels.find(x => x.id === id);
+        if (!r) { malos.push(`no está ${id}`); continue; }
+        if (r.muneco) malos.push(`${id} pide el muñeco ${r.muneco}`);
+        if (validarGuion(r) !== 'v4') malos.push(`${id} no usa el v4`);
+      }
+      const render = leer('brand/instagram/reels/render.mjs');
+      if (!/muneco: munecoReel === 'v5' \? munecoV5\(\) : /.test(render)) malos.push('render.mjs no elige el v4 por defecto');
+      if (!/partes-v4\/piezas\.json/.test(render)) malos.push('render.mjs ya no arma el v4 con partes-v4');
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
+  {
+    ca: 'CA-16.7', desc: 'Reels con el muñeco v5: en todos los cuadros las manos quedan dentro del video y por debajo del subtítulo y las cajitas',
+    run: () => {
+      const v5 = JSON.parse(leer('brand/instagram/reels/guiones.json')).reels.filter(r => r.muneco === 'v5'), malos = [];
+      if (!v5.length) throw new Error('no hay ningún reel con el muñeco v5');
+      for (const r of v5) {
+        const m = JSON.parse(leerOpcional(`brand/instagram/reels/${r.id}/manos.json`) ?? 'null');
+        if (!m) { malos.push(`${r.id}: falta manos.json (correr render.mjs ${r.id} --muestras)`); continue; }
+        if (m.margen < 0) malos.push(`${r.id}: una mano tapa el texto en t=${m.tMargen.toFixed(1)} s`);
+        if (m.izquierda < 0 || m.derecha > 1080) malos.push(`${r.id}: una mano se sale del video (x de ${m.izquierda.toFixed(0)} a ${m.derecha.toFixed(0)})`);
+      }
+      if (malos.length) throw new Error(malos.join('; '));
+      return true;
+    },
+  },
 ];
 
 // PNG → píxeles RGBA (solo PNG de 8 bits RGBA sin entrelazar, que es lo que escribe el recorte del navegador)
