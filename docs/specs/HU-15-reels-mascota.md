@@ -1,7 +1,7 @@
 # HU-15: Reels con la mascota Hefesto
 
 **Historia:** Como dueño del estudio, quiero reels cortos con una mascota propia que explique cosas de las páginas web, para llegar a gente que todavía no me sigue sin tener que salir yo en cámara ni pagar herramientas.
-**Estado de la spec:** Implementada (falta la firma del CA-15.6)
+**Estado de la spec:** Implementada y firmada
 
 ## Objetivo
 1. **Muñeco animado:** armar a **Hefesto** (la mascota que Matias generó con Gemini el 2026-11-16) como un muñeco 2D que se anima con código, con las partes de `brand/instagram/reels/mascota/hoja-partes.jpg`. Tiene que poder:
@@ -37,7 +37,7 @@
 | CA-15.6 | Dado el reel, cuando Matias lo ve en el celular, entonces la mascota se ve bien animada, no da "cosa" y se entiende sin sonido | Checklist |
 
 ## Checklist (lo firma Matias)
-- [ ] CA-15.6: ¿El reel se ve bien en el celular, la mascota no da "cosa" y se entiende sin sonido? — firmado:
+- [x] CA-15.6: ¿El reel se ve bien en el celular, la mascota no da "cosa" y se entiende sin sonido? — firmado: Matias, 2026-11-17
 
 ## Preguntas abiertas
 - ~~¿Frecuencia?~~ Pendiente de confirmar por Matias: propuesta de 1 reel por semana (miércoles) cuando el primero esté aprobado.
@@ -46,3 +46,4 @@
 - 2026-11-16: creada con la mascota y la hoja de partes generadas por Matias en Gemini.
 - 2026-11-16: aprobada por Matias. Cambio pedido: el reel lleva voz generada con IA gratis (RN-15.4). Hoja de partes v2: brand/instagram/reels/mascota/hoja-partes-v2.jpg.
 - 2026-11-17: implementada. Hoja de partes v4 (brazo con codo; el brazo del martillo se achica a 0,81 porque Gemini lo hizo 19 % más grande). Voz: Gemini TTS, voz Algenib (gratis con clave de AI Studio guardada fuera del repo); el tono va en notas separadas del texto, y se quita el golpe de estática que Gemini deja al final. Boca sincronizada con Rhubarb Lip Sync (gratis, local, modo fonético). Subtítulos: entran hasta 0,35 s antes de la voz y duran al menos 1,5 s; la voz arranca en 1,5 s para que el gancho se lea entero. Publicación de reels por la API lista (`publicarReel`, media_type=REELS): el R1 todavía no está en el calendario (falta confirmar la frecuencia y el OK de Matias). R1: 23,1 s, 1080×1920, 4,6 MB. 59/59 chequeos y 27/27 tests en verde.
+- 2026-11-17: CA-15.6 firmado por Matias. Historia cerrada. Queda abierta la frecuencia de los reels (se define al programar el R1).
