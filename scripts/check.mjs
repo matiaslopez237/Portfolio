@@ -619,11 +619,11 @@ const chequeos = [
     },
   },
   {
-    ca: 'CA-14.4', desc: 'textos.md: cada carrusel con texto ≤ 2.200 caracteres y 5 a 10 hashtags',
+    ca: 'CA-14.4', desc: 'textos.md: cada carrusel con texto ≤ 2.200 caracteres y 3 a 5 hashtags (límite de Instagram, DEF-02)',
     run: () => {
       const t = leer('brand/instagram/textos.md');
       const bloques = new Map([...t.matchAll(/^## Carrusel (C\d+)[^\n]*\n[\s\S]*?```texto\n([\s\S]*?)\n```/gm)].map(m => [m[1], m[2]]));
-      const malos = carruseles().filter(c => { const x = bloques.get(c.id); if (!x) return true; const h = (x.match(/#[\p{L}\p{N}_]+/gu) || []).length; return [...x].length > 2200 || h < 5 || h > 10; }).map(c => c.id);
+      const malos = carruseles().filter(c => { const x = bloques.get(c.id); if (!x) return true; const h = (x.match(/#[\p{L}\p{N}_]+/gu) || []).length; return [...x].length > 2200 || h < 3 || h > 5; }).map(c => c.id);
       if (malos.length) throw new Error('faltan o fuera de límites: ' + malos.join(', '));
       return true;
     },

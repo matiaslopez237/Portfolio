@@ -77,9 +77,13 @@ test('CA-10.4 rechaza textos de más de 2.200 caracteres', () => {
   assert.throws(() => validarTexto('a'.repeat(2201)), /2\.?200/);
 });
 
-test('CA-10.4 rechaza más de 30 hashtags', () => {
-  const muchos = Array.from({ length: 31 }, (_, i) => '#h' + i).join(' ');
-  assert.throws(() => validarTexto(muchos), /30/);
+test('CA-10.4 DEF-02: rechaza más de 5 hashtags (límite de Instagram desde diciembre de 2025)', () => {
+  const seis = Array.from({ length: 6 }, (_, i) => '#h' + i).join(' ');
+  assert.throws(() => validarTexto(seis), /5/);
+});
+
+test('CA-10.4 DEF-02: acepta 5 hashtags', () => {
+  assert.doesNotThrow(() => validarTexto('Hola #a #b #c #d #e'));
 });
 
 test('CA-10.4 acepta un texto dentro de los límites', () => {

@@ -40,7 +40,7 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 | CA-14.1 | Dadas las muestras, entonces hay 3 carruseles (caso, consejo y plan), cada uno con 5 a 7 PNG de 1080×1350 | Chequeo automático |
 | CA-14.2 | Dado `contenido.json`, entonces cada slide tiene 25 palabras o menos, y cada carrusel indica pilar, persona y etapa de la matriz | Chequeo automático |
 | CA-14.3 | Dado cada carrusel, entonces el último slide es el CTA fijo con el número y `@hefestowebs` | Chequeo automático |
-| CA-14.4 | Dado `textos.md`, entonces cada carrusel tiene su texto (2.200 caracteres o menos) con 5 a 10 hashtags | Chequeo automático |
+| CA-14.4 | Dado `textos.md`, entonces cada carrusel tiene su texto (2.200 caracteres o menos) con 3 a 5 hashtags (límite de Instagram, DEF-02) | Chequeo automático |
 | CA-14.5 | Dadas las plantillas, entonces solo usan colores hex de `brand/tokens.json` (las transparencias se arman con esos mismos colores) | Chequeo automático |
 | CA-14.6 | Dado `calendario.md`, entonces tiene los 12 carruseles entre el 2026-11-16 y el 2026-12-21 (lunes, miércoles y viernes la primera semana; lunes y viernes desde el 23/11), con pilar y persona en cada carrusel, y la mezcla de la matriz (consejos 40%, trabajos 30%, oferta 20%, detrás de escena 10%, ±10%) | Chequeo automático |
 | CA-14.7 | Dado un carrusel en el calendario, cuando corre la publicación con la API simulada, entonces crea un contenedor por slide, el del carrusel con sus hijos y lo publica | Test (TDD) |
@@ -61,3 +61,4 @@ Reemplazar los 12 posts de imagen sola (HU-04 y HU-09) por **carruseles** con el
 - 2026-11-14: etapa 2 lista: 12 carruseles (C1 a C12), textos y calendario desde el 2026-11-16; posts viejos archivados; excepción de Instagram y hero agregada a DESIGN.md. Falta la firma de CA-14.9.
 - 2026-11-14: CA-14.9 firmado por Matias; historia cerrada. Publicación automática desde el 2026-11-16.
 - 2026-11-17: cambio de calendario pedido por Matias: desde el 23/11, 2 carruseles (lunes y viernes) y 2 reels (miércoles y sábado) por semana. RN-14.8 y CA-14.6 actualizados.
+- 2026-11-17: CA-14.4 pasa de 5 a 10 hashtags a 3 a 5 (Instagram limita a 5 desde diciembre de 2025, DEF-02).

@@ -27,7 +27,7 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 
 ## Casos límite
 - **Imagen todavía no publicada en Pages** (por ejemplo, un post nuevo sin push): el script verifica que la URL responda antes de publicar. Si no responde, falla con un mensaje claro.
-- **Texto de más de 2.200 caracteres o más de 30 hashtags:** falla antes de llamar a Instagram.
+- **Texto de más de 2.200 caracteres o más de 5 hashtags:** falla antes de llamar a Instagram. (El límite era 30; Instagram lo bajó a 5 por publicación desde el 18-19/12/2025, según medios y el anuncio de @creators: DEF-02.)
 - **Dos posts el mismo día en el calendario:** se publican en orden de número.
 - **Token por vencer:** el script avisa en el log cuando falten menos de 7 días, si la API informa la fecha de vencimiento.
 - **Corrida manual:** el workflow también se puede lanzar a mano desde GitHub, por ejemplo para reintentar un día fallido.
@@ -57,3 +57,4 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 - 2026-11-10: implementada; 11 tests y 2 chequeos en verde, prueba en seco OK. Falta conectar la app de Meta, cargar los secrets y hacer push.
 - 2026-11-14: app de Meta conectada al portfolio, token de usuario del sistema (no vence) y secrets cargados por Matias. Verificación OK y prueba del lunes 16 OK (C2, 6 slides).
 - 2026-11-17: **DEF-01** — el C2 (16/11) no salió: GitHub atrasó la corrida programada 6 horas y el script buscó el post del día siguiente. Se publicó a mano (id 18174575107462750). Arreglo: RN-10.8 y CA-10.9 (publica lo atrasado hasta 2 días) y un segundo horario en el workflow.
+- 2026-11-17: **DEF-02** — el control de textos permitía 30 hashtags, pero Instagram acepta 5 desde diciembre de 2025: los 12 carruseles tenían 6 o 7 (el C2 salió con 6 sin error de la API). Arreglo: límite de 5 en `validarTexto` y carruseles recortados a 5.
