@@ -26,13 +26,15 @@
   const oscuro = (r, g, b) => Math.abs(r - g) < 16 && Math.abs(g - b) < 16 && r > 45 && r < 115;
 
   // Tapa un círculo gris (y su contorno) con la piel que lo rodea, fundiendo el borde (sin disco ni anillo)
-  function tapar(L, m) {
-    const im = L.g.getImageData(0, 0, L.w, L.h), q = im.data, R = m.r + 8;   // r es el gris; el contorno oscuro llega hasta ~r+7
-    let sr = 0, sg = 0, sb = 0, n = 0;
+  // v5 (HU-16): { borde: 4, mediana: true }: sus círculos son más chicos y la mediana no se oscurece con las pecas de la piel
+  function tapar(L, m, { borde = 8, mediana = false } = {}) {
+    const im = L.g.getImageData(0, 0, L.w, L.h), q = im.data, R = m.r + borde;   // r es el gris; el contorno oscuro llega hasta ~r+7 (v4)
+    let sr = 0, sg = 0, sb = 0, n = 0; const vals = [[], [], []];
     for (let y = 0; y < L.h; y++) for (let x = 0; x < L.w; x++) { const d = Math.hypot(x - m.x, y - m.y), i = (y * L.w + x) * 4;
-      if (d > R + 3 && d < R + 9 && q[i + 3] > 220 && q[i] > q[i + 2] + 40 && q[i] > 150) { sr += q[i]; sg += q[i + 1]; sb += q[i + 2]; n++; } }
+      if (d > R + 3 && d < R + 9 && q[i + 3] > 220 && q[i] > q[i + 2] + 40 && q[i] > 150) { sr += q[i]; sg += q[i + 1]; sb += q[i + 2]; n++; if (mediana) for (let c = 0; c < 3; c++) vals[c].push(q[i + c]); } }
     if (!n) return;
     sr /= n; sg /= n; sb /= n;
+    if (mediana) [sr, sg, sb] = vals.map(v => v.sort((a, b) => a - b)[v.length >> 1]);
     for (let y = 0; y < L.h; y++) for (let x = 0; x < L.w; x++) { const i = (y * L.w + x) * 4, d = Math.hypot(x - m.x, y - m.y);
       if (!q[i + 3] || d > R + 4) continue;
       const f = d <= R ? 1 : 1 - (d - R) / 4;          // en el borde se mezcla con lo que había
@@ -231,12 +233,13 @@
     const cc = circulos(I.cuerpo).sort((a, b) => a.y - b.y);
     if (cc.length < 3) throw new Error(`v5: el cuerpo tiene ${cc.length} círculos grises (se esperan 3: cuello y hombros). Manchas grises: ${JSON.stringify(manchas(I.cuerpo, gris, 150).map(m => [Math.round(m.x), Math.round(m.y), m.w, m.h, m.n]))}`);
     const cuello = cc[0], [hIzq, hDer] = cc.slice(1, 3).sort((a, b) => a.x - b.x);
-    tapar(I.cuerpo, hIzq); tapar(I.cuerpo, hDer);
+    const T5 = { borde: 4, mediana: true };
+    tapar(I.cuerpo, hIzq, T5); tapar(I.cuerpo, hDer, T5);
     // Brazo de arriba: hombro (arriba) y codo (abajo)
     const cb = circulos(I.brazo).sort((a, b) => a.y - b.y);
     if (cb.length < 2) throw new Error('v5: el brazo de arriba necesita 2 círculos grises (hombro y codo)');
     const hombroB = cb[0], codoB = cb.at(-1);
-    tapar(I.brazo, hombroB); tapar(I.brazo, codoB);
+    tapar(I.brazo, hombroB, T5); tapar(I.brazo, codoB, T5);
     const brazo = { hombro: hombroB, codo: codoB, largo: Math.hypot(codoB.x - hombroB.x, codoB.y - hombroB.y), nat: deg(Math.atan2(codoB.y - hombroB.y, codoB.x - hombroB.x)) };
     // Manos: el codo es el círculo de la pieza; en el brazo entero de "reposo" es el de más abajo y se borra lo que está arriba
     const manos = {};
@@ -245,8 +248,11 @@
       if (!cm.length) throw new Error(`v5: la mano "${k}" no tiene el círculo gris del codo`);
       const codo = recortar ? cm.sort((a, b) => b.y - a.y)[0] : cm.sort((a, b) => b.n - a.n)[0];
       if (recortar) desvanecer(L, (x, y) => y >= codo.y || Math.hypot(x - codo.x, y - codo.y) < codo.r * 1.5 ? 1 : 0);
-      tapar(L, codo);
+      tapar(L, codo, T5);
       const { pts, cx, cy } = contorno(L);
+      // Va encima del brazo de arriba: la punta del codo se funde (sin el contorno) para que parezca un solo brazo, como en la v4
+      const nat0 = Math.atan2(cy - codo.y, cx - codo.x);
+      desvanecer(L, (x, y) => 1 - suave((-((x - codo.x) * Math.cos(nat0) + (y - codo.y) * Math.sin(nat0)) - codo.r * 0.8) / (codo.r * 1.2)));   // tapa el parche del círculo del codo del brazo de arriba
       const martillo = k === 'martillo' ? manchas(L, gris, 150).filter(m => !esCirculo(m)).sort((a, b) => b.n - a.n)[0] ?? null : null;
       manos[k] = { L, codo, pts, nat: deg(Math.atan2(cy - codo.y, cx - codo.x)), martillo };
     }
@@ -279,10 +285,10 @@
     const { cfg, I, cuello } = M, P = poseV5(M, t, poses);
     const pieza = (L, px, py, ax, ay, ang, esc, espejo) => { g.save(); g.translate(px, py); g.rotate(rad(ang)); g.scale(espejo ? -esc : esc, esc); g.translate(-ax, -ay); g.drawImage(L.c, 0, 0); g.restore(); };
     g.clearRect(0, 0, g.canvas.width, g.canvas.height);
-    // 1) cuerpo, 2) antebrazos con la mano, 3) brazos de arriba (su punta redonda tapa la unión del codo), 4) cabeza
+    // 1) cuerpo, 2) brazos de arriba, 3) antebrazos con la mano (adelante, con el codo fundido), 4) cabeza
     g.drawImage(I.cuerpo.c, P.bx, P.by, I.cuerpo.w * P.S, I.cuerpo.h * P.S);
-    for (const b of Object.values(P.brazos)) pieza(b.mano.L, b.ex, b.ey, b.mano.codo.x, b.mano.codo.y, b.rotMano, P.S, b.espejoMano);
     for (const b of Object.values(P.brazos)) pieza(I.brazo, b.hx, b.hy, M.brazo.hombro.x, M.brazo.hombro.y, b.rotBrazo, P.S, b.espejo);
+    for (const b of Object.values(P.brazos)) pieza(b.mano.L, b.ex, b.ey, b.mano.codo.x, b.mano.codo.y, b.rotMano, P.S, b.espejoMano);
     // Hasta dónde llega cada mano en pantalla (para el chequeo de la zona de las manos, CA-16.7)
     const manos = {};
     for (const [lado, b] of Object.entries(P.brazos)) {

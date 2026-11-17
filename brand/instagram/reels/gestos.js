@@ -10,7 +10,8 @@
   const MARTILLO_MIN = 1.5;       // una línea con martillo tiene que durar al menos esto (subir, golpear y volver)
 
   // Pose de cada brazo: dirección del brazo de arriba (sup), del antebrazo (ant) y qué mano lleva
-  const REPOSO = { sup: 84, ant: 93, mano: 'reposo' };
+  // reposo va espejado: la pieza es un brazo del lado izquierdo de la hoja (con el pulgar hacia el cuerpo de ese lado)
+  const REPOSO = { sup: 84, ant: 93, mano: 'reposo', espejo: true };
   const POSES = {
     reposo:  { der: REPOSO, izq: REPOSO },
     palma:   { der: { sup: 62, ant: -76, mano: 'palma' }, izq: REPOSO },
