@@ -61,9 +61,9 @@ test('CA-10.1 un post sin texto en textos.md es un error', () => {
 });
 
 // CA-10.2
-test('CA-10.2 un día sin post (o solo con historia) no devuelve nada', () => {
-  assert.deepEqual(elegirPublicaciones(datos('2026-11-19')), []);
-  assert.deepEqual(elegirPublicaciones(datos('2026-11-21')), []);
+test('CA-10.2 un día sin post (o solo con historia) y sin nada atrasado no devuelve nada', () => {
+  assert.deepEqual(elegirPublicaciones(datos('2026-11-19', { 4: { estado: 'publicado' } })), []);
+  assert.deepEqual(elegirPublicaciones(datos('2026-11-23')), []);
 });
 
 // CA-10.3
@@ -209,4 +209,23 @@ test('CA-10.5 verificar: lee el usuario de la cuenta con el token, sin publicar'
 test('CA-10.5 verificar: si el token es inválido, falla sin mostrarlo', async () => {
   const fetch = fetchFalso([{ ok: false, status: 400, json: { error: { message: 'Invalid OAuth access token EAAsecreto' } } }]);
   await assert.rejects(verificarCuenta({ igUserId: '178', token: 'EAAsecreto', fetch }), (e) => /Invalid OAuth/.test(e.message) && !e.message.includes('EAAsecreto'));
+});
+
+// CA-10.9 · DEF-01: GitHub atrasó la corrida de las 19:00 del 16/11 hasta la 01:19 del 17 y el C2 no salió
+test('CA-10.9 DEF-01: la corrida del día siguiente publica el carrusel que quedó pendiente', () => {
+  const r = elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-17', carruseles: { C2: 3 }, baseCarruseles: baseCarr });
+  assert.deepEqual(r.map(p => p.id), ['C2']);
+});
+
+test('CA-10.9 DEF-01: lo atrasado ya publicado no se repite', () => {
+  const r = elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-17', carruseles: { C2: 3 }, baseCarruseles: baseCarr, publicados: { C2: { estado: 'publicado' } } });
+  assert.deepEqual(r, []);
+});
+
+test('CA-10.9 DEF-01: lo pendiente de hasta 2 días antes sale primero, después lo de hoy', () => {
+  assert.deepEqual(elegirPublicaciones(datos('2026-11-20')).map(p => p.n), [4, 5]);
+});
+
+test('CA-10.9 DEF-01: lo pendiente de más de 2 días atrás no se publica solo', () => {
+  assert.deepEqual(elegirPublicaciones({ calendario: calendarioCarr, textos: textosCarr, fecha: '2026-11-19', carruseles: { C2: 3 }, baseCarruseles: baseCarr }), []);
 });

@@ -21,7 +21,8 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 - **RN-10.3 (secretos):** el token nunca se escribe en el código, en el repositorio ni en los logs. Lo carga Matias en GitHub › Settings › Secrets. La IA no lo ve ni lo pega.
 - **RN-10.4 (modo prueba):** con `--prueba`, el script muestra qué publicaría (post, imagen, texto, URL) sin llamar a Instagram. Los tests corren siempre así.
 - **RN-10.5 (fallas visibles):** si Instagram rechaza la publicación o el token venció, el workflow falla en rojo y GitHub le manda un mail a Matias. No se reintenta en loop.
-- **RN-10.6 (días sin post):** si hoy no hay post en el calendario, el script termina sin hacer nada y sin error.
+- **RN-10.6 (días sin post):** si hoy no hay post en el calendario (ni uno atrasado, ver RN-10.8), el script termina sin hacer nada y sin error.
+- **RN-10.8 (atrasos de GitHub, DEF-01):** GitHub no garantiza la hora de las tareas programadas (el 16/11 la corrida de las 19:00 arrancó a la 01:19 del día siguiente y no publicó el C2). Por eso cada corrida publica lo de hoy **y lo pendiente de hasta 2 días antes**, del más viejo al más nuevo. Lo de más de 2 días atrás no se publica solo (se lanza a mano). El workflow corre dos veces (18:00 y 19:00 de Argentina); la que llega primero publica y la otra no encuentra nada (RN-10.2).
 - **RN-10.7 (cuenta):** crear la app de Meta, conectar @efestowebs y sacar el token lo hace Matias, guiado por la IA. La IA no acepta términos ni otorga permisos por él.
 
 ## Casos límite
@@ -39,7 +40,8 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 | CA-10.3 | Dado un post que ya figura en `publicados.json`, cuando le toca, entonces no se vuelve a publicar | Test (TDD) |
 | CA-10.4 | Dado un texto que supera los límites de Instagram, cuando corre el script, entonces falla antes de publicar | Test (TDD) |
 | CA-10.5 | Dada la publicación real (con la API simulada en el test), entonces se llama a crear el contenedor y después a publicarlo, con la URL pública de la imagen y el texto | Test (TDD, API simulada) |
-| CA-10.6 | Dado el workflow, entonces corre a las 22:00 UTC, se puede lanzar a mano y usa solo los secrets `IG_USER_ID` y `IG_ACCESS_TOKEN` | Chequeo automático |
+| CA-10.6 | Dado el workflow, entonces corre a las 21:00 y 22:00 UTC, se puede lanzar a mano y usa solo los secrets `IG_USER_ID` y `IG_ACCESS_TOKEN` | Chequeo automático |
+| CA-10.9 | Dado un post pendiente de 1 o 2 días antes (DEF-01), cuando corre el script, entonces lo publica, del más viejo al más nuevo; si es de más de 2 días atrás, no | Test (TDD) |
 | CA-10.7 | Dado el repositorio, entonces no hay ningún token ni clave escrito en los archivos | Chequeo automático |
 | CA-10.8 | Dado el post 4 (miércoles 18/11), cuando llega la hora, entonces aparece publicado en @efestowebs sin que Matias haga nada | Checklist |
 
@@ -54,3 +56,4 @@ Que cada post del calendario se publique solo en su fecha, a las 19 (hora de Arg
 - 2026-11-10: aprobada por Matias.
 - 2026-11-10: implementada; 11 tests y 2 chequeos en verde, prueba en seco OK. Falta conectar la app de Meta, cargar los secrets y hacer push.
 - 2026-11-14: app de Meta conectada al portfolio, token de usuario del sistema (no vence) y secrets cargados por Matias. Verificación OK y prueba del lunes 16 OK (C2, 6 slides).
+- 2026-11-17: **DEF-01** — el C2 (16/11) no salió: GitHub atrasó la corrida programada 6 horas y el script buscó el post del día siguiente. Se publicó a mano (id 18174575107462750). Arreglo: RN-10.8 y CA-10.9 (publica lo atrasado hasta 2 días) y un segundo horario en el workflow.
