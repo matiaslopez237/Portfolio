@@ -133,3 +133,25 @@ Adjuntá `mascota/hefesto-mascota.jpg`, pegá esto en un chat nuevo y **descarg�
 > **Proportions:** the upper arm plus the forearm together must be exactly as long as the arm that stays attached to the body (shoulder to wrist), same thickness and same muscle size. The arms must NOT be longer or bigger than that arm. All gray circles are the same size, so the joints line up (shoulder socket ↔ top of upper arm, bottom of upper arm ↔ elbow of forearm).
 
 **Si lo hace mal:** no le pidas que lo edite; generalo de nuevo desde cero con el prompt entero. Si una sola parte sale mal (por ejemplo la mano), avisame: a veces la puedo usar igual.
+
+## Hoja de partes v5: dos brazos, manos con gestos y martillo a veces (HU-16)
+
+Para los reels nuevos (R3 en adelante). La cabeza, los ojos y las bocas se siguen tomando de la v4, así que esta hoja no los trae.
+Adjuntá `mascota/hefesto-mascota.jpg`, pegá esto en un chat nuevo y **descargá la imagen en tamaño original** (no una captura). Guardala como `mascota/hoja-partes-v5.png` (o `.jpg`).
+
+> Using the attached character as the exact reference (same face, red hair and beard, tan skin, dark tank top, brown leather apron, dark pants, brown boots, same 2D cartoon style with thick dark outlines and flat colors), create a **cut-out puppet parts sheet** for 2D animation. **Landscape, high resolution.** Solid pure green background (#00FF00). Every part separated by wide green gaps, nothing touching, nothing overlapping, nothing cut off at the edges. Front view, no background shadows, no text, no labels. **The hammer appears ONLY in part 15.**
+>
+> Draw **exactly these 15 parts and nothing else**:
+>
+> 1. **Body** without head and **without both arms**. A flat gray circle (#999999) on the neck stump and a flat gray circle covering each empty shoulder socket (two shoulder circles).
+> 2. and 3. **Upper arms alone** (left and right): from the shoulder down to the elbow ONLY, pointing straight down. One gray circle at the very top end (shoulder) and one at the very bottom end (elbow). The circles sit AT THE ENDS of the piece.
+> 4. and 5. **Forearm + relaxed hand** (left and right): from the elbow to the hand, forearm pointing straight down, hand relaxed and slightly open, with the leather wristband. Gray circle at the elbow end (top).
+> 6. and 7. **Forearm + open palm facing the camera** (left and right): forearm pointing straight up, fingers together, palm toward the viewer. Gray circle at the elbow end (bottom).
+> 8. and 9. **Forearm + pointing hand** (left and right): forearm pointing straight up, index finger extended upward, the other fingers closed. Gray circle at the elbow end (bottom).
+> 10. and 11. **Forearm + explaining hand** (left and right): forearm horizontal pointing toward the center of the body, hand open with the palm facing sideways (up), like explaining something. Gray circle at the elbow end (outer end).
+> 12. to 14. **Counting hand, character's right arm only**: forearm pointing straight up, palm facing the camera (never the back of the hand). Part 12 shows **exactly one finger up (index)**, part 13 **exactly two fingers up (index and middle)**, part 14 **exactly three fingers up (index, middle and ring)**; the other fingers are folded and the thumb holds them. Gray circle at the elbow end (bottom).
+> 15. **Forearm + fist holding the hammer, character's right arm only**: from the elbow to the fist, with leather wristband, forearm pointing straight up, hammer upright (head up). **The fist is seen from the front: the fingers wrapped around the handle face the camera.** Gray circle at the elbow end (bottom).
+>
+> **Hands:** exactly five fingers each, clearly drawn, same size as the hands in the reference. **Proportions:** upper arm plus forearm together are exactly as long as the arms in the reference (shoulder to wrist), same thickness and muscle size. All gray circles are the same size so the joints line up.
+
+**Si lo hace mal:** no le pidas que lo edite; generalo de nuevo desde cero con el prompt entero. Fijate sobre todo en los dedos de las partes 12 a 14 (1, 2 y 3 dedos exactos) y en que el martillo esté solo en la parte 15.
