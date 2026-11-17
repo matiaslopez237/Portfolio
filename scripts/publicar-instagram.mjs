@@ -19,12 +19,28 @@ const LIMITE_HASHTAGS = 30;
 
 // ── Lógica pura (la cubren los tests) ──
 
+/** Cuántos días atrás se busca lo que quedó sin publicar (DEF-01: GitHub atrasa las corridas programadas). */
+export const DIAS_ATRASO = 2;
+
+/** La fecha AAAA-MM-DD de `dias` días antes. */
+function diasAntes(fecha, dias) {
+  const d = new Date(fecha + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - dias);
+  return d.toISOString().slice(0, 10);
+}
+
 /**
- * Lo que toca publicar en `fecha` según el calendario, sin lo ya publicado:
- * posts de una imagen (HU-10, en orden de número) y carruseles (HU-14).
+ * Lo que toca publicar en `fecha` según el calendario, sin lo ya publicado, más lo que quedó pendiente
+ * de hasta DIAS_ATRASO días antes (RN-10.8), del más viejo al más nuevo.
+ * Por día: posts de una imagen (HU-10, en orden de número) y después carruseles (HU-14).
  * `carruseles` es { C1: cantidadDeSlides, ... } y sale de contenido.json.
  */
-export function elegirPublicaciones({ calendario, textos, publicados = {}, fecha, baseImagenes = BASE_IMAGENES, carruseles = {}, baseCarruseles = BASE_CARRUSELES }) {
+export function elegirPublicaciones({ fecha, diasAtraso = DIAS_ATRASO, ...resto }) {
+  const dias = [];
+  for (let n = diasAtraso; n >= 0; n--) dias.push(diasAntes(fecha, n));
+  return dias.flatMap(dia => delDia({ ...resto, fecha: dia }));
+}
+
+function delDia({ calendario, textos, publicados = {}, fecha, baseImagenes = BASE_IMAGENES, carruseles = {}, baseCarruseles = BASE_CARRUSELES }) {
   const filas = calendario.split('\n').map(l => l.split('|').map(s => s.trim())).filter(c => c[1] === fecha);
   const numeros = filas
     .filter(c => c[3] === 'Post')

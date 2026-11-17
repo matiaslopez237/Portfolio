@@ -69,7 +69,7 @@ test('CA-10.2 un día sin post (o solo con historia) y sin nada atrasado no devu
 // CA-10.3
 test('CA-10.3 un post que ya figura en publicados no se repite', () => {
   const r = elegirPublicaciones(datos('2026-11-20', { 5: { estado: 'publicado', fecha: '2026-11-20' } }));
-  assert.deepEqual(r, []);
+  assert.deepEqual(r.map(p => p.n), [4]);   // el 5 no se repite (el 4 sale por estar atrasado, CA-10.9)
 });
 
 // CA-10.4
