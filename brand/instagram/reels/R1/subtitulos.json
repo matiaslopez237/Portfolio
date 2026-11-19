@@ -2,6 +2,7 @@
  "total": 23.102,
  "voz": 1.5,
  "golpe": 18.429,
+ "logo": false,
  "chunks": [
   {
    "ini": 1.15,

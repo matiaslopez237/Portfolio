@@ -123,7 +123,8 @@ window.armar = async (datos) => {
   chunks.forEach((c, i) => { c.fin = chunks[i + 1]?.ini ?? c.palabras.at(-1).fin + 0.4; });
   $('items').innerHTML = items.map((it, i) => `<div class="item" id="item-${i}">${it.txt}</div>`).join('');
   $('gancho').innerHTML = datos.reel.gancho.map(marcar).join('<br>');
-  total = palabras.at(-1).fin + VOZ + 0.5 + CTA;
+  // "cola": pausa entre la última palabra y el cierre (0,5 s; un reel puede pedir menos para no pasar de 25 s, RN-15.5)
+  total = palabras.at(-1).fin + VOZ + (datos.reel.cola ?? 0.5) + CTA;
   await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
   await document.fonts.ready;
   // Martillazo al logo (RN-16.7): dónde pega el martillo y dónde está el logo del cierre (con el cierre ya en su tamaño final)

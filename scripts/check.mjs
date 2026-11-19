@@ -786,12 +786,12 @@ const chequeos = [
     },
   },
   {
-    ca: 'CA-16.6', desc: 'R1 y R2 no piden muñeco y se siguen armando con el v4 (con su martillo y sin gestos)',
+    ca: 'CA-16.6', desc: 'R1 no pide muñeco y se sigue armando con el v4 (con su martillo y sin gestos); el R2 pasó al v5 por decisión de Matias',
     run: async () => {
       const { createRequire } = await import('node:module');
       const { validarGuion } = createRequire(import.meta.url)('../brand/instagram/reels/gestos.js');
       const g = JSON.parse(leer('brand/instagram/reels/guiones.json')), malos = [];
-      for (const id of ['R1', 'R2']) {
+      for (const id of ['R1']) {
         const r = g.reels.find(x => x.id === id);
         if (!r) { malos.push(`no está ${id}`); continue; }
         if (r.muneco) malos.push(`${id} pide el muñeco ${r.muneco}`);

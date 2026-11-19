@@ -123,18 +123,18 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-16 | CA-16.4 | Test (node) | ✓ | `test/gestos.test.mjs` (movimiento al hablar) |
 | HU-16 | CA-16.5 | Test (node) | ✓ | `test/gestos.test.mjs` · `validarGuion` en `render.mjs` (antes de la voz) |
 | HU-16 | CA-16.6 | Chequeo `scripts/check.mjs` | ✓ | `guiones.json` (R1, R2 sin "muneco") · muestras de R1 y R2 iguales byte a byte a las de antes del cambio (comparadas el 2026-11-17) |
-| HU-16 | CA-16.7 | Chequeo `scripts/check.mjs` | ✓ | `P16/manos.json` (lo escribe `render.mjs` recorriendo todos los cuadros) |
+| HU-16 | CA-16.7 | Chequeo `scripts/check.mjs` | ✓ | `R2/manos.json` (lo escribe `render.mjs` recorriendo todos los cuadros) |
 | HU-16 | CA-16.8 | Checklist (firma Matias) | pendiente | se firma con el R3 |
 | HU-16 | CA-16.10 | Test (node) | ✓ | `test/gestos.test.mjs` (golpe en "Hefesto", martillo levantado antes) · `planGestos` en `gestos.js` |
-| HU-16 | CA-16.11 | Chequeo `scripts/check.mjs` | ✓ | `P16/logo.json` (lo escribe `render.mjs` con `medirLogo`) |
-| HU-16 | CA-16.12 | Chequeo `scripts/check.mjs` | ✓ | `P16/logo.json` (cuadros con dos logos: 0) |
+| HU-16 | CA-16.11 | Chequeo `scripts/check.mjs` | ✓ | `R2/logo.json` (lo escribe `render.mjs` con `medirLogo`) |
+| HU-16 | CA-16.12 | Chequeo `scripts/check.mjs` | ✓ | `R2/logo.json` (cuadros con dos logos: 0) |
 | HU-16 · DEF-06 | CA-16.9 | Revisión visual (muestras del P16) | ✓ | mano del martillo espejada · golpe hacia afuera, a la cintura · `fix(DEF-06)` |
 | HU-16 · DEF-05 | CA-16.4 | Test (node) | ✓ | `test/gestos.test.mjs` (sin temblequeo con pausas entre palabras) · `nivelVoz` en `gestos.js` · `fix(DEF-05)` |
 | HU-16 · DEF-03 | CA-16.8 | Revisión visual (muestras del P16) | ✓ | mano de reposo espejada · antebrazos delante del bíceps · parche del codo con la mediana de la piel · `fix(DEF-03)` |
 | HU-16 | CA-16.9 | Test (node) | ✓ | `test/gestos.test.mjs` (martillo solo en su línea; línea corta avisa) |
 
 ## Huecos
-- HU-16: falta CA-16.8 (checklist, se firma al ver el R3 con el muñeco v5). Verificación liviana por decisión de Matias (tests de node y chequeos, sin BDD ni RED/GREEN). P16 es un reel de prueba con la voz del R2: no se publica.
+- HU-16: falta CA-16.8 (checklist, se firma al ver el R3 con el muñeco v5). Verificación liviana por decisión de Matias (tests de node y chequeos, sin BDD ni RED/GREEN). El P16 (prueba con la voz del R2) se sacó: el R2 pasó al v5.
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
 - HU-15: ninguno (CA-15.6 firmado 2026-11-17). Commits b5f4009 (armado) → [RED] 8cff7df → [GREEN] (este). El R1 no está en el calendario: falta confirmar la frecuencia (propuesta: 1 reel por semana, los miércoles) y el OK para programarlo. Sonido (efectos/música) fuera de alcance: RN-15.4 dice sin música; cambiarlo es una historia nueva.
 - HU-14: ninguno. Commits [RED] cfbeedb → [GREEN] (este). Posts viejos en `brand/instagram/archivo/`; los 3 borradores de Business Suite siguen ahí (se borran con OK de Matias). Sin publicar.

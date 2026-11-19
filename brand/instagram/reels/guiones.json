@@ -47,54 +47,6 @@
       "lineas": [
         {
           "texto": "Tu Instagram no es tuyo.",
-          "marca": "no es tuyo"
-        },
-        {
-          "texto": "Tu página web para tu negocio, sí.",
-          "marca": "página web"
-        },
-        {
-          "texto": "Si te bloquean la cuenta, desaparecés.",
-          "marca": "desaparecés"
-        },
-        {
-          "texto": "Dominio propio, como Quiropraxia Cipolletti.",
-          "marca": "Quiropraxia Cipolletti",
-          "item": "1 · Dominio propio"
-        },
-        {
-          "texto": "Tus servicios y precios, siempre a mano.",
-          "marca": "a mano",
-          "item": "2 · Servicios y precios"
-        },
-        {
-          "texto": "Y un botón de WhatsApp para que te escriban.",
-          "marca": "WhatsApp",
-          "item": "3 · Botón de WhatsApp"
-        },
-        {
-          "texto": "Instagram suma. Tu página es tuya.",
-          "marca": "tuya"
-        },
-        {
-          "texto": "En Hefesto Webs te la forjamos a medida.",
-          "marca": "a medida",
-          "accion": "martillo"
-        }
-      ]
-    },
-    {
-      "id": "P16",
-      "titulo": "Prueba del muñeco v5 (HU-16, no se publica)",
-      "voz": "gemini:Algenib",
-      "muneco": "v5",
-      "gancho": [
-        "Tu Instagram no es tuyo.",
-        "Tu *página web*, sí."
-      ],
-      "lineas": [
-        {
-          "texto": "Tu Instagram no es tuyo.",
           "marca": "no es tuyo",
           "gesto": "señala"
         },
@@ -136,7 +88,9 @@
           "marca": "a medida",
           "accion": "martillo"
         }
-      ]
+      ],
+      "muneco": "v5",
+      "cola": 0.3
     }
   ]
 }

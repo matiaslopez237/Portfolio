@@ -1,7 +1,53 @@
 {
- "total": 25.137,
+ "total": 24.937,
  "voz": 1.5,
- "golpe": 20.492,
+ "golpe": 19.442,
+ "logo": true,
+ "gestos": [
+  {
+   "ini": 1.5,
+   "fin": 3.4,
+   "gesto": "señala"
+  },
+  {
+   "ini": 3.4,
+   "fin": 6.067,
+   "gesto": "palma"
+  },
+  {
+   "ini": 6.067,
+   "fin": 8.433,
+   "gesto": "explica"
+  },
+  {
+   "ini": 8.433,
+   "fin": 11.8,
+   "gesto": "uno"
+  },
+  {
+   "ini": 11.8,
+   "fin": 14.1,
+   "gesto": "dos"
+  },
+  {
+   "ini": 14.1,
+   "fin": 16.533,
+   "gesto": "tres"
+  },
+  {
+   "ini": 16.533,
+   "fin": 19.267,
+   "gesto": "explica"
+  },
+  {
+   "ini": 19.267,
+   "fin": 21.937,
+   "gesto": "martillo",
+   "golpe": 19.442,
+   "logo": true,
+   "desde": 18.342
+  }
+ ],
  "chunks": [
   {
    "ini": 1.15,
