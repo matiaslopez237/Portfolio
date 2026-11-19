@@ -53,13 +53,27 @@ test('CA-16.4: con pausas entre palabras, los brazos no saltan de un cuadro al o
   // palabras de 0,3 s con pausas de 0,25 s entre medio, durante la línea de "señala" (sin cambio de gesto)
   const palabras = []; for (let t = 3.6; t < 5.3; t += 0.55) palabras.push({ ini: t, fin: t + 0.3 });
   let maxSalto = 0;
-  for (let f = 3.7 * 30; f < 5.2 * 30; f++) {
+  // (desde 4,1 s: antes está el cambio de gesto, que con el desfase codo/mano termina hacia 4 s)
+  for (let f = 4.1 * 30; f < 5.2 * 30; f++) {
     const a = poseBrazos(plan, f / 30, { habla: nivelVoz(palabras, f / 30) }), b = poseBrazos(plan, (f + 1) / 30, { habla: nivelVoz(palabras, (f + 1) / 30) });
     for (const lado of ['der', 'izq']) maxSalto = Math.max(maxSalto, Math.abs(difAng(a[lado].ant, b[lado].ant)), Math.abs(difAng(a[lado].sup, b[lado].sup)));
   }
   assert.ok(maxSalto < 1, `el salto más grande entre dos cuadros es ${maxSalto.toFixed(2)}° (máximo 1°)`);
   assert.equal(nivelVoz(palabras, 4.2), 1, 'en una pausa entre palabras el nivel sigue en 1');
   assert.equal(nivelVoz(palabras, 0), 0, 'antes de la voz no se mueve');
+});
+
+test('CA-16.3: el codo arranca antes que la mano, y la mano se pasa un poco y se asienta en la pose', () => {
+  const plan = planGestos(lineas), t0 = 3.5 - 0.15, ant = (t) => poseBrazos(plan, t).der.ant, sup = (t) => poseBrazos(plan, t).der.sup;
+  // en el primer cuadro del cambio el codo ya se mueve y la mano todavía no
+  assert.ok(Math.abs(difAng(sup(t0 + 0.05), sup(t0))) > 0.05, 'el codo tiene que arrancar');
+  assert.equal(ant(t0 + 0.05), ant(t0), 'la mano tiene que esperar');
+  // la mano se pasa del destino y vuelve: termina exactamente en la pose
+  const destino = POSES['señala'].der.ant, recorrido = []; for (let t = t0; t < t0 + 1; t += 1 / 30) recorrido.push(difAng(destino, ant(t)));
+  // cuánto se pasa más allá del destino, en el sentido del giro
+  const sentido = Math.sign(difAng(ant(t0), destino)), pasada = Math.max(...recorrido.map(x => x * sentido));
+  assert.ok(Math.abs(difAng(destino, ant(t0 + 1))) < 0.01, 'termina en la pose');
+  assert.ok(pasada > 1 && pasada <= 5.01, `se pasa ${pasada.toFixed(1)}° (entre 1° y 5°)`);
 });
 
 test('CA-16.5: un gesto que no existe frena el guion con la lista de gestos válidos', () => {
@@ -79,7 +93,8 @@ test('CA-16.9: el martillo aparece solo en su línea y el golpe cae dentro de el
   assert.ok(linea.golpe > linea.ini && linea.golpe < linea.fin);
   for (let t = 1.5; t < 12; t += 1 / 30) {
     const mano = poseBrazos(plan, t).der.mano, dentro = t >= linea.ini && t < linea.fin - 0.15;
-    if (mano === 'martillo') assert.ok(t > linea.ini - 0.2 && t < linea.fin, `martillo fuera de su línea en t=${t.toFixed(2)}`);
+    // el cambio de pieza va en la transición, que cruza el borde de la línea: hasta 0,2 s antes de que empiece y después de que termine
+    if (mano === 'martillo') assert.ok(t > linea.ini - 0.2 && t < linea.fin + 0.2, `martillo fuera de su línea en t=${t.toFixed(2)}`);
     if (dentro && t > linea.ini + 0.1) assert.equal(mano, 'martillo', `sin martillo en su línea en t=${t.toFixed(2)}`);
     assert.notEqual(poseBrazos(plan, t).izq.mano, 'martillo');
   }

@@ -7,6 +7,8 @@
   const MUNECOS = ['v4', 'v5'];
   const TRANSICION = 0.35;        // s que tarda en pasar de un gesto a otro (RN-16.4: 0,3 s o más)
   const ANTES = 0.15;             // la transición arranca un poco antes de que empiece la línea
+  const RETRASO = 0.07;           // s que la mano sale después del codo (2 cuadros)
+  const ASIENTO = 5;              // grados máximos que la mano se pasa antes de asentarse
   const MARTILLO_MIN = 1.5;       // una línea con martillo tiene que durar al menos esto (subir, golpear y volver)
 
   // Pose de cada brazo: dirección del brazo de arriba (sup), del antebrazo (ant) y qué mano lleva
@@ -21,7 +23,8 @@
     uno:     { der: { sup: 60, ant: -84, mano: 'uno' }, izq: REPOSO },
     dos:     { der: { sup: 60, ant: -84, mano: 'dos' }, izq: REPOSO },
     tres:    { der: { sup: 60, ant: -84, mano: 'tres' }, izq: REPOSO },
-    martillo: { der: { sup: 64, ant: -88, mano: 'martillo' }, izq: REPOSO },
+    // martillo va espejado: la pieza tiene el pulgar del lado de afuera para este brazo
+    martillo: { der: { sup: 64, ant: -88, mano: 'martillo', espejo: true }, izq: REPOSO },
   };
 
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -62,19 +65,23 @@
 
   // Golpe de martillo (brazo derecho): lleva el martillo atrás (hacia la cabeza, sin salirse del cuadro), baja de golpe
   // hacia afuera y abajo (el yunque) y vuelve
+  // Golpe de martillo (brazo derecho): lleva el martillo atrás (hacia la cabeza), baja girando hacia afuera hasta el
+  // impacto (al costado, a la altura de la cintura: no contra la pierna), se queda un instante y vuelve por el mismo camino.
+  // El martillo es largo: cada vez que pasa en horizontal (al bajar y al volver) el codo va pegado al cuerpo, si no se sale del cuadro.
+  const IMPACTO = { sup: 80, ant: 40 }, PEGADO = 100;
   function golpe(p, t, t0) {
-    const k = t - t0; let { sup, ant } = p;
+    const k = t - t0, base = p.sup; let { sup, ant } = p;
     if (k > -0.45 && k <= -0.08) { const e = suave(tramo(k, -0.45, -0.08)); sup += -14 * e; ant += -24 * e; }
-    else if (k > -0.08 && k < 0.6) {
-      const baja = suave(tramo(k, -0.08, 0.06)), vuelve = k < 0.06 ? baja : 1 - suave(tramo(k, 0.25, 0.6));
-      // El martillo es largo: cada vez que pasa en horizontal (al bajar y al volver) el codo va pegado al cuerpo,
-      // si no, se sale del cuadro. Al bajar, el codo cae antes de que el antebrazo llegue a la horizontal.
-      const base = sup, PEGADO = 100;
-      if (k < 0.06) sup = base - 14 + (PEGADO - base + 14) * suave(tramo(k, -0.08, -0.03));
-      else sup = base + (PEGADO - base) * (1 - suave(tramo(k, 0.5, 0.65)));
-      // baja girando hacia afuera (sentido horario en el brazo derecho) y vuelve por el mismo camino
-      const arriba = ant - 24 * (1 - baja);
-      ant = k < 0.06 ? girar(arriba, 80, baja, 1) : girar(ant, 80, vuelve, 1);
+    else if (k > -0.08 && k < 0.06) {
+      const baja = suave(tramo(k, -0.08, 0.06)), arriba = ant - 24 * (1 - baja);
+      ant = girar(arriba, IMPACTO.ant, baja, 1);
+      sup = base - 14 + (IMPACTO.sup - base + 14) * baja;
+      sup += (PEGADO - sup) * Math.sin(Math.PI * clamp((baja - 0.35) / 0.6));   // codo pegado al pasar en horizontal
+    } else if (k >= 0.06 && k < 0.6) {
+      const vuelve = suave(tramo(k, 0.25, 0.6));   // de 0,06 a 0,25 s se queda en el impacto
+      ant = girar(ant, IMPACTO.ant, 1 - vuelve, 1);
+      sup = IMPACTO.sup + (base - IMPACTO.sup) * vuelve;
+      sup += (PEGADO - sup) * Math.sin(Math.PI * clamp(vuelve / 0.7));
     }
     return { ...p, sup, ant };
   }
@@ -86,17 +93,23 @@
     if (i < 0) i = plan.length - 1;
     const actual = plan[i], previo = plan[i - 1];
     const desde = previo ? POSES[previo.gesto] : POSES.reposo, hacia = POSES[actual.gesto];
-    const f = previo ? suave(tramo(t, actual.ini - ANTES, actual.ini - ANTES + TRANSICION)) : 1;
+    const t0 = actual.ini - ANTES;
     const res = {};
     for (const lado of ['der', 'izq']) {
-      const a = desde[lado], b = hacia[lado];
-      // la mano cambia a mitad de la transición; el martillo, más tarde (es largo: con el brazo todavía en horizontal se sale del cuadro)
-      const m = f < (b.mano === 'martillo' ? 0.75 : 0.5) ? a : b;
-      let p = { sup: mezclarAng(a.sup, b.sup, f), ant: mezclarAng(a.ant, b.ant, f), mano: m.mano, espejo: !!m.espejo };
+      const a = desde[lado], b = hacia[lado], d = difAng(a.ant, b.ant);
+      // Desfase (superposición): el codo arranca primero y la mano lo sigue RETRASO s después. Los giros grandes duran más
+      // (de 0,35 s a 0,55 s). La mano llega un poco antes del final, se pasa unos grados y se asienta (ASIENTO).
+      const dur = clamp(TRANSICION + Math.abs(d) / 180 * 0.2, TRANSICION, 0.55);
+      const fc = previo ? suave(tramo(t, t0, t0 + dur)) : 1;
+      const xm = previo ? tramo(t, t0 + RETRASO, t0 + RETRASO + dur) : 1, fm = suave(tramo(xm, 0, 0.8));
+      const pasado = Math.abs(d) > 15 && xm > 0.65 && xm < 1 ? Math.sign(d) * Math.min(ASIENTO, Math.abs(d) * 0.05) * Math.sin(Math.PI * (xm - 0.65) / 0.35) : 0;
+      // la mano cambia a mitad de su giro; el martillo, más tarde (es largo: con el brazo todavía en horizontal se sale del cuadro)
+      const m = fm < (b.mano === 'martillo' ? 0.75 : 0.5) ? a : b;
+      let p = { sup: mezclarAng(a.sup, b.sup, fc), ant: mezclarAng(a.ant, b.ant, fm) + pasado, mano: m.mano, espejo: !!m.espejo };
       // Si en el cambio el antebrazo pasa en horizontal hacia afuera (ángulo 0), el codo baja durante el giro:
       // con el codo levantado la mano se sale del cuadro
-      const d = difAng(a.ant, b.ant), pasaPorAfuera = d !== 0 && Math.sign(-a.ant) === Math.sign(d) && Math.abs(a.ant) < Math.abs(d);
-      if (pasaPorAfuera && f > 0 && f < 1) p.sup += (100 - p.sup) * Math.sin(Math.PI * f) * 0.8;
+      const pasaPorAfuera = d !== 0 && Math.sign(-a.ant) === Math.sign(d) && Math.abs(a.ant) < Math.abs(d);
+      if (pasaPorAfuera && fm > 0 && fm < 1) p.sup += (100 - p.sup) * Math.sin(Math.PI * fm) * 0.8;
       // Martillazo: en la línea del martillo, y también al salir de ella (la vuelta del golpe)
       for (const l of plan) if (l.gesto === 'martillo' && lado === 'der' && Math.abs(t - l.golpe) < 0.6) p = golpe(p, t, l.golpe);
       // Movimiento al hablar (RN-16.4): pocos grados, distinto en cada brazo
