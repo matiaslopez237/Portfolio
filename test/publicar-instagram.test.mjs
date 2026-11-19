@@ -51,6 +51,13 @@ test('CA-10.1 elige el post del día con su imagen y su texto', () => {
   assert.deepEqual(r, [{ n: 4, imagenUrl: base + 'post-4.png', texto: 'Cómo trabajo, en 4 pasos.\n#a #b #c #d #e' }]);
 });
 
+// DEF-07: en Windows (git con core.autocrlf) calendario.md y textos.md quedan con finales de línea CRLF
+test('CA-10.1 DEF-07: con finales de línea de Windows (CRLF) elige lo mismo y el texto sale sin \\r', () => {
+  const crlf = (t) => t.replace(/\n/g, '\r\n');
+  const r = elegirPublicaciones({ ...datos('2026-11-18'), calendario: crlf(calendario), textos: crlf(textos) });
+  assert.deepEqual(r, [{ n: 4, imagenUrl: base + 'post-4.png', texto: 'Cómo trabajo, en 4 pasos.\n#a #b #c #d #e' }]);
+});
+
 test('CA-10.1 dos posts el mismo día salen en orden de número', () => {
   assert.deepEqual(elegirPublicaciones(datos('2026-11-25')).map(p => p.n), [6, 7]);
 });
