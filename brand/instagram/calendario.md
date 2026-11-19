@@ -22,7 +22,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-23 | Lunes | Carrusel | Carrusel C4 · Instagram vs. página web | Consejos · Martín · Busca |
 | 2026-11-24 | Martes | Historia | Encuesta sobre el tema del carrusel del lunes | Pilar oferta · etapa escribe |
-| 2026-11-25 | Miércoles | Reel por hacer | Lugar para un reel nuevo (R2 en adelante) | Se cambia a "Reel" cuando el video y su texto estén aprobados |
+| 2026-11-25 | Miércoles | Reel | Reel R2 · Instagram no alcanza | Por qué tener página propia · Todas · Descubre (Hefesto con gestos y martillazo al logo; nombra a Quiropraxia Cipolletti) |
 | 2026-11-26 | Jueves | Historia | Compartir el reel del miércoles + pregunta | Pilar oferta · etapa escribe |
 | 2026-11-27 | Viernes | Carrusel | Carrusel C5 · Caso Bacssa | Trabajos · Gabriela · Compara |
 | 2026-11-28 | Sábado | Reel | Reel R1 · 3 cosas que tu página tiene que tener | Consejos · Todas · Descubre (Hefesto explica; mismo tema que el C2, 12 días después) |
