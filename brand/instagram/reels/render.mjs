@@ -44,17 +44,8 @@ const datos = {
     hombro: pz['pieza-4'].gris, codo: pz['pieza-11'].gris, escala: 1.5, escalaCabeza: 0.9, escalaBrazo: 0.81, desplX: -50, piso: 2000, bocaSobreCuello: 14 }; })(),
 };
 
-// Muñeco v5 (HU-16, hoja v5b): dos brazos con gestos. Piezas sueltas de mascota/partes-v5b; la cara es la de la v4.
-// escala 1,28: el cuerpo de la v5 queda del mismo alto en pantalla que el de la v4 (733 px × 1,28 ≈ 626 px × 1,5).
-// "reposo" sale de un brazo entero de la hoja, cortado en el codo.
-function munecoV5() {
-  return { v5: true, carpeta: 'mascota/partes-v5b/',
-    piezas: { cuerpo: 0, brazo: 8, manos: { reposo: 7, palma: 3, 'señala': 4, explica: 9, uno: 12, dos: 14, tres: 13, martillo: 11 } },
-    recortarEnCodo: ['reposo'],
-    cara: { carpeta: 'mascota/partes-v4/', cabeza: 0, ojos: { abiertos: 3, medio: 5, cerrados: 6 }, boca: { cerrada: 8, a: 9, o: 12, e: 14, neutra: 15 } },
-    escala: 1.28, escalaCabeza: 1.35, piso: 2000, bocaSobreCuello: 14,
-    desplX: -28 };   // un poco a la izquierda: deja lugar al martillo de la derecha sin que el brazo izquierdo de "explica" se salga
-}
+// Muñeco v5 (HU-16, hoja v5b): dos brazos con gestos. La configuración está en muneco-v5.json (la comparte posador.html).
+function munecoV5() { return JSON.parse(readFileSync(ruta('muneco-v5.json'), 'utf8')); }
 
 // Servidor local mínimo (con file:// el navegador no deja leer los píxeles de las imágenes)
 const { createServer } = await import('node:http');

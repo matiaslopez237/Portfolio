@@ -750,10 +750,9 @@ const chequeos = [
   {
     ca: 'CA-16.1', desc: 'Piezas de la hoja v5b: PNG con transparencia sin verde, una por parte; el cuerpo trae 3 círculos grises (cuello y hombros) y cada brazo o mano su círculo de articulación',
     run: () => {
-      const render = leer('brand/instagram/reels/render.mjs');
-      const piezas = /piezas: \{ cuerpo: (\d+), brazo: (\d+), manos: \{([^}]*)\} \}/.exec(render);
-      if (!piezas) throw new Error('render.mjs no define las piezas del muñeco v5');
-      const manos = Object.fromEntries([...piezas[3].matchAll(/'?([a-zñ]+)'?: (\d+)/g)].map(m => [m[1], +m[2]]));
+      const P = JSON.parse(leer('brand/instagram/reels/muneco-v5.json')).piezas ?? {}, manos = P.manos ?? {};
+      if (P.cuerpo === undefined || P.brazo === undefined) throw new Error('muneco-v5.json no define el cuerpo y el brazo');
+      const piezas = [null, P.cuerpo, P.brazo];
       const faltan = ['reposo', 'palma', 'señala', 'explica', 'uno', 'dos', 'tres', 'martillo'].filter(k => !(k in manos));
       if (faltan.length) throw new Error('faltan las manos: ' + faltan.join(', '));
       const malos = [];

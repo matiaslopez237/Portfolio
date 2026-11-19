@@ -1,0 +1,43 @@
+{
+  "_nota": "HU-16: muñeco v5 (hoja v5b). Lo usan render.mjs y posador.html. escala 1,28: el cuerpo queda del alto del v4. desplX: corrido a la izquierda para dejar lugar al martillo. reposo sale de un brazo entero cortado en el codo.",
+  "v5": true,
+  "carpeta": "mascota/partes-v5b/",
+  "piezas": {
+    "cuerpo": 0,
+    "brazo": 8,
+    "manos": {
+      "reposo": 7,
+      "palma": 3,
+      "señala": 4,
+      "explica": 9,
+      "uno": 12,
+      "dos": 14,
+      "tres": 13,
+      "martillo": 11
+    }
+  },
+  "recortarEnCodo": [
+    "reposo"
+  ],
+  "cara": {
+    "carpeta": "mascota/partes-v4/",
+    "cabeza": 0,
+    "ojos": {
+      "abiertos": 3,
+      "medio": 5,
+      "cerrados": 6
+    },
+    "boca": {
+      "cerrada": 8,
+      "a": 9,
+      "o": 12,
+      "e": 14,
+      "neutra": 15
+    }
+  },
+  "escala": 1.28,
+  "escalaCabeza": 1.35,
+  "piso": 2000,
+  "bocaSobreCuello": 14,
+  "desplX": -28
+}

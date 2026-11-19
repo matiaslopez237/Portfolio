@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Posador de Hefesto</title>
+<!--
+  HU-16 · Posador: para armar a mano las poses de los gestos del muñeco v5 y pasárselas a Claude.
+  Abrir con el servidor local (no con doble clic):  py -m http.server 8080  →  http://localhost:8080/brand/instagram/reels/posador.html
+  Usa el mismo muñeco que el video (muneco.js + muneco-v5.json) y las poses actuales de gestos.js.
+  Arrastrá el codo (círculo) o la mano (círculo naranja) de cada brazo. Al final, "Copiar poses" y pegalas en el chat.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --fondo: #1b2128; --panel: #222a33; --linea: #36414d; --texto: #eef1f4; --suave: #9aa6b2; --naranja: #ff7a1a; --ok: #5fd08a; --mal: #ff5a5a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--fondo); color: var(--texto); font: 15px/1.4 'Public Sans', sans-serif; display: flex; gap: 20px; padding: 16px; height: 100vh; overflow: hidden; }
+  h1, h2 { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 75; text-transform: uppercase; letter-spacing: .02em; }
+  h1 { font-size: 22px; } h1 em { font-style: normal; color: var(--naranja); }
+  h2 { font-size: 14px; color: var(--suave); margin: 18px 0 8px; }
+  #escenario { position: relative; height: calc(100vh - 32px); aspect-ratio: 1080 / 1920; flex: none; border-radius: 8px; overflow: hidden; background: #13181d; box-shadow: 0 0 0 1px var(--linea); }
+  #escenario canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #fondo { position: absolute; inset: -2%; background: url('../recursos/taller.webp') 70% 60% / cover; filter: brightness(.42) saturate(.75); }
+  #muneco { touch-action: none; cursor: grab; }
+  #muneco.arrastrando { cursor: grabbing; }
+  #panel { flex: 1; min-width: 320px; max-width: 560px; overflow-y: auto; padding-right: 6px; }
+  .ayuda { color: var(--suave); margin-top: 6px; }
+  .gestos { display: flex; flex-wrap: wrap; gap: 6px; }
+  button { font: 600 14px 'Public Sans', sans-serif; color: var(--texto); background: var(--panel); border: 1px solid var(--linea); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+  button:hover { border-color: var(--suave); }
+  button.activo { background: var(--naranja); border-color: var(--naranja); color: #1b2128; }
+  button.principal { background: var(--naranja); border-color: var(--naranja); color: #1b2128; }
+  .brazo { background: var(--panel); border: 1px solid var(--linea); border-radius: 8px; padding: 12px; margin-bottom: 10px; }
+  .brazo h3 { font-size: 14px; margin-bottom: 8px; }
+  .fila { display: grid; grid-template-columns: 110px 1fr 52px; align-items: center; gap: 8px; margin: 6px 0; }
+  .fila input[type=range] { width: 100%; accent-color: var(--naranja); }
+  .fila output { text-align: right; font-variant-numeric: tabular-nums; }
+  select { font: inherit; color: var(--texto); background: var(--fondo); border: 1px solid var(--linea); border-radius: 6px; padding: 4px 6px; }
+  label.chk { display: flex; gap: 8px; align-items: center; margin-top: 6px; color: var(--suave); }
+  #estado { margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--linea); }
+  #estado .ok { color: var(--ok); } #estado .mal { color: var(--mal); }
+  textarea { width: 100%; height: 190px; margin-top: 8px; font: 12px/1.45 ui-monospace, Consolas, monospace; color: var(--texto); background: #13181d; border: 1px solid var(--linea); border-radius: 6px; padding: 8px; resize: vertical; }
+  .acciones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  @media (max-width: 800px) { body { flex-direction: column; height: auto; overflow: auto; } #escenario { height: 80vh; margin: 0 auto; } #panel { max-width: none; } }
+</style>
+</head>
+<body>
+<div id="escenario">
+  <div id="fondo"></div>
+  <canvas id="guias" width="1080" height="1920"></canvas>
+  <canvas id="muneco" width="1080" height="1920"></canvas>
+</div>
+<div id="panel">
+  <h1>Posador de <em>Hefesto</em></h1>
+  <p class="ayuda">Elegí un gesto y arrastrá el <b>codo</b> (círculo blanco) o la <b>mano</b> (círculo naranja) de cada brazo. Lo rayado de arriba es donde van el subtítulo y las cajitas: las manos no lo pueden tapar.</p>
+
+  <h2>Gesto</h2>
+  <div class="gestos" id="gestos"></div>
+
+  <h2>Brazos</h2>
+  <div id="brazos"></div>
+  <label class="chk"><input type="checkbox" id="simetrico" checked /> Brazo izquierdo igual al derecho (en espejo), solo si los dos usan la misma mano</label>
+
+  <h2>Muñeco</h2>
+  <div class="brazo">
+    <div class="fila"><span>Corrido en X</span><input type="range" id="desplX" min="-120" max="120" step="1" /><output id="desplXv"></output></div>
+  </div>
+
+  <div id="estado">Cargando el muñeco…</div>
+
+  <h2>Pasale esto a Claude</h2>
+  <textarea id="salida" readonly></textarea>
+  <div class="acciones">
+    <button class="principal" id="copiar">Copiar poses</button>
+    <button id="deshacer">Volver al gesto como estaba</button>
+    <button id="todo">Volver todo a como estaba</button>
+  </div>
+</div>
+
+<script src="gestos.js"></script>
+<script src="muneco.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const G = window.Gestos;
+const NOMBRES = { reposo: 'Reposo', palma: 'Palma', 'señala': 'Señala', explica: 'Explica', uno: '1', dos: '2', tres: '3', martillo: 'Martillo' };
+const LADOS = { der: 'Brazo derecho (de la pantalla)', izq: 'Brazo izquierdo (de la pantalla)' };
+const copia = (o) => JSON.parse(JSON.stringify(o));
+const ORIGINAL = copia(G.POSES);
+let POSES = copia(G.POSES), gesto = 'palma', M = null, cfg = null, desplOriginal = 0;
+// Lo que el visitante deja armado queda en este navegador (si se puede), para no perderlo al recargar
+try { const g = JSON.parse(localStorage.getItem('posador-hefesto') ?? 'null'); if (g?.poses) POSES = { ...POSES, ...g.poses }; } catch {}
+
+const norm = (a) => { a = ((a + 180) % 360 + 360) % 360 - 180; return Math.round(a); };
+// Las poses del brazo izquierdo se guardan en espejo (como en gestos.js); en pantalla van a 180 - ángulo
+const enPantalla = (p) => ({ der: { ...p.der }, izq: { ...p.izq, sup: 180 - p.izq.sup, ant: 180 - p.izq.ant } });
+
+function guardar() { try { localStorage.setItem('posador-hefesto', JSON.stringify({ poses: POSES, desplX: cfg?.desplX })); } catch {} }
+
+// ── Panel ──
+function armarGestos() {
+  $('gestos').innerHTML = Object.keys(NOMBRES).map(g => `<button data-g="${g}" class="${g === gesto ? 'activo' : ''}">${NOMBRES[g]}</button>`).join('');
+  $('gestos').querySelectorAll('button').forEach(b => b.onclick = () => { gesto = b.dataset.g; armarGestos(); armarBrazos(); dibujar(); });
+}
+function armarBrazos() {
+  const p = POSES[gesto], manos = Object.keys(M.manos);
+  $('brazos').innerHTML = Object.entries(LADOS).map(([lado, titulo]) => `
+    <div class="brazo" data-lado="${lado}"><h3>${titulo}</h3>
+      <div class="fila"><span>Brazo de arriba</span><input type="range" min="-180" max="180" step="1" data-k="sup" value="${p[lado].sup}" /><output>${p[lado].sup}°</output></div>
+      <div class="fila"><span>Antebrazo</span><input type="range" min="-180" max="180" step="1" data-k="ant" value="${p[lado].ant}" /><output>${p[lado].ant}°</output></div>
+      <div class="fila"><span>Mano</span><select data-k="mano">${manos.map(m => `<option ${m === p[lado].mano ? 'selected' : ''}>${m}</option>`).join('')}</select><span></span></div>
+      <label class="chk"><input type="checkbox" data-k="espejo" ${p[lado].espejo ? 'checked' : ''} /> Mano dada vuelta (espejo)</label>
+    </div>`).join('');
+  $('brazos').querySelectorAll('[data-k]').forEach(el => el.oninput = () => {
+    const lado = el.closest('.brazo').dataset.lado, k = el.dataset.k, p = POSES[gesto];
+    p[lado] = { ...p[lado], [k]: k === 'espejo' ? el.checked : k === 'mano' ? el.value : +el.value };
+    if (k === 'sup' || k === 'ant') el.nextElementSibling.textContent = el.value + '°';
+    espejar(lado); dibujar();
+  });
+}
+// Si el brazo izquierdo usa la misma mano que el derecho, copia la pose en espejo
+function espejar(lado) {
+  const p = POSES[gesto]; if (!$('simetrico').checked || p.der.mano !== p.izq.mano) return;
+  const otro = lado === 'der' ? 'izq' : 'der'; p[otro] = { ...p[lado] };
+  const caja = $('brazos').querySelector(`[data-lado="${otro}"]`);
+  caja.querySelector('[data-k=sup]').value = p[otro].sup; caja.querySelector('[data-k=sup]').nextElementSibling.textContent = p[otro].sup + '°';
+  caja.querySelector('[data-k=ant]').value = p[otro].ant; caja.querySelector('[data-k=ant]').nextElementSibling.textContent = p[otro].ant + '°';
+}
+
+// ── Guías: zona del texto (subtítulo de 2 renglones y 3 cajitas, como en el reel) y bordes ──
+function guias() {
+  const g = $('guias').getContext('2d'); g.clearRect(0, 0, 1080, 1920);
+  g.save(); g.fillStyle = 'rgba(255,122,26,.10)'; g.fillRect(0, 290, 1080, 510);
+  g.strokeStyle = 'rgba(255,122,26,.35)'; g.lineWidth = 2; g.setLineDash([14, 10]); g.strokeRect(1, 290, 1078, 510);
+  g.setLineDash([]); g.fillStyle = 'rgba(255,122,26,.8)'; g.font = '700 34px "Public Sans"'; g.fillText('subtítulo y cajitas', 70, 340);
+  g.strokeStyle = 'rgba(238,241,244,.25)'; g.strokeRect(1, 1, 1078, 1918);
+  g.restore();
+}
+const LIMITE_TEXTO = 800;   // abajo de las 3 cajitas
+
+// ── Muñeco ──
+let ultimo = null, puntos = {};
+function dibujar() {
+  const poses = enPantalla(POSES[gesto]), g = $('muneco').getContext('2d');
+  ultimo = window.dibujarMunecoV5(g, M, 0, { poses });
+  // Puntos para agarrar: codo y mano de cada brazo
+  const P = window.poseV5(M, 0, poses); puntos = {};
+  for (const [lado, b] of Object.entries(P.brazos)) {
+    const ant = poses[lado].ant * Math.PI / 180, largo = b.mano.largo * P.S * 0.8;
+    puntos[lado] = { hombro: { x: b.hx, y: b.hy }, codo: { x: b.ex, y: b.ey }, mano: { x: b.ex + Math.cos(ant) * largo, y: b.ey + Math.sin(ant) * largo } };
+    for (const [k, q] of Object.entries(puntos[lado])) {
+      if (k === 'hombro') continue;
+      g.beginPath(); g.arc(q.x, q.y, k === 'mano' ? 22 : 18, 0, Math.PI * 2);
+      g.fillStyle = k === 'mano' ? 'rgba(255,122,26,.55)' : 'rgba(238,241,244,.45)'; g.fill();
+      g.lineWidth = 4; g.strokeStyle = k === 'mano' ? '#ff7a1a' : '#eef1f4'; g.stroke();
+    }
+  }
+  estado(); salida(); guardar();
+}
+function estado() {
+  const m = Object.values(ultimo.manos), malos = [];
+  const x0 = Math.min(...m.map(q => q.x0)), x1 = Math.max(...m.map(q => q.x1)), y0 = Math.min(...m.map(q => q.y0));
+  if (x0 < 0) malos.push(`la mano izquierda se sale del video (${Math.round(-x0)} px)`);
+  if (x1 > 1080) malos.push(`la mano derecha se sale del video (${Math.round(x1 - 1080)} px)`);
+  if (y0 < LIMITE_TEXTO) malos.push(`una mano tapa la zona del texto (${Math.round(LIMITE_TEXTO - y0)} px)`);
+  $('estado').innerHTML = malos.length ? `<span class="mal">✗ ${malos.join(' · ')}</span>` : `<span class="ok">✓ Entra en el video y no tapa el texto</span> <span style="color:var(--suave)">(manos de x=${Math.round(x0)} a x=${Math.round(x1)})</span>`;
+}
+function salida() {
+  const linea = (g) => { const p = POSES[g], b = (q) => `{ sup: ${q.sup}, ant: ${q.ant}, mano: '${q.mano}'${q.espejo ? ', espejo: true' : ''} }`;
+    return `    ${g === 'señala' ? "'señala'" : g}: { der: ${b(p.der)}, izq: ${b(p.izq)} },`; };
+  const cambiados = Object.keys(POSES).filter(g => JSON.stringify(POSES[g]) !== JSON.stringify(ORIGINAL[g]));
+  $('salida').value = `Poses del posador (HU-16)\n` +
+    `Cambié: ${cambiados.length ? cambiados.map(g => NOMBRES[g]).join(', ') : 'nada todavía'}${cfg.desplX !== desplOriginal ? ` · corrido en X: ${cfg.desplX}` : ''}\n\n` +
+    `  const POSES = {\n${Object.keys(POSES).map(linea).join('\n')}\n  };\n  desplX: ${cfg.desplX}`;
+}
+
+// ── Arrastrar codo o mano ──
+let agarre = null;
+const aLienzo = (e) => { const r = $('muneco').getBoundingClientRect(); return { x: (e.clientX - r.left) * 1080 / r.width, y: (e.clientY - r.top) * 1920 / r.height }; };
+$('muneco').addEventListener('pointerdown', (e) => {
+  const q = aLienzo(e); let mejor = null, dmin = 70;
+  for (const [lado, pts] of Object.entries(puntos)) for (const k of ['mano', 'codo']) { const d = Math.hypot(pts[k].x - q.x, pts[k].y - q.y); if (d < dmin) { dmin = d; mejor = { lado, k }; } }
+  if (!mejor) return;
+  agarre = mejor; $('muneco').setPointerCapture(e.pointerId); $('muneco').classList.add('arrastrando');
+});
+$('muneco').addEventListener('pointermove', (e) => {
+  if (!agarre) return;
+  const q = aLienzo(e), { lado, k } = agarre, pts = puntos[lado], desde = k === 'codo' ? pts.hombro : pts.codo;
+  let a = Math.atan2(q.y - desde.y, q.x - desde.x) * 180 / Math.PI;
+  if (lado === 'izq') a = 180 - a;   // se guarda en espejo
+  const p = POSES[gesto]; p[lado] = { ...p[lado], [k === 'codo' ? 'sup' : 'ant']: norm(a) };
+  armarValores(lado); espejar(lado); dibujar();
+});
+const soltar = () => { agarre = null; $('muneco').classList.remove('arrastrando'); };
+$('muneco').addEventListener('pointerup', soltar); $('muneco').addEventListener('pointercancel', soltar);
+function armarValores(lado) {
+  const caja = $('brazos').querySelector(`[data-lado="${lado}"]`), p = POSES[gesto][lado];
+  for (const k of ['sup', 'ant']) { const el = caja.querySelector(`[data-k=${k}]`); el.value = p[k]; el.nextElementSibling.textContent = p[k] + '°'; }
+}
+
+// ── Botones ──
+$('copiar').onclick = async () => { try { await navigator.clipboard.writeText($('salida').value); $('copiar').textContent = '¡Copiado!'; } catch { $('salida').select(); document.execCommand('copy'); $('copiar').textContent = 'Copiado'; } setTimeout(() => $('copiar').textContent = 'Copiar poses', 1500); };
+$('deshacer').onclick = () => { POSES[gesto] = copia(ORIGINAL[gesto]); armarBrazos(); dibujar(); };
+$('todo').onclick = () => { POSES = copia(ORIGINAL); cfg.desplX = desplOriginal; $('desplX').value = cfg.desplX; $('desplXv').textContent = cfg.desplX; armarBrazos(); dibujar(); };
+$('desplX').oninput = () => { cfg.desplX = +$('desplX').value; $('desplXv').textContent = cfg.desplX; dibujar(); };
+
+// ── Arranque ──
+(async () => {
+  try {
+    cfg = await (await fetch('muneco-v5.json')).json(); desplOriginal = cfg.desplX;
+    try { const g = JSON.parse(localStorage.getItem('posador-hefesto') ?? 'null'); if (typeof g?.desplX === 'number') cfg.desplX = g.desplX; } catch {}
+    M = await window.prepararMunecoV5(cfg);
+    $('desplX').value = cfg.desplX; $('desplXv').textContent = cfg.desplX;
+    await document.fonts.ready; guias(); armarGestos(); armarBrazos(); dibujar();
+  } catch (e) {
+    $('estado').innerHTML = `<span class="mal">✗ No se pudo cargar el muñeco: ${e.message}. Abrilo con el servidor local (py -m http.server 8080), no con doble clic.</span>`;
+  }
+})();
+</script>
+</body>
+</html>

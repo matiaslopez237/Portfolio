@@ -274,7 +274,8 @@
       const nat0 = Math.atan2(cy - codo.y, cx - codo.x);
       desvanecer(L, (x, y) => 1 - suave((-((x - codo.x) * Math.cos(nat0) + (y - codo.y) * Math.sin(nat0)) - codo.r * 0.8) / (codo.r * 1.2)));   // tapa el parche del círculo del codo del brazo de arriba
       const martillo = k === 'martillo' ? manchas(L, gris, 150).filter(m => !esCirculo(m)).sort((a, b) => b.n - a.n)[0] ?? null : null;
-      manos[k] = { L, codo, pts, nat: deg(Math.atan2(cy - codo.y, cx - codo.x)), martillo };
+      const largo = Math.max(...pts.map(([x, y]) => Math.hypot(x - codo.x, y - codo.y)));   // del codo a la punta de la mano
+      manos[k] = { L, codo, pts, largo, nat: deg(Math.atan2(cy - codo.y, cx - codo.x)), martillo };
     }
     const hueco = manchas(I.cabeza, oscuro, 200).sort((a, b) => b.n - a.n)[0];
     return { v5: true, cfg, I, cuello, hombros: { izq: hIzq, der: hDer }, brazo, manos, ...prepararCara(I, cfg, hueco) };
@@ -300,6 +301,7 @@
   const aPantallaV5 = (px, py, ax, ay, rot, esc, espejo, x, y) => { const r = rad(rot), ux = (x - ax) * esc * (espejo ? -1 : 1), uy = (y - ay) * esc; return { x: px + ux * Math.cos(r) - uy * Math.sin(r), y: py + ux * Math.sin(r) + uy * Math.cos(r) }; };
   const puntoMartillo = (P) => { const b = P.brazos.der, m = b.mano.martillo; return m ? aPantallaV5(b.ex, b.ey, b.mano.codo.x, b.mano.codo.y, b.rotMano, P.S, b.espejoMano, m.x, m.y) : null; };
   window.martilloV5 = (M, t, poses) => puntoMartillo(poseV5(M, t, poses));
+  window.poseV5 = poseV5;   // lo usa posador.html para saber dónde están hombro, codo y mano
 
   window.dibujarMunecoV5 = (g, M, t, { boca = 'cerrada', ojos = 'abiertos', habla = false, poses } = {}) => {
     const { cfg, I, cuello } = M, P = poseV5(M, t, poses);
