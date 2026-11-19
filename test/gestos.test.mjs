@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-const { validarGuion, planGestos, poseBrazos, POSES, GESTOS, difAng } = createRequire(import.meta.url)('../brand/instagram/reels/gestos.js');
+const { validarGuion, planGestos, poseBrazos, nivelVoz, POSES, GESTOS, difAng } = createRequire(import.meta.url)('../brand/instagram/reels/gestos.js');
 
 // Tres líneas de 2 s: reposo, "señala" y "palma"
 const lineas = [
@@ -46,6 +46,20 @@ test('CA-16.4: mientras habla sin cambiar de gesto, las manos se mueven pero sol
   assert.ok(rango <= 10, `se mueve ${rango.toFixed(1)}° (máximo 10)`);
   const quieto = poseBrazos(plan, 4.5).der.ant;
   assert.equal(poseBrazos(plan, 4.9).der.ant, quieto, 'sin voz no se mueve');
+});
+
+test('CA-16.4: con pausas entre palabras, los brazos no saltan de un cuadro al otro (sin temblequeo)', () => {
+  const plan = planGestos(lineas);
+  // palabras de 0,3 s con pausas de 0,25 s entre medio, durante la línea de "señala" (sin cambio de gesto)
+  const palabras = []; for (let t = 3.6; t < 5.3; t += 0.55) palabras.push({ ini: t, fin: t + 0.3 });
+  let maxSalto = 0;
+  for (let f = 3.7 * 30; f < 5.2 * 30; f++) {
+    const a = poseBrazos(plan, f / 30, { habla: nivelVoz(palabras, f / 30) }), b = poseBrazos(plan, (f + 1) / 30, { habla: nivelVoz(palabras, (f + 1) / 30) });
+    for (const lado of ['der', 'izq']) maxSalto = Math.max(maxSalto, Math.abs(difAng(a[lado].ant, b[lado].ant)), Math.abs(difAng(a[lado].sup, b[lado].sup)));
+  }
+  assert.ok(maxSalto < 1, `el salto más grande entre dos cuadros es ${maxSalto.toFixed(2)}° (máximo 1°)`);
+  assert.equal(nivelVoz(palabras, 4.2), 1, 'en una pausa entre palabras el nivel sigue en 1');
+  assert.equal(nivelVoz(palabras, 0), 0, 'antes de la voz no se mueve');
 });
 
 test('CA-16.5: un gesto que no existe frena el guion con la lista de gestos válidos', () => {

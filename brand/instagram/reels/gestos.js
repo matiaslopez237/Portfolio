@@ -100,10 +100,13 @@
       // Martillazo: en la línea del martillo, y también al salir de ella (la vuelta del golpe)
       for (const l of plan) if (l.gesto === 'martillo' && lado === 'der' && Math.abs(t - l.golpe) < 0.6) p = golpe(p, t, l.golpe);
       // Movimiento al hablar (RN-16.4): pocos grados, distinto en cada brazo
-      if (habla) {
+      // habla: true/false o un nivel de 0 a 1 que sube y baja suave (si se prende y apaga de golpe en cada pausa,
+      // los brazos dan un salto: el "temblequeo" que vio Matias)
+      const nivel = habla === true ? 1 : +habla || 0;
+      if (nivel) {
         const s = lado === 'der' ? 1 : -1;
-        p.sup += 2.5 * Math.sin(t * 2.3 + (s > 0 ? 0 : 1.7));
-        p.ant += 4 * Math.sin(t * 3.1 + (s > 0 ? 0.6 : 2.4));
+        p.sup += nivel * 2.5 * Math.sin(t * 2.3 + (s > 0 ? 0 : 1.7));
+        p.ant += nivel * 4 * Math.sin(t * 3.1 + (s > 0 ? 0.6 : 2.4));
       }
       if (lado === 'izq') { p.sup = 180 - p.sup; p.ant = 180 - p.ant; }
       res[lado] = p;
@@ -111,7 +114,15 @@
     return res;
   }
 
-  const api = { GESTOS, MUNECOS, POSES, TRANSICION, MARTILLO_MIN, validarGuion, planGestos, poseBrazos, difAng };
+  // Nivel de voz para el movimiento al hablar: 1 desde que empieza hasta que termina la voz (las pausas entre palabras
+  // no lo cortan), con 0,3 s de entrada y de salida. palabras = [{ ini, fin }] en segundos del reel.
+  function nivelVoz(palabras, t) {
+    if (!palabras.length) return 0;
+    const ini = palabras[0].ini, fin = palabras.at(-1).fin;
+    return suave(tramo(t, ini - 0.3, ini)) * (1 - suave(tramo(t, fin, fin + 0.3)));
+  }
+
+  const api = { GESTOS, nivelVoz, MUNECOS, POSES, TRANSICION, MARTILLO_MIN, validarGuion, planGestos, poseBrazos, difAng };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else globalThis.Gestos = api;
 })();

@@ -182,8 +182,10 @@ window.cuadro = (t) => {
   const g = $('chispas').getContext('2d'); g.clearRect(0, 0, 1080, 1920); g.globalCompositeOperation = 'lighter';
   if (L.v5) {
     // Muñeco v5 (HU-16): gestos del guion; el martillo solo en su línea, con chispas en el golpe
-    const poses = window.Gestos.poseBrazos(plan, t, { habla: !!w });
-    ultimoCuadro = window.dibujarMunecoV5($('muneco').getContext('2d'), L, t, { boca, ojos, habla: !!w, poses });
+    // el movimiento al hablar sigue el nivel de voz (suave), no cada palabra: si no, tiembla en cada pausa
+    const nivel = window.Gestos.nivelVoz(chunks.flatMap(c => c.palabras), t);
+    const poses = window.Gestos.poseBrazos(plan, t, { habla: nivel });
+    ultimoCuadro = window.dibujarMunecoV5($('muneco').getContext('2d'), L, t, { boca, ojos, habla: nivel, poses });
     for (const l of plan) if (l.gesto === 'martillo') {
       const t0 = l.golpe + 0.06, p0 = window.martilloV5(L, t0, window.Gestos.poseBrazos(plan, t0, { habla: true }));
       if (p0) chispas(g, t, p0.x, p0.y, l.golpe, 46, 1.2);

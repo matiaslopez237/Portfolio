@@ -170,7 +170,8 @@
   // Cabeza apoyada en el cuello (cx, cy en pantalla), con escala EC, ojos y boca. La usan el muñeco v4 y el v5.
   function dibujarCabeza(g, M, t, cx, cy, EC, { boca, ojos, habla }) {
     const { cfg, I, hueco, ojosPos } = M;
-    const giro = Math.sin(t * 3.1) * (habla ? 1.6 : 0.6);
+    // habla: true/false (v4, igual que siempre) o un nivel de 0 a 1 (v5, suave: sin saltos de la cabeza en las pausas)
+    const giro = Math.sin(t * 3.1) * (typeof habla === 'number' ? 0.6 + habla : habla ? 1.6 : 0.6);
     g.save(); g.translate(cx, cy); g.rotate(giro * Math.PI / 180); g.scale(EC, EC); g.translate(-hueco.x, -hueco.y - (cfg.bocaSobreCuello ?? 14));
     g.drawImage(I.cabeza.c, 0, 0);
     const capa = M.capa;
