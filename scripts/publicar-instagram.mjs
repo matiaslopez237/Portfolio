@@ -36,6 +36,8 @@ function diasAntes(fecha, dias) {
  * `carruseles` es { C1: cantidadDeSlides, ... } y sale de contenido.json.
  */
 export function elegirPublicaciones({ fecha, diasAtraso = DIAS_ATRASO, ...resto }) {
+  // DEF-07: en Windows (git con core.autocrlf) los .md quedan con finales CRLF; se pasan a LF antes de leerlos
+  for (const k of ['calendario', 'textos']) if (typeof resto[k] === 'string') resto[k] = resto[k].replace(/\r\n/g, '\n');
   const dias = [];
   for (let n = diasAtraso; n >= 0; n--) dias.push(diasAntes(fecha, n));
   return dias.flatMap(dia => delDia({ ...resto, fecha: dia }));

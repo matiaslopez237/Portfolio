@@ -6,7 +6,8 @@ import { inflateSync } from 'node:zlib';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-const leer = (ruta) => readFileSync(new URL('../' + ruta, import.meta.url), 'utf8');
+// DEF-07: en Windows (git con core.autocrlf) los archivos de texto quedan con CRLF; se leen siempre con LF
+const leer = (ruta) => readFileSync(new URL('../' + ruta, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 
 // Devuelve el texto de una sección "## Titulo" (hasta el próximo "## ") o null si no existe.
 function seccion(md, titulo) {
