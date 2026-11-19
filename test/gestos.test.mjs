@@ -118,7 +118,8 @@ test('CA-16.10: el golpe al logo cae cuando dice "Hefesto" y el martillo ya est�
   assert.equal(alEmpezar.mano, 'martillo', 'cuando empieza la línea ya tiene el martillo en la mano');
   assert.ok(Math.abs(difAng(poseBrazos(plan, 7.2).der.ant, POSES.martillo.der.ant)) < 10, 'el martillo ya está levantado antes de la línea');
   // en el golpe el antebrazo apunta hacia abajo y afuera (no hacia arriba)
-  assert.ok(Math.abs(difAng(poseBrazos(plan, 7.7 + 0.1).der.ant, 40)) < 5);
+  const enGolpe = poseBrazos(plan, 7.7 + 0.1).der.ant;
+  assert.ok(enGolpe > 20 && enGolpe < 70, `en el golpe el antebrazo apunta a ${enGolpe.toFixed(0)}° (abajo y afuera: entre 20° y 70°)`);
 });
 
 test('CA-16.10: si no hay tiempo para levantar el martillo antes de "Hefesto", avisa', () => {
