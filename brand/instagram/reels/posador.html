@@ -54,18 +54,21 @@
 </div>
 <div id="panel">
   <h1>Posador de <em>Hefesto</em></h1>
-  <p class="ayuda">Elegí un gesto y arrastrá el <b>codo</b> (círculo blanco) o la <b>mano</b> (círculo naranja) de cada brazo. Lo rayado de arriba es donde van el subtítulo y las cajitas: las manos no lo pueden tapar.</p>
+  <p class="ayuda">Elegí un gesto y arrastrá el <b>hombro</b> (cuadrado blanco), el <b>codo</b> (círculo blanco) o la <b>mano</b> (círculo naranja) de cada brazo. Lo rayado de arriba es donde van el subtítulo y las cajitas: las manos no lo pueden tapar.</p>
 
   <h2>Gesto</h2>
   <div class="gestos" id="gestos"></div>
 
   <h2>Brazos</h2>
   <div id="brazos"></div>
-  <label class="chk"><input type="checkbox" id="simetrico" checked /> Brazo izquierdo igual al derecho (en espejo), solo si los dos usan la misma mano</label>
+  <label class="chk"><input type="checkbox" id="simetrico" checked /> Mover los dos brazos en espejo (lo que movés en uno, el otro lo hace al revés en X y igual en Y)</label>
 
   <h2>Muñeco</h2>
   <div class="brazo">
     <div class="fila"><span>Corrido en X</span><input type="range" id="desplX" min="-120" max="120" step="1" /><output id="desplXv"></output></div>
+    <div class="fila"><span>Hombros: separación</span><input type="range" id="hombroX" min="-60" max="120" step="1" /><output id="hombroXv"></output></div>
+    <div class="fila"><span>Hombros: altura</span><input type="range" id="hombroArriba" min="-60" max="160" step="1" /><output id="hombroArribav"></output></div>
+    <p class="ayuda">Los hombros valen para todos los gestos. También los podés arrastrar (cuadrado blanco): se mueven los dos en espejo.</p>
   </div>
 
   <div id="estado">Cargando el muñeco…</div>
@@ -88,7 +91,7 @@ const NOMBRES = { reposo: 'Reposo', palma: 'Palma', 'señala': 'Señala', explic
 const LADOS = { der: 'Brazo derecho (de la pantalla)', izq: 'Brazo izquierdo (de la pantalla)' };
 const copia = (o) => JSON.parse(JSON.stringify(o));
 const ORIGINAL = copia(G.POSES);
-let POSES = copia(G.POSES), gesto = 'palma', M = null, cfg = null, desplOriginal = 0;
+let POSES = copia(G.POSES), gesto = 'palma', M = null, cfg = null, munecoOriginal = {};
 // Lo que el visitante deja armado queda en este navegador (si se puede), para no perderlo al recargar
 try { const g = JSON.parse(localStorage.getItem('posador-hefesto') ?? 'null'); if (g?.poses) POSES = { ...POSES, ...g.poses }; } catch {}
 
@@ -96,7 +99,7 @@ const norm = (a) => { a = ((a + 180) % 360 + 360) % 360 - 180; return Math.round
 // Las poses del brazo izquierdo se guardan en espejo (como en gestos.js); en pantalla van a 180 - ángulo
 const enPantalla = (p) => ({ der: { ...p.der }, izq: { ...p.izq, sup: 180 - p.izq.sup, ant: 180 - p.izq.ant } });
 
-function guardar() { try { localStorage.setItem('posador-hefesto', JSON.stringify({ poses: POSES, desplX: cfg?.desplX })); } catch {} }
+function guardar() { try { localStorage.setItem('posador-hefesto', JSON.stringify({ poses: POSES, muneco: cfg ? { desplX: cfg.desplX, hombroX: cfg.hombroX ?? 0, hombroY: cfg.hombroY ?? 0 } : null })); } catch {} }
 
 // ── Panel ──
 function armarGestos() {
@@ -121,8 +124,8 @@ function armarBrazos() {
 }
 // Si el brazo izquierdo usa la misma mano que el derecho, copia la pose en espejo
 function espejar(lado) {
-  const p = POSES[gesto]; if (!$('simetrico').checked || p.der.mano !== p.izq.mano) return;
-  const otro = lado === 'der' ? 'izq' : 'der'; p[otro] = { ...p[lado] };
+  const p = POSES[gesto]; if (!$('simetrico').checked) return;
+  const otro = lado === 'der' ? 'izq' : 'der'; p[otro] = { ...p[otro], sup: p[lado].sup, ant: p[lado].ant };
   const caja = $('brazos').querySelector(`[data-lado="${otro}"]`);
   caja.querySelector('[data-k=sup]').value = p[otro].sup; caja.querySelector('[data-k=sup]').nextElementSibling.textContent = p[otro].sup + '°';
   caja.querySelector('[data-k=ant]').value = p[otro].ant; caja.querySelector('[data-k=ant]').nextElementSibling.textContent = p[otro].ant + '°';
@@ -150,7 +153,7 @@ function dibujar() {
     const ant = poses[lado].ant * Math.PI / 180, largo = b.mano.largo * P.S * 0.8;
     puntos[lado] = { hombro: { x: b.hx, y: b.hy }, codo: { x: b.ex, y: b.ey }, mano: { x: b.ex + Math.cos(ant) * largo, y: b.ey + Math.sin(ant) * largo } };
     for (const [k, q] of Object.entries(puntos[lado])) {
-      if (k === 'hombro') continue;
+      if (k === 'hombro') { g.fillStyle = 'rgba(238,241,244,.45)'; g.fillRect(q.x - 16, q.y - 16, 32, 32); g.lineWidth = 4; g.strokeStyle = '#eef1f4'; g.strokeRect(q.x - 16, q.y - 16, 32, 32); continue; }
       g.beginPath(); g.arc(q.x, q.y, k === 'mano' ? 22 : 18, 0, Math.PI * 2);
       g.fillStyle = k === 'mano' ? 'rgba(255,122,26,.55)' : 'rgba(238,241,244,.45)'; g.fill();
       g.lineWidth = 4; g.strokeStyle = k === 'mano' ? '#ff7a1a' : '#eef1f4'; g.stroke();
@@ -171,8 +174,8 @@ function salida() {
     return `    ${g === 'señala' ? "'señala'" : g}: { der: ${b(p.der)}, izq: ${b(p.izq)} },`; };
   const cambiados = Object.keys(POSES).filter(g => JSON.stringify(POSES[g]) !== JSON.stringify(ORIGINAL[g]));
   $('salida').value = `Poses del posador (HU-16)\n` +
-    `Cambié: ${cambiados.length ? cambiados.map(g => NOMBRES[g]).join(', ') : 'nada todavía'}${cfg.desplX !== desplOriginal ? ` · corrido en X: ${cfg.desplX}` : ''}\n\n` +
-    `  const POSES = {\n${Object.keys(POSES).map(linea).join('\n')}\n  };\n  desplX: ${cfg.desplX}`;
+    `Cambié: ${[...cambiados.map(g => NOMBRES[g]), ...Object.keys(munecoOriginal).filter(k => (cfg[k] ?? 0) !== munecoOriginal[k])].join(', ') || 'nada todavía'}\n\n` +
+    `  const POSES = {\n${Object.keys(POSES).map(linea).join('\n')}\n  };\n  muneco-v5.json: desplX ${cfg.desplX}, hombroX ${cfg.hombroX ?? 0}, hombroY ${cfg.hombroY ?? 0}`;
 }
 
 // ── Arrastrar codo o mano ──
@@ -180,13 +183,20 @@ let agarre = null;
 const aLienzo = (e) => { const r = $('muneco').getBoundingClientRect(); return { x: (e.clientX - r.left) * 1080 / r.width, y: (e.clientY - r.top) * 1920 / r.height }; };
 $('muneco').addEventListener('pointerdown', (e) => {
   const q = aLienzo(e); let mejor = null, dmin = 70;
-  for (const [lado, pts] of Object.entries(puntos)) for (const k of ['mano', 'codo']) { const d = Math.hypot(pts[k].x - q.x, pts[k].y - q.y); if (d < dmin) { dmin = d; mejor = { lado, k }; } }
+  for (const [lado, pts] of Object.entries(puntos)) for (const k of ['mano', 'codo', 'hombro']) { const d = Math.hypot(pts[k].x - q.x, pts[k].y - q.y); if (d < dmin) { dmin = d; mejor = { lado, k }; } }
   if (!mejor) return;
   agarre = mejor; $('muneco').setPointerCapture(e.pointerId); $('muneco').classList.add('arrastrando');
 });
 $('muneco').addEventListener('pointermove', (e) => {
   if (!agarre) return;
-  const q = aLienzo(e), { lado, k } = agarre, pts = puntos[lado], desde = k === 'codo' ? pts.hombro : pts.codo;
+  const q = aLienzo(e), { lado, k } = agarre, pts = puntos[lado];
+  if (k === 'hombro') {
+    // dónde estaría el hombro sin corrimiento; el corrimiento se aplica a los dos en espejo
+    const sentido = lado === 'der' ? 1 : -1, baseX = pts.hombro.x - sentido * (cfg.hombroX ?? 0), baseY = pts.hombro.y - (cfg.hombroY ?? 0);
+    cfg.hombroX = Math.round(sentido * (q.x - baseX)); cfg.hombroY = Math.round(q.y - baseY);
+    valoresMuneco(); dibujar(); return;
+  }
+  const desde = k === 'codo' ? pts.hombro : pts.codo;
   let a = Math.atan2(q.y - desde.y, q.x - desde.x) * 180 / Math.PI;
   if (lado === 'izq') a = 180 - a;   // se guarda en espejo
   const p = POSES[gesto]; p[lado] = { ...p[lado], [k === 'codo' ? 'sup' : 'ant']: norm(a) };
@@ -202,16 +212,24 @@ function armarValores(lado) {
 // ── Botones ──
 $('copiar').onclick = async () => { try { await navigator.clipboard.writeText($('salida').value); $('copiar').textContent = '¡Copiado!'; } catch { $('salida').select(); document.execCommand('copy'); $('copiar').textContent = 'Copiado'; } setTimeout(() => $('copiar').textContent = 'Copiar poses', 1500); };
 $('deshacer').onclick = () => { POSES[gesto] = copia(ORIGINAL[gesto]); armarBrazos(); dibujar(); };
-$('todo').onclick = () => { POSES = copia(ORIGINAL); cfg.desplX = desplOriginal; $('desplX').value = cfg.desplX; $('desplXv').textContent = cfg.desplX; armarBrazos(); dibujar(); };
-$('desplX').oninput = () => { cfg.desplX = +$('desplX').value; $('desplXv').textContent = cfg.desplX; dibujar(); };
+$('todo').onclick = () => { POSES = copia(ORIGINAL); Object.assign(cfg, munecoOriginal); valoresMuneco(); armarBrazos(); dibujar(); };
+function valoresMuneco() {
+  $('desplX').value = cfg.desplX; $('desplXv').textContent = cfg.desplX;
+  $('hombroX').value = cfg.hombroX ?? 0; $('hombroXv').textContent = cfg.hombroX ?? 0;
+  $('hombroArriba').value = -(cfg.hombroY ?? 0); $('hombroArribav').textContent = -(cfg.hombroY ?? 0);
+}
+$('desplX').oninput = () => { cfg.desplX = +$('desplX').value; valoresMuneco(); dibujar(); };
+$('hombroX').oninput = () => { cfg.hombroX = +$('hombroX').value; valoresMuneco(); dibujar(); };
+$('hombroArriba').oninput = () => { cfg.hombroY = -$('hombroArriba').value; valoresMuneco(); dibujar(); };
 
 // ── Arranque ──
 (async () => {
   try {
-    cfg = await (await fetch('muneco-v5.json')).json(); desplOriginal = cfg.desplX;
-    try { const g = JSON.parse(localStorage.getItem('posador-hefesto') ?? 'null'); if (typeof g?.desplX === 'number') cfg.desplX = g.desplX; } catch {}
+    cfg = await (await fetch('muneco-v5.json')).json();
+    munecoOriginal = { desplX: cfg.desplX, hombroX: cfg.hombroX ?? 0, hombroY: cfg.hombroY ?? 0 };
+    try { const g = JSON.parse(localStorage.getItem('posador-hefesto') ?? 'null'); for (const k of Object.keys(munecoOriginal)) if (typeof g?.muneco?.[k] === 'number') cfg[k] = g.muneco[k]; } catch {}
     M = await window.prepararMunecoV5(cfg);
-    $('desplX').value = cfg.desplX; $('desplXv').textContent = cfg.desplX;
+    valoresMuneco();
     await document.fonts.ready; guias(); armarGestos(); armarBrazos(); dibujar();
   } catch (e) {
     $('estado').innerHTML = `<span class="mal">✗ No se pudo cargar el muñeco: ${e.message}. Abrilo con el servidor local (py -m http.server 8080), no con doble clic.</span>`;

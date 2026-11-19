@@ -287,7 +287,8 @@
     const bx = 540 - I.cuerpo.w / 2 * S + (cfg.desplX ?? 0), by = (cfg.piso ?? 2000) - I.cuerpo.h * S + resp;
     const brazos = {};
     for (const lado of ['der', 'izq']) {
-      const p = poses[lado], h = M.hombros[lado], hx = bx + h.x * S, hy = by + h.y * S;
+      // hombros: corrimiento de muneco-v5.json, en espejo (hombroX + = los dos hacia afuera) y a la misma altura (hombroY + = abajo)
+      const p = poses[lado], h = M.hombros[lado], hx = bx + h.x * S + (lado === 'der' ? 1 : -1) * (cfg.hombroX ?? 0), hy = by + h.y * S + (cfg.hombroY ?? 0);
       const ex = hx + Math.cos(rad(p.sup)) * M.brazo.largo * S, ey = hy + Math.sin(rad(p.sup)) * M.brazo.largo * S;
       // El lado izquierdo va espejado; la mano además puede pedir espejo propio (p.espejo, por ejemplo en "explica")
       const espejo = lado === 'izq', espejoMano = espejo !== !!p.espejo, mano = M.manos[p.mano] ?? M.manos.reposo;

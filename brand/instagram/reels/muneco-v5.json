@@ -39,5 +39,7 @@
   "escalaCabeza": 1.35,
   "piso": 2000,
   "bocaSobreCuello": 14,
-  "desplX": -28
+  "desplX": -28,
+  "hombroX": 0,
+  "hombroY": 0
 }
