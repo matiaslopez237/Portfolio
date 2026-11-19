@@ -355,3 +355,21 @@ Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
 
 #paginaweb #paginasweb #negocioslocales #emprendedores
 ```
+
+## Reel R2 · Instagram no alcanza
+
+```texto
+Página web para tu negocio: tu Instagram no es tuyo, tu página sí.
+
+Si te bloquean la cuenta, desaparecés. Con tu propia página web eso no pasa.
+
+1. Dominio propio, como Quiropraxia Cipolletti.
+2. Tus servicios y precios, siempre a mano.
+3. Un botón de WhatsApp para que te escriban.
+
+Instagram suma, pero tu página es tuya. En Hefesto Webs te forjamos tu página web a medida, con dominio propio y botón de WhatsApp.
+
+Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
+
+#paginawebparatunegocio #paginaweb #paginasweb #negocioslocales #emprendedores
+```
