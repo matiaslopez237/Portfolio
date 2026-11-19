@@ -125,6 +125,9 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-16 | CA-16.6 | Chequeo `scripts/check.mjs` | ✓ | `guiones.json` (R1, R2 sin "muneco") · muestras de R1 y R2 iguales byte a byte a las de antes del cambio (comparadas el 2026-11-17) |
 | HU-16 | CA-16.7 | Chequeo `scripts/check.mjs` | ✓ | `P16/manos.json` (lo escribe `render.mjs` recorriendo todos los cuadros) |
 | HU-16 | CA-16.8 | Checklist (firma Matias) | pendiente | se firma con el R3 |
+| HU-16 | CA-16.10 | Test (node) | ✓ | `test/gestos.test.mjs` (golpe en "Hefesto", martillo levantado antes) · `planGestos` en `gestos.js` |
+| HU-16 | CA-16.11 | Chequeo `scripts/check.mjs` | ✓ | `P16/logo.json` (lo escribe `render.mjs` con `medirLogo`) |
+| HU-16 | CA-16.12 | Chequeo `scripts/check.mjs` | ✓ | `P16/logo.json` (cuadros con dos logos: 0) |
 | HU-16 · DEF-06 | CA-16.9 | Revisión visual (muestras del P16) | ✓ | mano del martillo espejada · golpe hacia afuera, a la cintura · `fix(DEF-06)` |
 | HU-16 · DEF-05 | CA-16.4 | Test (node) | ✓ | `test/gestos.test.mjs` (sin temblequeo con pausas entre palabras) · `nivelVoz` en `gestos.js` · `fix(DEF-05)` |
 | HU-16 · DEF-03 | CA-16.8 | Revisión visual (muestras del P16) | ✓ | mano de reposo espejada · antebrazos delante del bíceps · parche del codo con la mediana de la piel · `fix(DEF-03)` |

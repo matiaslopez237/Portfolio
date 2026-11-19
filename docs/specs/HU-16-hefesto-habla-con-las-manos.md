@@ -1,7 +1,7 @@
 # HU-16: Hefesto habla con las manos
 
 **Historia:** Como dueño del estudio, quiero que Hefesto hable moviendo las dos manos, sin tener el martillo todo el tiempo, para que los reels se vean más vivos y menos repetidos.
-**Estado de la spec:** Implementada (falta firmar CA-16.8 con el R3)
+**Estado de la spec:** Implementada (falta firmar CA-16.8 y el checklist del logo con el R3)
 
 ## Objetivo
 Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sostiene el martillo todo el tiempo. El otro brazo viene pegado al cuerpo. Con una hoja de partes nueva (v5) que traiga **los dos brazos sueltos y manos vacías con gestos**, el código mueve los dos brazos y cada línea del guion puede llevar un gesto. Se estrena en el R3. El R1 y el R2 no cambian.
@@ -29,6 +29,13 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
 - **RN-16.4 (movimiento al hablar):** mientras la voz suena, las manos se mueven un poco solas (unos pocos grados) para que no quede rígido. Cuando cambia el gesto, pasa al siguiente con una transición suave de 0,3 s o más, nunca de golpe.
 - **RN-16.5 (martillo a veces):** en los reels v5 Hefesto habla con las manos vacías. El martillo aparece solo en las líneas que llevan `"accion": "martillo"`: en esa línea el brazo derecho cambia a la pieza con el martillo, da el golpe con chispas (igual que en la HU-15) y después vuelve a la mano vacía. Ninguna línea sin esa acción muestra el martillo. Es opcional: un reel puede no usarlo nunca.
 - **RN-16.6 (compatibilidad):** cada reel elige su muñeco con `"muneco": "v4"` o `"muneco": "v5"`. Si no lo dice, usa el v4, así el R1 y el R2 se renderizan igual que hoy.
+- **RN-16.7 (martillazo al logo, aprobada 2026-11-19):** en una línea con `"accion": "martillo"` que nombra la marca, el golpe cae sobre el logo 3D de Hefesto Webs (`recursos/logo-3d.webp`, el mismo del cierre), en el momento en que dice "Hefesto" (elección de Matias).
+  - El logo aparece al costado de Hefesto, a la altura de la cintura, justo donde pega el martillo. Aparece en forma suave 0,3 s antes del golpe.
+  - Con el golpe: chispas, y el logo se pone "al rojo" (brillo naranja) y se enfría en alrededor de 1 s, como el gancho del reel.
+  - Como "Hefesto" se dice apenas empieza la línea, Hefesto agarra y levanta el martillo al final de la línea anterior.
+  - Cuando entra el cierre, el logo crece y viaja hasta el lugar del logo grande del cierre y queda ahí: nunca se ven dos logos a la vez (elección de Matias).
+  - Si la línea del martillo no dice "Hefesto", el golpe sigue como hasta ahora, sin logo.
+  - El logo no tapa el subtítulo ni las cajitas y no se sale del cuadro.
 
 ## Casos límite
 - **Gemini dibuja los brazos de otro tamaño que el cuerpo** (ya pasó en la v4, con un 19 % de más): cada pieza lleva su propia escala en la configuración, como el `escalaBrazo` de la v4.
@@ -48,6 +55,9 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
 | CA-16.4 | Dado un tramo con voz y sin cambio de gesto, cuando se calculan las poses, entonces las manos se mueven (el ángulo varía) pero no más de unos pocos grados | Test (node) |
 | CA-16.5 | Dado un guion con un gesto que no existe, cuando se corre el render, entonces se corta antes de generar la voz con un mensaje que lista los gestos válidos | Test (node) |
 | CA-16.9 | Dado un reel v5 con `"accion": "martillo"` en una línea, cuando se calculan las poses, entonces el brazo derecho usa la pieza con martillo solo durante esa línea, el golpe cae dentro de ella, y en las demás líneas no hay martillo | Test (node) |
+| CA-16.10 | Dado un reel v5 con martillo en una línea que dice "Hefesto", cuando se calculan las poses, entonces el golpe cae al empezar esa palabra (±1 cuadro) y el martillo ya está levantado antes de que empiece la línea | Test (node) |
+| CA-16.11 | Dado ese reel, el logo aparece antes del golpe, en el instante del golpe está donde pega el martillo (±30 px), y hasta el cierre queda dentro del video y debajo del texto | Chequeo automático |
+| CA-16.12 | Dado ese reel, cuando entra el cierre el logo viaja hasta el logo del cierre, y en ningún cuadro se ven dos logos | Chequeo automático |
 | CA-16.6 | Dado un reel sin `"muneco"` (R1, R2), cuando se renderiza, entonces usa el muñeco v4 y sus muestras quedan iguales a las de antes del cambio | Chequeo automático |
 | CA-16.7 | Dado un reel v5, en todos los cuadros las manos quedan dentro del video y por debajo de los subtítulos y las cajitas | Chequeo automático |
 | CA-16.8 | Dado el R3 con el muñeco v5, cuando Matias lo ve en el celular, entonces los gestos acompañan lo que dice, se ven naturales y no dan "cosa" | Checklist |
@@ -56,6 +66,7 @@ Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sost
 Historia liviana: tests de node (`test/gestos.test.mjs`, `npm run test:unit`) para la lógica de gestos, martillo y validación, y chequeos en `scripts/check.mjs` para las piezas, la compatibilidad y la zona de las manos. Sin escenarios `.feature` ni commits [RED] → [GREEN]: un solo commit `feat(HU-16)`. Lo visual se juzga con muestras y el checklist.
 
 ## Checklist (lo firma Matias)
+- [ ] CA-16.11/16.12: ¿El martillazo al logo se entiende y el viaje del logo al cierre queda bien? — firmado:
 - [ ] CA-16.8: ¿En el R3, los gestos acompañan lo que dice, se ven naturales y no dan "cosa"? — firmado:
 
 ## Preguntas abiertas
@@ -97,3 +108,6 @@ Copia de lo que está en `brand/instagram/reels/prompts-gemini.md` (sección "Ho
 - 2026-11-18: DEF-05 (visto por Matias): los brazos temblaban cada pocos segundos. Causa: el movimiento al hablar se prendía y apagaba de golpe en cada pausa entre palabras (saltos de 3 a 5° en un cuadro; la cabeza también). Arreglo: el movimiento sigue un nivel de voz continuo (nivelVoz, con 0,3 s de entrada y salida). Test nuevo en CA-16.4. En el P16, fuera de los cambios de gesto, el salto máximo entre cuadros es 0,4°.
 - 2026-11-18: mejora 2 de la revisión de animación (aprobada por Matias): el codo arranca primero y la mano lo sigue 2 cuadros después, se pasa hasta 5° y se asienta; los giros grandes duran más (0,35 a 0,55 s). Test nuevo en CA-16.3. La mejora 1 (bíceps detrás del cuerpo) se descartó.
 - 2026-11-18: DEF-06 (visto por Matias): la mano del martillo estaba al revés y el martillazo pegaba en la rodilla. Arreglo: la mano del martillo va espejada; el golpe cae hacia afuera, al costado y a la altura de la cintura, con el codo pegado solo cuando el martillo pasa en horizontal. Manos de x=18 a x=1046.
+- 2026-11-18: propuesta de Matias: el martillazo cae sobre el logo de Hefesto Webs cuando lo nombra. Borrador de RN-16.7 y CA-16.10 a CA-16.12 (golpe en "Hefesto"; el logo se pone al rojo y viaja al cierre).
+- 2026-11-19: Matias aprueba RN-16.7 y CA-16.10 a CA-16.12.
+- 2026-11-19: RN-16.7 implementada. El golpe cae al empezar "Hefesto" (en el P16, 19,44 s) y el martillo se agarra 1,1 s antes, al final de la línea anterior. Logo de 170 px a la cintura, a la derecha (golpe a 46°): aparece 0,3 s antes, se pone al rojo y se enfría en 1 s, y al entrar el cierre viaja 0,5 s hasta el logo del cierre; el texto del cierre entra cuando el logo llegó. Medido en el P16: a 3 px de donde pega el martillo, 0 cuadros fuera del video, 0 tapando texto, 0 con dos logos. Ojo: el logo queda abajo a la derecha, cerca de donde Instagram pone sus botones; se revisa en el celular (checklist).

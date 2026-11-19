@@ -1,0 +1,13 @@
+{
+ "visibleAntesDelGolpe": 1,
+ "distanciaAlGolpe": 2.567947987701018,
+ "cuadrosFuera": 0,
+ "cuadrosTapaTexto": 0,
+ "cuadrosDosLogos": 0,
+ "caja": {
+  "x0": 884.4683837890625,
+  "x1": 1054.4683837890625,
+  "y0": 1609.2034912109375,
+  "y1": 1763.0355224609375
+ }
+}

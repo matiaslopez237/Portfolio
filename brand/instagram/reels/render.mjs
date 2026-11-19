@@ -69,6 +69,9 @@ console.log(`${id}: ${info.total.toFixed(1)} s, ${info.chunks.length} subtítulo
 if (munecoReel === 'v5') {
   const manos = await p.evaluate(() => window.medirManos());
   writeFileSync(dir + 'manos.json', JSON.stringify(manos, null, 1));
+  // Martillazo al logo (RN-16.7): dónde queda el logo y si alguna vez hay dos (lo leen los chequeos CA-16.11 y CA-16.12)
+  const logo = await p.evaluate(() => window.medirLogo());
+  if (logo) { writeFileSync(dir + 'logo.json', JSON.stringify(logo, null, 1)); console.log(`logo: a ${logo.distanciaAlGolpe.toFixed(0)} px del golpe, ${logo.cuadrosFuera} cuadros fuera, ${logo.cuadrosTapaTexto} tapando texto, ${logo.cuadrosDosLogos} con dos logos`); }
   console.log(`manos: margen bajo el texto ${manos.margen.toFixed(0)} px (t=${manos.tMargen.toFixed(1)} s), de x=${manos.izquierda.toFixed(0)} a x=${manos.derecha.toFixed(0)}`);
 }
 

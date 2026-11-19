@@ -107,3 +107,20 @@ test('CA-16.9: el martillo aparece solo en su línea y el golpe cae dentro de el
 test('CA-16.9: una línea con martillo de menos de 1,5 s avisa en vez de dibujarlo a medias', () => {
   assert.throws(() => planGestos([{ ini: 0, fin: 1.2, martillo: true }]), /el martillo necesita 1.5 s/);
 });
+
+test('CA-16.10: el golpe al logo cae cuando dice "Hefesto" y el martillo ya está levantado antes de que empiece la línea', () => {
+  // línea del cierre: empieza en 7,5 s y "Hefesto" se dice en 7,7 s
+  const plan = planGestos([...lineas, { ini: 7.5, fin: 10, martillo: true, marca: 7.7 }]);
+  const linea = plan[3];
+  assert.equal(linea.logo, true);
+  assert.ok(Math.abs(linea.golpe - 7.7) <= 1 / 30, `el golpe cae en ${linea.golpe} y "Hefesto" en 7,7`);
+  const alEmpezar = poseBrazos(plan, 7.5).der;
+  assert.equal(alEmpezar.mano, 'martillo', 'cuando empieza la línea ya tiene el martillo en la mano');
+  assert.ok(Math.abs(difAng(poseBrazos(plan, 7.2).der.ant, POSES.martillo.der.ant)) < 10, 'el martillo ya está levantado antes de la línea');
+  // en el golpe el antebrazo apunta hacia abajo y afuera (no hacia arriba)
+  assert.ok(Math.abs(difAng(poseBrazos(plan, 7.7 + 0.1).der.ant, 40)) < 5);
+});
+
+test('CA-16.10: si no hay tiempo para levantar el martillo antes de "Hefesto", avisa', () => {
+  assert.throws(() => planGestos([{ ini: 0, fin: 0.6 }, { ini: 0.6, fin: 3, martillo: true, marca: 0.8 }]), /no hay tiempo para levantar el martillo/);
+});

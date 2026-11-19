@@ -9,7 +9,8 @@
   const ANTES = 0.15;             // la transición arranca un poco antes de que empiece la línea
   const RETRASO = 0.07;           // s que la mano sale después del codo (2 cuadros)
   const ASIENTO = 5;              // grados máximos que la mano se pasa antes de asentarse
-  const MARTILLO_MIN = 1.5;       // una línea con martillo tiene que durar al menos esto (subir, golpear y volver)
+  const MARTILLO_MIN = 1.5;
+  const PREPARAR = 1.1;           // s antes del golpe al logo en que arranca a agarrar el martillo (transición + envión)       // una línea con martillo tiene que durar al menos esto (subir, golpear y volver)
 
   // Pose de cada brazo: dirección del brazo de arriba (sup), del antebrazo (ant) y qué mano lleva
   // reposo va espejado: la pieza es un brazo del lado izquierdo de la hoja (con el pulgar hacia el cuerpo de ese lado)
@@ -53,6 +54,15 @@
   function planGestos(lineas) {
     let anterior = 'reposo';
     return lineas.map((l, i) => {
+      if (l.martillo && l.marca !== undefined) {
+        // RN-16.7: golpe al logo cuando dice "Hefesto" (l.marca = cuándo empieza esa palabra). Como se dice apenas empieza
+        // la línea, el martillo se agarra y se levanta antes: la transición arranca PREPARAR s antes del golpe (al final
+        // de la línea anterior, pero no antes de que esa línea lleve 0,5 s).
+        const golpe = l.marca, desde = Math.max(golpe - PREPARAR, (lineas[i - 1]?.ini ?? -Infinity) + 0.5);
+        if (golpe - desde < PREPARAR - 1e-9) throw new Error(`línea ${i + 1}: no hay tiempo para levantar el martillo antes de "Hefesto" (hacen falta ${PREPARAR} s y hay ${(golpe - desde).toFixed(2)} s)`);
+        if (l.fin - golpe < 0.6) throw new Error(`línea ${i + 1}: después del golpe al logo hacen falta 0,6 s para volver`);
+        return { ini: l.ini, fin: l.fin, gesto: 'martillo', golpe, logo: true, desde };
+      }
       if (l.martillo) {
         if (l.fin - l.ini < MARTILLO_MIN) throw new Error(`línea ${i + 1}: dura ${(l.fin - l.ini).toFixed(1)} s y el martillo necesita ${MARTILLO_MIN} s (subir, golpear y volver)`);
         const golpe = clamp(l.golpe ?? (l.ini + l.fin) / 2, l.ini + 0.6, l.fin - 0.6);
@@ -68,7 +78,7 @@
   // Golpe de martillo (brazo derecho): lleva el martillo atrás (hacia la cabeza), baja girando hacia afuera hasta el
   // impacto (al costado, a la altura de la cintura: no contra la pierna), se queda un instante y vuelve por el mismo camino.
   // El martillo es largo: cada vez que pasa en horizontal (al bajar y al volver) el codo va pegado al cuerpo, si no se sale del cuadro.
-  const IMPACTO = { sup: 80, ant: 40 }, PEGADO = 100;
+  const IMPACTO = { sup: 80, ant: 46 }, PEGADO = 100;
   function golpe(p, t, t0) {
     const k = t - t0, base = p.sup; let { sup, ant } = p;
     if (k > -0.45 && k <= -0.08) { const e = suave(tramo(k, -0.45, -0.08)); sup += -14 * e; ant += -24 * e; }
@@ -89,11 +99,13 @@
   // Pose de los dos brazos en el instante t. habla: si la voz está sonando (las manos se mueven un poco).
   function poseBrazos(plan, t, { habla = false } = {}) {
     // Gesto vigente y el anterior (para la transición)
-    let i = plan.findIndex((l, k) => t < (plan[k + 1]?.ini ?? Infinity) - ANTES);
+    // cada gesto arranca su transición en l.desde (golpe al logo) o un poco antes de que empiece su línea
+    const arranque = (l) => l?.desde ?? (l ? l.ini - ANTES : Infinity);
+    let i = plan.findIndex((l, k) => t < arranque(plan[k + 1]));
     if (i < 0) i = plan.length - 1;
     const actual = plan[i], previo = plan[i - 1];
     const desde = previo ? POSES[previo.gesto] : POSES.reposo, hacia = POSES[actual.gesto];
-    const t0 = actual.ini - ANTES;
+    const t0 = arranque(actual);
     const res = {};
     for (const lado of ['der', 'izq']) {
       const a = desde[lado], b = hacia[lado], d = difAng(a.ant, b.ant);

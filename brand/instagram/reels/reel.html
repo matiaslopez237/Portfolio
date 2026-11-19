@@ -39,6 +39,8 @@
   #cta { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
   #cta .fondo { position: absolute; inset: 0; background: rgba(19,24,29,.94); }
   #cta .bloque { position: relative; text-align: center; }
+  /* Logo del martillazo (HU-16, RN-16.7): va detrás del muñeco (el martillo le pega por delante) y, al viajar al cierre, adelante */
+  #logoGolpe { position: absolute; left: 0; top: 0; width: 460px; transform-origin: 0 0; opacity: 0; pointer-events: none; }
   #cta img { width: 460px; display: block; margin: 0 auto 30px; filter: drop-shadow(0 30px 40px rgba(27,33,40,.9)); }
   #cta h2 { font-size: 100px; line-height: .95; }
   #cta .num { margin-top: 26px; font-size: 96px; color: #ff7a1a; text-shadow: 0 0 30px rgba(255,122,26,.5); }
@@ -54,6 +56,7 @@
   <div class="taller" id="taller"></div>
   <div class="velo"></div>
   <div class="fragua" id="fragua"></div>
+  <img id="logoGolpe" src="../recursos/logo-3d.webp" alt="" />
   <canvas id="muneco" width="1080" height="1920"></canvas>
   <canvas id="chispas" width="1080" height="1920"></canvas>
   <div class="marca cond"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg><span>Hefesto <b>Webs</b></span></div>
@@ -71,7 +74,8 @@
 <script>
 // ── Estado y armado (se llama una vez con los datos) ──
 const $ = (id) => document.getElementById(id);
-let D, L, chunks, palabras, items, accion, total, plan = null;
+let D, L, chunks, palabras, items, accion, total, plan = null, logo = null;
+const LOGO_ANCHO = 170;   // ancho del logo del martillazo (el del cierre mide 460)
 const VOZ = 1.5;          // la voz arranca al segundo 1,5: antes, el gancho solo (1 s entero a la vista)
 const CTA = 3.2;          // duración del cierre
 const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -97,7 +101,9 @@ window.armar = async (datos) => {
     cerrar();
     const dichas = palabras.slice(k0, k);
     const forj = dichas.find(p => norm(p.texto).startsWith("forj"));
-    tiemposLineas.push({ ini: dichas[0].inicio + VOZ, fin: dichas.at(-1).fin + VOZ, gesto: linea.gesto, martillo: linea.accion === "martillo", golpe: forj ? forj.inicio + VOZ : undefined });
+    // RN-16.7: si la línea del martillo dice "Hefesto", el golpe va al logo en esa palabra
+    const hef = linea.accion === "martillo" ? dichas.find(p => norm(p.texto).startsWith("hefest")) : null;
+    tiemposLineas.push({ ini: dichas[0].inicio + VOZ, fin: dichas.at(-1).fin + VOZ, gesto: linea.gesto, martillo: linea.accion === "martillo", golpe: forj ? forj.inicio + VOZ : undefined, marca: hef ? hef.inicio + VOZ : undefined });
     const inicioLinea = chunks.find(c => c.palabras.some(w => w.txt === linea.texto.split(/\s+/)[0]))?.palabras[0].ini;
     if (linea.item) items.push({ txt: linea.item, t: chunks.at(-1).palabras[0].ini });
     if (linea.accion === 'martillo') {
@@ -120,8 +126,19 @@ window.armar = async (datos) => {
   total = palabras.at(-1).fin + VOZ + 0.5 + CTA;
   await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
   await document.fonts.ready;
+  // Martillazo al logo (RN-16.7): dónde pega el martillo y dónde está el logo del cierre (con el cierre ya en su tamaño final)
+  const lineaLogo = plan?.find(l => l.logo);
+  logo = null;
+  if (lineaLogo) {
+    const tg = lineaLogo.golpe + 0.06, p0 = window.martilloV5(L, tg, window.Gestos.poseBrazos(plan, tg, { habla: 1 }));
+    const img = $('logoGolpe'), alto = LOGO_ANCHO * img.naturalHeight / img.naturalWidth;
+    const bloque = $('cta').querySelector('.bloque'), antes = bloque.style.transform; bloque.style.transform = 'scale(1)';
+    const rc = $('cta').querySelector('img').getBoundingClientRect(); bloque.style.transform = antes;
+    // el logo queda justo debajo de la cabeza del martillo (le pega en el borde de arriba)
+    logo = { golpe: lineaLogo.golpe, impacto: p0, x: p0.x, y: p0.y + alto * 0.42, ancho: LOGO_ANCHO, cierre: { x: rc.left + rc.width / 2, y: rc.top + rc.height / 2, ancho: rc.width } };
+  }
   const golpeV5 = plan?.find(l => l.gesto === "martillo")?.golpe ?? null;
-  return { total, voz: VOZ, golpe: accion ? accion.t : golpeV5, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+  return { total, voz: VOZ, golpe: accion ? accion.t : golpeV5, logo: !!logo, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
 };
 
 // ── Utilidades de tiempo ──
@@ -145,6 +162,26 @@ function chispas(g, t, x0, y0, t0, n, fuerza) {
 // ── Un fotograma ──
 let ultimoCuadro = null;
 // Muñeco v5: recorre todo el reel y devuelve hasta dónde llegaron las manos (CA-16.7)
+// Martillazo al logo: datos para los chequeos CA-16.11 y CA-16.12
+window.medirLogo = (paso = 1 / 30) => {
+  if (!logo) return null;
+  const caja = () => $('logoGolpe').getBoundingClientRect(), vis = (e) => +getComputedStyle(e).opacity;
+  window.cuadro(logo.golpe - 0.04); const antes = vis($('logoGolpe'));
+  window.cuadro(logo.golpe + 0.06); const r = caja(), p = logo.impacto;
+  const dist = Math.hypot(Math.max(r.left - p.x, 0, p.x - r.right), Math.max(r.top - p.y, 0, p.y - r.bottom));
+  const fin = total - CTA; let fuera = 0, tapa = 0, dos = 0;
+  for (let t = logo.golpe - 0.3; t < total; t += paso) {
+    window.cuadro(t);
+    const e = $('logoGolpe'), b = caja(), o = vis(e), ctaImg = vis($('cta')) * vis($('cta').querySelector('img'));
+    if (o > 0.05 && ctaImg > 0.05) dos++;
+    if (t < fin && o > 0.05) {
+      if (b.left < 0 || b.right > 1080 || b.bottom > 1920) fuera++;
+      const textos = [$('sub'), ...document.querySelectorAll('.item')].filter(x => vis(x) > 0.05).map(x => x.getBoundingClientRect().bottom);
+      if (b.top < Math.max(0, ...textos)) tapa++;
+    }
+  }
+  return { visibleAntesDelGolpe: antes, distanciaAlGolpe: dist, cuadrosFuera: fuera, cuadrosTapaTexto: tapa, cuadrosDosLogos: dos, caja: { x0: r.left, x1: r.right, y0: r.top, y1: r.bottom } };
+};
 window.medirManos = (paso = 1 / 30) => {
   // margen = cuánto queda la punta más alta de una mano por debajo del texto visible (subtítulo o cajitas). Negativo: lo tapa.
   const r = { margen: Infinity, tMargen: 0, izquierda: Infinity, derecha: -Infinity };
@@ -221,6 +258,24 @@ window.cuadro = (t) => {
   // Cierre
   const fin = total - CTA, cta = tramo(t, fin, fin + 0.35);
   $('cta').style.opacity = cta; $('cta').querySelector('.bloque').style.transform = `scale(${0.92 + 0.08 * ease(cta)})`;
+  // Martillazo al logo (RN-16.7): aparece antes del golpe, se pone al rojo y se enfría, y al entrar el cierre viaja a su lugar
+  if (logo) {
+    const img = $('logoGolpe'), aparece = ease(tramo(t, logo.golpe - 0.3, logo.golpe - 0.05));
+    const calor = t >= logo.golpe ? 1 - tramo(t, logo.golpe, logo.golpe + 1) : 0, k = t - logo.golpe;
+    const aplasta = k >= 0 && k < 0.15 ? 1 - 0.1 * Math.sin(Math.PI * k / 0.15) : 1;   // el golpe lo aplasta un poco
+    const viaje = ease(tramo(t, fin, fin + 0.5)), llego = t >= fin + 0.5;
+    const ancho = logo.ancho + (logo.cierre.ancho - logo.ancho) * viaje, e = ancho / 460;
+    const cx = logo.x + (logo.cierre.x - logo.x) * viaje, cy = logo.y + (logo.cierre.y - logo.y) * viaje;
+    const alto = ancho * img.naturalHeight / img.naturalWidth;
+    img.style.transform = `translate(${cx - ancho / 2}px, ${cy - alto / 2 + alto * (1 - aplasta)}px) scale(${e}, ${e * aplasta})`;
+    img.style.opacity = llego ? 0 : aparece;
+    img.style.zIndex = viaje > 0 ? 20 : 'auto';   // detrás del muñeco; adelante del cierre mientras viaja
+    img.style.filter = `drop-shadow(0 20px 30px rgba(27,33,40,.8)) brightness(${(1 + 0.9 * calor).toFixed(2)}) saturate(${(1 + 0.6 * calor).toFixed(2)}) drop-shadow(0 0 ${(40 * calor).toFixed(1)}px rgba(255,122,26,${(0.95 * calor).toFixed(2)}))`;
+    $('cta').querySelector('img').style.opacity = llego ? 1 : 0;   // nunca dos logos a la vez (CA-16.12)
+    // el texto del cierre entra cuando el logo ya llegó (si no, el logo le pasa por encima mientras viaja)
+    const texto = ease(tramo(t, fin + 0.4, fin + 0.75));
+    for (const e of $('cta').querySelectorAll('.bloque > :not(img)')) e.style.opacity = texto;
+  }
 };
 </script>
 </body>

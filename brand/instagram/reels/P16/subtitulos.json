@@ -1,7 +1,8 @@
 {
  "total": 25.137,
  "voz": 1.5,
- "golpe": 20.492,
+ "golpe": 19.442,
+ "logo": true,
  "gestos": [
   {
    "ini": 1.5,
@@ -42,7 +43,9 @@
    "ini": 19.267,
    "fin": 21.937,
    "gesto": "martillo",
-   "golpe": 20.492
+   "golpe": 19.442,
+   "logo": true,
+   "desde": 18.342
   }
  ],
  "chunks": [

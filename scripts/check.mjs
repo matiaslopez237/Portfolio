@@ -819,7 +819,34 @@ const chequeos = [
       return true;
     },
   },
+  {
+    ca: 'CA-16.11', desc: 'Martillazo al logo: el logo aparece antes del golpe, está donde pega el martillo (±30 px) y hasta el cierre queda dentro del video y debajo del texto',
+    run: () => logosDeReels((r, l) => [
+      l.visibleAntesDelGolpe > 0.05 ? null : 'el logo no aparece antes del golpe',
+      l.distanciaAlGolpe <= 30 ? null : `el logo está a ${l.distanciaAlGolpe.toFixed(0)} px de donde pega el martillo`,
+      l.cuadrosFuera === 0 ? null : `${l.cuadrosFuera} cuadros con el logo fuera del video`,
+      l.cuadrosTapaTexto === 0 ? null : `${l.cuadrosTapaTexto} cuadros con el logo tapando el texto`,
+    ]),
+  },
+  {
+    ca: 'CA-16.12', desc: 'Martillazo al logo: al entrar el cierre el logo viaja a su lugar y nunca se ven dos logos',
+    run: () => logosDeReels((r, l) => [l.cuadrosDosLogos === 0 ? null : `${l.cuadrosDosLogos} cuadros con dos logos`]),
+  },
 ];
+
+// Reels v5 con martillazo al logo (una línea con "accion": "martillo" que dice "Hefesto"): revisa su logo.json
+function logosDeReels(revisar) {
+  const reels = JSON.parse(leer('brand/instagram/reels/guiones.json')).reels.filter(r => r.muneco === 'v5' && r.lineas.some(l => l.accion === 'martillo' && /hefest/i.test(l.texto)));
+  if (!reels.length) throw new Error('no hay ningún reel v5 con martillazo al logo');
+  const malos = [];
+  for (const r of reels) {
+    const l = JSON.parse(leerOpcional(`brand/instagram/reels/${r.id}/logo.json`) ?? 'null');
+    if (!l) { malos.push(`${r.id}: falta logo.json (correr render.mjs ${r.id} --muestras)`); continue; }
+    for (const m of revisar(r, l)) if (m) malos.push(`${r.id}: ${m}`);
+  }
+  if (malos.length) throw new Error(malos.join('; '));
+  return true;
+}
 
 // PNG → píxeles RGBA (solo PNG de 8 bits RGBA sin entrelazar, que es lo que escribe el recorte del navegador)
 function leerPngRgba(ruta) {
