@@ -25,3 +25,5 @@ brand/instagram/reels/mascota/partes-extra-reposo/
 
 # HU-17: capturas del sitio para el teléfono del reel (render.mjs las vuelve a grabar si faltan)
 brand/instagram/reels/*/sitio/
+brand/instagram/reels/*/voz-final.mp3
+brand/instagram/reels/*/boca-final.json

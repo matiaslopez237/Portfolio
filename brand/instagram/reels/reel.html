@@ -146,7 +146,7 @@ window.armar = async (datos) => {
   primeraLinea = { ini: tiemposLineas[0].ini, fin: tiemposLineas[0].finVoz };
   // Cada gesto dura hasta que arranca la línea siguiente (la última, hasta 0,5 s después de la voz, cuando entra el cierre)
   tiemposLineas.forEach((l, i) => { l.fin = tiemposLineas[i + 1]?.ini ?? l.fin + 0.5; });
-  if (L.v5) { plan = window.Gestos.planGestos(tiemposLineas); accion = null; }
+  if (L.v5) { plan = window.Gestos.planGestos(tiemposLineas, { velocidad: datos.reel.velocidad ?? 1 }); accion = null; }
   // Teléfono (HU-17): plan de pantallas y capturas del sitio ya decodificadas (cuadro() dibuja sin esperar)
   planTel = tiemposLineas.some(l => 'pantalla' in l) ? window.Telefono.planTelefono(tiemposLineas) : null;
   if (planTel) await prepararTelefono(datos);

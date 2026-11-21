@@ -74,7 +74,7 @@ export function sacarRuidoFinal({ pcm, tasa }) {
   return { pcm: out, tasa, cortado: (pcm.length / 2 - hasta) / tasa };
 }
 
-function aMp3({ pcm, tasa }, destino) {
+export function aMp3({ pcm, tasa }, destino) {
   const tmp = destino + '.pcm'; writeFileSync(tmp, pcm);
   execFileSync(ffmpeg, ['-y', '-loglevel', 'error', '-f', 's16le', '-ar', String(tasa), '-ac', '1', '-i', tmp, '-b:a', '160k', destino]);
   rmSync(tmp);

@@ -51,15 +51,17 @@
 
   // Arma el plan del reel a partir de los tiempos de cada línea:
   // lineas = [{ ini, fin, gesto?, martillo?, golpe? }] (golpe = momento del martillazo, dentro de la línea)
-  function planGestos(lineas) {
+  // opciones.velocidad (HU-17, RN-17.9): con la voz acelerada, el martillo también se prepara más rápido
+  function planGestos(lineas, { velocidad = 1 } = {}) {
+    const preparar = PREPARAR / velocidad, margen = 0.5 / velocidad;
     let anterior = 'reposo';
     return lineas.map((l, i) => {
       if (l.martillo && l.marca !== undefined) {
         // RN-16.7: golpe al logo cuando dice "Hefesto" (l.marca = cuándo empieza esa palabra). Como se dice apenas empieza
         // la línea, el martillo se agarra y se levanta antes: la transición arranca PREPARAR s antes del golpe (al final
         // de la línea anterior, pero no antes de que esa línea lleve 0,5 s).
-        const golpe = l.marca, desde = Math.max(golpe - PREPARAR, (lineas[i - 1]?.ini ?? -Infinity) + 0.5);
-        if (golpe - desde < PREPARAR - 1e-9) throw new Error(`línea ${i + 1}: no hay tiempo para levantar el martillo antes de "Hefesto" (hacen falta ${PREPARAR} s y hay ${(golpe - desde).toFixed(2)} s)`);
+        const golpe = l.marca, desde = Math.max(golpe - preparar, (lineas[i - 1]?.ini ?? -Infinity) + margen);
+        if (golpe - desde < preparar - 1e-9) throw new Error(`línea ${i + 1}: no hay tiempo para levantar el martillo antes de "Hefesto" (hacen falta ${preparar.toFixed(2)} s y hay ${(golpe - desde).toFixed(2)} s)`);
         if (l.fin - golpe < 0.6) throw new Error(`línea ${i + 1}: después del golpe al logo hacen falta 0,6 s para volver`);
         return { ini: l.ini, fin: l.fin, gesto: 'martillo', golpe, logo: true, desde };
       }

@@ -32,7 +32,7 @@
   - identidad Forja;
   - el CTA fijo;
   - programar solo con el OK de Matias.
-- **RN-17.2 (duración):** el objetivo es **de 15 a 20 s**. Se aceptan hasta **22 s** cuando recortar empeora el guion (decisión de Matias, 2026-11-20: el dato de Buzzfy es un rango, no un corte exacto).
+- **RN-17.2 (duración):** de **10 a 22 s**, cuanto más ágil mejor (con la voz a x1,5 quedan entre 11 y 15 s). El mínimo bajó de 15 a 10 s el 2026-11-20, cuando Matias eligió x1,5. Se aceptan hasta **22 s** cuando recortar empeora el guion (decisión de Matias, 2026-11-20: el dato de Buzzfy es un rango, no un corte exacto).
 - **RN-17.3 (gancho en 3 s):** en los primeros 3 s ya se ve y se lee la promesa o el resultado, sin saludo. El texto del gancho aparece desde el segundo 0.
 - **RN-17.4 (grabación del sitio):** R3 y R5 muestran el sitio real en un celular. La grabación se hace con Playwright en tamaño de celular sobre la página pública. Se graba solo el recorrido hasta el link de WhatsApp: no se manda ningún mensaje ni se llena ningún formulario.
 - **RN-17.5 (contenido real):** solo datos de `PRODUCT.md` y de los sitios reales. Ninguna cifra de resultados ("más clientes", "x% más ventas") ni opiniones de clientes. Los 3 errores del R4 son distintos de los del R1 y del C2 (que ya cubren celular, botón de WhatsApp y dónde y cuándo), para no repetir el tema (cambio aprobado por Matias el 2026-11-20).
@@ -41,7 +41,7 @@
   - va en `textos.md` y nombra la palabra clave en los primeros 125 caracteres;
   - usa de 3 a 5 hashtags;
   - cierra pidiendo guardar o mandar (R3, R4, R5) o comentar PÁGINA (R6).
-- **RN-17.9 (velocidad, pedido de Matias 2026-11-20):** un reel puede pedir `"velocidad"` en `guiones.json` (por ejemplo 1,5). La voz se acelera sin cambiar el tono (ffmpeg `atempo`) y los subtítulos, la boca y los gestos siguen a la voz acelerada. Sin `"velocidad"`, la voz queda como sale de Gemini. Además, en todos los reels nuevos los silencios largos de la voz se acortan a 0,25 s como máximo (y el del principio a 0,1 s): Gemini a veces hace pausas dramáticas en el medio de una frase. Las palabras y la boca se vuelven a ubicar sobre la voz final. El R4 publicado el 20/11 queda como salió (decisión de Matias).
+- **RN-17.9 (velocidad, pedido de Matias 2026-11-20):** un reel puede pedir `"velocidad"` en `guiones.json`. Los reels nuevos van a **x1,5** (elección de Matias, 2026-11-20: "si son muy lentos no se ven"). La voz se acelera sin cambiar el tono (ffmpeg `atempo`) y los subtítulos, la boca y los gestos siguen a la voz acelerada. Sin `"velocidad"`, la voz queda como sale de Gemini. Además, en todos los reels nuevos los silencios largos de la voz se acortan a 0,25 s como máximo (y el del principio a 0,1 s): Gemini a veces hace pausas dramáticas en el medio de una frase. Las palabras y la boca se vuelven a ubicar sobre la voz final. El R4 publicado el 20/11 queda como salió (decisión de Matias).
 - **RN-17.8 (cómo se mide):** a las 48 h de cada reel se corre `ig_reel_checkup` de Buzzfy (mientras dure el acceso) y se anotan alcance a no seguidores, compartidos, guardados y clics en `brand/instagram/estrategia/`. Sin juzgar por los "me gusta" de conocidos.
 
 ## Casos límite
@@ -52,7 +52,7 @@
 ## Criterios de aceptación
 | CA | Dado / cuando / entonces | Se verifica con |
 | --- | --- | --- |
-| CA-17.1 | Dados R3 a R6, entonces cada uno es un MP4 de 1080×1920, de 15 a 22 s y de menos de 20 MB | Escenario BDD |
+| CA-17.1 | Dados R3 a R6, entonces cada uno es un MP4 de 1080×1920, de 10 a 22 s y de menos de 20 MB | Escenario BDD |
 | CA-17.2 | Dado cada reel, entonces tiene subtítulo o texto de gancho visible desde el segundo 0 y la primera línea del guion termina antes de los 3 s | Chequeo automático |
 | CA-17.3 | Dados los subtítulos de R3 a R6, entonces cumplen CA-15.3 (1,5 s o más, 12 palabras o menos, en la zona segura) y el último tramo muestra el CTA fijo | Chequeo automático |
 | CA-17.4 | Dado el texto de cada reel en `textos.md`, entonces tiene de 3 a 5 hashtags y su palabra clave en los primeros 125 caracteres | Chequeo automático |

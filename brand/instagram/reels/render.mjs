@@ -38,18 +38,35 @@ if (!existsSync(dir + 'palabras.json') || process.argv.includes('--voz')) {
 // Boca: Rhubarb Lip Sync escucha la voz y da la forma de la boca en cada momento (modo fonético: sirve para español).
 // Se busca en RHUBARB o en ~/.2d-character-sketch/rhubarb. Si no está, la boca sigue a las palabras y al volumen.
 const rhubarb = process.env.RHUBARB ?? `${homedir()}/.2d-character-sketch/rhubarb/rhubarb.exe`;
-if (existsSync(rhubarb) && (!existsSync(dir + 'boca.json') || statSync(dir + 'boca.json').mtimeMs < statSync(dir + 'voz.mp3').mtimeMs)) {
-  execFileSync(ffmpeg, ['-y', '-loglevel', 'error', '-i', dir + 'voz.mp3', '-ac', '1', '-ar', '16000', dir + 'voz.wav']);
+function bocaDe(mp3, json) {
+  if (!existsSync(rhubarb) || (existsSync(json) && statSync(json).mtimeMs >= statSync(mp3).mtimeMs)) return;
+  execFileSync(ffmpeg, ['-y', '-loglevel', 'error', '-i', mp3, '-ac', '1', '-ar', '16000', dir + 'voz.wav']);
   const r = JSON.parse(execFileSync(rhubarb, ['-r', 'phonetic', '-f', 'json', '--machineReadable', dir + 'voz.wav'], { maxBuffer: 1 << 26 }).toString());
-  writeFileSync(dir + 'boca.json', JSON.stringify(r.mouthCues));
+  writeFileSync(json, JSON.stringify(r.mouthCues));
   rmSync(dir + 'voz.wav');
   console.log(`boca: ${r.mouthCues.length} formas (Rhubarb)`);
 }
+bocaDe(dir + 'voz.mp3', dir + 'boca.json');
+const leerJson = (f) => existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : null;
+// RN-17.9: con "velocidad", la voz se acelera sin cambiar el tono (atempo) y se acortan sus pausas largas.
+// Las palabras y la boca se vuelven a ubicar sobre esa voz final (voz-final.mp3). Sin "velocidad", la voz queda como está.
+let vozFinal = dir + 'voz.mp3', voz = { palabras: leerJson(dir + 'palabras.json'), energia: leerJson(dir + 'energia.json'), boca: leerJson(dir + 'boca.json') };
+if (reel.velocidad) {
+  const { acortarPausas } = await import('./velocidad.mjs');
+  const { energia, alinear, aMp3 } = await import('./voz-gemini.mjs');
+  const pcm = execFileSync(ffmpeg, ['-loglevel', 'error', '-i', dir + 'voz.mp3', '-filter:a', `atempo=${reel.velocidad}`, '-f', 's16le', '-ac', '1', '-ar', '24000', '-'], { maxBuffer: 1 << 28 });
+  const a = acortarPausas({ pcm, tasa: 24000 });
+  vozFinal = dir + 'voz-final.mp3'; aMp3(a, vozFinal);
+  const ener = energia(a);
+  bocaDe(vozFinal, dir + 'boca-final.json');
+  voz = { palabras: alinear(reel.lineas.map(x => x.texto).join(' '), ener), energia: ener, boca: leerJson(dir + 'boca-final.json') };
+  console.log(`voz x${reel.velocidad}: ${(ener.length / 30).toFixed(1)} s (pausas acortadas: ${a.quitado.toFixed(2)} s)`);
+}
 const datos = {
   sitio,
-  boca: existsSync(dir + 'boca.json') ? JSON.parse(readFileSync(dir + 'boca.json', 'utf8')) : null,
-  reel, palabras: JSON.parse(readFileSync(dir + 'palabras.json', 'utf8')),
-  energia: existsSync(dir + 'energia.json') ? JSON.parse(readFileSync(dir + 'energia.json', 'utf8')) : null,
+  boca: voz.boca,
+  reel, palabras: voz.palabras,
+  energia: voz.energia,
   // Muñeco con codo (hoja v4). Piezas sueltas de mascota/partes-v4 (recortar-partes CRUDO=1); hombro y codo, de piezas.json.
   // escalaBrazo 0.81: el brazo del martillo de la hoja vino 19 % más grande que el brazo del cuerpo (medido: 270 vs 221 px de largo, 94 vs 76 px de ancho)
   muneco: munecoReel === 'v5' ? munecoV5() : (() => { const pz = JSON.parse(readFileSync(ruta('mascota/partes-v4/piezas.json'), 'utf8')).piezas; return {
@@ -106,7 +123,7 @@ if (muestras) {
 }
 
 const total = Math.ceil(info.total * FPS);
-const ff = spawn(ffmpeg, ['-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-itsoffset', String(info.voz), '-i', dir + 'voz.mp3',
+const ff = spawn(ffmpeg, ['-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', '-itsoffset', String(info.voz), '-i', vozFinal,
   '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '21', '-c:a', 'aac', '-b:a', '160k',
   '-t', (total / FPS).toFixed(2), '-movflags', '+faststart', dir + `${id}.mp4`], { stdio: ['pipe', 'ignore', 'inherit'] });
 for (let f = 0; f < total; f++) {

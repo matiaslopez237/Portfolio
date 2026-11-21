@@ -1,72 +1,72 @@
 {
- "total": 15.512,
+ "total": 11.684999999999999,
  "voz": 1,
  "ganchoDesde": 0,
  "primeraLinea": {
   "ini": 1,
-  "fin": 2.427
+  "fin": 1.9729999999999999
  },
- "cierre": 12.312000000000001,
- "golpe": 11.34,
+ "cierre": 8.485,
+ "golpe": 7.733,
  "logo": true,
  "gestos": [
   {
    "ini": 1,
-   "fin": 2.867,
+   "fin": 2.2,
    "gesto": "señala"
   },
   {
-   "ini": 2.867,
-   "fin": 4.867,
+   "ini": 2.2,
+   "fin": 3.567,
    "gesto": "palma"
   },
   {
-   "ini": 4.867,
-   "fin": 7.533,
+   "ini": 3.567,
+   "fin": 5.3,
    "gesto": "palma"
   },
   {
-   "ini": 7.533,
-   "fin": 10.3,
+   "ini": 5.3,
+   "fin": 7.033,
    "gesto": "señala"
   },
   {
-   "ini": 10.3,
-   "fin": 12.512,
+   "ini": 7.033,
+   "fin": 8.684999999999999,
    "gesto": "martillo",
-   "golpe": 11.34,
+   "golpe": 7.733,
    "logo": true,
-   "desde": 10.24
+   "desde": 6.999666666666666
   }
  ],
  "chunks": [
   {
    "ini": 0.65,
-   "fin": 2.517,
+   "fin": 2.15,
    "palabras": 4,
    "texto": "¿Tu página pierde clientes?"
   },
   {
-   "ini": 2.517,
-   "fin": 4.643000000000001,
+   "ini": 2.15,
+   "fin": 3.65,
    "palabras": 6,
    "texto": "Hicimos una lista de ocho preguntas."
   },
   {
-   "ini": 4.643000000000001,
-   "fin": 7.183000000000001,
+   "ini": 3.65,
+   "fin": 5.15,
    "palabras": 7,
    "texto": "La revisás vos, sin saber nada técnico."
   },
   {
-   "ini": 7.183000000000001,
-   "fin": 9.950000000000001,
+   "ini": 5.15,
+   "fin": 6.892,
    "palabras": 8,
    "texto": "Comentá PÁGINA y te la mandamos por mensaje."
   },
   {
-   "ini": 9.950000000000001,
-   "fin": 12.412,
+   "ini": 6.892,
+   "fin": 8.584999999999999,
    "palabras": 6,
    "texto": "Gratis, de parte de Hefesto Webs."
   }

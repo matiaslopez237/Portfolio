@@ -157,7 +157,8 @@
      "marca": "tu página",
      "accion": "martillo"
     }
-   ]
+   ],
+   "velocidad": 1.5
   },
   {
    "id": "R4",
@@ -280,7 +281,8 @@
      "accion": "martillo",
      "pantalla": false
     }
-   ]
+   ],
+   "velocidad": 1.5
   },
   {
    "id": "R6",
@@ -327,7 +329,8 @@
      "accion": "martillo",
      "pantalla": false
     }
-   ]
+   ],
+   "velocidad": 1.5
   }
  ]
 }
