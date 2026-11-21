@@ -30,3 +30,13 @@ test('CA-17.8: el silencio del principio queda en 0,1 s como mucho', () => {
   const r = acortarPausas({ pcm: audio([[0.5, 0], [0.3, 1]]), tasa: TASA }, { pausaMax: 0.25 });
   assert.ok(dur(r.pcm) <= 0.41, `dura ${dur(r.pcm).toFixed(3)} s`);
 });
+
+// RN-17.9: con la voz acelerada, los gestos también: el martillo se levanta en PREPARAR / velocidad
+import { createRequire } from 'node:module';
+const { planGestos } = createRequire(import.meta.url)('../brand/instagram/reels/gestos.js');
+test('CA-17.8: con velocidad 1,5 el martillo se prepara en 1,1 / 1,5 s antes de "Hefesto" (sin velocidad, sigue pidiendo 1,1 s)', () => {
+  const lineas = [{ ini: 1, fin: 2 }, { ini: 2, fin: 4, martillo: true, marca: 2.2 }];
+  assert.throws(() => planGestos(lineas), /no hay tiempo para levantar el martillo/);
+  const plan = planGestos(lineas, { velocidad: 1.5 });
+  assert.ok(Math.abs(plan[1].golpe - plan[1].desde - 1.1 / 1.5) < 1e-9, `se prepara en ${(plan[1].golpe - plan[1].desde).toFixed(3)} s`);
+});
