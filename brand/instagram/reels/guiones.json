@@ -1,96 +1,333 @@
 {
-  "_nota": "Guiones de los reels con Hefesto (HU-15). Cada línea es un subtítulo; 'marca' resalta una palabra en naranja; 'accion' dispara un gesto (martillo). Voz: \"gemini:<voz>\" usa Gemini TTS (voz-gemini.mjs); otra cosa, edge-tts (voz.py). Se generan con node brand/instagram/reels/render.mjs <id>.",
-  "reels": [
+ "_nota": "Guiones de los reels con Hefesto (HU-15). Cada línea es un subtítulo; 'marca' resalta una palabra en naranja; 'accion' dispara un gesto (martillo). Voz: \"gemini:<voz>\" usa Gemini TTS (voz-gemini.mjs); otra cosa, edge-tts (voz.py). Se generan con node brand/instagram/reels/render.mjs <id>.",
+ "reels": [
+  {
+   "id": "R1",
+   "titulo": "3 cosas que tu página tiene que tener",
+   "voz": "gemini:Algenib",
+   "gancho": [
+    "3 cosas que tu página",
+    "tiene que *tener*"
+   ],
+   "lineas": [
     {
-      "id": "R1",
-      "titulo": "3 cosas que tu página tiene que tener",
-      "voz": "gemini:Algenib",
-      "gancho": [
-        "3 cosas que tu página",
-        "tiene que *tener*"
-      ],
-      "lineas": [
-        {
-          "texto": "¿Tenés un negocio? Tu página tiene que tener tres cosas, sí o sí.",
-          "marca": "tres cosas"
-        },
-        {
-          "texto": "Uno: un botón de WhatsApp. Si tienen que buscar tu número, se van.",
-          "marca": "WhatsApp",
-          "item": "1 · Botón de WhatsApp"
-        },
-        {
-          "texto": "Dos: que se vea bien en el celular.",
-          "marca": "celular",
-          "item": "2 · Se ve bien en el celular"
-        },
-        {
-          "texto": "Tres: dónde estás y cuándo atendés.",
-          "marca": "cuándo atendés",
-          "item": "3 · Dónde y cuándo"
-        },
-        {
-          "texto": "¿La tuya no las tiene? En Hefesto Webs te la forjamos a medida.",
-          "marca": "a medida",
-          "accion": "martillo"
-        }
-      ]
+     "texto": "¿Tenés un negocio? Tu página tiene que tener tres cosas, sí o sí.",
+     "marca": "tres cosas"
     },
     {
-      "id": "R2",
-      "titulo": "Instagram no alcanza",
-      "voz": "gemini:Algenib",
-      "gancho": [
-        "Tu Instagram no es tuyo.",
-        "Tu *página web*, sí."
-      ],
-      "lineas": [
-        {
-          "texto": "Tu Instagram no es tuyo.",
-          "marca": "no es tuyo",
-          "gesto": "señala"
-        },
-        {
-          "texto": "Tu página web para tu negocio, sí.",
-          "marca": "página web",
-          "gesto": "palma"
-        },
-        {
-          "texto": "Si te bloquean la cuenta, desaparecés.",
-          "marca": "desaparecés",
-          "gesto": "explica"
-        },
-        {
-          "texto": "Dominio propio, como Quiropraxia Cipolletti.",
-          "marca": "Quiropraxia Cipolletti",
-          "item": "1 · Dominio propio",
-          "gesto": "uno"
-        },
-        {
-          "texto": "Tus servicios y precios, siempre a mano.",
-          "marca": "a mano",
-          "item": "2 · Servicios y precios",
-          "gesto": "dos"
-        },
-        {
-          "texto": "Y un botón de WhatsApp para que te escriban.",
-          "marca": "WhatsApp",
-          "item": "3 · Botón de WhatsApp",
-          "gesto": "tres"
-        },
-        {
-          "texto": "Instagram suma. Tu página es tuya.",
-          "marca": "tuya",
-          "gesto": "explica"
-        },
-        {
-          "texto": "En Hefesto Webs te la forjamos a medida.",
-          "marca": "a medida",
-          "accion": "martillo"
-        }
-      ],
-      "muneco": "v5",
-      "cola": 0.3
+     "texto": "Uno: un botón de WhatsApp. Si tienen que buscar tu número, se van.",
+     "marca": "WhatsApp",
+     "item": "1 · Botón de WhatsApp"
+    },
+    {
+     "texto": "Dos: que se vea bien en el celular.",
+     "marca": "celular",
+     "item": "2 · Se ve bien en el celular"
+    },
+    {
+     "texto": "Tres: dónde estás y cuándo atendés.",
+     "marca": "cuándo atendés",
+     "item": "3 · Dónde y cuándo"
+    },
+    {
+     "texto": "¿La tuya no las tiene? En Hefesto Webs te la forjamos a medida.",
+     "marca": "a medida",
+     "accion": "martillo"
     }
-  ]
+   ]
+  },
+  {
+   "id": "R2",
+   "titulo": "Instagram no alcanza",
+   "voz": "gemini:Algenib",
+   "gancho": [
+    "Tu Instagram no es tuyo.",
+    "Tu *página web*, sí."
+   ],
+   "lineas": [
+    {
+     "texto": "Tu Instagram no es tuyo.",
+     "marca": "no es tuyo",
+     "gesto": "señala"
+    },
+    {
+     "texto": "Tu página web para tu negocio, sí.",
+     "marca": "página web",
+     "gesto": "palma"
+    },
+    {
+     "texto": "Si te bloquean la cuenta, desaparecés.",
+     "marca": "desaparecés",
+     "gesto": "explica"
+    },
+    {
+     "texto": "Dominio propio, como Quiropraxia Cipolletti.",
+     "marca": "Quiropraxia Cipolletti",
+     "item": "1 · Dominio propio",
+     "gesto": "uno"
+    },
+    {
+     "texto": "Tus servicios y precios, siempre a mano.",
+     "marca": "a mano",
+     "item": "2 · Servicios y precios",
+     "gesto": "dos"
+    },
+    {
+     "texto": "Y un botón de WhatsApp para que te escriban.",
+     "marca": "WhatsApp",
+     "item": "3 · Botón de WhatsApp",
+     "gesto": "tres"
+    },
+    {
+     "texto": "Instagram suma. Tu página es tuya.",
+     "marca": "tuya",
+     "gesto": "explica"
+    },
+    {
+     "texto": "En Hefesto Webs te la forjamos a medida.",
+     "marca": "a medida",
+     "accion": "martillo"
+    }
+   ],
+   "muneco": "v5",
+   "cola": 0.3
+  },
+  {
+   "id": "R3",
+   "titulo": "Así se pide turno",
+   "clave": "pedir turno",
+   "voz": "gemini:Algenib",
+   "muneco": "v5",
+   "cola": 0.3,
+   "inicioVoz": 1,
+   "sitio": {
+    "url": "https://quiropraxiacipolletti.com",
+    "paradas": [
+     0,
+     1830
+    ],
+    "contacto": "Quiropraxia Cipolletti"
+   },
+   "gancho": [
+    "Así pide *turno*",
+    "un paciente"
+   ],
+   "lineas": [
+    {
+     "texto": "Así pide turno un paciente.",
+     "marca": "turno",
+     "gesto": "señala",
+     "pantalla": {
+      "sitio": 0
+     }
+    },
+    {
+     "texto": "Entra a la página y mira los servicios.",
+     "marca": "servicios",
+     "gesto": "palma",
+     "pantalla": {
+      "sitio": 1830
+     }
+    },
+    {
+     "texto": "Toca el botón de WhatsApp.",
+     "marca": "WhatsApp",
+     "gesto": "señala",
+     "pantalla": {
+      "sitio": 1830,
+      "toque": true
+     }
+    },
+    {
+     "texto": "Y el mensaje ya está escrito.",
+     "marca": "ya está escrito",
+     "gesto": "palma",
+     "pantalla": {
+      "chat": "sitio"
+     }
+    },
+    {
+     "texto": "Sin buscar el número.",
+     "marca": "número",
+     "gesto": "explica",
+     "pantalla": false
+    },
+    {
+     "texto": "En Hefesto Webs te la forjamos a medida.",
+     "marca": "a medida",
+     "accion": "martillo"
+    }
+   ]
+  },
+  {
+   "id": "R4",
+   "titulo": "3 errores que espantan clientes",
+   "clave": "página web",
+   "voz": "gemini:Algenib",
+   "muneco": "v5",
+   "cola": 0.3,
+   "inicioVoz": 1,
+   "gancho": [
+    "3 errores que",
+    "*espantan* clientes"
+   ],
+   "lineas": [
+    {
+     "texto": "Esto espanta clientes.",
+     "marca": "espanta",
+     "gesto": "señala"
+    },
+    {
+     "texto": "Uno: no dice qué hacés en la primera pantalla.",
+     "marca": "qué hacés",
+     "item": "1 · No dice qué hacés",
+     "gesto": "uno"
+    },
+    {
+     "texto": "Dos: tarda en cargar con datos del celular.",
+     "marca": "tarda",
+     "item": "2 · Tarda en cargar",
+     "gesto": "dos"
+    },
+    {
+     "texto": "Tres: no muestra tus servicios.",
+     "marca": "servicios",
+     "item": "3 · No muestra servicios",
+     "gesto": "tres"
+    },
+    {
+     "texto": "En Hefesto Webs te la forjamos a medida.",
+     "marca": "a medida",
+     "accion": "martillo"
+    }
+   ]
+  },
+  {
+   "id": "R5",
+   "titulo": "Antes y después: Quiropraxia Cipolletti",
+   "clave": "página web para tu consultorio",
+   "voz": "gemini:Algenib",
+   "muneco": "v5",
+   "cola": 0.3,
+   "inicioVoz": 1,
+   "sitio": {
+    "url": "https://quiropraxiacipolletti.com",
+    "paradas": [
+     0,
+     1830
+    ],
+    "contacto": "Quiropraxia Cipolletti"
+   },
+   "gancho": [
+    "Antes: todo por *WhatsApp*.",
+    "Ahora: su *página*."
+   ],
+   "lineas": [
+    {
+     "texto": "Antes, todo por WhatsApp.",
+     "marca": "WhatsApp",
+     "gesto": "palma",
+     "pantalla": {
+      "chat": {
+       "contacto": "Consultas",
+       "mensajes": [
+        {
+         "texto": "Hola, ¿qué días atienden?"
+        },
+        {
+         "texto": "¿Cuánto sale la sesión?"
+        },
+        {
+         "texto": "¿Dónde queda el consultorio?"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "texto": "Sin página, cada paciente tiene que preguntar todo.",
+     "marca": "preguntar todo",
+     "gesto": "señala"
+    },
+    {
+     "texto": "Ahora, Quiropraxia Cipolletti tiene su página.",
+     "marca": "su página",
+     "gesto": "uno",
+     "pantalla": {
+      "sitio": 0
+     }
+    },
+    {
+     "texto": "Con dominio propio y sus servicios.",
+     "marca": "dominio propio",
+     "gesto": "palma",
+     "pantalla": {
+      "sitio": 1830
+     }
+    },
+    {
+     "texto": "Y un botón para pedir turno.",
+     "marca": "pedir turno",
+     "gesto": "señala",
+     "pantalla": {
+      "sitio": 1830,
+      "toque": true
+     }
+    },
+    {
+     "texto": "En Hefesto Webs te la forjamos a medida.",
+     "marca": "a medida",
+     "accion": "martillo",
+     "pantalla": false
+    }
+   ]
+  },
+  {
+   "id": "R6",
+   "titulo": "Lista gratis para revisar tu web",
+   "clave": "revisar tu página web",
+   "voz": "gemini:Algenib",
+   "muneco": "v5",
+   "cola": 0.3,
+   "inicioVoz": 1,
+   "gancho": [
+    "¿Tu página *pierde*",
+    "clientes?"
+   ],
+   "lineas": [
+    {
+     "texto": "¿Tu página pierde clientes?",
+     "marca": "pierde",
+     "gesto": "señala"
+    },
+    {
+     "texto": "Hicimos una lista de ocho preguntas.",
+     "marca": "ocho preguntas",
+     "gesto": "palma",
+     "pantalla": {
+      "imagen": {
+       "archivo": "recursos/lista-revisa-tu-web.png",
+       "difuminada": true
+      }
+     }
+    },
+    {
+     "texto": "La revisás vos, sin saber nada técnico.",
+     "marca": "vos",
+     "gesto": "palma"
+    },
+    {
+     "texto": "Comentá PÁGINA y te la mandamos por mensaje.",
+     "marca": "PÁGINA",
+     "gesto": "señala"
+    },
+    {
+     "texto": "Gratis, de parte de Hefesto Webs.",
+     "marca": "Gratis",
+     "accion": "martillo",
+     "pantalla": false
+    }
+   ]
+  }
+ ]
 }

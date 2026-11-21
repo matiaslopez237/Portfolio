@@ -22,3 +22,6 @@ brand/instagram/reels/mascota/hoja-partes-v5.jpg
 brand/instagram/reels/mascota/partes-v5/
 brand/instagram/reels/mascota/extra-reposo.png
 brand/instagram/reels/mascota/partes-extra-reposo/
+
+# HU-17: capturas del sitio para el teléfono del reel (render.mjs las vuelve a grabar si faltan)
+brand/instagram/reels/*/sitio/

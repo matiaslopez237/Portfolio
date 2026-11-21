@@ -373,3 +373,63 @@ Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
 
 #paginawebparatunegocio #paginaweb #paginasweb #negocioslocales #emprendedores
 ```
+
+## Reel R3 · Así se pide turno
+
+```texto
+Pedir turno por WhatsApp desde la página, en un toque.
+
+Así lo hace un paciente en quiropraxiacipolletti.com: entra desde el celular, mira los servicios, toca el botón de WhatsApp y el mensaje "Hola, quiero reservar un turno" ya está escrito. No tiene que buscar el número.
+
+¿Tu negocio da turnos? Guardalo, o mandáselo a alguien que atienda con turnos.
+
+En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+
+#paginaweb #turnosonline #consultorios #negocioslocales
+```
+
+## Reel R4 · 3 errores que espantan clientes
+
+```texto
+Página web: 3 errores que espantan clientes. Guardalo y revisá la tuya.
+
+1. No dice qué hacés en la primera pantalla.
+2. Tarda en cargar con datos del celular.
+3. No muestra tus servicios.
+
+Si no entienden rápido, se van. ¿Conocés a alguien con una página así? Mandáselo.
+
+En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+
+#paginaweb #emprendedores #negocioslocales #diseñoweb
+```
+
+## Reel R5 · Antes y después: Quiropraxia Cipolletti
+
+```texto
+Página web para tu consultorio: el antes y el después de Quiropraxia Cipolletti.
+
+Antes atendían solo por Instagram y WhatsApp. Sin página, cada paciente tiene que preguntar todo por mensaje.
+
+Ahora tienen quiropraxiacipolletti.com: dominio propio, sus servicios a la vista y un botón para pedir turno por WhatsApp.
+
+¿Conocés a alguien con un consultorio que todavía no tiene página? Mandáselo.
+
+En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+
+#paginaweb #consultorios #salud #negocioslocales
+```
+
+## Reel R6 · Lista gratis para revisar tu web
+
+```texto
+Revisar tu página web en 8 preguntas, sin saber nada técnico. Comentá PÁGINA y te mando la lista gratis por mensaje.
+
+Son preguntas simples: ¿se ve bien en el celular?, ¿tiene un botón de WhatsApp?, ¿dice qué hacés en la primera pantalla?… y 5 más.
+
+¿Todavía no tenés página? La lista también te sirve para saber qué pedir.
+
+En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+
+#paginaweb #emprendedores #negocioslocales #consejos
+```

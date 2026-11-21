@@ -1,0 +1,167 @@
+[
+ {
+  "texto": "Esto",
+  "inicio": 0,
+  "fin": 0.352
+ },
+ {
+  "texto": "espanta",
+  "inicio": 0.382,
+  "fin": 0.926
+ },
+ {
+  "texto": "clientes",
+  "inicio": 0.973,
+  "fin": 1.581
+ },
+ {
+  "texto": "Uno",
+  "inicio": 1.933,
+  "fin": 2.148
+ },
+ {
+  "texto": "no",
+  "inicio": 2.567,
+  "fin": 2.691
+ },
+ {
+  "texto": "dice",
+  "inicio": 2.701,
+  "fin": 2.896
+ },
+ {
+  "texto": "qué",
+  "inicio": 2.913,
+  "fin": 3.073
+ },
+ {
+  "texto": "hacés",
+  "inicio": 3.087,
+  "fin": 3.317
+ },
+ {
+  "texto": "en",
+  "inicio": 3.337,
+  "fin": 3.461
+ },
+ {
+  "texto": "la",
+  "inicio": 3.472,
+  "fin": 3.596
+ },
+ {
+  "texto": "primera",
+  "inicio": 3.607,
+  "fin": 3.908
+ },
+ {
+  "texto": "pantalla",
+  "inicio": 3.934,
+  "fin": 4.271
+ },
+ {
+  "texto": "Dos",
+  "inicio": 4.867,
+  "fin": 5.143
+ },
+ {
+  "texto": "tarda",
+  "inicio": 5.567,
+  "fin": 5.783
+ },
+ {
+  "texto": "en",
+  "inicio": 5.802,
+  "fin": 5.918
+ },
+ {
+  "texto": "cargar",
+  "inicio": 5.928,
+  "fin": 6.178
+ },
+ {
+  "texto": "con",
+  "inicio": 6.199,
+  "fin": 6.349
+ },
+ {
+  "texto": "datos",
+  "inicio": 6.362,
+  "fin": 6.578
+ },
+ {
+  "texto": "del",
+  "inicio": 6.597,
+  "fin": 6.746
+ },
+ {
+  "texto": "celular",
+  "inicio": 6.759,
+  "fin": 7.042
+ },
+ {
+  "texto": "Tres",
+  "inicio": 7.833,
+  "fin": 8.079
+ },
+ {
+  "texto": "no",
+  "inicio": 8.5,
+  "fin": 8.647
+ },
+ {
+  "texto": "muestra",
+  "inicio": 8.66,
+  "fin": 9.017
+ },
+ {
+  "texto": "tus",
+  "inicio": 9.048,
+  "fin": 9.237
+ },
+ {
+  "texto": "servicios",
+  "inicio": 9.254,
+  "fin": 9.695
+ },
+ {
+  "texto": "En",
+  "inicio": 10.567,
+  "fin": 10.737
+ },
+ {
+  "texto": "Hefesto",
+  "inicio": 10.752,
+  "fin": 11.167
+ },
+ {
+  "texto": "Webs",
+  "inicio": 11.203,
+  "fin": 11.471
+ },
+ {
+  "texto": "te",
+  "inicio": 11.495,
+  "fin": 11.665
+ },
+ {
+  "texto": "la",
+  "inicio": 11.68,
+  "fin": 11.851
+ },
+ {
+  "texto": "forjamos",
+  "inicio": 11.866,
+  "fin": 12.329
+ },
+ {
+  "texto": "a",
+  "inicio": 12.37,
+  "fin": 12.492
+ },
+ {
+  "texto": "medida",
+  "inicio": 12.502,
+  "fin": 12.868
+ }
+]

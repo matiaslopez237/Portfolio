@@ -32,7 +32,8 @@ test('CA-17.3: una línea sin "pantalla" mantiene la anterior; "pantalla": false
 test('CA-17.3: el teléfono entra y sale suave (nunca salta de 0 a 1 en un cuadro)', () => {
   let maxSalto = 0, prev = estadoTelefono(plan, 0).visible;
   for (let t = 0; t <= 11; t += 1 / 30) { const v = estadoTelefono(plan, t).visible; maxSalto = Math.max(maxSalto, Math.abs(v - prev)); prev = v; }
-  assert.ok(maxSalto <= 1 / (TRANSICION * 30) + 1e-6, `salto de ${maxSalto.toFixed(3)} en un cuadro`);
+  // con curva suave la pendiente máxima es 1,5 veces la de una recta
+  assert.ok(maxSalto <= 1.5 / (TRANSICION * 30) + 1e-6, `salto de ${maxSalto.toFixed(3)} en un cuadro`);
 });
 
 test('CA-17.3: el scroll va de 0 a 1900 sin saltos y llega antes de que termine la línea', () => {

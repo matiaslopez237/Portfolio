@@ -1,0 +1,85 @@
+{
+ "total": 15.240000000000002,
+ "voz": 1,
+ "ganchoDesde": 0,
+ "primeraLinea": {
+  "ini": 1,
+  "fin": 2.819
+ },
+ "cierre": 12.040000000000003,
+ "golpe": 9.987,
+ "logo": true,
+ "gestos": [
+  {
+   "ini": 1,
+   "fin": 3.067,
+   "gesto": "señala"
+  },
+  {
+   "ini": 3.067,
+   "fin": 5.4,
+   "gesto": "palma"
+  },
+  {
+   "ini": 5.4,
+   "fin": 6.867,
+   "gesto": "señala"
+  },
+  {
+   "ini": 6.867,
+   "fin": 8.333,
+   "gesto": "palma"
+  },
+  {
+   "ini": 8.333,
+   "fin": 9.833,
+   "gesto": "explica"
+  },
+  {
+   "ini": 9.833,
+   "fin": 12.24,
+   "gesto": "martillo",
+   "golpe": 9.987,
+   "logo": true,
+   "desde": 8.887
+  }
+ ],
+ "chunks": [
+  {
+   "ini": 0.65,
+   "fin": 2.899,
+   "palabras": 5,
+   "texto": "Así pide turno un paciente."
+  },
+  {
+   "ini": 2.899,
+   "fin": 5.050000000000001,
+   "palabras": 8,
+   "texto": "Entra a la página y mira los servicios."
+  },
+  {
+   "ini": 5.050000000000001,
+   "fin": 6.550000000000001,
+   "palabras": 5,
+   "texto": "Toca el botón de WhatsApp."
+  },
+  {
+   "ini": 6.550000000000001,
+   "fin": 8.089,
+   "palabras": 6,
+   "texto": "Y el mensaje ya está escrito."
+  },
+  {
+   "ini": 8.089,
+   "fin": 9.589,
+   "palabras": 4,
+   "texto": "Sin buscar el número."
+  },
+  {
+   "ini": 9.589,
+   "fin": 12.14,
+   "palabras": 8,
+   "texto": "En Hefesto Webs te la forjamos a medida."
+  }
+ ]
+}

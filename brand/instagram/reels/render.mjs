@@ -16,8 +16,20 @@ if (!reel) { console.error(`no hay un reel "${id}" en guiones.json`); process.ex
 // HU-16: el guion se revisa antes de generar la voz (gestos válidos, muñeco v4 o v5)
 const { validarGuion } = createRequire(import.meta.url)('./gestos.js');
 let munecoReel;
-try { munecoReel = validarGuion(reel); } catch (e) { console.error('✗ ' + e.message); process.exit(1); }
+// HU-17: pantallas del teléfono (sitio, chat, imagen)
+const { validarPantallas } = createRequire(import.meta.url)('./telefono.js');
+try { munecoReel = validarGuion(reel); validarPantallas(reel); } catch (e) { console.error('✗ ' + e.message); process.exit(1); }
 const dir = ruta(`${id}/`);
+// HU-17: si el reel muestra un sitio real, se graba en tamaño celular (una vez; con --sitio se vuelve a grabar)
+let sitio = null;
+if (reel.sitio) {
+  if (!existsSync(dir + 'sitio/sitio.json') || process.argv.includes('--sitio')) {
+    const { grabarSitio } = await import('./grabar-sitio.mjs');
+    const r = await grabarSitio({ ...reel.sitio, salida: dir + 'sitio/' });
+    console.log(`sitio: ${r.frames.length} capturas de ${r.url} (${r.bloqueados} pedidos a WhatsApp bloqueados)`);
+  }
+  sitio = { ...JSON.parse(readFileSync(dir + 'sitio/sitio.json', 'utf8')), base: `/reels/${id}/sitio/` };
+}
 // Voz: "gemini:<voz>" → Gemini TTS (voz-gemini.mjs, con energia.json para la boca); si no, edge-tts (voz.py)
 if (!existsSync(dir + 'palabras.json') || process.argv.includes('--voz')) {
   if (/^gemini:/.test(reel.voz)) execFileSync(process.execPath, [ruta('voz-gemini.mjs'), '--reel', id], { stdio: 'inherit' });
@@ -34,6 +46,7 @@ if (existsSync(rhubarb) && (!existsSync(dir + 'boca.json') || statSync(dir + 'bo
   console.log(`boca: ${r.mouthCues.length} formas (Rhubarb)`);
 }
 const datos = {
+  sitio,
   boca: existsSync(dir + 'boca.json') ? JSON.parse(readFileSync(dir + 'boca.json', 'utf8')) : null,
   reel, palabras: JSON.parse(readFileSync(dir + 'palabras.json', 'utf8')),
   energia: existsSync(dir + 'energia.json') ? JSON.parse(readFileSync(dir + 'energia.json', 'utf8')) : null,
@@ -50,7 +63,7 @@ function munecoV5() { return JSON.parse(readFileSync(ruta('muneco-v5.json'), 'ut
 // Servidor local mínimo (con file:// el navegador no deja leer los píxeles de las imágenes)
 const { createServer } = await import('node:http');
 const raizInstagram = fileURLToPath(new URL('../', aqui));
-const tipos = { '.js': 'text/javascript', '.html': 'text/html', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.json': 'application/json' };
+const tipos = { '.jpg': 'image/jpeg', '.js': 'text/javascript', '.html': 'text/html', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.json': 'application/json' };
 const srv = createServer((req, res) => {
   const f = raizInstagram + decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, '');
   if (!existsSync(f) || statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
@@ -65,6 +78,9 @@ await p.goto(`http://localhost:${puerto}/reels/reel.html`, { waitUntil: 'network
 const info = await p.evaluate((d) => window.armar(d), datos);
 writeFileSync(dir + 'subtitulos.json', JSON.stringify(info, null, 1));
 console.log(`${id}: ${info.total.toFixed(1)} s, ${info.chunks.length} subtítulos`);
+// Teléfono (HU-17): dónde queda y si tapa el subtítulo (lo lee el escenario CA-17.3)
+const tel = await p.evaluate(() => window.medirTelefono());
+if (tel) { writeFileSync(dir + 'telefono.json', JSON.stringify(tel, null, 1)); console.log(`teléfono: de y=${tel.caja.y0.toFixed(0)} a y=${tel.caja.y1.toFixed(0)}, ${tel.cuadrosTapaTexto} cuadros tapando el subtítulo`); }
 // Muñeco v5: hasta dónde llegan las manos en todo el reel (lo lee el chequeo CA-16.7)
 if (munecoReel === 'v5') {
   const manos = await p.evaluate(() => window.medirManos());

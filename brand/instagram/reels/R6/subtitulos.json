@@ -1,0 +1,74 @@
+{
+ "total": 15.512,
+ "voz": 1,
+ "ganchoDesde": 0,
+ "primeraLinea": {
+  "ini": 1,
+  "fin": 2.427
+ },
+ "cierre": 12.312000000000001,
+ "golpe": 11.34,
+ "logo": true,
+ "gestos": [
+  {
+   "ini": 1,
+   "fin": 2.867,
+   "gesto": "señala"
+  },
+  {
+   "ini": 2.867,
+   "fin": 4.867,
+   "gesto": "palma"
+  },
+  {
+   "ini": 4.867,
+   "fin": 7.533,
+   "gesto": "palma"
+  },
+  {
+   "ini": 7.533,
+   "fin": 10.3,
+   "gesto": "señala"
+  },
+  {
+   "ini": 10.3,
+   "fin": 12.512,
+   "gesto": "martillo",
+   "golpe": 11.34,
+   "logo": true,
+   "desde": 10.24
+  }
+ ],
+ "chunks": [
+  {
+   "ini": 0.65,
+   "fin": 2.517,
+   "palabras": 4,
+   "texto": "¿Tu página pierde clientes?"
+  },
+  {
+   "ini": 2.517,
+   "fin": 4.643000000000001,
+   "palabras": 6,
+   "texto": "Hicimos una lista de ocho preguntas."
+  },
+  {
+   "ini": 4.643000000000001,
+   "fin": 7.183000000000001,
+   "palabras": 7,
+   "texto": "La revisás vos, sin saber nada técnico."
+  },
+  {
+   "ini": 7.183000000000001,
+   "fin": 9.950000000000001,
+   "palabras": 8,
+   "texto": "Comentá PÁGINA y te la mandamos por mensaje."
+  },
+  {
+   "ini": 9.950000000000001,
+   "fin": 12.412,
+   "palabras": 6,
+   "texto": "Gratis, de parte de Hefesto Webs."
+  }
+ ]
+}

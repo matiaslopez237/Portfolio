@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Lista · Revisá tu página web</title>
+<!--
+  HU-17 (RN-17.6): regalo del R6. Se exporta a lista-revisa-tu-web.png (1080×1350) con:
+  node brand/instagram/recursos/exportar-lista.mjs
+  Colores de brand/tokens.json, estilo Forja. Solo preguntas que el dueño puede revisar solo, sin jerga.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #1b2128; color: #eef1f4; font-family: 'Public Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  .cond { font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; text-transform: uppercase; }
+  em { font-style: normal; color: #ff7a1a; }
+  .fondo { position: absolute; inset: 0; background: url('taller.webp') 70% 60% / cover; filter: brightness(.22) saturate(.6); }
+  .brasa { position: absolute; left: 50%; bottom: -380px; width: 1500px; height: 800px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(255,122,26,.22), rgba(255,122,26,0)); }
+  main { position: relative; padding: 64px 84px 0; }
+  .marca { display: flex; gap: 14px; align-items: center; font-size: 34px; color: #eef1f4; }
+  .marca svg { width: 50px; height: 50px; }
+  .marca b { color: #9aa6b2; }
+  h1 { margin-top: 34px; font-size: 92px; line-height: .9; white-space: nowrap; }
+  .bajada { margin-top: 14px; font-size: 30px; color: #9aa6b2; }
+  ol { list-style: none; margin-top: 30px; display: grid; gap: 12px; counter-reset: n; }
+  li { counter-increment: n; display: grid; grid-template-columns: 56px 1fr 44px; gap: 20px; align-items: center; padding: 11px 22px; border-radius: 8px;
+    background: rgba(34,42,51,.92); box-shadow: inset 0 0 0 2px rgba(255,122,26,.45); font-size: 29px; font-weight: 500; line-height: 1.18; }
+  li::before { content: counter(n); font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; font-size: 46px; color: #ff7a1a; text-align: center; }
+  li small { display: block; margin-top: 1px; font-size: 22px; color: #9aa6b2; font-weight: 400; }
+  li i { width: 40px; height: 40px; border-radius: 6px; box-shadow: inset 0 0 0 3px #9aa6b2; }
+  footer { position: absolute; left: 84px; right: 84px; bottom: 48px; display: flex; justify-content: space-between; align-items: end; font-size: 28px; color: #9aa6b2; }
+  footer strong { display: block; font-family: 'Archivo', sans-serif; font-variation-settings: "wdth" 70; font-weight: 800; font-size: 46px; color: #ff7a1a; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="fondo"></div><div class="brasa"></div>
+<main>
+  <div class="marca cond"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg><span>Hefesto <b>Webs</b></span></div>
+  <h1 class="cond">Revisá tu <em>página web</em></h1>
+  <p class="bajada">8 preguntas. Abrila en tu celular y marcá las que cumple.</p>
+  <ol>
+    <li><span>¿Se ve bien en el celular?<small>Sin achicar con los dedos ni texto cortado.</small></span><i></i></li>
+    <li><span>¿Tiene un botón para escribirte por WhatsApp?<small>Que se vea sin buscarlo.</small></span><i></i></li>
+    <li><span>¿Dice qué hacés en la primera pantalla?<small>Antes de bajar, ya se entiende.</small></span><i></i></li>
+    <li><span>¿Dice dónde estás y cuándo atendés?</span><i></i></li>
+    <li><span>¿Muestra tus servicios?<small>Y los precios, si podés darlos.</small></span><i></i></li>
+    <li><span>¿Carga rápido con datos, no solo con wifi?</span><i></i></li>
+    <li><span>¿Tiene dominio propio?<small>Como tunegocio.com.ar</small></span><i></i></li>
+    <li><span>¿Aparece en Google cuando buscás tu negocio?</span><i></i></li>
+  </ol>
+</main>
+<footer><span>¿Te faltan algunas?<strong>Escribime por WhatsApp</strong></span><span style="text-align:right">260 466-1138<br>@hefestowebs</span></footer>
+</body>
+</html>

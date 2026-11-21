@@ -20,7 +20,7 @@
 | Reel | Formato | Idea | Día propuesto |
 |---|---|---|---|
 | R3 | Resultado primero + demostración | "Así pide turno un paciente en 10 segundos": el recorrido real en quiropraxiacipolletti.com en un celular, del botón hasta que se abre WhatsApp | Mié 02/12 |
-| R4 | Problema + lista | "Tu página pierde clientes en 3 segundos por esto": 3 errores (no se ve bien en el celular, no hay botón de WhatsApp, no dice dónde ni cuándo atendés) | Sáb 05/12 |
+| R4 | Problema + lista | "3 errores que espantan clientes": no dice qué hacés en la primera pantalla, tarda en cargar con datos del celular, no muestra tus servicios | Sáb 05/12 |
 | R5 | Antes y después | Quiropraxia Cipolletti: de atender solo por Instagram y WhatsApp a tener su página | Mié 09/12 |
 | R6 | Regalo gratis | "Comentá PÁGINA y te mando la lista para revisar tu web": checklist gratis, enviada a mano por mensaje privado | Sáb 12/12 |
 
@@ -35,7 +35,7 @@
 - **RN-17.2 (duración):** cada reel dura de **15 a 20 s**, dentro del límite de 15 a 25 s de RN-15.5.
 - **RN-17.3 (gancho en 3 s):** en los primeros 3 s ya se ve y se lee la promesa o el resultado, sin saludo. El texto del gancho aparece desde el segundo 0.
 - **RN-17.4 (grabación del sitio):** R3 y R5 muestran el sitio real en un celular. La grabación se hace con Playwright en tamaño de celular sobre la página pública. Se graba solo el recorrido hasta el link de WhatsApp: no se manda ningún mensaje ni se llena ningún formulario.
-- **RN-17.5 (contenido real):** solo datos de `PRODUCT.md` y de los sitios reales. Ninguna cifra de resultados ("más clientes", "x% más ventas") ni opiniones de clientes. Los 3 errores del R4 son los mismos del carrusel C2, dichos al revés.
+- **RN-17.5 (contenido real):** solo datos de `PRODUCT.md` y de los sitios reales. Ninguna cifra de resultados ("más clientes", "x% más ventas") ni opiniones de clientes. Los 3 errores del R4 son distintos de los del R1 y del C2 (que ya cubren celular, botón de WhatsApp y dónde y cuándo), para no repetir el tema (cambio aprobado por Matias el 2026-11-20).
 - **RN-17.6 (regalo del R6):** la lista es una imagen (1080×1350) con 5 a 8 puntos que un dueño de negocio puede revisar solo, en el estilo Forja, sin jerga técnica. Queda en `brand/instagram/recursos/`. Matias la manda a mano a quien comente PÁGINA: no se usan respuestas automáticas (piden Buzzfy MAX).
 - **RN-17.7 (texto de cada reel):**
   - va en `textos.md` y nombra la palabra clave en los primeros 125 caracteres;
@@ -80,3 +80,4 @@ Ninguna.
 ## Historial
 - 2026-11-20: creada a partir de la auditoría de Buzzfy y el análisis de formatos. Matias eligió hacer los 4.
 - 2026-11-20: Matias respondió las preguntas: R5 con Bacssa (o Quiropraxia sin/con página), verificación con BDD + TDD y publicación normal, sin reels de prueba.
+- 2026-11-20: el R4 cambia a 3 errores nuevos (el original repetía el tema del R1 y del C2). La primera línea del R5 pasa a "Antes, todo por WhatsApp." para terminar antes de los 3 s.

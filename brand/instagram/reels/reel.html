@@ -49,6 +49,29 @@
   .marca { position: absolute; left: 70px; top: 120px; display: flex; gap: 14px; align-items: center; font-size: 38px; opacity: .9; }
   .marca svg { width: 56px; height: 56px; }
   .marca b { color: #9aa6b2; font-weight: 800; }
+  /* Teléfono (HU-17): muestra un sitio real, un chat o una imagen. Pantalla de 448 px = 390 px CSS del celular × 1,15 */
+  #telefono { position: absolute; left: 50px; top: 580px; width: 476px; padding: 14px; border-radius: 54px; background: #0e1216; opacity: 0;
+    box-shadow: inset 0 0 0 3px #3a4450, 0 40px 80px -20px rgba(0,0,0,.85), 0 0 60px -20px rgba(255,122,26,.45); }
+  #telefono .pantalla { position: relative; width: 448px; height: 1020px; border-radius: 40px; overflow: hidden; background: #fff; }
+  #telefono .capa { position: absolute; inset: 0; opacity: 0; }
+  #telefono .barra { position: absolute; left: 0; right: 0; top: 0; height: 50px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: #f1f3f5; color: #3c4650; font: 500 19px 'Public Sans', sans-serif; border-bottom: 1px solid #dde2e6; }
+  #telefono .barra svg { width: 15px; height: 15px; }
+  #telSitio { position: absolute; left: 0; top: 50px; width: 448px; height: 970px; }
+  #telDedo { position: absolute; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; background: rgba(255,255,255,.55);
+    box-shadow: 0 0 0 4px rgba(27,33,40,.55); opacity: 0; }
+  /* Chat genérico (no imita a ninguna app) */
+  .chat { background: #ece5dd; font-family: 'Public Sans', sans-serif; }
+  .chat .cab { height: 96px; padding: 34px 20px 0; display: flex; gap: 14px; align-items: center; background: #1f2a33; color: #fff; font-size: 24px; font-weight: 700; }
+  .chat .cab i { width: 46px; height: 46px; border-radius: 50%; background: #9aa6b2; display: inline-block; }
+  .chat .msjs { padding: 22px 18px; display: grid; gap: 12px; }
+  .chat .msj { max-width: 340px; padding: 12px 16px; border-radius: 14px; font-size: 24px; line-height: 1.25; color: #1b2128; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+  .chat .msj.yo { justify-self: end; background: #dcf8c6; }
+  .chat .escribir { position: absolute; left: 12px; right: 12px; bottom: 18px; display: flex; gap: 10px; align-items: center; }
+  .chat .caja { flex: 1; padding: 16px 20px; border-radius: 28px; background: #fff; font-size: 24px; color: #1b2128; }
+  .chat .enviar { width: 60px; height: 60px; border-radius: 50%; background: #2a9d63; display: grid; place-items: center; }
+  .chat .enviar svg { width: 28px; height: 28px; }
+  #telImagen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 </style>
 </head>
 <body>
@@ -59,6 +82,12 @@
   <img id="logoGolpe" src="../recursos/logo-3d.webp" alt="" />
   <canvas id="muneco" width="1080" height="1920"></canvas>
   <canvas id="chispas" width="1080" height="1920"></canvas>
+  <div id="telefono"><div class="pantalla">
+    <div class="capa" id="telCapaSitio"><div class="barra"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2h1v8H3V7zm2 0h4V5a2 2 0 0 0-4 0z" fill="#3c4650"/></svg><span id="telDominio"></span></div>
+      <canvas id="telSitio" width="780" height="1688"></canvas><div id="telDedo"></div></div>
+    <div class="capa chat" id="telCapaChat"></div>
+    <div class="capa" id="telImagen"><img alt="" /></div>
+  </div></div>
   <div class="marca cond"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 27 V73 L50 96 L10 73 V27 Z" fill="none" stroke="#eef1f4" stroke-width="6" stroke-linejoin="round"/><path d="M36 29 L26 39.5 L36 50 M64 29 L74 39.5 L64 50" fill="none" stroke="#eef1f4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.5 26 L44.5 53" stroke="#ff7a1a" stroke-width="6.5" stroke-linecap="round"/><path d="M24 61 H76 V66.5 C70 67.5 65 69 61 71 V75 H66 V80.5 H34 V75 H39 V71 C35 69 30 67.5 24 65.5 Z" fill="#eef1f4"/></svg><span>Hefesto <b>Webs</b></span></div>
   <div id="gancho" class="cond"></div>
   <div id="sub" class="cond"></div>
@@ -71,18 +100,20 @@
 </div>
 <script src="gestos.js"></script>
 <script src="muneco.js"></script>
+<script src="telefono.js"></script>
 <script>
 // ── Estado y armado (se llama una vez con los datos) ──
 const $ = (id) => document.getElementById(id);
-let D, L, chunks, palabras, items, accion, total, plan = null, logo = null;
+let D, L, chunks, palabras, items, accion, total, plan = null, logo = null, planTel = null, sitioImgs = [], primeraLinea = null;
 const LOGO_ANCHO = 170;   // ancho del logo del martillazo (el del cierre mide 460)
-const VOZ = 1.5;          // la voz arranca al segundo 1,5: antes, el gancho solo (1 s entero a la vista)
+let VOZ = 1.5;            // la voz arranca al segundo 1,5: antes, el gancho solo. Un reel puede pedir otro ("inicioVoz", HU-17)
+const TEL = { dx: 240, escala: 0.8 };   // con el teléfono a la vista, Hefesto se corre a la derecha y se achica un poco
 const CTA = 3.2;          // duración del cierre
 const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9ñ]/g, '');
 
 window.armar = async (datos) => {
-  D = datos; palabras = datos.palabras;
+  D = datos; palabras = datos.palabras; VOZ = datos.reel.inicioVoz ?? 1.5;
   // Muñeco: v4 (un brazo con martillo, HU-15) o v5 (dos brazos con gestos, HU-16). Se prepara en muneco.js
   L = datos.muneco.v5 ? await window.prepararMunecoV5(datos.muneco) : await window.prepararMuneco(datos.muneco);
   const tiemposLineas = [];
@@ -103,7 +134,7 @@ window.armar = async (datos) => {
     const forj = dichas.find(p => norm(p.texto).startsWith("forj"));
     // RN-16.7: si la línea del martillo dice "Hefesto", el golpe va al logo en esa palabra
     const hef = linea.accion === "martillo" ? dichas.find(p => norm(p.texto).startsWith("hefest")) : null;
-    tiemposLineas.push({ ini: dichas[0].inicio + VOZ, fin: dichas.at(-1).fin + VOZ, gesto: linea.gesto, martillo: linea.accion === "martillo", golpe: forj ? forj.inicio + VOZ : undefined, marca: hef ? hef.inicio + VOZ : undefined });
+    tiemposLineas.push({ ini: dichas[0].inicio + VOZ, fin: dichas.at(-1).fin + VOZ, finVoz: dichas.at(-1).fin + VOZ, ...('pantalla' in linea ? { pantalla: linea.pantalla } : {}), gesto: linea.gesto, martillo: linea.accion === "martillo", golpe: forj ? forj.inicio + VOZ : undefined, marca: hef ? hef.inicio + VOZ : undefined });
     const inicioLinea = chunks.find(c => c.palabras.some(w => w.txt === linea.texto.split(/\s+/)[0]))?.palabras[0].ini;
     if (linea.item) items.push({ txt: linea.item, t: chunks.at(-1).palabras[0].ini });
     if (linea.accion === 'martillo') {
@@ -112,9 +143,13 @@ window.armar = async (datos) => {
     }
   }
   if (k !== palabras.length) throw new Error(`el guion tiene ${k} palabras y la voz ${palabras.length}`);
+  primeraLinea = { ini: tiemposLineas[0].ini, fin: tiemposLineas[0].finVoz };
   // Cada gesto dura hasta que arranca la línea siguiente (la última, hasta 0,5 s después de la voz, cuando entra el cierre)
   tiemposLineas.forEach((l, i) => { l.fin = tiemposLineas[i + 1]?.ini ?? l.fin + 0.5; });
   if (L.v5) { plan = window.Gestos.planGestos(tiemposLineas); accion = null; }
+  // Teléfono (HU-17): plan de pantallas y capturas del sitio ya decodificadas (cuadro() dibuja sin esperar)
+  planTel = tiemposLineas.some(l => 'pantalla' in l) ? window.Telefono.planTelefono(tiemposLineas) : null;
+  if (planTel) await prepararTelefono(datos);
   // Cada subtítulo aparece un poco antes de que se diga (hasta 0,35 s, y nunca antes de que termine de decirse el anterior):
   // así las frases cortas, como "¿Tenés un negocio?", quedan al menos 1,5 s en pantalla (CA-15.3). Las palabras igual se
   // iluminan cuando suenan. El primero puede empezar 0,5 s antes de la voz (el gancho se va antes, ver cuadro()).
@@ -139,7 +174,10 @@ window.armar = async (datos) => {
     logo = { golpe: lineaLogo.golpe, impacto: p0, x: p0.x, y: p0.y + alto * 0.42, ancho: LOGO_ANCHO, cierre: { x: rc.left + rc.width / 2, y: rc.top + rc.height / 2, ancho: rc.width } };
   }
   const golpeV5 = plan?.find(l => l.gesto === "martillo")?.golpe ?? null;
-  return { total, voz: VOZ, golpe: accion ? accion.t : golpeV5, logo: !!logo, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+  // ganchoDesde: primer momento (de a un cuadro) en que el gancho se ve (CA-17.2)
+  let ganchoDesde = null;
+  for (let t = 0; t < 1.5 && ganchoDesde === null; t += 1 / 30) { window.cuadro(t); if (+$('gancho').style.opacity > 0.5) ganchoDesde = +t.toFixed(3); }
+  return { total, voz: VOZ, ganchoDesde, primeraLinea, cierre: total - CTA, golpe: accion ? accion.t : golpeV5, logo: !!logo, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
 };
 
 // ── Utilidades de tiempo ──
@@ -190,15 +228,95 @@ window.medirManos = (paso = 1 / 30) => {
     window.cuadro(t);
     const visibles = [$("sub"), ...document.querySelectorAll(".item")].filter(e => +getComputedStyle(e).opacity > 0.05);
     const limite = Math.max(0, ...visibles.map(e => e.getBoundingClientRect().bottom));
-    for (const m of Object.values(ultimoCuadro.manos)) {
+    for (const m0 of Object.values(ultimoCuadro.manos)) {
+      // con el teléfono a la vista el muñeco está corrido y achicado (HU-17): se mide en coordenadas de la pantalla
+      const a = aPantalla(m0.x0, m0.y0), b = aPantalla(m0.x1, m0.y1), m = { x0: a.x, y0: a.y, x1: b.x, y1: b.y };
       if (m.y0 - limite < r.margen) { r.margen = m.y0 - limite; r.tMargen = t; }
       r.izquierda = Math.min(r.izquierda, m.x0); if (m.x1 > r.derecha) { r.derecha = m.x1; r.tDerecha = t; }
     }
   }
   return r;
 };
+// ── Teléfono (HU-17) ──
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function prepararTelefono(datos) {
+  const s = datos.sitio;
+  if (s) {
+    $('telDominio').textContent = new URL(s.url).host.replace(/^www\./, '');
+    sitioImgs = await Promise.all(s.frames.map(f => new Promise((ok, mal) => { const i = new Image(); i.onload = () => i.decode().then(() => ok(i), () => ok(i)); i.onerror = () => mal(new Error('no cargó ' + f.archivo)); i.src = s.base + f.archivo; })));
+  }
+  const img = planTel.find(l => l.tipo === 'imagen');
+  if (img) { const e = $('telImagen').querySelector('img'); e.src = '../' + img.pantalla.imagen.archivo; await e.decode().catch(() => {}); }
+}
+// Arma el HTML de un chat: "sitio" = el chat que abre el botón, con el mensaje escrito (sin enviar)
+function htmlChat(p, t, inicio) {
+  const enviar = '<div class="enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l18-8L3 4v6l12 2-12 2z" fill="#fff"/></svg></div>';
+  if (p.chat === 'sitio') {
+    const b = D.sitio.botones[0];
+    return `<div class="cab"><i></i>${esc(D.reel.sitio.contacto ?? new URL(D.sitio.url).host)}</div><div class="msjs"></div>
+      <div class="escribir"><div class="caja">${esc(b.mensaje)}</div>${enviar}</div>`;
+  }
+  // los mensajes entran de a uno, cada 0,6 s desde que aparece el chat
+  const vis = p.chat.mensajes.filter((m, i) => t >= inicio + 0.25 + i * 0.6);
+  return `<div class="cab"><i></i>${esc(p.chat.contacto ?? 'Chat')}</div><div class="msjs">${vis.map(m => `<div class="msj${m.yo ? ' yo' : ''}">${esc(m.texto)}</div>`).join('')}</div>`;
+}
+function pintarCapa(tipo, pantalla, scroll, t, inicio, opacidad, z) {
+  const capa = tipo === 'sitio' ? $('telCapaSitio') : tipo === 'chat' ? $('telCapaChat') : $('telImagen');
+  capa.style.opacity = opacidad; capa.style.zIndex = z;
+  if (tipo === 'sitio') {
+    const i = window.Telefono.frameParaScroll(D.sitio.frames, scroll), g = $('telSitio').getContext('2d');
+    g.drawImage(sitioImgs[i], 0, 0, 780, 1688);
+  } else if (tipo === 'chat') {
+    const h = htmlChat(pantalla, t, inicio); if (capa.innerHTML !== h) capa.innerHTML = h;
+  } else {
+    capa.querySelector('img').style.filter = pantalla.imagen.difuminada ? 'blur(9px) brightness(.95)' : 'none';
+  }
+}
+let telAhora = { visible: 0 };
+function cuadroTelefono(t) {
+  const tel = $('telefono');
+  if (!planTel) { tel.style.opacity = 0; telAhora = { visible: 0 }; return; }
+  const e = window.Telefono.estadoTelefono(planTel, t); telAhora = e;
+  tel.style.opacity = e.visible;
+  tel.style.transformOrigin = "50% 50%"; tel.style.transform = `scale(${0.92 + 0.08 * e.visible})`;   // entra en su lugar, sin salirse del cuadro
+  for (const c of ['telCapaSitio', 'telCapaChat', 'telImagen']) $(c).style.opacity = 0;
+  if (!e.tipo) return;
+  if (e.anterior) pintarCapa(e.anterior.tipo, e.anterior.pantalla, e.anterior.scroll, t, e.anterior.inicio, 1, 1);
+  pintarCapa(e.tipo, e.pantalla, e.scroll, t, e.inicio, e.mezcla, 2);
+  // dedo: baja sobre el botón de WhatsApp visible, se aprieta y se va
+  const dedo = $('telDedo');
+  if (e.toque !== null && e.tipo === 'sitio') {
+    const b = D.sitio.botones.find(x => x.parada === e.pantalla.sitio) ?? D.sitio.botones[0], k = 448 / D.sitio.anchoCss;
+    dedo.style.left = (b.x + b.w / 2) * k + 'px'; dedo.style.top = 50 + (b.y + b.h / 2) * k + 'px';
+    const a = e.toque, aprieta = a > 0.35 && a < 0.6;
+    dedo.style.opacity = a < 0.2 ? a / 0.2 : a > 0.8 ? (1 - a) / 0.2 : 1;
+    dedo.style.transform = `scale(${aprieta ? 0.8 : 1.15 - 0.15 * Math.min(1, a / 0.35)})`;
+    dedo.style.boxShadow = `0 0 0 ${aprieta ? 14 : 4}px rgba(255,122,26,${aprieta ? 0.55 : 0.35})`;
+  } else dedo.style.opacity = 0;
+}
+// Con el teléfono a la vista, Hefesto (y sus chispas) se corren a la derecha y se achican (desde abajo al centro)
+const desplMuneco = () => { const v = telAhora.visible ?? 0; return { dx: TEL.dx * v, s: 1 - (1 - TEL.escala) * v }; };
+const aPantalla = (x, y) => { const d = desplMuneco(); return { x: 540 + (x - 540) * d.s + d.dx, y: 1920 - (1920 - y) * d.s }; };
+// Dónde queda el teléfono y si alguna vez tapa el subtítulo (CA-17.3)
+window.medirTelefono = (paso = 1 / 30) => {
+  if (!planTel) return null;
+  const caja = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity }; let tapa = 0, cuadros = 0;
+  for (let t = 0; t < total - CTA; t += paso) {
+    window.cuadro(t);
+    if (+$('telefono').style.opacity <= 0.05) continue;
+    cuadros++;
+    const r = $('telefono').getBoundingClientRect();
+    caja.x0 = Math.min(caja.x0, r.left); caja.y0 = Math.min(caja.y0, r.top); caja.x1 = Math.max(caja.x1, r.right); caja.y1 = Math.max(caja.y1, r.bottom);
+    const sub = $('sub'); if (+sub.style.opacity > 0.05 && r.top < sub.getBoundingClientRect().bottom) tapa++;
+  }
+  return { cuadros, caja, cuadrosTapaTexto: tapa };
+};
+
 window.cuadro = (t) => {
   $('taller').style.transform = `scale(${1.04 + t * 0.0025})`;
+  cuadroTelefono(t);
+  { const d = desplMuneco(), tr = `translate(${d.dx}px, 0) scale(${d.s})`;
+    for (const c of ['muneco', 'chispas']) { $(c).style.transformOrigin = '540px 1920px'; $(c).style.transform = tr; } }
   // Habla: palabra actual y cuánto suena la voz (si hay energía, la boca se abre solo cuando suena)
   const w = chunks.flatMap(c => c.palabras).find(w => t >= w.ini && t <= w.fin);
   const en = D.energia ? (D.energia[Math.round((t - VOZ) * 30)] ?? 0) : (w ? 1 : 0);
@@ -241,7 +359,7 @@ window.cuadro = (t) => {
   const gg = $('gancho');
   if (t < chunks[0].ini) {   // el gancho se va justo cuando entra el primer subtítulo
     const enc = tramo(t, 0, 0.8), sale = tramo(t, chunks[0].ini - 0.3, chunks[0].ini);
-    gg.style.opacity = (enc > 0 ? 1 : 0) * (1 - sale);
+    gg.style.opacity = 1 - sale;   // a la vista desde el primer cuadro (CA-17.2)
     gg.style.color = `rgb(255,${(200 + 38 * enc) | 0},${(120 + 124 * enc) | 0})`;
     gg.style.textShadow = `0 0 ${(40 * (1 - enc)) | 0}px rgba(255,122,26,${(0.9 * (1 - enc)).toFixed(2)})`;
     gg.style.transform = `translateY(${(1 - ease(tramo(t, 0, 0.4))) * 30}px)`;

@@ -134,7 +134,16 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-16 · DEF-03 | CA-16.8 | Revisión visual (muestras del P16) | ✓ | mano de reposo espejada · antebrazos delante del bíceps · parche del codo con la mediana de la piel · `fix(DEF-03)` |
 | HU-16 | CA-16.9 | Test (node) | ✓ | `test/gestos.test.mjs` (martillo solo en su línea; línea corta avisa) |
 
+| HU-17 | CA-17.1 | Escenario BDD `features/HU-17-reels-formatos-probados.feature` | ✓ | `R3.mp4` a `R6.mp4` |
+| HU-17 | CA-17.2 | Escenario BDD | ✓ | `subtitulos.json` (ganchoDesde, primeraLinea) |
+| HU-17 | CA-17.3 | Escenario BDD + test (node) `test/telefono.test.mjs` | ✓ | `subtitulos.json`, `telefono.json` · `telefono.js` |
+| HU-17 | CA-17.4 | Escenario BDD | ✓ | `brand/instagram/textos.md` · `clave` en `guiones.json` |
+| HU-17 | CA-17.5 | Escenario BDD | ✓ | `brand/instagram/recursos/lista-revisa-tu-web.png` |
+| HU-17 | CA-17.6 | Checklist (firma Matias) + test (node) `test/grabar-sitio.test.mjs` | test ✓ · firma pendiente | `grabar-sitio.mjs` (capturas en tamaño celular, pedidos a WhatsApp bloqueados) |
+| HU-17 | CA-17.7 | Checklist (firma Matias) | pendiente | muestras en `brand/instagram/reels/R3` a `R6` |
+
 ## Huecos
+- HU-17: faltan las firmas de CA-17.6 y CA-17.7. El R4 cambió a 3 errores nuevos (el original repetía el R1 y el C2). Commits [RED] 56b0558 → [GREEN] (este). Los reels no están programados: las filas "Reel por hacer" pasan a "Reel" con el OK de Matias.
 - HU-16: falta CA-16.8 (checklist, se firma al ver el R3 con el muñeco v5). Verificación liviana por decisión de Matias (tests de node y chequeos, sin BDD ni RED/GREEN). El P16 (prueba con la voz del R2) se sacó: el R2 pasó al v5.
 - HU-12: ninguno. Commits [RED] 662f7b7 → [GREEN] (este). Se adaptaron CA-06.1 (fondo en las placas), CA-08.3 (logo 3D) y CA-08.5 (placas). Publicada el 2026-11-14.
 - HU-15: ninguno (CA-15.6 firmado 2026-11-17). Commits b5f4009 (armado) → [RED] 8cff7df → [GREEN] (este). El R1 no está en el calendario: falta confirmar la frecuencia (propuesta: 1 reel por semana, los miércoles) y el OK para programarlo. Sonido (efectos/música) fuera de alcance: RN-15.4 dice sin música; cambiarlo es una historia nueva.

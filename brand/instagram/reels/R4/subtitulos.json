@@ -1,0 +1,74 @@
+{
+ "total": 17.368000000000002,
+ "voz": 1,
+ "ganchoDesde": 0,
+ "primeraLinea": {
+  "ini": 1,
+  "fin": 2.581
+ },
+ "cierre": 14.168000000000003,
+ "golpe": 11.752,
+ "logo": true,
+ "gestos": [
+  {
+   "ini": 1,
+   "fin": 2.933,
+   "gesto": "señala"
+  },
+  {
+   "ini": 2.933,
+   "fin": 5.867,
+   "gesto": "uno"
+  },
+  {
+   "ini": 5.867,
+   "fin": 8.833,
+   "gesto": "dos"
+  },
+  {
+   "ini": 8.833,
+   "fin": 11.567,
+   "gesto": "tres"
+  },
+  {
+   "ini": 11.567,
+   "fin": 14.368,
+   "gesto": "martillo",
+   "golpe": 11.752,
+   "logo": true,
+   "desde": 10.652000000000001
+  }
+ ],
+ "chunks": [
+  {
+   "ini": 0.65,
+   "fin": 2.661,
+   "palabras": 3,
+   "texto": "Esto espanta clientes."
+  },
+  {
+   "ini": 2.661,
+   "fin": 5.517,
+   "palabras": 9,
+   "texto": "Uno: no dice qué hacés en la primera pantalla."
+  },
+  {
+   "ini": 5.517,
+   "fin": 8.483,
+   "palabras": 8,
+   "texto": "Dos: tarda en cargar con datos del celular."
+  },
+  {
+   "ini": 8.483,
+   "fin": 11.217,
+   "palabras": 5,
+   "texto": "Tres: no muestra tus servicios."
+  },
+  {
+   "ini": 11.217,
+   "fin": 14.268,
+   "palabras": 8,
+   "texto": "En Hefesto Webs te la forjamos a medida."
+  }
+ ]
+}
