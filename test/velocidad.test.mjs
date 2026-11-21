@@ -1,28 +1,32 @@
-// Tests de la HU-17 (RN-17.9): acelerar la voz de un reel. Correr: npm run test:unit
+// Tests de la HU-17 (RN-17.9): voz más ágil. Correr: npm run test:unit
+// acortarPausas trabaja sobre el audio crudo (PCM de 16 bits, un canal); la aceleración la hace ffmpeg (atempo).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { acelerar } from '../brand/instagram/reels/velocidad.mjs';
+import { acortarPausas } from '../brand/instagram/reels/velocidad.mjs';
 
-const palabras = [{ texto: 'Esto', inicio: 0, fin: 0.3 }, { texto: 'espanta', inicio: 0.6, fin: 1.5 }];
-const energia = Array.from({ length: 60 }, (_, i) => i / 60);   // 2 s a 30 cuadros por segundo
+const TASA = 8000;
+// arma un audio con tramos de [segundos, sonido?]: el sonido es un tono, el silencio son ceros
+function audio(tramos) {
+  const muestras = [];
+  for (const [seg, suena] of tramos) for (let i = 0; i < Math.round(seg * TASA); i++) muestras.push(suena ? Math.round(12000 * Math.sin(i / 3)) : 0);
+  const b = Buffer.alloc(muestras.length * 2); muestras.forEach((v, i) => b.writeInt16LE(v, i * 2)); return b;
+}
+const dur = (pcm) => pcm.length / 2 / TASA;
 
-test('CA-17.8: con velocidad 1,5 cada palabra empieza y termina 1,5 veces antes', () => {
-  const r = acelerar({ palabras, energia }, 1.5);
-  assert.deepEqual(r.palabras.map(p => [p.texto, p.inicio, p.fin]), [['Esto', 0, 0.2], ['espanta', 0.4, 1]]);
+test('CA-17.8: una pausa de 0,9 s en el medio queda de 0,25 s y el sonido no se toca', () => {
+  const r = acortarPausas({ pcm: audio([[0.3, 1], [0.9, 0], [0.3, 1]]), tasa: TASA }, { pausaMax: 0.25 });
+  assert.ok(Math.abs(dur(r.pcm) - 0.85) < 0.03, `dura ${dur(r.pcm).toFixed(3)} s`);
+  assert.ok(Math.abs(r.quitado - 0.65) < 0.03, `quitó ${r.quitado.toFixed(3)} s`);
 });
 
-test('CA-17.8: la energía se acorta en la misma proporción (30 cuadros por segundo)', () => {
-  const r = acelerar({ palabras, energia }, 1.5);
-  assert.equal(r.energia.length, 40);
-  assert.equal(r.energia[20], energia[30]);   // el cuadro 20 nuevo es el 30 de antes
+test('CA-17.8: las pausas cortas (de 0,25 s o menos) quedan como están', () => {
+  const pcm = audio([[0.3, 1], [0.2, 0], [0.3, 1]]);
+  const r = acortarPausas({ pcm, tasa: TASA }, { pausaMax: 0.25 });
+  assert.equal(r.pcm.length, pcm.length);
+  assert.equal(r.quitado, 0);
 });
 
-test('CA-17.8: con velocidad 1 (o sin velocidad) no cambia nada', () => {
-  assert.deepEqual(acelerar({ palabras, energia }, 1), { palabras, energia });
-  assert.deepEqual(acelerar({ palabras, energia }), { palabras, energia });
-});
-
-test('CA-17.8: velocidades fuera de rango avisan (ffmpeg atempo acepta de 0,5 a 2)', () => {
-  assert.throws(() => acelerar({ palabras, energia }, 2.5), /velocidad/);
-  assert.throws(() => acelerar({ palabras, energia }, 0), /velocidad/);
+test('CA-17.8: el silencio del principio queda en 0,1 s como mucho', () => {
+  const r = acortarPausas({ pcm: audio([[0.5, 0], [0.3, 1]]), tasa: TASA }, { pausaMax: 0.25 });
+  assert.ok(dur(r.pcm) <= 0.41, `dura ${dur(r.pcm).toFixed(3)} s`);
 });
