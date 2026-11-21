@@ -41,6 +41,7 @@
   - va en `textos.md` y nombra la palabra clave en los primeros 125 caracteres;
   - usa de 3 a 5 hashtags;
   - cierra pidiendo guardar o mandar (R3, R4, R5) o comentar PÁGINA (R6).
+- **RN-17.9 (velocidad, pedido de Matias 2026-11-20):** un reel puede pedir `"velocidad"` en `guiones.json` (por ejemplo 1,5). La voz se acelera sin cambiar el tono (ffmpeg `atempo`) y los subtítulos, la boca y los gestos siguen a la voz acelerada. Sin `"velocidad"`, la voz queda como sale de Gemini.
 - **RN-17.8 (cómo se mide):** a las 48 h de cada reel se corre `ig_reel_checkup` de Buzzfy (mientras dure el acceso) y se anotan alcance a no seguidores, compartidos, guardados y clics en `brand/instagram/estrategia/`. Sin juzgar por los "me gusta" de conocidos.
 
 ## Casos límite
@@ -57,6 +58,7 @@
 | CA-17.4 | Dado el texto de cada reel en `textos.md`, entonces tiene de 3 a 5 hashtags y su palabra clave en los primeros 125 caracteres | Chequeo automático |
 | CA-17.5 | Dado el R6, entonces la lista existe en 1080×1350 y el texto del reel pide comentar PÁGINA | Chequeo automático |
 | CA-17.6 | Dados R3 y R5, cuando Matias los ve en el celular, entonces la grabación del sitio se lee bien y no muestra nada roto ni datos de nadie | Checklist |
+| CA-17.8 | Dado un reel con "velocidad", entonces cada palabra empieza y termina en su tiempo original dividido por la velocidad, y la energía de la voz se acorta en la misma proporción | Test (node) |
 | CA-17.7 | Dados los 4 reels, cuando Matias los ve, entonces el gancho se entiende en 3 s, la mascota se ve bien y no hay ninguna afirmación inventada | Checklist |
 
 ## Checklist (lo firma Matias)
