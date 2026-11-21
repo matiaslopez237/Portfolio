@@ -349,7 +349,7 @@ Página web para tu negocio: las 3 cosas que tiene que tener, sí o sí.
 2. Que se vea bien en el celular.
 3. Dónde estás y cuándo atendés.
 
-¿La tuya no las tiene? En Hefesto Webs te forjamos tu página web a medida, con botón de WhatsApp y pensada para el celular.
+¿La tuya no las tiene? En Hefesto Webs forjamos tu página web a medida, con botón de WhatsApp y pensada para el celular.
 
 Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
 
@@ -367,7 +367,7 @@ Si te bloquean la cuenta, desaparecés. Con tu propia página web eso no pasa.
 2. Tus servicios y precios, siempre a mano.
 3. Un botón de WhatsApp para que te escriban.
 
-Instagram suma, pero tu página es tuya. En Hefesto Webs te forjamos tu página web a medida, con dominio propio y botón de WhatsApp.
+Instagram suma, pero tu página es tuya. En Hefesto Webs forjamos tu página web a medida, con dominio propio y botón de WhatsApp.
 
 Escribime por WhatsApp al 260 466-1138 (link en la bio) y lo vemos.
 
@@ -383,7 +383,7 @@ Así lo hace un paciente en quiropraxiacipolletti.com: entra desde el celular, m
 
 ¿Tu negocio da turnos? Guardalo, o mandáselo a alguien que atienda con turnos.
 
-En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+En Hefesto Webs forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
 
 #paginaweb #turnosonline #consultorios #negocioslocales
 ```
@@ -399,7 +399,7 @@ Página web: 3 errores que espantan clientes. Guardalo y revisá la tuya.
 
 Si no entienden rápido, se van. ¿Conocés a alguien con una página así? Mandáselo.
 
-En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+En Hefesto Webs forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
 
 #paginaweb #emprendedores #negocioslocales #diseñoweb
 ```
@@ -415,7 +415,7 @@ Ahora tienen quiropraxiacipolletti.com: dominio propio, sus servicios a la vista
 
 ¿Conocés a alguien con un consultorio que todavía no tiene página? Mandáselo.
 
-En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+En Hefesto Webs forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
 
 #paginaweb #consultorios #salud #negocioslocales
 ```
@@ -429,7 +429,7 @@ Son preguntas simples: ¿se ve bien en el celular?, ¿tiene un botón de WhatsAp
 
 ¿Todavía no tenés página? La lista también te sirve para saber qué pedir.
 
-En Hefesto Webs te forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
+En Hefesto Webs forjamos tu página a medida. Escribime por WhatsApp al 260 466-1138 (link en la bio).
 
 #paginaweb #emprendedores #negocioslocales #consejos
 ```

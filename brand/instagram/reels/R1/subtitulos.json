@@ -1,7 +1,13 @@
 {
- "total": 23.102,
+ "total": 22.939,
  "voz": 1.5,
- "golpe": 18.429,
+ "ganchoDesde": 0,
+ "primeraLinea": {
+  "ini": 1.5,
+  "fin": 5.353
+ },
+ "cierre": 19.739,
+ "golpe": 17.869,
  "logo": false,
  "chunks": [
   {
@@ -12,45 +18,45 @@
   },
   {
    "ini": 2.65,
-   "fin": 5.783,
+   "fin": 5.7170000000000005,
    "palabras": 10,
    "texto": "Tu página tiene que tener tres cosas, sí o sí."
   },
   {
-   "ini": 5.783,
-   "fin": 7.550000000000001,
+   "ini": 5.7170000000000005,
+   "fin": 7.3500000000000005,
    "palabras": 5,
    "texto": "Uno: un botón de WhatsApp."
   },
   {
-   "ini": 7.550000000000001,
-   "fin": 10.624,
+   "ini": 7.3500000000000005,
+   "fin": 10.325,
    "palabras": 8,
    "texto": "Si tienen que buscar tu número, se van."
   },
   {
-   "ini": 10.624,
-   "fin": 12.317,
+   "ini": 10.325,
+   "fin": 12.15,
    "palabras": 8,
    "texto": "Dos: que se vea bien en el celular."
   },
   {
-   "ini": 12.317,
-   "fin": 15.483,
+   "ini": 12.15,
+   "fin": 15.35,
    "palabras": 6,
    "texto": "Tres: dónde estás y cuándo atendés."
   },
   {
-   "ini": 15.483,
-   "fin": 16.983,
+   "ini": 15.35,
+   "fin": 16.85,
    "palabras": 5,
    "texto": "¿La tuya no las tiene?"
   },
   {
-   "ini": 16.983,
-   "fin": 19.802,
+   "ini": 16.85,
+   "fin": 19.639,
    "palabras": 8,
-   "texto": "En Hefesto Webs te la forjamos a medida."
+   "texto": "En Hefesto Webs forjamos tu página a medida."
   }
  ]
 }

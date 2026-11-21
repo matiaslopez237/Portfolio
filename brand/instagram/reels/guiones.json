@@ -30,8 +30,8 @@
      "item": "3 · Dónde y cuándo"
     },
     {
-     "texto": "¿La tuya no las tiene? En Hefesto Webs te la forjamos a medida.",
-     "marca": "a medida",
+     "texto": "¿La tuya no las tiene? En Hefesto Webs forjamos tu página a medida.",
+     "marca": "tu página",
      "accion": "martillo"
     }
    ]
@@ -84,8 +84,8 @@
      "gesto": "explica"
     },
     {
-     "texto": "En Hefesto Webs te la forjamos a medida.",
-     "marca": "a medida",
+     "texto": "En Hefesto Webs forjamos tu página a medida.",
+     "marca": "tu página",
      "accion": "martillo"
     }
    ],
@@ -153,8 +153,8 @@
      "pantalla": false
     },
     {
-     "texto": "En Hefesto Webs te la forjamos a medida.",
-     "marca": "a medida",
+     "texto": "En Hefesto Webs forjamos tu página a medida.",
+     "marca": "tu página",
      "accion": "martillo"
     }
    ]
@@ -196,8 +196,8 @@
      "gesto": "tres"
     },
     {
-     "texto": "En Hefesto Webs te la forjamos a medida.",
-     "marca": "a medida",
+     "texto": "En Hefesto Webs forjamos tu página a medida.",
+     "marca": "tu página",
      "accion": "martillo"
     }
    ]
@@ -275,8 +275,8 @@
      }
     },
     {
-     "texto": "En Hefesto Webs te la forjamos a medida.",
-     "marca": "a medida",
+     "texto": "En Hefesto Webs forjamos tu página a medida.",
+     "marca": "tu página",
      "accion": "martillo",
      "pantalla": false
     }

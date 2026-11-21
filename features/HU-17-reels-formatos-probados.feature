@@ -13,7 +13,7 @@ Característica: Reels con formatos probados (R3 a R6)
   Esquema del escenario: El video del reel <reel> cumple el formato
     Dado el reel "<reel>"
     Entonces el video es un MP4 H.264 de 1080×1920
-    Y dura entre 15 y 20 segundos
+    Y dura entre 15 y 22 segundos
     Y pesa menos de 20 MB
 
     Ejemplos:

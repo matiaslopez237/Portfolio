@@ -14,6 +14,7 @@
 | 2026-11-18 | Miércoles | Carrusel | Carrusel C1 · Caso Quiropraxia Cipolletti | Trabajos · Laura · Compara |
 | 2026-11-19 | Jueves | Historia | Compartir el carrusel del miércoles + pregunta | Pilar oferta · etapa escribe |
 | 2026-11-20 | Viernes | Carrusel | Carrusel C3 · Plan Tienda WhatsApp | Oferta · Martín · Escribe |
+| 2026-11-20 | Viernes | Reel | Reel R4 · 3 errores que espantan clientes | Consejos · Todas · Descubre (HU-17; subido a mano para probar cómo le va, pedido de Matias) |
 | 2026-11-21 | Sábado | Historia | Historia con sticker de WhatsApp: "Consultame" | Pilar oferta · etapa escribe |
 
 ## Semana 2
@@ -37,7 +38,7 @@
 | 2026-12-02 | Miércoles | Reel por hacer | Lugar para un reel nuevo (R2 en adelante) | Se cambia a "Reel" cuando el video y su texto estén aprobados |
 | 2026-12-03 | Jueves | Historia | Compartir el reel del miércoles + pregunta | Pilar oferta · etapa escribe |
 | 2026-12-04 | Viernes | Carrusel | Carrusel C7 · ¿Una página web es cara? | Consejos · Todas · Busca |
-| 2026-12-05 | Sábado | Reel por hacer | Lugar para un reel nuevo (R2 en adelante) | Se cambia a "Reel" cuando el video y su texto estén aprobados |
+| 2026-12-05 | Sábado | Reel por hacer | Lugar para un reel nuevo (el R4 salió el 20/11) | Se cambia a "Reel" cuando el video y su texto estén aprobados |
 | 2026-12-05 | Sábado | Historia | Historia con sticker de WhatsApp: "Consultame" | Pilar oferta · etapa escribe |
 
 ## Semana 4

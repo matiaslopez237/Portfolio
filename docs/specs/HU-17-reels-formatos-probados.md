@@ -32,7 +32,7 @@
   - identidad Forja;
   - el CTA fijo;
   - programar solo con el OK de Matias.
-- **RN-17.2 (duración):** cada reel dura de **15 a 20 s**, dentro del límite de 15 a 25 s de RN-15.5.
+- **RN-17.2 (duración):** el objetivo es **de 15 a 20 s**. Se aceptan hasta **22 s** cuando recortar empeora el guion (decisión de Matias, 2026-11-20: el dato de Buzzfy es un rango, no un corte exacto).
 - **RN-17.3 (gancho en 3 s):** en los primeros 3 s ya se ve y se lee la promesa o el resultado, sin saludo. El texto del gancho aparece desde el segundo 0.
 - **RN-17.4 (grabación del sitio):** R3 y R5 muestran el sitio real en un celular. La grabación se hace con Playwright en tamaño de celular sobre la página pública. Se graba solo el recorrido hasta el link de WhatsApp: no se manda ningún mensaje ni se llena ningún formulario.
 - **RN-17.5 (contenido real):** solo datos de `PRODUCT.md` y de los sitios reales. Ninguna cifra de resultados ("más clientes", "x% más ventas") ni opiniones de clientes. Los 3 errores del R4 son distintos de los del R1 y del C2 (que ya cubren celular, botón de WhatsApp y dónde y cuándo), para no repetir el tema (cambio aprobado por Matias el 2026-11-20).
@@ -51,7 +51,7 @@
 ## Criterios de aceptación
 | CA | Dado / cuando / entonces | Se verifica con |
 | --- | --- | --- |
-| CA-17.1 | Dados R3 a R6, entonces cada uno es un MP4 de 1080×1920, de 15 a 20 s y de menos de 20 MB | Chequeo automático |
+| CA-17.1 | Dados R3 a R6, entonces cada uno es un MP4 de 1080×1920, de 15 a 22 s y de menos de 20 MB | Escenario BDD |
 | CA-17.2 | Dado cada reel, entonces tiene subtítulo o texto de gancho visible desde el segundo 0 y la primera línea del guion termina antes de los 3 s | Chequeo automático |
 | CA-17.3 | Dados los subtítulos de R3 a R6, entonces cumplen CA-15.3 (1,5 s o más, 12 palabras o menos, en la zona segura) y el último tramo muestra el CTA fijo | Chequeo automático |
 | CA-17.4 | Dado el texto de cada reel en `textos.md`, entonces tiene de 3 a 5 hashtags y su palabra clave en los primeros 125 caracteres | Chequeo automático |
@@ -81,3 +81,4 @@ Ninguna.
 - 2026-11-20: creada a partir de la auditoría de Buzzfy y el análisis de formatos. Matias eligió hacer los 4.
 - 2026-11-20: Matias respondió las preguntas: R5 con Bacssa (o Quiropraxia sin/con página), verificación con BDD + TDD y publicación normal, sin reels de prueba.
 - 2026-11-20: el R4 cambia a 3 errores nuevos (el original repetía el tema del R1 y del C2). La primera línea del R5 pasa a "Antes, todo por WhatsApp." para terminar antes de los 3 s.
+- 2026-11-20: el cierre de R1 a R5 pasa de "te la forjamos a medida" a "forjamos tu página a medida" (pedido de Matias). Duración máxima: 22 s (RN-17.2); R1 y R2, 27 s (RN-15.5).

@@ -7,7 +7,7 @@
 Hoy el muñeco (HU-15, hoja v4) tiene un solo brazo articulado, que además sostiene el martillo todo el tiempo. El otro brazo viene pegado al cuerpo. Con una hoja de partes nueva (v5) que traiga **los dos brazos sueltos y manos vacías con gestos**, el código mueve los dos brazos y cada línea del guion puede llevar un gesto. Se estrena en el R3. El R1 y el R2 no cambian.
 
 ## Reglas
-- **RN-16.1 (lo de la HU-15 sigue igual):** RN-15.1 a RN-15.6 siguen valiendo: todo gratis y sin cámara, contenido real, voz Gemini, formato 1080×1920 de 15 a 25 s, zona segura e identidad Forja.
+- **RN-16.1 (lo de la HU-15 sigue igual):** RN-15.1 a RN-15.6 siguen valiendo: todo gratis y sin cámara, contenido real, voz Gemini, formato 1080×1920 de 15 a 27 s (RN-15.5), zona segura e identidad Forja.
 - **RN-16.2 (hoja v5):** la genera Matias en Gemini con el prompt del anexo y la imagen de referencia `mascota/hefesto-mascota.jpg`. Trae:
   - el cuerpo sin ningún brazo, con un círculo gris en cada hombro;
   - la parte de arriba de cada brazo, sola, con un círculo gris en el hombro y otro en el codo;

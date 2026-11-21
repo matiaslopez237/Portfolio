@@ -2,166 +2,166 @@
  {
   "texto": "Esto",
   "inicio": 0,
-  "fin": 0.352
+  "fin": 0.151
  },
  {
   "texto": "espanta",
-  "inicio": 0.382,
-  "fin": 0.926
+  "inicio": 0.164,
+  "fin": 0.397
  },
  {
   "texto": "clientes",
-  "inicio": 0.973,
-  "fin": 1.581
+  "inicio": 0.417,
+  "fin": 0.677
  },
  {
   "texto": "Uno",
-  "inicio": 1.933,
-  "fin": 2.148
+  "inicio": 1.6,
+  "fin": 2.489
  },
  {
   "texto": "no",
-  "inicio": 2.567,
-  "fin": 2.691
+  "inicio": 3.2,
+  "fin": 3.403
  },
  {
   "texto": "dice",
-  "inicio": 2.701,
-  "fin": 2.896
+  "inicio": 3.42,
+  "fin": 3.739
  },
  {
   "texto": "qué",
-  "inicio": 2.913,
-  "fin": 3.073
+  "inicio": 3.767,
+  "fin": 4.027
  },
  {
   "texto": "hacés",
-  "inicio": 3.087,
-  "fin": 3.317
+  "inicio": 4.05,
+  "fin": 4.427
  },
  {
   "texto": "en",
-  "inicio": 3.337,
-  "fin": 3.461
+  "inicio": 4.459,
+  "fin": 4.662
  },
  {
   "texto": "la",
-  "inicio": 3.472,
-  "fin": 3.596
+  "inicio": 4.68,
+  "fin": 4.882
  },
  {
   "texto": "primera",
-  "inicio": 3.607,
-  "fin": 3.908
+  "inicio": 4.9,
+  "fin": 5.392
  },
  {
   "texto": "pantalla",
-  "inicio": 3.934,
-  "fin": 4.271
+  "inicio": 5.435,
+  "fin": 5.985
  },
  {
   "texto": "Dos",
-  "inicio": 4.867,
-  "fin": 5.143
+  "inicio": 6.633,
+  "fin": 5.724
  },
  {
   "texto": "tarda",
-  "inicio": 5.567,
-  "fin": 5.783
+  "inicio": 5.645,
+  "fin": 6.11
  },
  {
   "texto": "en",
-  "inicio": 5.802,
-  "fin": 5.918
+  "inicio": 6.15,
+  "fin": 6.4
  },
  {
   "texto": "cargar",
-  "inicio": 5.928,
-  "fin": 6.178
+  "inicio": 6.422,
+  "fin": 6.957
  },
  {
   "texto": "con",
-  "inicio": 6.199,
-  "fin": 6.349
+  "inicio": 7.004,
+  "fin": 7.325
  },
  {
   "texto": "datos",
-  "inicio": 6.362,
-  "fin": 6.578
+  "inicio": 7.353,
+  "fin": 7.817
  },
  {
   "texto": "del",
-  "inicio": 6.597,
-  "fin": 6.746
+  "inicio": 7.858,
+  "fin": 8.179
  },
  {
   "texto": "celular",
-  "inicio": 6.759,
-  "fin": 7.042
+  "inicio": 8.207,
+  "fin": 8.814
  },
  {
   "texto": "Tres",
-  "inicio": 7.833,
-  "fin": 8.079
+  "inicio": 9.567,
+  "fin": 9.781
  },
  {
   "texto": "no",
-  "inicio": 8.5,
-  "fin": 8.647
+  "inicio": 10.167,
+  "fin": 10.274
  },
  {
   "texto": "muestra",
-  "inicio": 8.66,
-  "fin": 9.017
+  "inicio": 10.283,
+  "fin": 10.544
  },
  {
   "texto": "tus",
-  "inicio": 9.048,
-  "fin": 9.237
+  "inicio": 10.567,
+  "fin": 10.705
  },
  {
   "texto": "servicios",
-  "inicio": 9.254,
-  "fin": 9.695
+  "inicio": 10.717,
+  "fin": 11.039
  },
  {
   "texto": "En",
-  "inicio": 10.567,
-  "fin": 10.737
+  "inicio": 12.133,
+  "fin": 12.299
  },
  {
   "texto": "Hefesto",
-  "inicio": 10.752,
-  "fin": 11.167
+  "inicio": 12.313,
+  "fin": 12.715
  },
  {
   "texto": "Webs",
-  "inicio": 11.203,
-  "fin": 11.471
- },
- {
-  "texto": "te",
-  "inicio": 11.495,
-  "fin": 11.665
- },
- {
-  "texto": "la",
-  "inicio": 11.68,
-  "fin": 11.851
+  "inicio": 12.75,
+  "fin": 13.01
  },
  {
   "texto": "forjamos",
-  "inicio": 11.866,
-  "fin": 12.329
+  "inicio": 13.033,
+  "fin": 13.482
+ },
+ {
+  "texto": "tu",
+  "inicio": 13.521,
+  "fin": 13.686
+ },
+ {
+  "texto": "página",
+  "inicio": 13.701,
+  "fin": 14.055
  },
  {
   "texto": "a",
-  "inicio": 12.37,
-  "fin": 12.492
+  "inicio": 14.086,
+  "fin": 14.204
  },
  {
   "texto": "medida",
-  "inicio": 12.502,
-  "fin": 12.868
+  "inicio": 14.215,
+  "fin": 14.569
  }
 ]

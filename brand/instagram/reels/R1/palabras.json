@@ -2,266 +2,266 @@
  {
   "texto": "Tenés",
   "inicio": 0,
-  "fin": 0.302
+  "fin": 0.323
  },
  {
   "texto": "un",
-  "inicio": 0.328,
-  "fin": 0.49
+  "inicio": 0.351,
+  "fin": 0.525
  },
  {
   "texto": "negocio",
-  "inicio": 0.505,
-  "fin": 0.899
+  "inicio": 0.541,
+  "fin": 0.963
  },
  {
   "texto": "Tu",
-  "inicio": 1.3,
-  "fin": 1.467
+  "inicio": 1.467,
+  "fin": 1.621
  },
  {
   "texto": "página",
-  "inicio": 1.482,
-  "fin": 1.841
+  "inicio": 1.635,
+  "fin": 1.966
  },
  {
   "texto": "tiene",
-  "inicio": 1.872,
-  "fin": 2.183
+  "inicio": 1.995,
+  "fin": 2.282
  },
  {
   "texto": "que",
-  "inicio": 2.21,
-  "fin": 2.425
+  "inicio": 2.307,
+  "fin": 2.505
  },
  {
   "texto": "tener",
-  "inicio": 2.444,
-  "fin": 2.755
+  "inicio": 2.523,
+  "fin": 2.81
  },
  {
   "texto": "tres",
-  "inicio": 2.782,
-  "fin": 3.045
+  "inicio": 2.835,
+  "fin": 3.078
  },
  {
   "texto": "cosas",
-  "inicio": 3.068,
-  "fin": 3.379
+  "inicio": 3.099,
+  "fin": 3.386
  },
  {
   "texto": "sí",
-  "inicio": 3.406,
-  "fin": 3.573
+  "inicio": 3.411,
+  "fin": 3.565
  },
  {
   "texto": "o",
-  "inicio": 3.588,
-  "fin": 3.708
+  "inicio": 3.579,
+  "fin": 3.689
  },
  {
   "texto": "sí",
-  "inicio": 3.718,
-  "fin": 3.885
+  "inicio": 3.699,
+  "fin": 3.853
  },
  {
   "texto": "Uno",
-  "inicio": 4.633,
-  "fin": 4.909
+  "inicio": 4.567,
+  "fin": 4.751
  },
  {
   "texto": "un",
-  "inicio": 5.1,
-  "fin": 5.226
+  "inicio": 5.133,
+  "fin": 5.222
  },
  {
   "texto": "botón",
-  "inicio": 5.237,
-  "fin": 5.471
+  "inicio": 5.23,
+  "fin": 5.394
  },
  {
   "texto": "de",
-  "inicio": 5.491,
-  "fin": 5.617
+  "inicio": 5.409,
+  "fin": 5.497
  },
  {
   "texto": "WhatsApp",
-  "inicio": 5.628,
-  "fin": 5.97
+  "inicio": 5.505,
+  "fin": 5.746
  },
  {
   "texto": "Si",
-  "inicio": 6.4,
-  "fin": 6.604
+  "inicio": 6.2,
+  "fin": 6.397
  },
  {
   "texto": "tienen",
-  "inicio": 6.622,
-  "fin": 7.06
+  "inicio": 6.414,
+  "fin": 6.836
  },
  {
   "texto": "que",
-  "inicio": 7.098,
-  "fin": 7.361
+  "inicio": 6.872,
+  "fin": 7.125
  },
  {
   "texto": "buscar",
-  "inicio": 7.384,
-  "fin": 7.822
+  "inicio": 7.147,
+  "fin": 7.569
  },
  {
   "texto": "tu",
-  "inicio": 7.86,
-  "fin": 8.065
+  "inicio": 7.606,
+  "fin": 7.802
  },
  {
   "texto": "número",
-  "inicio": 8.083,
-  "fin": 8.521
+  "inicio": 7.819,
+  "fin": 8.241
  },
  {
   "texto": "se",
-  "inicio": 8.559,
-  "fin": 8.763
+  "inicio": 8.278,
+  "fin": 8.475
  },
  {
   "texto": "van",
-  "inicio": 8.781,
-  "fin": 9.044
+  "inicio": 8.492,
+  "fin": 8.745
  },
  {
   "texto": "Dos",
-  "inicio": 9.4,
-  "fin": 9.124
+  "inicio": 9.033,
+  "fin": 8.855
  },
  {
   "texto": "que",
-  "inicio": 9.1,
-  "fin": 9.265
+  "inicio": 8.84,
+  "fin": 9.02
  },
  {
   "texto": "se",
-  "inicio": 9.28,
-  "fin": 9.408
+  "inicio": 9.036,
+  "fin": 9.176
  },
  {
   "texto": "vea",
-  "inicio": 9.419,
-  "fin": 9.584
+  "inicio": 9.189,
+  "fin": 9.369
  },
  {
   "texto": "bien",
-  "inicio": 9.598,
-  "fin": 9.799
+  "inicio": 9.385,
+  "fin": 9.605
  },
  {
   "texto": "en",
-  "inicio": 9.817,
-  "fin": 9.945
+  "inicio": 9.624,
+  "fin": 9.765
  },
  {
   "texto": "el",
-  "inicio": 9.956,
-  "fin": 10.084
+  "inicio": 9.777,
+  "fin": 9.917
  },
  {
   "texto": "celular",
-  "inicio": 10.095,
-  "fin": 10.406
+  "inicio": 9.93,
+  "fin": 10.27
  },
  {
   "texto": "Tres",
-  "inicio": 11.167,
-  "fin": 11.443
+  "inicio": 11,
+  "fin": 11.307
  },
  {
   "texto": "dónde",
-  "inicio": 11.867,
-  "fin": 12.208
+  "inicio": 11.6,
+  "fin": 11.961
  },
  {
   "texto": "estás",
-  "inicio": 12.238,
-  "fin": 12.58
+  "inicio": 11.992,
+  "fin": 12.353
  },
  {
   "texto": "y",
-  "inicio": 12.61,
-  "fin": 12.741
+  "inicio": 12.384,
+  "fin": 12.523
  },
  {
   "texto": "cuándo",
-  "inicio": 12.752,
-  "fin": 13.147
+  "inicio": 12.535,
+  "fin": 12.951
  },
  {
   "texto": "atendés",
-  "inicio": 13.181,
-  "fin": 13.628
+  "inicio": 12.987,
+  "fin": 13.459
  },
  {
   "texto": "La",
-  "inicio": 14.333,
-  "fin": 14.443
+  "inicio": 14.2,
+  "fin": 14.319
  },
  {
   "texto": "tuya",
-  "inicio": 14.452,
-  "fin": 14.625
+  "inicio": 14.329,
+  "fin": 14.516
  },
  {
   "texto": "no",
-  "inicio": 14.64,
-  "fin": 14.749
+  "inicio": 14.532,
+  "fin": 14.651
  },
  {
   "texto": "las",
-  "inicio": 14.759,
-  "fin": 14.9
+  "inicio": 14.661,
+  "fin": 14.814
  },
  {
   "texto": "tiene",
-  "inicio": 14.912,
-  "fin": 15.116
+  "inicio": 14.827,
+  "fin": 15.047
  },
  {
   "texto": "En",
-  "inicio": 15.667,
-  "fin": 15.833
+  "inicio": 15.567,
+  "fin": 15.714
  },
  {
   "texto": "Hefesto",
-  "inicio": 15.847,
-  "fin": 16.25
+  "inicio": 15.727,
+  "fin": 16.086
  },
  {
   "texto": "Webs",
-  "inicio": 16.285,
-  "fin": 16.546
- },
- {
-  "texto": "te",
-  "inicio": 16.568,
-  "fin": 16.734
- },
- {
-  "texto": "la",
-  "inicio": 16.748,
-  "fin": 16.914
+  "inicio": 16.117,
+  "fin": 16.349
  },
  {
   "texto": "forjamos",
-  "inicio": 16.929,
-  "fin": 17.379
+  "inicio": 16.369,
+  "fin": 16.769
+ },
+ {
+  "texto": "tu",
+  "inicio": 16.804,
+  "fin": 16.952
+ },
+ {
+  "texto": "página",
+  "inicio": 16.965,
+  "fin": 17.281
  },
  {
   "texto": "a",
-  "inicio": 17.418,
-  "fin": 17.537
+  "inicio": 17.308,
+  "fin": 17.414
  },
  {
   "texto": "medida",
-  "inicio": 17.547,
-  "fin": 17.902
+  "inicio": 17.423,
+  "fin": 17.739
  }
 ]

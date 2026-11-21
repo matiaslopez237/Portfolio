@@ -1,85 +1,85 @@
 {
- "total": 19.703,
+ "total": 19.834,
  "voz": 1,
  "ganchoDesde": 0,
  "primeraLinea": {
   "ini": 1,
-  "fin": 2.424
+  "fin": 2.521
  },
- "cierre": 16.503,
- "golpe": 14.208,
+ "cierre": 16.634,
+ "golpe": 13.925,
  "logo": true,
  "gestos": [
   {
    "ini": 1,
-   "fin": 3.033,
+   "fin": 2.867,
    "gesto": "palma"
   },
   {
-   "ini": 3.033,
-   "fin": 6.467,
+   "ini": 2.867,
+   "fin": 6.333,
    "gesto": "señala"
   },
   {
-   "ini": 6.467,
-   "fin": 10.067,
+   "ini": 6.333,
+   "fin": 9.367,
    "gesto": "uno"
   },
   {
-   "ini": 10.067,
-   "fin": 12.067,
+   "ini": 9.367,
+   "fin": 11.567,
    "gesto": "palma"
   },
   {
-   "ini": 12.067,
-   "fin": 14.033,
+   "ini": 11.567,
+   "fin": 13.733,
    "gesto": "señala"
   },
   {
-   "ini": 14.033,
-   "fin": 16.703,
+   "ini": 13.733,
+   "fin": 16.834,
    "gesto": "martillo",
-   "golpe": 14.208,
+   "golpe": 13.925,
    "logo": true,
-   "desde": 13.108
+   "desde": 12.825000000000001
   }
  ],
  "chunks": [
   {
    "ini": 0.65,
-   "fin": 2.683,
+   "fin": 2.601,
    "palabras": 4,
    "texto": "Antes, todo por WhatsApp."
   },
   {
-   "ini": 2.683,
-   "fin": 6.117,
+   "ini": 2.601,
+   "fin": 5.9830000000000005,
    "palabras": 8,
    "texto": "Sin página, cada paciente tiene que preguntar todo."
   },
   {
-   "ini": 6.117,
-   "fin": 9.717,
+   "ini": 5.9830000000000005,
+   "fin": 9.017000000000001,
    "palabras": 6,
    "texto": "Ahora, Quiropraxia Cipolletti tiene su página."
   },
   {
-   "ini": 9.717,
-   "fin": 11.717,
+   "ini": 9.017000000000001,
+   "fin": 11.217,
    "palabras": 6,
    "texto": "Con dominio propio y sus servicios."
   },
   {
-   "ini": 11.717,
-   "fin": 13.683,
+   "ini": 11.217,
+   "fin": 13.383000000000001,
    "palabras": 6,
    "texto": "Y un botón para pedir turno."
   },
   {
-   "ini": 13.683,
-   "fin": 16.602999999999998,
+   "ini": 13.383000000000001,
+   "fin": 16.733999999999998,
    "palabras": 8,
-   "texto": "En Hefesto Webs te la forjamos a medida."
+   "texto": "En Hefesto Webs forjamos tu página a medida."
   }
  ]
 }

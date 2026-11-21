@@ -2,191 +2,191 @@
  {
   "texto": "Antes",
   "inicio": 0,
-  "fin": 0.337
+  "fin": 0.36
  },
  {
   "texto": "todo",
-  "inicio": 0.367,
-  "fin": 0.652
+  "inicio": 0.392,
+  "fin": 0.697
  },
  {
   "texto": "por",
-  "inicio": 0.677,
-  "fin": 0.91
+  "inicio": 0.723,
+  "fin": 0.973
  },
  {
   "texto": "WhatsApp",
-  "inicio": 0.931,
-  "fin": 1.424
+  "inicio": 0.994,
+  "fin": 1.521
  },
  {
   "texto": "Sin",
-  "inicio": 2.033,
-  "fin": 2.251
+  "inicio": 1.867,
+  "fin": 2.061
  },
  {
   "texto": "página",
-  "inicio": 2.269,
-  "fin": 2.631
+  "inicio": 2.078,
+  "fin": 2.401
  },
  {
   "texto": "cada",
-  "inicio": 2.663,
-  "fin": 2.928
+  "inicio": 2.43,
+  "fin": 2.667
  },
  {
   "texto": "paciente",
-  "inicio": 2.952,
-  "fin": 3.41
+  "inicio": 2.688,
+  "fin": 3.098
  },
  {
   "texto": "tiene",
-  "inicio": 3.45,
-  "fin": 3.764
+  "inicio": 3.133,
+  "fin": 3.414
  },
  {
   "texto": "que",
-  "inicio": 3.791,
-  "fin": 4.008
+  "inicio": 3.438,
+  "fin": 3.632
  },
  {
   "texto": "preguntar",
-  "inicio": 4.027,
-  "fin": 4.534
+  "inicio": 3.649,
+  "fin": 4.103
  },
  {
   "texto": "todo",
-  "inicio": 4.578,
-  "fin": 4.844
+  "inicio": 4.142,
+  "fin": 4.379
  },
  {
   "texto": "Ahora",
-  "inicio": 5.467,
-  "fin": 5.84
+  "inicio": 5.333,
+  "fin": 5.653
  },
  {
   "texto": "Quiropraxia",
-  "inicio": 5.873,
-  "fin": 6.592
+  "inicio": 5.681,
+  "fin": 6.296
  },
  {
   "texto": "Cipolletti",
-  "inicio": 6.654,
-  "fin": 7.315
+  "inicio": 6.349,
+  "fin": 6.915
  },
  {
   "texto": "tiene",
-  "inicio": 7.373,
-  "fin": 7.747
+  "inicio": 6.964,
+  "fin": 7.284
  },
  {
   "texto": "su",
-  "inicio": 7.779,
-  "fin": 7.98
+  "inicio": 7.312,
+  "fin": 7.484
  },
  {
   "texto": "página",
-  "inicio": 7.998,
-  "fin": 8.429
+  "inicio": 7.499,
+  "fin": 7.868
  },
  {
   "texto": "Con",
-  "inicio": 9.067,
-  "fin": 9.237
+  "inicio": 8.367,
+  "fin": 8.556
  },
  {
   "texto": "dominio",
-  "inicio": 9.252,
-  "fin": 9.575
+  "inicio": 8.572,
+  "fin": 8.929
  },
  {
   "texto": "propio",
-  "inicio": 9.603,
-  "fin": 9.887
+  "inicio": 8.96,
+  "fin": 9.274
  },
  {
   "texto": "y",
-  "inicio": 9.912,
-  "fin": 10.007
+  "inicio": 9.302,
+  "fin": 9.407
  },
  {
   "texto": "sus",
-  "inicio": 10.015,
-  "fin": 10.186
+  "inicio": 9.416,
+  "fin": 9.605
  },
  {
   "texto": "servicios",
-  "inicio": 10.2,
-  "fin": 10.599
+  "inicio": 9.621,
+  "fin": 10.062
  },
  {
   "texto": "Y",
-  "inicio": 11.067,
-  "fin": 11.151
+  "inicio": 10.567,
+  "fin": 10.678
  },
  {
   "texto": "un",
-  "inicio": 11.158,
-  "fin": 11.276
+  "inicio": 10.688,
+  "fin": 10.843
  },
  {
   "texto": "botón",
-  "inicio": 11.286,
-  "fin": 11.505
+  "inicio": 10.857,
+  "fin": 11.146
  },
  {
   "texto": "para",
-  "inicio": 11.524,
-  "fin": 11.709
+  "inicio": 11.172,
+  "fin": 11.416
  },
  {
   "texto": "pedir",
-  "inicio": 11.725,
-  "fin": 11.943
+  "inicio": 11.438,
+  "fin": 11.727
  },
  {
   "texto": "turno",
-  "inicio": 11.962,
-  "fin": 12.181
+  "inicio": 11.752,
+  "fin": 12.042
  },
  {
   "texto": "En",
-  "inicio": 13.033,
-  "fin": 13.194
+  "inicio": 12.733,
+  "fin": 12.91
  },
  {
   "texto": "Hefesto",
-  "inicio": 13.208,
-  "fin": 13.599
+  "inicio": 12.925,
+  "fin": 13.354
  },
  {
   "texto": "Webs",
-  "inicio": 13.633,
-  "fin": 13.886
- },
- {
-  "texto": "te",
-  "inicio": 13.908,
-  "fin": 14.069
- },
- {
-  "texto": "la",
-  "inicio": 14.083,
-  "fin": 14.244
+  "inicio": 13.392,
+  "fin": 13.669
  },
  {
   "texto": "forjamos",
-  "inicio": 14.258,
-  "fin": 14.695
+  "inicio": 13.693,
+  "fin": 14.173
+ },
+ {
+  "texto": "tu",
+  "inicio": 14.215,
+  "fin": 14.391
+ },
+ {
+  "texto": "página",
+  "inicio": 14.407,
+  "fin": 14.785
  },
  {
   "texto": "a",
-  "inicio": 14.733,
-  "fin": 14.848
+  "inicio": 14.818,
+  "fin": 14.944
  },
  {
   "texto": "medida",
-  "inicio": 14.858,
-  "fin": 15.203
+  "inicio": 14.955,
+  "fin": 15.334
  }
 ]

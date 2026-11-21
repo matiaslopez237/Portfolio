@@ -1,74 +1,74 @@
 {
- "total": 17.368000000000002,
+ "total": 19.069000000000003,
  "voz": 1,
  "ganchoDesde": 0,
  "primeraLinea": {
   "ini": 1,
-  "fin": 2.581
+  "fin": 1.677
  },
- "cierre": 14.168000000000003,
- "golpe": 11.752,
+ "cierre": 15.869000000000003,
+ "golpe": 13.313,
  "logo": true,
  "gestos": [
   {
    "ini": 1,
-   "fin": 2.933,
+   "fin": 2.6,
    "gesto": "señala"
   },
   {
-   "ini": 2.933,
-   "fin": 5.867,
+   "ini": 2.6,
+   "fin": 7.633,
    "gesto": "uno"
   },
   {
-   "ini": 5.867,
-   "fin": 8.833,
+   "ini": 7.633,
+   "fin": 10.567,
    "gesto": "dos"
   },
   {
-   "ini": 8.833,
-   "fin": 11.567,
+   "ini": 10.567,
+   "fin": 13.133,
    "gesto": "tres"
   },
   {
-   "ini": 11.567,
-   "fin": 14.368,
+   "ini": 13.133,
+   "fin": 16.069000000000003,
    "gesto": "martillo",
-   "golpe": 11.752,
+   "golpe": 13.313,
    "logo": true,
-   "desde": 10.652000000000001
+   "desde": 12.213000000000001
   }
  ],
  "chunks": [
   {
    "ini": 0.65,
-   "fin": 2.661,
+   "fin": 2.25,
    "palabras": 3,
    "texto": "Esto espanta clientes."
   },
   {
-   "ini": 2.661,
-   "fin": 5.517,
+   "ini": 2.25,
+   "fin": 7.283,
    "palabras": 9,
    "texto": "Uno: no dice qué hacés en la primera pantalla."
   },
   {
-   "ini": 5.517,
-   "fin": 8.483,
+   "ini": 7.283,
+   "fin": 10.217,
    "palabras": 8,
    "texto": "Dos: tarda en cargar con datos del celular."
   },
   {
-   "ini": 8.483,
-   "fin": 11.217,
+   "ini": 10.217,
+   "fin": 12.783,
    "palabras": 5,
    "texto": "Tres: no muestra tus servicios."
   },
   {
-   "ini": 11.217,
-   "fin": 14.268,
+   "ini": 12.783,
+   "fin": 15.969000000000001,
    "palabras": 8,
-   "texto": "En Hefesto Webs te la forjamos a medida."
+   "texto": "En Hefesto Webs forjamos tu página a medida."
   }
  ]
 }
