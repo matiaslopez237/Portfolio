@@ -68,3 +68,16 @@ Característica: Reels con formatos probados (R3 a R6)
     Dado el reel "R6"
     Entonces la lista para revisar tu web existe y mide 1080×1350
     Y su texto pide comentar "PÁGINA"
+
+  @CA-17.9
+  Esquema del escenario: El reel <reel> arranca con un golpe, sin silencio
+    Dado el reel "<reel>"
+    Entonces la voz arranca antes de los 0,5 segundos
+    Y en el primer cuadro ya hay texto a la vista
+    Y el texto entra golpeando y salen chispas en el primer medio segundo
+
+    Ejemplos:
+      | reel |
+      | R3   |
+      | R5   |
+      | R6   |

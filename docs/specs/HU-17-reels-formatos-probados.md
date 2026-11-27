@@ -42,6 +42,10 @@
   - usa de 3 a 5 hashtags;
   - cierra pidiendo guardar o mandar (R3, R4, R5) o comentar PÁGINA (R6).
 - **RN-17.9 (velocidad, pedido de Matias 2026-11-20):** un reel puede pedir `"velocidad"` en `guiones.json`. Los reels nuevos van a **x1,5** (elección de Matias, 2026-11-20: "si son muy lentos no se ven"). La voz se acelera sin cambiar el tono (ffmpeg `atempo`) y los subtítulos, la boca y los gestos siguen a la voz acelerada. Sin `"velocidad"`, la voz queda como sale de Gemini. Además, en todos los reels nuevos los silencios largos de la voz se acortan a 0,25 s como máximo (y el del principio a 0,1 s): Gemini a veces hace pausas dramáticas en el medio de una frase. Las palabras y la boca se vuelven a ubicar sobre la voz final. El R4 publicado el 20/11 queda como salió (decisión de Matias).
+- **RN-17.10 (arranque con golpe, pedido de Matias 2026-11-26):** el R4 tuvo 79 % de gente que lo pasó de largo (lo normal es 57 %) y lo miraron 4,2 s en promedio. Buzzfy marca el problema en el arranque: abrir con el momento fuerte, sin silencio y con texto desde el primer cuadro. Un reel con `"arranque": "golpe"`:
+  - la voz empieza a los 0,3 s (antes, a 1 s, con un segundo de silencio);
+  - la primera frase ya está escrita en el cuadro 0 y entra "golpeada": grande, se aplasta a su tamaño en 0,2 s, sale al rojo y se enfría, con chispas y un temblor corto de la escena;
+  - si la primera línea muestra el teléfono, el teléfono ya está a la vista desde el cuadro 0.
 - **RN-17.8 (cómo se mide):** a las 48 h de cada reel se corre `ig_reel_checkup` de Buzzfy (mientras dure el acceso) y se anotan alcance a no seguidores, compartidos, guardados y clics en `brand/instagram/estrategia/`. Sin juzgar por los "me gusta" de conocidos.
 
 ## Casos límite
@@ -59,6 +63,7 @@
 | CA-17.5 | Dado el R6, entonces la lista existe en 1080×1350 y el texto del reel pide comentar PÁGINA | Chequeo automático |
 | CA-17.6 | Dados R3 y R5, cuando Matias los ve en el celular, entonces la grabación del sitio se lee bien y no muestra nada roto ni datos de nadie | Checklist |
 | CA-17.8 | Dada la voz de un reel, entonces ninguna pausa dura más de 0,25 s (la del principio, 0,1 s) y el sonido no se recorta | Test (node) |
+| CA-17.9 | Dado un reel con arranque con golpe, entonces la voz arranca antes de los 0,5 s, en el cuadro 0 ya hay texto a la vista, el texto cambia de tamaño en los primeros 0,4 s y hay chispas antes de los 0,5 s | Escenario BDD |
 | CA-17.7 | Dados los 4 reels, cuando Matias los ve, entonces el gancho se entiende en 3 s, la mascota se ve bien y no hay ninguna afirmación inventada | Checklist |
 
 ## Checklist (lo firma Matias)
@@ -84,3 +89,4 @@ Ninguna.
 - 2026-11-20: Matias respondió las preguntas: R5 con Bacssa (o Quiropraxia sin/con página), verificación con BDD + TDD y publicación normal, sin reels de prueba.
 - 2026-11-20: el R4 cambia a 3 errores nuevos (el original repetía el tema del R1 y del C2). La primera línea del R5 pasa a "Antes, todo por WhatsApp." para terminar antes de los 3 s.
 - 2026-11-20: el cierre de R1 a R5 pasa de "te la forjamos a medida" a "forjamos tu página a medida" (pedido de Matias). Duración máxima: 22 s (RN-17.2); R1 y R2, 27 s (RN-15.5).
+- 2026-11-26: datos de Buzzfy del R4 (182 cuentas, 79 % lo pasa de largo, 4,2 s de vista promedio). Nueva RN-17.10: arranque con golpe en R3, R5 y R6.

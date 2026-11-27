@@ -113,3 +113,22 @@ Then('su texto pide comentar {string}', function (palabra) {
   const t = textoDelReel(this.reel) ?? '';
   assert.match(t, new RegExp(`coment[aá] ${palabra}`, 'i'));
 });
+
+// ── CA-17.9 (arranque con golpe) ──
+const arranque = (w) => {
+  const s = json(w.dir + 'subtitulos.json');
+  assert.ok(s.arranque, 'subtitulos.json no trae "arranque" (el reel tiene que pedir "arranque": "golpe")');
+  return { ...s.arranque, voz: s.voz };
+};
+Then('la voz arranca antes de los 0,5 segundos', function () {
+  const a = arranque(this);
+  assert.ok(a.voz < 0.5, `la voz arranca a los ${a.voz} s`);
+});
+Then('en el primer cuadro ya hay texto a la vista', function () {
+  assert.ok(arranque(this).textoCuadro0 > 0.5, 'en el cuadro 0 no se ve texto');
+});
+Then('el texto entra golpeando y salen chispas en el primer medio segundo', function () {
+  const a = arranque(this);
+  assert.ok(Math.abs(a.escala0 - a.escala04) > 0.1, `el texto no cambia de tamaño (${a.escala0} → ${a.escala04})`);
+  assert.ok(a.chispas > 0, 'no hay chispas en el primer medio segundo');
+});
