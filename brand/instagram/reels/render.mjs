@@ -59,7 +59,11 @@ if (reel.velocidad) {
   vozFinal = dir + 'voz-final.mp3'; aMp3(a, vozFinal);
   const ener = energia(a);
   bocaDe(vozFinal, dir + 'boca-final.json');
-  voz = { palabras: alinear(reel.lineas.map(x => x.texto).join(' '), ener), energia: ener, boca: leerJson(dir + 'boca-final.json') };
+  // las palabras se ubican sobre la voz acelerada sin recortar (con sus pausas, se ve dónde termina cada frase)
+  // y después se corren a la voz recortada
+  const palabras = alinear(reel.lineas.map(x => x.texto).join(' '), energia({ pcm, tasa: 24000 }))
+    .map(p => ({ ...p, inicio: +a.mover(p.inicio).toFixed(3), fin: +a.mover(p.fin).toFixed(3) }));
+  voz = { palabras, energia: ener, boca: leerJson(dir + 'boca-final.json') };
   console.log(`voz x${reel.velocidad}: ${(ener.length / 30).toFixed(1)} s (pausas acortadas: ${a.quitado.toFixed(2)} s)`);
 }
 const datos = {

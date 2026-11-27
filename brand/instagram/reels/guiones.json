@@ -34,7 +34,10 @@
      "marca": "tu página",
      "accion": "martillo"
     }
-   ]
+   ],
+   "velocidad": 1.5,
+   "arranque": "golpe",
+   "inicioVoz": 0.3
   },
   {
    "id": "R2",
@@ -99,7 +102,7 @@
    "voz": "gemini:Algenib",
    "muneco": "v5",
    "cola": 0.3,
-   "inicioVoz": 1,
+   "inicioVoz": 0.3,
    "sitio": {
     "url": "https://quiropraxiacipolletti.com",
     "paradas": [
@@ -139,7 +142,7 @@
      }
     },
     {
-     "texto": "Y el mensaje ya está escrito.",
+     "texto": "Y el mensaje ya está escrito, sin buscar el número.",
      "marca": "ya está escrito",
      "gesto": "palma",
      "pantalla": {
@@ -147,18 +150,14 @@
      }
     },
     {
-     "texto": "Sin buscar el número.",
-     "marca": "número",
-     "gesto": "explica",
-     "pantalla": false
-    },
-    {
      "texto": "En Hefesto Webs forjamos tu página a medida.",
      "marca": "tu página",
-     "accion": "martillo"
+     "accion": "martillo",
+     "pantalla": false
     }
    ],
-   "velocidad": 1.5
+   "velocidad": 1.5,
+   "arranque": "golpe"
   },
   {
    "id": "R4",
@@ -210,7 +209,7 @@
    "voz": "gemini:Algenib",
    "muneco": "v5",
    "cola": 0.3,
-   "inicioVoz": 1,
+   "inicioVoz": 0.3,
    "sitio": {
     "url": "https://quiropraxiacipolletti.com",
     "paradas": [
@@ -282,7 +281,8 @@
      "pantalla": false
     }
    ],
-   "velocidad": 1.5
+   "velocidad": 1.5,
+   "arranque": "golpe"
   },
   {
    "id": "R6",
@@ -291,7 +291,7 @@
    "voz": "gemini:Algenib",
    "muneco": "v5",
    "cola": 0.3,
-   "inicioVoz": 1,
+   "inicioVoz": 0.3,
    "gancho": [
     "¿Tu página *pierde*",
     "clientes?"
@@ -330,7 +330,8 @@
      "pantalla": false
     }
    ],
-   "velocidad": 1.5
+   "velocidad": 1.5,
+   "arranque": "golpe"
   }
  ]
 }

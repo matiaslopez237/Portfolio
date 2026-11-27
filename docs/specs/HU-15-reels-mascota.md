@@ -17,7 +17,7 @@
 - **RN-15.2 (personaje):** Hefesto es una mascota estilizada y no se presenta como una persona real. Los textos hablan en nombre del estudio ("en Hefesto Webs…"), no como si fuera Matias.
 - **RN-15.3 (contenido real):** igual que en la HU-14: solo datos reales de `PRODUCT.md` e `index.html`, la voz de `voz-y-tono.md` y el CTA fijo (WhatsApp 260 466-1138 · @hefestowebs).
 - **RN-15.4 (voz y música):** la voz de Hefesto se genera con una herramienta de voz por IA **gratuita** (sin cuenta paga), en español rioplatense; la boca y los subtítulos siguen los tiempos de esa voz. Los subtítulos se leen igual sin sonido. Sin música en el video: la agrega Matias al publicar desde la biblioteca de Instagram (o se publica sin música).
-- **RN-15.5 (formato):** MP4 H.264, 1080×1920, 30 fps, de 15 a 27 s (hasta el 2026-11-20 eran 25 s), menos de 20 MB. Los subtítulos y el contenido importante quedan dentro de la zona segura (fuera de los 250 px de arriba y de abajo).
+- **RN-15.5 (formato):** MP4 H.264, 1080×1920, 30 fps, de 10 a 27 s (hasta el 2026-11-20 eran 15 a 25 s), menos de 20 MB. Los subtítulos y el contenido importante quedan dentro de la zona segura (fuera de los 250 px de arriba y de abajo).
 - **RN-15.6 (identidad):** colores de `brand/tokens.json`, tipografías Archivo y Public Sans, y el estilo Forja.
 - **RN-15.7 (publicación):** los reels entran al calendario como filas "Reel" y se publican con la API (`media_type=REELS`). Programar o publicar solo con el OK de Matias.
 
@@ -30,7 +30,7 @@
 | CA | Dado / cuando / entonces | Se verifica con |
 | --- | --- | --- |
 | CA-15.1 | Dadas las partes de la mascota, entonces están recortadas sin fondo verde (PNG con transparencia), una por pieza | Chequeo automático |
-| CA-15.2 | Dado el primer reel, entonces es un MP4 de 1080×1920, entre 15 y 27 s y de menos de 20 MB | Chequeo automático |
+| CA-15.2 | Dado el primer reel, entonces es un MP4 de 1080×1920, entre 10 y 27 s y de menos de 20 MB | Chequeo automático |
 | CA-15.3 | Dados los subtítulos del reel, entonces cada uno dura al menos 1,5 s, tiene 12 palabras o menos y está dentro de la zona segura | Chequeo automático |
 | CA-15.4 | Dado el último tramo del reel, entonces muestra el CTA fijo con el número y @hefestowebs | Chequeo automático |
 | CA-15.5 | Dado un reel en el calendario, cuando corre la publicación con la API simulada, entonces crea el contenedor REELS con la URL del video y el texto, espera que esté listo y lo publica | Test (TDD) |
@@ -48,3 +48,4 @@
 - 2026-11-17: implementada. Hoja de partes v4 (brazo con codo; el brazo del martillo se achica a 0,81 porque Gemini lo hizo 19 % más grande). Voz: Gemini TTS, voz Algenib (gratis con clave de AI Studio guardada fuera del repo); el tono va en notas separadas del texto, y se quita el golpe de estática que Gemini deja al final. Boca sincronizada con Rhubarb Lip Sync (gratis, local, modo fonético). Subtítulos: entran hasta 0,35 s antes de la voz y duran al menos 1,5 s; la voz arranca en 1,5 s para que el gancho se lea entero. Publicación de reels por la API lista (`publicarReel`, media_type=REELS): el R1 todavía no está en el calendario (falta confirmar la frecuencia y el OK de Matias). R1: 23,1 s, 1080×1920, 4,6 MB. 59/59 chequeos y 27/27 tests en verde.
 - 2026-11-17: CA-15.6 firmado por Matias. Historia cerrada. Queda abierta la frecuencia de los reels (se define al programar el R1).
 - 2026-11-20: el límite de RN-15.5 sube de 25 a 27 s (decisión de Matias, HU-17), para que el R1 y el R2 entren con el cierre nuevo "forjamos tu página a medida".
+- 2026-11-26: el R1 pasa a x1,5 con arranque con golpe (HU-17, RN-17.9 y RN-17.10) y el mínimo de RN-15.5 baja a 10 s, igual que en la HU-17.

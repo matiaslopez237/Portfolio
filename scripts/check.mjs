@@ -705,14 +705,14 @@ const chequeos = [
     },
   },
   {
-    ca: 'CA-15.2', desc: 'Reel R1: MP4 H.264 de 1080×1920, entre 15 y 27 s, menos de 20 MB',
+    ca: 'CA-15.2', desc: 'Reel R1: MP4 H.264 de 1080×1920, entre 10 y 27 s, menos de 20 MB',
     run: async () => {
       const ruta = 'brand/instagram/reels/R1/R1.mp4', v = await infoVideo(ruta);
       if (!v) throw new Error('falta ' + ruta);
       const malos = [];
       if (v.codec !== 'h264') malos.push('códec ' + v.codec);
       if (v.w !== 1080 || v.h !== 1920) malos.push(`medidas ${v.w}×${v.h}`);
-      if (v.dur < 15 || v.dur > 27) malos.push(`dura ${v.dur.toFixed(1)} s`);
+      if (v.dur < 10 || v.dur > 27) malos.push(`dura ${v.dur.toFixed(1)} s`);
       if (v.mb >= 20) malos.push(`pesa ${v.mb.toFixed(1)} MB`);
       if (malos.length) throw new Error(malos.join('; '));
       return true;

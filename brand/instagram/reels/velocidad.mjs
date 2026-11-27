@@ -14,7 +14,8 @@ export function acortarPausas({ pcm, tasa }, { pausaMax = 0.25, inicioMax = 0.1 
   }
   const max = Math.max(...niveles) || 1, suena = niveles.map(v => v / max > UMBRAL);
   const primera = suena.indexOf(true);
-  if (primera < 0) return { pcm, tasa, quitado: 0 };
+  const igual = (t) => t;
+  if (primera < 0) return { pcm, tasa, quitado: 0, mover: igual };
   // tramos a quitar (en ventanas): el silencio del principio que pase de inicioMax, y de cada pausa del medio
   // lo que pase de pausaMax (se saca del centro, así la voz entra y sale igual que antes)
   const quitar = [];
@@ -28,12 +29,15 @@ export function acortarPausas({ pcm, tasa }, { pausaMax = 0.25, inicioMax = 0.1 
     if (largo > maxV) { const a = i + Math.floor(maxV / 2); quitar.push([a, a + (largo - maxV)]); }
     i = j;
   }
-  if (!quitar.length) return { pcm, tasa, quitado: 0 };
+  if (!quitar.length) return { pcm, tasa, quitado: 0, mover: igual };
   const partes = []; let desde = 0, quitado = 0;
   for (const [a, b] of quitar) {
     const sa = Math.min(n, a * paso), sb = Math.min(n, b * paso);
     partes.push(pcm.subarray(desde * 2, sa * 2)); quitado += (sb - sa) / tasa; desde = sb;
   }
   partes.push(pcm.subarray(desde * 2));
-  return { pcm: Buffer.concat(partes), tasa, quitado };
+  // mover(t): dónde queda en la voz recortada un momento t de la voz sin recortar (lo de adentro de un corte, al borde)
+  const cortes = quitar.map(([a, b]) => [a * paso / tasa, b * paso / tasa]);
+  const mover = (t) => { let menos = 0; for (const [a, b] of cortes) { if (t >= b) menos += b - a; else if (t > a) menos += t - a; } return t - menos; };
+  return { pcm: Buffer.concat(partes), tasa, quitado, mover };
 }

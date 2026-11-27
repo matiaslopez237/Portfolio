@@ -106,6 +106,7 @@
 const $ = (id) => document.getElementById(id);
 let D, L, chunks, palabras, items, accion, total, plan = null, logo = null, planTel = null, sitioImgs = [], primeraLinea = null;
 const LOGO_ANCHO = 170;   // ancho del logo del martillazo (el del cierre mide 460)
+let GOLPE = false, escalaSub = 1, caidaSub = 0;   // arranque con golpe (HU-17, RN-17.10)
 let VOZ = 1.5;            // la voz arranca al segundo 1,5: antes, el gancho solo. Un reel puede pedir otro ("inicioVoz", HU-17)
 const TEL = { dx: 240, escala: 0.8 };   // con el teléfono a la vista, Hefesto se corre a la derecha y se achica un poco
 const CTA = 3.2;          // duración del cierre
@@ -113,7 +114,7 @@ const marcar = (t) => t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9ñ]/g, '');
 
 window.armar = async (datos) => {
-  D = datos; palabras = datos.palabras; VOZ = datos.reel.inicioVoz ?? 1.5;
+  D = datos; palabras = datos.palabras; VOZ = datos.reel.inicioVoz ?? 1.5; GOLPE = datos.reel.arranque === 'golpe';
   // Muñeco: v4 (un brazo con martillo, HU-15) o v5 (dos brazos con gestos, HU-16). Se prepara en muneco.js
   L = datos.muneco.v5 ? await window.prepararMunecoV5(datos.muneco) : await window.prepararMuneco(datos.muneco);
   const tiemposLineas = [];
@@ -148,18 +149,20 @@ window.armar = async (datos) => {
   tiemposLineas.forEach((l, i) => { l.fin = tiemposLineas[i + 1]?.ini ?? l.fin + 0.5; });
   if (L.v5) { plan = window.Gestos.planGestos(tiemposLineas, { velocidad: datos.reel.velocidad ?? 1 }); accion = null; }
   // Teléfono (HU-17): plan de pantallas y capturas del sitio ya decodificadas (cuadro() dibuja sin esperar)
-  planTel = tiemposLineas.some(l => 'pantalla' in l) ? window.Telefono.planTelefono(tiemposLineas) : null;
+  // RN-17.10: con golpe, si la primera línea muestra el teléfono, ya está a la vista en el cuadro 0
+  planTel = tiemposLineas.some(l => 'pantalla' in l) ? window.Telefono.planTelefono(tiemposLineas.map((l, i) => i === 0 && GOLPE ? { ...l, ini: -1 } : l)) : null;
   if (planTel) await prepararTelefono(datos);
   // Cada subtítulo aparece un poco antes de que se diga (hasta 0,35 s, y nunca antes de que termine de decirse el anterior):
   // así las frases cortas, como "¿Tenés un negocio?", quedan al menos 1,5 s en pantalla (CA-15.3). Las palabras igual se
   // iluminan cuando suenan. El primero puede empezar 0,5 s antes de la voz (el gancho se va antes, ver cuadro()).
   // y ninguno reemplaza al anterior antes de que este lleve 1,5 s en pantalla (a lo sumo, el texto nuevo entra unas décimas tarde).
-  chunks.forEach((c, i) => { c.ini = i ? Math.max(c.palabras[0].ini - 0.35, chunks[i - 1].palabras.at(-1).fin + 0.08, chunks[i - 1].ini + 1.5) : Math.max(c.palabras[0].ini - 0.35, VOZ - 0.5); });
-  chunks.forEach((c, i) => { c.fin = chunks[i + 1]?.ini ?? c.palabras.at(-1).fin + 0.4; });
+  chunks.forEach((c, i) => { c.ini = i ? Math.max(c.palabras[0].ini - 0.35, chunks[i - 1].palabras.at(-1).fin + 0.08, chunks[i - 1].ini + 1.501) : (GOLPE ? 0 : Math.max(c.palabras[0].ini - 0.35, VOZ - 0.5)); });   // RN-17.10: con golpe, la primera frase ya está en el cuadro 0
+  // el último también queda 1,5 s o más (con la voz a x1,5 la última frase dura menos que eso, HU-17)
+  chunks.forEach((c, i) => { c.fin = chunks[i + 1]?.ini ?? Math.max(c.palabras.at(-1).fin + 0.4, c.ini + 1.501); });
   $('items').innerHTML = items.map((it, i) => `<div class="item" id="item-${i}">${it.txt}</div>`).join('');
   $('gancho').innerHTML = datos.reel.gancho.map(marcar).join('<br>');
   // "cola": pausa entre la última palabra y el cierre (0,5 s; un reel puede pedir menos para no pasar de 25 s, RN-15.5)
-  total = palabras.at(-1).fin + VOZ + (datos.reel.cola ?? 0.5) + CTA;
+  total = Math.max(palabras.at(-1).fin + VOZ + (datos.reel.cola ?? 0.5), chunks.at(-1).fin) + CTA;
   await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
   await document.fonts.ready;
   // Martillazo al logo (RN-16.7): dónde pega el martillo y dónde está el logo del cierre (con el cierre ya en su tamaño final)
@@ -176,8 +179,18 @@ window.armar = async (datos) => {
   const golpeV5 = plan?.find(l => l.gesto === "martillo")?.golpe ?? null;
   // ganchoDesde: primer momento (de a un cuadro) en que el gancho se ve (CA-17.2)
   let ganchoDesde = null;
-  for (let t = 0; t < 1.5 && ganchoDesde === null; t += 1 / 30) { window.cuadro(t); if (+$('gancho').style.opacity > 0.5) ganchoDesde = +t.toFixed(3); }
-  return { total, voz: VOZ, ganchoDesde, primeraLinea, cierre: total - CTA, golpe: accion ? accion.t : golpeV5, logo: !!logo, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
+  const textoVisible = () => Math.max(+$('gancho').style.opacity || 0, +$('sub').style.opacity || 0);
+  for (let t = 0; t < 1.5 && ganchoDesde === null; t += 1 / 30) { window.cuadro(t); if (textoVisible() > 0.5) ganchoDesde = +t.toFixed(3); }
+  // Arranque con golpe (CA-17.9): texto en el cuadro 0, cambio de tamaño en 0,4 s y chispas antes de los 0,5 s
+  let arranque = null;
+  if (GOLPE) {
+    window.cuadro(0); const textoCuadro0 = textoVisible(), escala0 = escalaSub;
+    window.cuadro(0.4); const escala04 = escalaSub;
+    let chispasVistas = 0;
+    for (let t = 0; t < 0.5; t += 1 / 30) { window.cuadro(t); const px = $('chispas').getContext('2d').getImageData(0, 0, 1080, 900).data; for (let i = 3; i < px.length; i += 4 * 7) if (px[i] > 40) chispasVistas++; }
+    arranque = { textoCuadro0, escala0: +escala0.toFixed(3), escala04: +escala04.toFixed(3), chispas: chispasVistas };
+  }
+  return { total, voz: VOZ, ganchoDesde, ...(arranque ? { arranque } : {}), primeraLinea, cierre: total - CTA, golpe: accion ? accion.t : golpeV5, logo: !!logo, ...(plan ? { gestos: plan } : {}), chunks: chunks.map(c => ({ ini: c.ini, fin: c.fin, palabras: c.palabras.length, texto: c.palabras.map(w => w.txt).join(' ') })) };
 };
 
 // ── Utilidades de tiempo ──
@@ -353,11 +366,15 @@ window.cuadro = (t) => {
     // Chispas: salen de la cabeza del martillo en cada golpe
     for (const t0 of golpes) chispas(g, t, pos.golpe[t0]?.x ?? pos.martillo.x, pos.golpe[t0]?.y ?? pos.martillo.y, t0, 46, 1.2);
   }
+  // RN-17.10: el golpe del arranque saca chispas del texto (el lienzo de chispas está corrido como el muñeco: se compensa)
+  if (GOLPE) { const d = desplMuneco(), x = (px) => 540 + (px - 540 - d.dx) / d.s, y = (py) => 1920 - (1920 - py) / d.s;
+    chispas(g, t, x(380), y(430), 0.1, 40, 1.3); chispas(g, t, x(700), y(430), 0.13, 40, 1.3); }
   g.globalCompositeOperation = 'source-over';
   $('fragua').style.opacity = 0.75 + 0.25 * Math.sin(t * 7.3) * Math.sin(t * 3.1);
   // Gancho: aparece al rojo y se enfría, se va cuando empieza la voz
   const gg = $('gancho');
-  if (t < chunks[0].ini) {   // el gancho se va justo cuando entra el primer subtítulo
+  if (GOLPE) gg.style.opacity = 0;   // con golpe, la primera frase hace de gancho
+  else if (t < chunks[0].ini) {   // el gancho se va justo cuando entra el primer subtítulo
     const enc = tramo(t, 0, 0.8), sale = tramo(t, chunks[0].ini - 0.3, chunks[0].ini);
     gg.style.opacity = 1 - sale;   // a la vista desde el primer cuadro (CA-17.2)
     gg.style.color = `rgb(255,${(200 + 38 * enc) | 0},${(120 + 124 * enc) | 0})`;
@@ -372,6 +389,18 @@ window.cuadro = (t) => {
     sub.innerHTML = c.palabras.map(w => `<span class="w${t >= w.ini ? ' dicha' : ''}${marca.includes(norm(w.txt)) ? ' m' : ''}">${w.txt}</span>`).join(' ');
     sub.style.opacity = 1;
   } else sub.style.opacity = 0;
+  // RN-17.10: la primera frase entra golpeada: grande, se aplasta a su tamaño en 0,2 s, al rojo y se enfría; la escena tiembla
+  escalaSub = 1; caidaSub = 0;
+  if (GOLPE && c === chunks[0] && t < 1) {
+    const k = tramo(t, 0, 0.2), enfria = tramo(t, 0.15, 0.95);
+    // empieza un 18 % más grande y 60 px más arriba (más grande se sale del cuadro con frases de una línea) y cae
+    escalaSub = k < 1 ? 1.18 - 0.23 * ease(k) : 0.95 + 0.05 * ease(tramo(t, 0.2, 0.35));
+    caidaSub = (1 - ease(k)) * -60;
+    sub.style.filter = `brightness(${(1 + 0.7 * (1 - enfria)).toFixed(2)}) drop-shadow(0 0 ${(36 * (1 - enfria)).toFixed(1)}px rgba(255,122,26,${(0.9 * (1 - enfria)).toFixed(2)}))`;
+  } else sub.style.filter = 'none';
+  sub.style.transform = `translateY(${caidaSub.toFixed(1)}px) scale(${escalaSub.toFixed(3)})`;
+  const tiembla = GOLPE ? 1 - tramo(t, 0.12, 0.42) : 0;
+  $('escena').style.transform = tiembla > 0 && t >= 0.12 ? `translate(${(9 * tiembla * Math.sin(t * 97)).toFixed(1)}px, ${(7 * tiembla * Math.cos(t * 83)).toFixed(1)}px)` : 'none';
   // Ítems
   items.forEach((it, i) => { const e = $('item-' + i), a = tramo(t, it.t, it.t + 0.25); e.style.opacity = a; e.style.transform = `translateX(${(1 - ease(a)) * -60}px)`; });
   // Cierre

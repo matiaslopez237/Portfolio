@@ -1,83 +1,89 @@
 {
- "total": 14.011,
- "voz": 1,
+ "total": 13.392000000000003,
+ "voz": 0.3,
  "ganchoDesde": 0,
- "primeraLinea": {
-  "ini": 1,
-  "fin": 2.035
+ "arranque": {
+  "textoCuadro0": 1,
+  "escala0": 1.18,
+  "escala04": 1,
+  "chispas": 2478
  },
- "cierre": 10.811,
- "golpe": 8.895,
+ "primeraLinea": {
+  "ini": 0.3,
+  "fin": 1.335
+ },
+ "cierre": 10.192000000000004,
+ "golpe": 8.206,
  "logo": true,
  "gestos": [
   {
-   "ini": 1,
-   "fin": 2.233,
+   "ini": 0.3,
+   "fin": 1.5330000000000001,
    "gesto": "palma"
   },
   {
-   "ini": 2.233,
-   "fin": 4.167,
+   "ini": 1.5330000000000001,
+   "fin": 3.453,
    "gesto": "señala"
   },
   {
-   "ini": 4.167,
-   "fin": 6.133,
+   "ini": 3.453,
+   "fin": 5.427,
    "gesto": "uno"
   },
   {
-   "ini": 6.133,
-   "fin": 7.533,
+   "ini": 5.427,
+   "fin": 6.8229999999999995,
    "gesto": "palma"
   },
   {
-   "ini": 7.533,
-   "fin": 8.767,
+   "ini": 6.8229999999999995,
+   "fin": 8.08,
    "gesto": "señala"
   },
   {
-   "ini": 8.767,
-   "fin": 11.011,
+   "ini": 8.08,
+   "fin": 10.292000000000002,
    "gesto": "martillo",
-   "golpe": 8.895,
+   "golpe": 8.206,
    "logo": true,
-   "desde": 8.161666666666665
+   "desde": 7.472666666666666
   }
  ],
  "chunks": [
   {
-   "ini": 0.65,
-   "fin": 2.15,
+   "ini": 0,
+   "fin": 1.501,
    "palabras": 4,
    "texto": "Antes, todo por WhatsApp."
   },
   {
-   "ini": 2.15,
-   "fin": 3.999,
+   "ini": 1.501,
+   "fin": 3.299,
    "palabras": 8,
    "texto": "Sin página, cada paciente tiene que preguntar todo."
   },
   {
-   "ini": 3.999,
-   "fin": 5.958,
+   "ini": 3.299,
+   "fin": 5.245,
    "palabras": 6,
    "texto": "Ahora, Quiropraxia Cipolletti tiene su página."
   },
   {
-   "ini": 5.958,
-   "fin": 7.458,
+   "ini": 5.245,
+   "fin": 6.746,
    "palabras": 6,
    "texto": "Con dominio propio y sus servicios."
   },
   {
-   "ini": 7.458,
-   "fin": 8.958,
+   "ini": 6.746,
+   "fin": 8.247,
    "palabras": 6,
    "texto": "Y un botón para pedir turno."
   },
   {
-   "ini": 8.958,
-   "fin": 10.911,
+   "ini": 8.247,
+   "fin": 10.192000000000002,
    "palabras": 8,
    "texto": "En Hefesto Webs forjamos tu página a medida."
   }

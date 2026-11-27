@@ -1,85 +1,80 @@
 {
- "total": 15.240000000000002,
- "voz": 1,
+ "total": 11.414000000000001,
+ "voz": 0.3,
  "ganchoDesde": 0,
- "primeraLinea": {
-  "ini": 1,
-  "fin": 2.819
+ "arranque": {
+  "textoCuadro0": 1,
+  "escala0": 1.18,
+  "escala04": 1,
+  "chispas": 2478
  },
- "cierre": 12.040000000000003,
- "golpe": 9.987,
+ "primeraLinea": {
+  "ini": 0.3,
+  "fin": 1.4040000000000001
+ },
+ "cierre": 8.214000000000002,
+ "golpe": 6.168,
  "logo": true,
  "gestos": [
   {
-   "ini": 1,
-   "fin": 3.067,
+   "ini": 0.3,
+   "fin": 1.663,
    "gesto": "señala"
   },
   {
-   "ini": 3.067,
-   "fin": 5.4,
+   "ini": 1.663,
+   "fin": 3.1969999999999996,
    "gesto": "palma"
   },
   {
-   "ini": 5.4,
-   "fin": 6.867,
+   "ini": 3.1969999999999996,
+   "fin": 4.11,
    "gesto": "señala"
   },
   {
-   "ini": 6.867,
-   "fin": 8.333,
+   "ini": 4.11,
+   "fin": 6.037,
    "gesto": "palma"
   },
   {
-   "ini": 8.333,
-   "fin": 9.833,
-   "gesto": "explica"
-  },
-  {
-   "ini": 9.833,
-   "fin": 12.24,
+   "ini": 6.037,
+   "fin": 8.314,
    "gesto": "martillo",
-   "golpe": 9.987,
+   "golpe": 6.168,
    "logo": true,
-   "desde": 8.887
+   "desde": 5.434666666666667
   }
  ],
  "chunks": [
   {
-   "ini": 0.65,
-   "fin": 2.899,
+   "ini": 0,
+   "fin": 1.501,
    "palabras": 5,
    "texto": "Así pide turno un paciente."
   },
   {
-   "ini": 2.899,
-   "fin": 5.050000000000001,
+   "ini": 1.501,
+   "fin": 3.0509999999999997,
    "palabras": 8,
    "texto": "Entra a la página y mira los servicios."
   },
   {
-   "ini": 5.050000000000001,
-   "fin": 6.550000000000001,
+   "ini": 3.0509999999999997,
+   "fin": 4.552,
    "palabras": 5,
    "texto": "Toca el botón de WhatsApp."
   },
   {
-   "ini": 6.550000000000001,
-   "fin": 8.089,
-   "palabras": 6,
-   "texto": "Y el mensaje ya está escrito."
+   "ini": 4.552,
+   "fin": 6.052999999999999,
+   "palabras": 10,
+   "texto": "Y el mensaje ya está escrito, sin buscar el número."
   },
   {
-   "ini": 8.089,
-   "fin": 9.589,
-   "palabras": 4,
-   "texto": "Sin buscar el número."
-  },
-  {
-   "ini": 9.589,
-   "fin": 12.14,
+   "ini": 6.052999999999999,
+   "fin": 8.214,
    "palabras": 8,
-   "texto": "En Hefesto Webs te la forjamos a medida."
+   "texto": "En Hefesto Webs forjamos tu página a medida."
   }
  ]
 }

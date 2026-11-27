@@ -141,6 +141,8 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-17 | CA-17.4 | Escenario BDD | ✓ | `brand/instagram/textos.md` · `clave` en `guiones.json` |
 | HU-17 | CA-17.5 | Escenario BDD | ✓ | `brand/instagram/recursos/lista-revisa-tu-web.png` |
 | HU-17 | CA-17.6 | Checklist (firma Matias) + test (node) `test/grabar-sitio.test.mjs` | test ✓ · firma pendiente | `grabar-sitio.mjs` (capturas en tamaño celular, pedidos a WhatsApp bloqueados) |
+| HU-17 | CA-17.8 | Test (node) `test/velocidad.test.mjs` | ✓ | voz a x1,5 sin pausas largas (`velocidad.mjs`), palabras ubicadas antes de recortar y alineador por frases en orden (`voz-gemini.mjs`), martillo que se prepara más rápido (`gestos.js`) |
+| HU-17 | CA-17.9 | Escenario BDD | ✓ | `subtitulos.json` › `arranque` (R3, R5, R6): voz a los 0,3 s, texto en el cuadro 0, golpe y chispas |
 | HU-17 | CA-17.7 | Checklist (firma Matias) | pendiente | muestras en `brand/instagram/reels/R3` a `R6` |
 
 ## Huecos

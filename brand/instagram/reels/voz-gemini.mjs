@@ -95,18 +95,35 @@ export function energia({ pcm, tasa }, fps = 30) {
 export function alinear(texto, ener, fps = 30) {
   const voz = ener.map(v => v > 0.06), t = (i) => i / fps;
   const ini = voz.indexOf(true), fin = voz.lastIndexOf(true) + 1;
-  // silencios de 0,15 s o más dentro del habla
+  // silencios de 0,1 s o más dentro del habla (HU-17: con la voz a x1,5 los cortes entre frases son más cortos)
   const pausas = []; let s = -1;
-  for (let i = ini; i < fin; i++) { if (!voz[i] && s < 0) s = i; if (voz[i] && s >= 0) { if (i - s >= Math.round(0.15 * fps)) pausas.push({ a: t(s), b: t(i) }); s = -1; } }
+  for (let i = ini; i < fin; i++) { if (!voz[i] && s < 0) s = i; if (voz[i] && s >= 0) { if (i - s >= Math.round(0.1 * fps)) pausas.push({ a: t(s), b: t(i) }); s = -1; } }
   const frases = texto.match(/[^.?!:]+[.?!:]?/g).map(x => x.trim()).filter(Boolean);
   const largos = frases.map(f => f.replace(/[^\p{L}\p{N}]/gu, '').length), total = largos.reduce((a, b) => a + b, 0);
-  const T0 = t(ini), T1 = t(fin), cortes = []; let acum = 0, desde = 0;
-  for (let k = 0; k < frases.length - 1; k++) {
-    acum += largos[k]; const esperado = T0 + (T1 - T0) * acum / total;
-    let mejor = -1;
-    for (let j = desde; j < pausas.length; j++) if (mejor < 0 || Math.abs((pausas[j].a + pausas[j].b) / 2 - esperado) < Math.abs((pausas[mejor].a + pausas[mejor].b) / 2 - esperado)) mejor = j;
-    if (mejor >= 0 && Math.abs((pausas[mejor].a + pausas[mejor].b) / 2 - esperado) < 1.2) { cortes.push(pausas[mejor]); desde = mejor + 1; }
-    else cortes.push({ a: esperado, b: esperado });
+  const T0 = t(ini), T1 = t(fin); let acum = 0;
+  const esperados = frases.slice(0, -1).map((_, k) => { acum += largos[k]; return T0 + (T1 - T0) * acum / total; });
+  // HU-17: cada final de frase va a una pausa distinta y en orden. Se elige la combinación que mejor junta
+  // "cerca de donde debería caer" con "pausa larga" (antes, cada frase tomaba la más cercana y la siguiente podía
+  // quedarse sin pausa y caer antes: con la voz del R3 a x1,5 una frase entera quedaba en un instante)
+  const costo = (k, j) => Math.abs((pausas[j].a + pausas[j].b) / 2 - esperados[k]) - 0.8 * (pausas[j].b - pausas[j].a);
+  const N = esperados.length, P = pausas.length;
+  let cortes;
+  if (N && P >= N) {
+    const dp = Array.from({ length: N }, () => new Array(P).fill(Infinity)), de = Array.from({ length: N }, () => new Array(P).fill(-1));
+    for (let j = 0; j < P; j++) dp[0][j] = costo(0, j);
+    for (let k = 1; k < N; k++) for (let j = k; j < P; j++) for (let i = k - 1; i < j; i++) if (dp[k - 1][i] + costo(k, j) < dp[k][j]) { dp[k][j] = dp[k - 1][i] + costo(k, j); de[k][j] = i; }
+    let j = dp[N - 1].indexOf(Math.min(...dp[N - 1])); cortes = [];
+    for (let k = N - 1; k >= 0; k--) { cortes.unshift(pausas[j]); j = de[k][j]; }
+  } else {
+    // menos pausas que frases: el reparto de antes (cada una a la pausa más cercana que queda, si no, donde debería caer)
+    cortes = []; let desde = 0;
+    for (const esperado of esperados) {
+      let mejor = -1;
+      for (let j = desde; j < pausas.length; j++) if (mejor < 0 || Math.abs((pausas[j].a + pausas[j].b) / 2 - esperado) < Math.abs((pausas[mejor].a + pausas[mejor].b) / 2 - esperado)) mejor = j;
+      const ultimo = cortes.at(-1)?.b ?? T0;
+      if (mejor >= 0 && Math.abs((pausas[mejor].a + pausas[mejor].b) / 2 - esperado) < 1.2) { cortes.push(pausas[mejor]); desde = mejor + 1; }
+      else { const e = Math.max(esperado, ultimo); cortes.push({ a: e, b: e }); }
+    }
   }
   const palabras = [];
   frases.forEach((f, k) => {

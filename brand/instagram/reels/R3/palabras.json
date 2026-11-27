@@ -2,181 +2,181 @@
  {
   "texto": "Así",
   "inicio": 0,
-  "fin": 0.262
+  "fin": 0.234
  },
  {
   "texto": "pide",
-  "inicio": 0.285,
-  "fin": 0.605
+  "inicio": 0.254,
+  "fin": 0.54
  },
  {
   "texto": "turno",
-  "inicio": 0.633,
-  "fin": 1.011
+  "inicio": 0.565,
+  "fin": 0.903
  },
  {
   "texto": "un",
-  "inicio": 1.044,
-  "fin": 1.248
+  "inicio": 0.932,
+  "fin": 1.114
  },
  {
   "texto": "paciente",
-  "inicio": 1.266,
-  "fin": 1.819
+  "inicio": 1.13,
+  "fin": 1.624
  },
  {
   "texto": "Entra",
-  "inicio": 2.067,
-  "fin": 2.336
+  "inicio": 2.167,
+  "fin": 2.44
  },
  {
   "texto": "a",
-  "inicio": 2.359,
-  "fin": 2.462
+  "inicio": 2.464,
+  "fin": 2.569
  },
  {
   "texto": "la",
-  "inicio": 2.471,
-  "fin": 2.616
+  "inicio": 2.578,
+  "fin": 2.726
  },
  {
   "texto": "página",
-  "inicio": 2.629,
-  "fin": 2.939
+  "inicio": 2.738,
+  "fin": 3.054
  },
  {
   "texto": "y",
-  "inicio": 2.966,
-  "fin": 3.069
+  "inicio": 3.081,
+  "fin": 3.187
  },
  {
   "texto": "mira",
-  "inicio": 3.078,
-  "fin": 3.306
+  "inicio": 3.196,
+  "fin": 3.427
  },
  {
   "texto": "los",
-  "inicio": 3.326,
-  "fin": 3.512
+  "inicio": 3.447,
+  "fin": 3.637
  },
  {
   "texto": "servicios",
-  "inicio": 3.528,
-  "fin": 3.962
+  "inicio": 3.653,
+  "fin": 4.095
  },
  {
   "texto": "Toca",
-  "inicio": 4.4,
-  "fin": 4.554
+  "inicio": 4.467,
+  "fin": 4.644
  },
  {
   "texto": "el",
-  "inicio": 4.567,
-  "fin": 4.665
+  "inicio": 4.66,
+  "fin": 4.773
  },
  {
   "texto": "botón",
-  "inicio": 4.674,
-  "fin": 4.856
+  "inicio": 4.782,
+  "fin": 4.992
  },
  {
   "texto": "de",
-  "inicio": 4.871,
-  "fin": 4.969
+  "inicio": 5.011,
+  "fin": 5.124
  },
  {
   "texto": "WhatsApp",
-  "inicio": 4.978,
-  "fin": 5.244
+  "inicio": 5.133,
+  "fin": 5.44
  },
  {
   "texto": "Y",
-  "inicio": 5.867,
-  "fin": 5.951
+  "inicio": 6.033,
+  "fin": 6.138
  },
  {
   "texto": "el",
-  "inicio": 5.958,
-  "fin": 6.075
+  "inicio": 6.147,
+  "fin": 6.293
  },
  {
   "texto": "mensaje",
-  "inicio": 6.085,
-  "fin": 6.371
+  "inicio": 6.306,
+  "fin": 6.662
  },
  {
   "texto": "ya",
-  "inicio": 6.395,
-  "fin": 6.513
+  "inicio": 6.692,
+  "fin": 6.839
  },
  {
   "texto": "está",
-  "inicio": 6.523,
-  "fin": 6.707
+  "inicio": 6.852,
+  "fin": 7.082
  },
  {
   "texto": "escrito",
-  "inicio": 6.723,
-  "fin": 7.009
+  "inicio": 7.102,
+  "fin": 7.457
  },
  {
-  "texto": "Sin",
-  "inicio": 7.333,
-  "fin": 7.483
+  "texto": "sin",
+  "inicio": 7.488,
+  "fin": 7.676
  },
  {
   "texto": "buscar",
-  "inicio": 7.496,
-  "fin": 7.746
+  "inicio": 7.692,
+  "fin": 8.006
  },
  {
   "texto": "el",
-  "inicio": 7.768,
-  "fin": 7.885
+  "inicio": 8.033,
+  "fin": 8.18
  },
  {
   "texto": "número",
-  "inicio": 7.895,
-  "fin": 8.145
+  "inicio": 8.192,
+  "fin": 8.506
  },
  {
   "texto": "En",
-  "inicio": 8.833,
-  "fin": 8.975
+  "inicio": 9.267,
+  "fin": 9.446
  },
  {
   "texto": "Hefesto",
-  "inicio": 8.987,
-  "fin": 9.331
+  "inicio": 9.461,
+  "fin": 9.896
  },
  {
   "texto": "Webs",
-  "inicio": 9.361,
-  "fin": 9.583
- },
- {
-  "texto": "te",
-  "inicio": 9.602,
-  "fin": 9.744
- },
- {
-  "texto": "la",
-  "inicio": 9.756,
-  "fin": 9.898
+  "inicio": 9.933,
+  "fin": 10.214
  },
  {
   "texto": "forjamos",
-  "inicio": 9.91,
-  "fin": 10.294
+  "inicio": 10.239,
+  "fin": 10.724
+ },
+ {
+  "texto": "tu",
+  "inicio": 10.767,
+  "fin": 10.946
+ },
+ {
+  "texto": "página",
+  "inicio": 10.961,
+  "fin": 11.344
  },
  {
   "texto": "a",
-  "inicio": 10.327,
-  "fin": 10.428
+  "inicio": 11.378,
+  "fin": 11.506
  },
  {
   "texto": "medida",
-  "inicio": 10.437,
-  "fin": 10.74
+  "inicio": 11.517,
+  "fin": 11.9
  }
 ]
