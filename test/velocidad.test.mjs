@@ -40,3 +40,11 @@ test('CA-17.8: con velocidad 1,5 el martillo se prepara en 1,1 / 1,5 s antes de 
   const plan = planGestos(lineas, { velocidad: 1.5 });
   assert.ok(Math.abs(plan[1].golpe - plan[1].desde - 1.1 / 1.5) < 1e-9, `se prepara en ${(plan[1].golpe - plan[1].desde).toFixed(3)} s`);
 });
+
+test('CA-17.8: los tiempos de la voz original se pasan a la voz recortada (las palabras se ubican antes de recortar)', () => {
+  // sonido de 0 a 0,3 s, silencio hasta 1,2 s, sonido hasta 1,5 s: se quitan 0,65 s del medio del silencio
+  const r = acortarPausas({ pcm: audio([[0.3, 1], [0.9, 0], [0.3, 1]]), tasa: TASA }, { pausaMax: 0.25 });
+  assert.ok(Math.abs(r.mover(0.2) - 0.2) < 0.02, `0,2 s queda en ${r.mover(0.2)}`);
+  assert.ok(Math.abs(r.mover(1.3) - 0.65) < 0.03, `1,3 s queda en ${r.mover(1.3)}`);
+  assert.ok(r.mover(0.8) >= r.mover(0.4) && r.mover(0.8) <= r.mover(1.3), 'un momento dentro del silencio quitado queda entre los dos sonidos');
+});
