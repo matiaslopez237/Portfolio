@@ -1,6 +1,7 @@
 # Publica en Instagram el post que toca hoy según brand/instagram/calendario.md (HU-10).
-# Corre todos los días a las 18:00 y a las 19:00 de Argentina (21:00 y 22:00 UTC): GitHub suele atrasar
-# las tareas programadas (DEF-01), así que la que llega primero publica y la otra no encuentra nada.
+# Corre cada hora de 12:00 a 20:00 de Argentina (15 a 23 UTC) y solo publica entre las 18:00 y las 23:00 (DEF-08):
+# GitHub atrasa las tareas programadas varias horas (DEF-01), así que alguna corrida cae dentro del horario,
+# la primera que lo hace publica y las demás no encuentran nada.
 # Si las dos se atrasan al día siguiente, igual publica lo pendiente de hasta 2 días antes (RN-10.8).
 # También se puede lanzar a mano desde GitHub › Actions › "Publicar en Instagram" › Run workflow.
 # Necesita dos secrets (GitHub › Settings › Secrets and variables › Actions): IG_USER_ID e IG_ACCESS_TOKEN.
@@ -8,8 +9,7 @@ name: Publicar en Instagram
 
 on:
   schedule:
-    - cron: '0 21 * * *'
-    - cron: '0 22 * * *'
+    - cron: '0 15-23 * * *'
   workflow_dispatch:
     inputs:
       fecha:

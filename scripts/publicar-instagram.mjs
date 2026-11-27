@@ -182,6 +182,15 @@ export async function verificarCuenta({ igUserId, token, fetch = globalThis.fetc
   return llamar(fetch, `${hostApi(token)}/${igUserId}?fields=username&access_token=${encodeURIComponent(token)}`, { method: 'GET' }, token);
 }
 
+/**
+ * DEF-08 (RN-10.9): solo se publica entre las 18:00 y las 23:00 de Argentina. GitHub atrasa las corridas programadas
+ * 5 a 7 horas y los posts salían de madrugada, cuando casi nadie los ve.
+ */
+export function enHorario(ahora = new Date(), { desde = 18, hasta = 23 } = {}) {
+  const hora = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Argentina/Buenos_Aires', hour: '2-digit', hourCycle: 'h23' }).format(ahora));
+  return hora >= desde && hora < hasta;
+}
+
 // ── Línea de comandos ──
 
 function hoyEnArgentina() {
@@ -198,7 +207,10 @@ async function principal() {
     console.log(`✓ Conexión OK con Instagram: @${cuenta.username} (no se publicó nada)`);
     return;
   }
-  const fecha = (args.find(a => a.startsWith('--fecha=')) ?? '').slice(8) || hoyEnArgentina();
+  const fechaPedida = (args.find(a => a.startsWith('--fecha=')) ?? '').slice(8);
+  // DEF-08: las corridas automáticas (sin fecha) solo publican de 18 a 23 de Argentina; a mano con fecha, a cualquier hora
+  if (!fechaPedida && !prueba && !enHorario()) { console.log('Fuera del horario de publicación (18:00 a 23:00 de Argentina): no se publica nada.'); return; }
+  const fecha = fechaPedida || hoyEnArgentina();
   const raiz = (rel) => fileURLToPath(new URL('../' + rel, import.meta.url));
   const rutaPublicados = raiz('brand/instagram/publicados.json');
   const publicados = existsSync(rutaPublicados) ? JSON.parse(readFileSync(rutaPublicados, 'utf8')) : {};

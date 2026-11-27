@@ -74,6 +74,7 @@ Historia → Spec → Criterio → Cómo se verifica → Estado. Generada con la
 | HU-10 · DEF-01 | CA-10.9 | Test (TDD) | ✓ | `test/publicar-instagram.test.mjs` · `npm run test:unit` · commits [RED] 500ec3c → [GREEN] `fix(DEF-01)` |
 | HU-10 · DEF-02 | CA-10.4 | Test (TDD) + chequeo CA-14.4 | ✓ | `validarTexto` (máx. 5 hashtags) · carruseles recortados a 5 · commits [RED] e89e032 → [GREEN] `fix(DEF-02)` |
 | HU-10 · DEF-07 | CA-10.1 | Test (TDD) | ✓ | `elegirPublicaciones` y `leer` de `check.mjs` pasan CRLF a LF (en Windows, con core.autocrlf, el lector no encontraba ningún texto) · commits [RED] d9c7809 → [GREEN] `fix(DEF-07)` |
+| HU-10 · DEF-08 | CA-10.10 | Test (TDD) | ✓ | `enHorario` en `publicar-instagram.mjs` (solo de 18 a 23 de Argentina) · workflow cada hora de 15 a 23 UTC (CA-10.6) · commits [RED] b8c220b → [GREEN] `fix(DEF-08)` |
 | HU-11 | CA-11.1 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/ (9 .md) + estrategia.html` |
 | HU-11 | CA-11.2 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/personas.md` |
 | HU-11 | CA-11.3 | Chequeo `scripts/check.mjs` | ✓ | `brand/instagram/estrategia/personas.md (fuentes)` |
