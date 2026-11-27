@@ -48,3 +48,17 @@ test('CA-17.8: los tiempos de la voz original se pasan a la voz recortada (las p
   assert.ok(Math.abs(r.mover(1.3) - 0.65) < 0.03, `1,3 s queda en ${r.mover(1.3)}`);
   assert.ok(r.mover(0.8) >= r.mover(0.4) && r.mover(0.8) <= r.mover(1.3), 'un momento dentro del silencio quitado queda entre los dos sonidos');
 });
+
+// Regresión con la voz real del R3 a x1,5 (2026-11-26): el alineador ubicaba "Sin tener que buscar el número" en un instante
+// (cada frase buscaba la pausa más cercana a donde "debería" terminar y la penúltima se quedaba sin pausa).
+import { alinear } from '../brand/instagram/reels/voz-gemini.mjs';
+test('CA-17.8: las frases se ubican en orden y cada una dura algo (voz real del R3)', () => {
+  const patron = '############.###############.###.......########################################..######################......######################.........############################....................#################....############.##.#################..';
+  const ener = [...patron].map(c => c === '#' ? 0.5 : 0);
+  const texto = 'Así pide turno un paciente. Entra a la página y mira los servicios. Toca el botón de WhatsApp. Y el mensaje ya está escrito. Sin tener que buscar el número. En Hefesto Webs forjamos tu página a medida.';
+  const p = alinear(texto, ener);
+  for (let i = 1; i < p.length; i++) assert.ok(p[i].inicio >= p[i - 1].inicio, `"${p[i].texto}" (${p[i].inicio}) empieza antes que "${p[i - 1].texto}" (${p[i - 1].inicio})`);
+  const sin = p.find(w => w.texto === 'Sin'), numero = p.find(w => w.texto === 'número'), en = p.find(w => w.texto === 'En');
+  assert.ok(numero.fin - sin.inicio > 0.5, `"Sin tener que buscar el número" dura ${(numero.fin - sin.inicio).toFixed(2)} s`);
+  assert.ok(en.inicio > 6.6, `"En Hefesto" empieza en ${en.inicio} s y la última frase arranca después de la pausa de 0,67 s`);
+});
