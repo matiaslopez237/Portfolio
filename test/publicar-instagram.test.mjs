@@ -2,7 +2,7 @@
 // Nunca llaman a Instagram: la API se simula con un fetch falso.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { elegirPublicaciones, validarTexto, publicarEnInstagram } from '../scripts/publicar-instagram.mjs';
+import { elegirPublicaciones, validarTexto, publicarEnInstagram, enHorario } from '../scripts/publicar-instagram.mjs';
 
 const calendario = `
 | Fecha | Día | Formato | Pieza | Idea |
@@ -296,4 +296,22 @@ test('CA-15.5 si Instagram no puede procesar el video, falla sin publicar', asyn
   const fetch = fetchFalso([{ json: { id: 'cont-r' } }, { json: { status_code: 'ERROR' } }]);
   await assert.rejects(publicarReel({ igUserId: '123', token: 't', videoUrl: baseReels + 'R1/R1.mp4', texto: 'x', fetch, esperaMs: 0 }), /ERROR/);
   assert.equal(fetch.llamadas.some(l => /media_publish/.test(l.url)), false);
+});
+
+// DEF-08: GitHub atrasa las corridas 5 a 7 horas y los posts salían de madrugada (el R2 salió a las 00:56 y llegó a 22 cuentas).
+// Ahora el workflow corre cada hora y solo publica entre las 18:00 y las 23:00 de Argentina (UTC-3).
+test('CA-10.10 DEF-08: a las 17:59 de Argentina no publica; de 18:00 a 22:59 sí', () => {
+  assert.equal(enHorario(new Date('2026-11-26T20:59:00Z')), false);   // 17:59 ART
+  assert.equal(enHorario(new Date('2026-11-26T21:00:00Z')), true);    // 18:00 ART
+  assert.equal(enHorario(new Date('2026-11-27T01:59:00Z')), true);    // 22:59 ART
+});
+
+test('CA-10.10 DEF-08: desde las 23:00 y de madrugada no publica (queda para el día siguiente a las 18)', () => {
+  assert.equal(enHorario(new Date('2026-11-27T02:00:00Z')), false);   // 23:00 ART
+  assert.equal(enHorario(new Date('2026-11-27T03:56:00Z')), false);   // 00:56 ART, la hora en que salió el R2
+  assert.equal(enHorario(new Date('2026-11-27T12:00:00Z')), false);   // 09:00 ART
+});
+
+test('CA-10.10 DEF-08: lo que no salió a la noche sale al día siguiente en el horario (lo atrasado de hasta 2 días)', () => {
+  assert.deepEqual(elegirPublicaciones(datos('2026-11-19')).map(p => p.n), [4]);
 });

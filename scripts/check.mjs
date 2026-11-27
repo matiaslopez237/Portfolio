@@ -400,11 +400,11 @@ const chequeos = [
 
   // ── HU-10: Publicación automática en Instagram ──
   {
-    ca: 'CA-10.6', desc: 'Workflow diario a las 21:00 y 22:00 UTC (DEF-01), lanzable a mano, solo con los secrets IG_USER_ID e IG_ACCESS_TOKEN',
+    ca: 'CA-10.6', desc: 'Workflow cada hora de 15:00 a 23:00 UTC (DEF-01, DEF-08), lanzable a mano, solo con los secrets IG_USER_ID e IG_ACCESS_TOKEN',
     run: () => {
       const w = leerOpcional('.github/workflows/publicar-instagram.yml'); if (!w) throw new Error('no existe .github/workflows/publicar-instagram.yml');
       const malos = [];
-      for (const h of ['21', '22']) if (!new RegExp(`cron:\\s*['"]0 ${h} \\* \\* \\*['"]`).test(w)) malos.push(`falta el cron "0 ${h} * * *"`);
+      if (!/cron:\s*['"]0 15-23 \* \* \*['"]/.test(w)) malos.push('falta el cron "0 15-23 * * *" (cada hora de 12 a 20 de Argentina, DEF-08)');
       if (!/workflow_dispatch/.test(w)) malos.push('no se puede lanzar a mano (workflow_dispatch)');
       const secrets = [...new Set([...w.matchAll(/secrets\.([A-Z0-9_]+)/g)].map(m => m[1]))].sort();
       if (secrets.join() !== 'IG_ACCESS_TOKEN,IG_USER_ID') malos.push('secrets usados: ' + (secrets.join(', ') || 'ninguno'));
